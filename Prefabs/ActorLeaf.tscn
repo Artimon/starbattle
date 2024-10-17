@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://duyrj0vfxsvna"]
+
+[ext_resource type="Script" path="res://Scripts/Actor.cs" id="1_m2e3j"]
+[ext_resource type="Texture2D" uid="uid://b7yep8lqx5o0l" path="res://Images/TempCharacterWithLeaf.png" id="2_8h435"]
+
+[node name="ActorLeaf" type="Node3D"]
+script = ExtResource("1_m2e3j")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_8h435")

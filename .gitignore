@@ -1,8 +1,9 @@
-# Godot 4+ specific ignores
-.godot/
+.idea/
 
 # Godot-specific ignores
 .import/
+.godot/
+/android/
 export.cfg
 export_presets.cfg
 
