@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Godot;
 
 namespace Starbattle;
@@ -39,6 +38,11 @@ public partial class ControllerPlayer : Node {
 		RpcId(1, nameof(_RequestPlayerSpawn), actorPrefabIndex);
 	}
 
+	/**
+	 * Important:
+	 * During initialization of the network, not all clients may know the other peers, yet.
+	 * Hence, only requesting the server is reliable, since the server MUST know all peers.
+	 */
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
 	public void _RequestPlayerSpawn(int actorPrefabIndex) {
 		if (!Multiplayer.IsServer()) {
