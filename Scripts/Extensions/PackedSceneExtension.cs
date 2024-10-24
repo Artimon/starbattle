@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 
 namespace Artimus.Extensions;
 
@@ -12,10 +13,17 @@ public static class PackedSceneExtension {
 		return thing;
 	}
 
-	public static T InstantiateNetworked<T>(this PackedScene packedScene, Node3D parent, long uniqueId) where T : Node3D {
+	public static T InstantiateNetworked<T>(
+		this PackedScene packedScene,
+		Node3D parent,
+		long uniqueId,
+		Action<T> preAdd = null
+	) where T : Node3D {
 		var thing = packedScene.Instantiate<T>();
 
+		preAdd?.Invoke(thing);
 		parent.AddChild(thing);
+
 		thing.GlobalPosition = parent.GlobalPosition;
 		thing.Name = $"{thing.Name} {uniqueId}";
 

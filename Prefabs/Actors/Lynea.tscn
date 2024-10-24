@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dddpb6pre657w"]
+
+[ext_resource type="PackedScene" uid="uid://duyrj0vfxsvna" path="res://Prefabs/Actors/ActorBase.tscn" id="1_e6qxu"]
+
+[node name="ActorBase" instance=ExtResource("1_e6qxu")]

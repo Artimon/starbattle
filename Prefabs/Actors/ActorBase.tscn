@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://duyrj0vfxsvna"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_nhjax"]
+[ext_resource type="Texture2D" uid="uid://b7yep8lqx5o0l" path="res://Images/TempCharacterWithLeaf.png" id="2_8h435"]
+[ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="3_fite4"]
+[ext_resource type="Script" path="res://Scripts/Actor/StateMove.cs" id="4_5ljhj"]
+[ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="4_5msbm"]
+
+[node name="ActorBase" type="Node3D" node_paths=PackedStringArray("cameraTarget", "stateMachine", "stateMove")]
+script = ExtResource("1_nhjax")
+cameraTarget = NodePath("Camera Target Node3D")
+stateMachine = NodePath("StateMachine")
+stateMove = NodePath("StateMachine/StateMove")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45257, 0)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_8h435")
+
+[node name="Camera Target Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_fite4")
+
+[node name="StateIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("_stateMachine")]
+script = ExtResource("4_5msbm")
+_stateMachine = NodePath("..")
+isDefault = true
+
+[node name="StateMove" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
+script = ExtResource("4_5ljhj")
+_actor = NodePath("../..")
+_stateMachine = NodePath("..")

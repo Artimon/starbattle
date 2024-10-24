@@ -17,13 +17,12 @@ public partial class ControllerPlayer : Node {
 	public void _SpawnPlayer(int actorPrefabIndex, Vector3 position, long uniqueId) {
 		var prefab = _playerPrefabs[actorPrefabIndex];
 
-		GD.Print($"Creating player ({uniqueId}) on {Multiplayer.GetUniqueId()} at {position}");
-
-		var actor = prefab.InstantiateNetworked<Actor>(_actorContainer, uniqueId);
+		var actor = prefab.InstantiateNetworked<Actor>(_actorContainer, uniqueId, (actor) => {
+			actor.ownerId = uniqueId;
+			actor.prefabIndex = actorPrefabIndex;
+		});
 
 		actor.GlobalPosition = position;
-		actor.ownerId = uniqueId;
-		actor.prefabIndex = actorPrefabIndex;
 
 		_players.Add(actor);
 	}
@@ -52,7 +51,7 @@ public partial class ControllerPlayer : Node {
 		// @TODO Check if the player is already spawned.
 		var ownerId = Multiplayer.GetRemoteSenderId();
 		var position = new Vector3(
-			-0.25f + 0.25f * _players.Count,
+			-2f + 2f * _players.Count,
 			0f,
 			0f
 		);

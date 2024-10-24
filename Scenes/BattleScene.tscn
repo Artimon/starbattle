@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=6 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/ControllerPlayer.cs" id="2_whdc0"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
-[ext_resource type="PackedScene" uid="uid://duyxedech1uc2" path="res://Prefabs/ActorSao.tscn" id="3_n0odh"]
-[ext_resource type="PackedScene" uid="uid://duyrj0vfxsvna" path="res://Prefabs/ActorLeaf.tscn" id="4_llh24"]
+[ext_resource type="PackedScene" uid="uid://ckru28eyyrw5k" path="res://Prefabs/Actors/Sao.tscn" id="3_ch0nk"]
+[ext_resource type="PackedScene" uid="uid://dddpb6pre657w" path="res://Prefabs/Actors/Lynea.tscn" id="4_dw50s"]
+[ext_resource type="Script" path="res://Scripts/ControllerCamera.cs" id="5_887w4"]
 
 [node name="BattleScene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.308691, 0.27521)
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_controllerPlayer")]
 script = ExtResource("3_5vdu8")
@@ -14,9 +16,14 @@ _controllerPlayer = NodePath("ControllerPlayer")
 [node name="ControllerPlayer" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_actorContainer")]
 script = ExtResource("2_whdc0")
 _actorContainer = NodePath("../ActorContainer")
-_playerPrefabs = Array[PackedScene]([ExtResource("3_n0odh"), ExtResource("4_llh24")])
+_playerPrefabs = Array[PackedScene]([ExtResource("3_ch0nk"), ExtResource("4_dw50s")])
 
 [node name="ActorContainer" type="Node3D" parent="MultiplayerContainer"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.508146)
+[node name="ControllerCamera" type="Node3D" parent="."]
+process_mode = 4
+script = ExtResource("5_887w4")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="ControllerCamera"]
+
+[node name="Camera3D" type="Camera3D" parent="ControllerCamera"]
