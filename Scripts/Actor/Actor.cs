@@ -4,7 +4,7 @@ using Godot;
 namespace Starbattle;
 
 [GlobalClass]
-public partial class Actor : Node3D {
+public partial class Actor : NetworkNode3D {
 	public string displayName;
 
 	[Export]
@@ -16,10 +16,6 @@ public partial class Actor : Node3D {
 	[Export]
 	public StateMove stateMove;
 
-	public int prefabIndex;
-
-	public long ownerId;
-
 	public float inputX;
 
 	public float angle;
@@ -30,14 +26,11 @@ public partial class Actor : Node3D {
 	public bool isMoving;
 	public Vector3 movedBy;
 
-	public bool IsPlayer => ownerId == Multiplayer.GetUniqueId();
+	public bool isMob;
 
-	public override void _EnterTree() {
-		GD.Print("EnterTree");
-	}
+	public bool IsPlayer => !isMob && ownerId == Multiplayer.GetUniqueId();
 
 	public override void _Ready() {
-		GD.Print($"Ready {ownerId} == {Multiplayer.GetUniqueId()} = {IsPlayer}");
 		if (IsPlayer) {
 			ControllerCamera.instance.Follow(this);
 		}

@@ -1,13 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=13 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/ControllerPlayer.cs" id="2_whdc0"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="PackedScene" uid="uid://ckru28eyyrw5k" path="res://Prefabs/Actors/Sao.tscn" id="3_ch0nk"]
 [ext_resource type="PackedScene" uid="uid://dddpb6pre657w" path="res://Prefabs/Actors/Lynea.tscn" id="4_dw50s"]
 [ext_resource type="Script" path="res://Scripts/ControllerCamera.cs" id="5_887w4"]
+[ext_resource type="Script" path="res://Scripts/ControllerSpawner.cs" id="6_lb2et"]
+[ext_resource type="Script" path="res://Scripts/Test.cs" id="6_wjjft"]
+[ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
+[ext_resource type="PackedScene" uid="uid://bsm2lc4s0rhiy" path="res://Prefabs/Actors/GreenSlime.tscn" id="7_a8oyc"]
+[ext_resource type="Script" path="res://Scripts/NetworkPrefabs.cs" id="8_1bbbk"]
+[ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
+[ext_resource type="Texture2D" uid="uid://catxthhhls552" path="res://Images/Grass2.png" id="9_ftk6f"]
 
 [node name="BattleScene" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.308691, 0.27521)
+
+[node name="ControllerCamera" type="Node3D" parent="."]
+process_mode = 4
+script = ExtResource("5_887w4")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="ControllerCamera"]
+
+[node name="Camera3D" type="Camera3D" parent="ControllerCamera"]
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_controllerPlayer")]
 script = ExtResource("3_5vdu8")
@@ -18,12 +32,87 @@ script = ExtResource("2_whdc0")
 _actorContainer = NodePath("../ActorContainer")
 _playerPrefabs = Array[PackedScene]([ExtResource("3_ch0nk"), ExtResource("4_dw50s")])
 
+[node name="ControllerSpawner" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_multiplayerContainer", "_networkPrefabs", "_spawnPoint")]
+script = ExtResource("6_lb2et")
+_multiplayerContainer = NodePath("..")
+_networkPrefabs = NodePath("NetworkPrefabs")
+_spawnPoint = NodePath("Spawn Point 1")
+_mobPrefab = ExtResource("7_a8oyc")
+
+[node name="NetworkPrefabs" type="Node" parent="MultiplayerContainer/ControllerSpawner" node_paths=PackedStringArray("_container")]
+script = ExtResource("8_1bbbk")
+_prefabs = Array[PackedScene]([ExtResource("7_a8oyc")])
+_container = NodePath("../../ActorContainer")
+
+[node name="Spawn Point 1" type="Node3D" parent="MultiplayerContainer/ControllerSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.01098, 0, 0)
+
 [node name="ActorContainer" type="Node3D" parent="MultiplayerContainer"]
 
-[node name="ControllerCamera" type="Node3D" parent="."]
-process_mode = 4
-script = ExtResource("5_887w4")
+[node name="Scene Decoration" type="Node3D" parent="."]
 
-[node name="AudioListener3D" type="AudioListener3D" parent="ControllerCamera"]
+[node name="Sprite3D" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.583194, 0.0836654, -1.71772)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_1rh3b")
 
-[node name="Camera3D" type="Camera3D" parent="ControllerCamera"]
+[node name="Sprite3D2" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86943, 0.0836654, -1.45185)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_1rh3b")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47206, 0.0836654, 1.13332)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_1rh3b")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37297, 0.157111, -2.71903)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_bfhsi")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12995, 0.157111, -1.00702)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_bfhsi")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129022, 0.157111, 1.15628)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_bfhsi")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25739, 0.0897831, 0.932156)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("9_ftk6f")
+
+[node name="Sprite3D8" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.06453, 0.0897829, 0.378813)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("9_ftk6f")
+
+[node name="Sprite3D9" type="Sprite3D" parent="Scene Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264362, 0.0897831, -0.294441)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("9_ftk6f")
+
+[node name="Test" type="Node3D" parent="."]
+script = ExtResource("6_wjjft")

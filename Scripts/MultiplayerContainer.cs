@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Godot;
 
 namespace Starbattle;
@@ -7,6 +8,8 @@ namespace Starbattle;
 public partial class MultiplayerContainer : Node {
 	[Export]
 	public ControllerPlayer _controllerPlayer;
+
+	public event Action OnConnectionReady;
 
 	public override void _Ready() {
 		Multiplayer.PeerConnected += (id) => {
@@ -44,6 +47,8 @@ public partial class MultiplayerContainer : Node {
 			return;
 		}
 
+		OnConnectionReady?.Invoke();
+
 		Multiplayer.PeerConnected += (id) => {
 			_controllerPlayer.SendAllPlayersToNewPlayer(id);
 		};
@@ -66,6 +71,7 @@ public partial class MultiplayerContainer : Node {
 	public void ConnectToServer() {
 		Multiplayer.ConnectedToServer += () => {
 			// Print("Connected to server.");
+			OnConnectionReady?.Invoke();
 
 			var uniqueId = Multiplayer.GetUniqueId();
 

@@ -25,7 +25,7 @@ public static class PackedSceneExtension {
 		parent.AddChild(thing);
 
 		thing.GlobalPosition = parent.GlobalPosition;
-		thing.Name = $"{thing.Name} {uniqueId}";
+		thing.Name = $"{thing.Name} {uniqueId}"; // For network identification.
 
 		return thing;
 	}
