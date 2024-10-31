@@ -2,4 +2,4 @@
 
 [ext_resource type="PackedScene" uid="uid://duyrj0vfxsvna" path="res://Prefabs/Actors/ActorBase.tscn" id="1_e6qxu"]
 
-[node name="ActorBase" instance=ExtResource("1_e6qxu")]
+[node name="Lynea" instance=ExtResource("1_e6qxu")]

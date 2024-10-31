@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://duyrj0vfxsvna"]
+[gd_scene load_steps=8 format=3 uid="uid://duyrj0vfxsvna"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_nhjax"]
 [ext_resource type="Texture2D" uid="uid://b7yep8lqx5o0l" path="res://Images/TempCharacterWithLeaf.png" id="2_8h435"]
+[ext_resource type="Script" path="res://Scripts/Actor/ActorBody3D.cs" id="3_6wma1"]
 [ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="3_fite4"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateMove.cs" id="4_5ljhj"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="4_5msbm"]
 
-[node name="ActorBase" type="Node3D" node_paths=PackedStringArray("cameraTarget", "stateMachine", "stateMove")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cjox4"]
+
+[node name="ActorBase" type="Node3D" node_paths=PackedStringArray("cameraTarget", "_rayCast", "stateMachine", "stateMove")]
 script = ExtResource("1_nhjax")
 cameraTarget = NodePath("Camera Target Node3D")
+_rayCast = NodePath("RayCast3D")
 stateMachine = NodePath("StateMachine")
 stateMove = NodePath("StateMachine/StateMove")
 
@@ -19,8 +23,20 @@ billboard = 2
 texture_filter = 0
 texture = ExtResource("2_8h435")
 
+[node name="ActorBody3D" type="CharacterBody3D" parent="Sprite3D" node_paths=PackedStringArray("_actor")]
+script = ExtResource("3_6wma1")
+_actor = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/ActorBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("CapsuleShape3D_cjox4")
+
 [node name="Camera Target Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+exclude_parent = false
+debug_shape_custom_color = Color(0.739789, 1.93726e-06, 9.62615e-07, 1)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_fite4")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=14 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/ControllerPlayer.cs" id="2_whdc0"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://Scripts/NetworkPrefabs.cs" id="8_1bbbk"]
 [ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
 [ext_resource type="Texture2D" uid="uid://catxthhhls552" path="res://Images/Grass2.png" id="9_ftk6f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t4n4b"]
 
 [node name="BattleScene" type="Node3D"]
 
@@ -116,3 +118,9 @@ texture = ExtResource("9_ftk6f")
 
 [node name="Test" type="Node3D" parent="."]
 script = ExtResource("6_wjjft")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_t4n4b")
