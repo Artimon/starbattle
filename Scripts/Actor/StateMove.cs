@@ -6,7 +6,7 @@ namespace Starbattle;
 [GlobalClass]
 public partial class StateMove : StateBase {
 	[Export]
-	public Actor _actor;
+	public ActorBase _actor;
 
 	public override string StateName => "Move";
 
@@ -23,6 +23,7 @@ public partial class StateMove : StateBase {
 		var progress = Mathf.Clamp(_elapsedTime / _lerpTime, 0f, 1f);
 
 		_actor.GlobalPosition = _startPosition.Lerp(_targetPosition, progress);
+		// @TODO Add "movement target" object and follow it just like the camera.
 
 		if (progress < 1f) {
 			return;

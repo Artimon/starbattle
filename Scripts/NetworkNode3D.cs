@@ -4,6 +4,7 @@ using Godot;
 namespace Starbattle;
 
 public partial class NetworkNode3D : Node3D {
+	public long uniqueId;
 	public long ownerId;
 	public int prefabIndex;
 

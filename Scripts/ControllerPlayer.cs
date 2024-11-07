@@ -11,13 +11,13 @@ public partial class ControllerPlayer : Node {
 	[Export]
 	public PackedScene[] _playerPrefabs;
 
-	public readonly List<Actor> _players = new();
+	public readonly List<ActorPlayer> _players = new();
 
 	[Rpc(CallLocal = true)]
 	public void _SpawnPlayer(int actorPrefabIndex, Vector3 position, long uniqueId) {
 		var prefab = _playerPrefabs[actorPrefabIndex];
 
-		var actor = prefab.InstantiateNetworked<Actor>(_actorContainer, uniqueId, (actor) => {
+		var actor = prefab.InstantiateNetworked<ActorPlayer>(_actorContainer, uniqueId, (actor) => {
 			actor.ownerId = uniqueId;
 			actor.prefabIndex = actorPrefabIndex;
 		});

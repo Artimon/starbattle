@@ -1,11 +1,12 @@
-﻿using Artimus.Services;
-using Godot;
+﻿using Godot;
 
 namespace Starbattle;
 
 [GlobalClass]
-public partial class Actor : NetworkNode3D {
-	public string displayName;
+public partial class ActorPlayer : ActorBase {
+	public static ActorPlayer player;
+
+	public bool isPlayer;
 
 	[Export]
 	public Node3D cameraTarget;
@@ -13,72 +14,18 @@ public partial class Actor : NetworkNode3D {
 	[Export]
 	public RayCast3D _rayCast;
 
-	[Export]
-	public StateMachine stateMachine;
-
-	[Export]
-	public StateMove stateMove;
-
-	// public float inputX;
-
-	public float angle;
-
-	public Vector3 _velocity;
-	public Vector3 direction;
-	public float moveSpeed;
-	public bool isMoving;
-	public Vector3 movedBy;
-
-	public bool isMob;
-
-	public bool IsPlayer => !isMob && ownerId == Multiplayer.GetUniqueId();
-
 	public override void _Ready() {
-		if (IsPlayer) {
-			ControllerCamera.instance.Follow(this);
+		isPlayer = ownerId == Multiplayer.GetUniqueId();
+		if (!isPlayer) {
+			return;
 		}
+
+		player = this;
+
+		ControllerCamera.instance.Follow(this);
 	}
 
-	public override void _Process(double delta) {
-		// _Movement(30f, (float)delta, out isMoving, out movedBy);
-
-		// var velocity = new Vector3(inputX, 0f, 0f) * (float)delta;
-		//
-		// GlobalPosition += velocity;
-	}
-
-	// [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	// public void _SetInput(float value) {
-	// 	inputX = value;
-	// }
-
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-	public void _MoveTo(Vector3 position) {
-		stateMove.MoveTo(position);
-	}
-
-	public void _Movement(
-		float friction,
-		float deltaTime,
-		out bool hasMoved,
-		out Vector3 movedBy
-	) {
-		// var velocity = _rigidbody.velocity;
-		var velocityChange = Vector3.Zero;
-		var velocityTarget = direction.Normalized() * moveSpeed;
-
-		velocityChange.X = (velocityTarget.X - _velocity.X) * friction * deltaTime;
-		velocityChange.Z = (velocityTarget.Z - _velocity.Z) * friction * deltaTime;
-
-		_velocity += velocityChange;
-
-		movedBy = _velocity * deltaTime;
-		hasMoved = _velocity.ApproximateArea(0.01f);
-
-		GlobalPosition += movedBy;
-	}
-
-	public bool _TryGetClickPosition(Vector2 mousePosition, out Vector3 clickPosition) {
+	public bool _TryGetClickPosition(Vector2 mousePosition, out Vector3 clickPosition, out ActorBase actor) {
 		var camera = GetViewport().GetCamera3D();
 		var from = camera.ProjectRayOrigin(mousePosition);
 		var to = camera.ProjectRayNormal(mousePosition) * 1000f;
@@ -86,6 +33,8 @@ public partial class Actor : NetworkNode3D {
 		_rayCast.GlobalPosition = from;
 		_rayCast.TargetPosition = to;
 		_rayCast.ForceRaycastUpdate();
+
+		actor = default;
 
 		if (!_rayCast.IsColliding()) {
 			clickPosition = Vector3.Zero;
@@ -100,6 +49,8 @@ public partial class Actor : NetworkNode3D {
 		if (collider is not ActorBody3D actorBody) {
 			return true;
 		}
+
+		actor = actorBody.Actor;
 
 		GD.Print($"Detected collision with {actorBody.Actor.Name}");
 
@@ -123,30 +74,46 @@ public partial class Actor : NetworkNode3D {
 		// return true;
 	}
 
-	public enum ActionTypes {
-		Move,
-		Attack
-	}
-
-	public ActionTypes _actionType;
-
 	public override void _Input(InputEvent @event) {
-		if (!IsPlayer) {
+		if (!isPlayer) {
+			return;
+		}
+
+		if (@event.IsActionPressed("TargetCloser")) {
+			TargetMarker.instance.TargetCloser();
+
+			return;
+		}
+
+		if (@event.IsActionPressed("TargetFurther")) {
+			TargetMarker.instance.TargetFurther();
+
 			return;
 		}
 
 		if (@event.IsActionPressed("Move")) {
 			_actionType = ActionTypes.Move;
+
+			return;
 		}
 
 		if (@event.IsActionPressed("Attack")) {
 			_actionType = ActionTypes.Attack;
+
+			return;
 		}
 
 		if (@event is InputEventMouseButton { Pressed: true } mouseEvent) {
-			var success = _TryGetClickPosition(mouseEvent.Position, out var clickPosition);
+			var success = _TryGetClickPosition(mouseEvent.Position, out var clickPosition, out var actor);
 			if (!success) {
 				GD.Print($"Failed to get click position");
+				return;
+			}
+
+			if (actor is ActorMob mob) {
+				TargetMarker.instance.Target = mob;
+
+				GD.Print($"Clicked on {mob.Name}");
 				return;
 			}
 

@@ -5,9 +5,9 @@ namespace Starbattle;
 [GlobalClass]
 public partial class ActorBody3D : CharacterBody3D {
 	[Export]
-	public Actor _actor;
+	public ActorBase _actor;
 
-	public Actor Actor => _actor;
+	public ActorBase Actor => _actor;
 
 	// public override void _Input(InputEvent @event) {
 	// 	if (@event is InputEventMouseButton { Pressed: true } mouseEvent) {

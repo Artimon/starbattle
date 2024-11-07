@@ -14,6 +14,8 @@ public partial class NetworkPrefabs : Node {
 
 	public List<NetworkNode3D> _things = new ();
 
+	public long _uniqueId;
+
 	public Action<NetworkNode3D> onInstantiated;
 
 	public override void _EnterTree() {
@@ -38,11 +40,12 @@ public partial class NetworkPrefabs : Node {
 	}
 
 	[Rpc(CallLocal = true)]
-	public void _RpcInstantiate(int prefabIndex, Vector3 position, long ownerId) {
+	public void _RpcInstantiate(int prefabIndex, Vector3 position, long uniqueId, long ownerId) {
 		var prefab = _prefabs[prefabIndex];
 		var thing = prefab.Instantiate<NetworkNode3D>();
 
-		thing.Name = $"{thing.Name} {ownerId}"; // For network identification.
+		thing.Name = $"{thing.Name} {uniqueId}"; // For network identification.
+		thing.uniqueId = uniqueId;
 		thing.ownerId = ownerId;
 		thing.prefabIndex = prefabIndex;
 
@@ -64,14 +67,16 @@ public partial class NetworkPrefabs : Node {
 	}
 
 	public void Instantiate(NetworkNode3D thing, long recipientId) {
-		RpcId(recipientId, nameof(_RpcInstantiate), thing.prefabIndex, thing.GlobalPosition, thing.ownerId);
+		RpcId(recipientId, nameof(_RpcInstantiate), thing.prefabIndex, thing.GlobalPosition, thing.uniqueId, thing.ownerId);
 	}
 
 	public void Instantiate(PackedScene prefab, Vector3 position) {
 		var prefabIndex = GetPrefabIndex(prefab);
 		var ownerId = Multiplayer.GetUniqueId();
 
-		Rpc(nameof(_RpcInstantiate), prefabIndex, position, ownerId);
+		_uniqueId += 1;
+
+		Rpc(nameof(_RpcInstantiate), prefabIndex, position, _uniqueId, ownerId);
 	}
 
 	public void OnNodeExitingTree(NetworkNode3D thing) {

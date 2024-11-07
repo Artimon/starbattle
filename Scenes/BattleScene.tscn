@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=16 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/ControllerPlayer.cs" id="2_whdc0"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
@@ -8,10 +8,12 @@
 [ext_resource type="Script" path="res://Scripts/ControllerSpawner.cs" id="6_lb2et"]
 [ext_resource type="Script" path="res://Scripts/Test.cs" id="6_wjjft"]
 [ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
-[ext_resource type="PackedScene" uid="uid://bsm2lc4s0rhiy" path="res://Prefabs/Actors/GreenSlime.tscn" id="7_a8oyc"]
+[ext_resource type="PackedScene" uid="uid://cyg7yi1l2s50e" path="res://Prefabs/Actors/GreenSlime.tscn" id="7_a8oyc"]
 [ext_resource type="Script" path="res://Scripts/NetworkPrefabs.cs" id="8_1bbbk"]
 [ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
+[ext_resource type="Script" path="res://Scripts/TargetMarker.cs" id="9_eusdq"]
 [ext_resource type="Texture2D" uid="uid://catxthhhls552" path="res://Images/Grass2.png" id="9_ftk6f"]
+[ext_resource type="Texture2D" uid="uid://cqeuq2r4fatri" path="res://Images/TargetMarker.png" id="10_5w3ir"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t4n4b"]
 
@@ -50,6 +52,15 @@ _container = NodePath("../../ActorContainer")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.01098, 0, 0)
 
 [node name="ActorContainer" type="Node3D" parent="MultiplayerContainer"]
+
+[node name="TargetMarker" type="Node3D" parent="."]
+script = ExtResource("9_eusdq")
+
+[node name="Sprite3D" type="Sprite3D" parent="TargetMarker"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+pixel_size = 0.0625
+texture_filter = 0
+texture = ExtResource("10_5w3ir")
 
 [node name="Scene Decoration" type="Node3D" parent="."]
 
@@ -116,11 +127,11 @@ billboard = 2
 texture_filter = 0
 texture = ExtResource("9_ftk6f")
 
-[node name="Test" type="Node3D" parent="."]
-script = ExtResource("6_wjjft")
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_t4n4b")
+
+[node name="Test" type="Node3D" parent="."]
+script = ExtResource("6_wjjft")

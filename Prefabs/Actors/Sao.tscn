@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckru28eyyrw5k"]
 
-[ext_resource type="PackedScene" uid="uid://duyrj0vfxsvna" path="res://Prefabs/Actors/ActorBase.tscn" id="1_jlqgj"]
+[ext_resource type="PackedScene" uid="uid://duyrj0vfxsvna" path="res://Prefabs/Actors/ActorPlayerBase.tscn" id="1_jlqgj"]
 [ext_resource type="Texture2D" uid="uid://chnmo5qbqeocv" path="res://Images/TempCharacterSao.png" id="2_e8n4u"]
 
 [node name="Sao" instance=ExtResource("1_jlqgj")]
