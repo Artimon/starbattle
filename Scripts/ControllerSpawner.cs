@@ -11,7 +11,7 @@ public partial class ControllerSpawner : Node {
 	public MultiplayerContainer _multiplayerContainer;
 
 	[Export]
-	public NetworkPrefabs _networkPrefabs;
+	public Node3D _actorContainer;
 
 	[Export]
 	public Node3D _spawnPoint;
@@ -34,18 +34,6 @@ public partial class ControllerSpawner : Node {
 
 		SetProcess(false);
 
-		_networkPrefabs.onInstantiated += (thing) => {
-			var actor = (ActorMob)thing;
-
-			actor.OnDeath += (actor) => {
-				_mobs.Remove((ActorMob)actor);
-			};
-
-			_mobs.Add(actor);
-
-			// GD.Print($"Mob spawned: {actor.Name} at peer {Multiplayer.GetUniqueId()} for {actor.ownerId}");
-		};
-
 		_multiplayerContainer.OnConnectionReady += () => {
 			if (Multiplayer.IsServer()) {
 				_Begin();
@@ -54,8 +42,9 @@ public partial class ControllerSpawner : Node {
 	}
 
 	public void _Begin() {
-		_networkPrefabs.Instantiate(_mobPrefab, RandomSpawnPosition);
-		_networkPrefabs.Instantiate(_mobPrefab, RandomSpawnPosition);
-		_networkPrefabs.Instantiate(_mobPrefab, RandomSpawnPosition);
+		_mobPrefab.Instantiate<ActorMob>(_actorContainer, (actor) => {
+			actor.serverSynchronizer.networkHandle = GD.Randi(); // @TODO Get from a global system that ensure 100% unique identifiers.
+			actor.Name = $"{actor.Name} {actor.serverSynchronizer.networkHandle}";
+		});
 	}
 }

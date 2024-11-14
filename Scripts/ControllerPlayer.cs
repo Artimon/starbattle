@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Godot;
+﻿using Godot;
 
 namespace Starbattle;
 
@@ -10,28 +9,6 @@ public partial class ControllerPlayer : Node {
 
 	[Export]
 	public PackedScene[] _playerPrefabs;
-
-	public readonly List<ActorPlayer> _players = new();
-
-	[Rpc(CallLocal = true)]
-	public void _SpawnPlayer(int actorPrefabIndex, Vector3 position, long uniqueId) {
-		var prefab = _playerPrefabs[actorPrefabIndex];
-
-		var actor = prefab.InstantiateNetworked<ActorPlayer>(_actorContainer, uniqueId, (actor) => {
-			actor.ownerId = uniqueId;
-			actor.prefabIndex = actorPrefabIndex;
-		});
-
-		actor.GlobalPosition = position;
-
-		_players.Add(actor);
-	}
-
-	public void SendAllPlayersToNewPlayer(long recipientId) {
-		foreach (var playerActor in _players.ToArray()) {
-			RpcId(recipientId, nameof(_SpawnPlayer), playerActor.prefabIndex, playerActor.GlobalPosition, playerActor.ownerId);
-		}
-	}
 
 	public void RpcIdRequestPlayerSpawn(int actorPrefabIndex) {
 		RpcId(1, nameof(_RequestPlayerSpawn), actorPrefabIndex);
@@ -48,14 +25,11 @@ public partial class ControllerPlayer : Node {
 			return;
 		}
 
-		// @TODO Check if the player is already spawned.
-		var ownerId = Multiplayer.GetRemoteSenderId();
-		var position = new Vector3(
-			-2f + 2f * _players.Count,
-			0f,
-			0f
-		);
-
-		Rpc(nameof(_SpawnPlayer), actorPrefabIndex, position, ownerId);
+		var prefab = _playerPrefabs[actorPrefabIndex];
+		var actor = prefab.Instantiate<ActorPlayer>(_actorContainer, (actor) => {
+			actor.serverSynchronizer.networkHandle = GD.Randi(); // @TODO Get from a global system that ensure 100% unique identifiers.
+			actor.serverSynchronizer.ownerId = Multiplayer.GetRemoteSenderId();
+			actor.Name = $"{actor.Name} {actor.serverSynchronizer.networkHandle}";
+		});
 	}
 }

@@ -49,10 +49,6 @@ public partial class MultiplayerContainer : Node {
 
 		OnConnectionReady?.Invoke();
 
-		Multiplayer.PeerConnected += (id) => {
-			_controllerPlayer.SendAllPlayersToNewPlayer(id);
-		};
-
 		// peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
 		Multiplayer.MultiplayerPeer = peer; // Assigning the peer triggers the connection.
 

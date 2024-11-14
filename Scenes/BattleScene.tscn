@@ -26,20 +26,25 @@ script = ExtResource("5_887w4")
 [node name="AudioListener3D" type="AudioListener3D" parent="ControllerCamera"]
 
 [node name="Camera3D" type="Camera3D" parent="ControllerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.597302, 2.55741)
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_controllerPlayer")]
 script = ExtResource("3_5vdu8")
 _controllerPlayer = NodePath("ControllerPlayer")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MultiplayerContainer"]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Actors/Lynea.tscn", "res://Prefabs/Actors/Sao.tscn", "res://Prefabs/Actors/GreenSlime.tscn")
+spawn_path = NodePath("../ActorContainer")
 
 [node name="ControllerPlayer" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_actorContainer")]
 script = ExtResource("2_whdc0")
 _actorContainer = NodePath("../ActorContainer")
 _playerPrefabs = Array[PackedScene]([ExtResource("3_ch0nk"), ExtResource("4_dw50s")])
 
-[node name="ControllerSpawner" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_multiplayerContainer", "_networkPrefabs", "_spawnPoint")]
+[node name="ControllerSpawner" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_multiplayerContainer", "_actorContainer", "_spawnPoint")]
 script = ExtResource("6_lb2et")
 _multiplayerContainer = NodePath("..")
-_networkPrefabs = NodePath("NetworkPrefabs")
+_actorContainer = NodePath("../ActorContainer")
 _spawnPoint = NodePath("Spawn Point 1")
 _mobPrefab = ExtResource("7_a8oyc")
 

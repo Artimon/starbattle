@@ -1,10 +1,13 @@
-﻿using Godot;
+﻿using System.Collections.Generic;
+using Godot;
 
 namespace Starbattle;
 
 [GlobalClass]
 public partial class ActorPlayer : ActorBase {
 	public static ActorPlayer player;
+
+	public static readonly List<ActorPlayer> players = new();
 
 	public bool isPlayer;
 
@@ -14,8 +17,21 @@ public partial class ActorPlayer : ActorBase {
 	[Export]
 	public RayCast3D _rayCast;
 
+	public override void _EnterTree() {
+		// Warning: Synchronizer fields are not set yet!
+
+		serverSynchronizer.DeltaSynchronized += () => {
+			GD.Print($"DeltaSynchronized: {serverSynchronizer.networkHandle} / {serverSynchronizer.ownerId} ({Multiplayer.GetUniqueId()})");
+		};
+	}
+
 	public override void _Ready() {
-		isPlayer = ownerId == Multiplayer.GetUniqueId();
+		// Note: Synchronizer fields are set now!
+
+		players.Add(this); // Add here, to ensure all synchronizer fields are set.
+		GD.Print($"_Ready: {serverSynchronizer.networkHandle} / {serverSynchronizer.ownerId} ({Multiplayer.GetUniqueId()})");
+
+		isPlayer = serverSynchronizer.ownerId == Multiplayer.GetUniqueId();
 		if (!isPlayer) {
 			return;
 		}
@@ -23,6 +39,10 @@ public partial class ActorPlayer : ActorBase {
 		player = this;
 
 		ControllerCamera.instance.Follow(this);
+	}
+
+	public override void _ExitTree() {
+		players.Remove(this);
 	}
 
 	public bool _TryGetClickPosition(Vector2 mousePosition, out Vector3 clickPosition, out ActorBase actor) {
@@ -98,7 +118,9 @@ public partial class ActorPlayer : ActorBase {
 		}
 
 		if (@event.IsActionPressed("Attack")) {
+			Godot.GD.Print($"Current target: {TargetMarker.instance.Target.Name}");
 			_actionType = ActionTypes.Attack;
+			// stateMachine.
 
 			return;
 		}
@@ -127,9 +149,5 @@ public partial class ActorPlayer : ActorBase {
 				// Attack
 			}
 		}
-
-		// inputX = Input.GetAxis("Left", "Right");
-		//
-		// Rpc(nameof(_SetInput), inputX);
 	}
 }

@@ -4,7 +4,10 @@ using Godot;
 
 namespace Starbattle;
 
-public abstract partial class ActorBase : NetworkNode3D {
+/**
+ * @link https://godotengine.org/article/multiplayer-in-godot-4-0-scene-replication/
+ */
+public abstract partial class ActorBase : Node3D {
 	public string displayName;
 
 	public enum ActionTypes {
@@ -14,6 +17,14 @@ public abstract partial class ActorBase : NetworkNode3D {
 	}
 
 	public ActionTypes _actionType;
+
+	[Export]
+	public CollisionShape3D collisionShape;
+
+	public float Size => collisionShape.Shape.GetMargin();
+
+	[Export]
+	public ServerSynchronizer serverSynchronizer;
 
 	[Export]
 	public StateMachine stateMachine;

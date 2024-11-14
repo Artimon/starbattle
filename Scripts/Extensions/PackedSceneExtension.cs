@@ -13,11 +13,10 @@ public static class PackedSceneExtension {
 		return thing;
 	}
 
-	public static T InstantiateNetworked<T>(
+	public static T Instantiate<T>(
 		this PackedScene packedScene,
 		Node3D parent,
-		long uniqueId,
-		Action<T> preAdd = null
+		Action<T> preAdd
 	) where T : Node3D {
 		var thing = packedScene.Instantiate<T>();
 
@@ -25,7 +24,6 @@ public static class PackedSceneExtension {
 		parent.AddChild(thing);
 
 		thing.GlobalPosition = parent.GlobalPosition;
-		thing.Name = $"{thing.Name} {uniqueId}"; // For network identification.
 
 		return thing;
 	}
