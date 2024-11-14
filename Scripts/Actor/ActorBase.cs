@@ -38,7 +38,6 @@ public abstract partial class ActorBase : Node3D {
 
 	public event Action<ActorBase> OnDeath;
 
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
 	public void _MoveTo(Vector3 position) {
 		stateMove.MoveTo(position);
 	}

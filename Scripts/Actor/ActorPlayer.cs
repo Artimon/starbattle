@@ -117,9 +117,8 @@ public partial class ActorPlayer : ActorBase {
 		}
 
 		if (@event.IsActionPressed("Attack")) {
-			Godot.GD.Print($"Current target: {TargetMarker.instance.Target.Name}");
 			_actionType = ActionTypes.Attack;
-			// stateMachine.
+			_RequestActionViaRpcId(ActionTypes.Attack, TargetMarker.instance.Target);
 
 			return;
 		}
@@ -141,12 +140,54 @@ public partial class ActorPlayer : ActorBase {
 			GD.Print($"Clicked at {clickPosition} with {_actionType}");
 
 			if (_actionType == ActionTypes.Move) {
-				Rpc(nameof(_MoveTo), clickPosition);
+				_RequestActionViaRpcId(ActionTypes.Move, clickPosition);
 			}
 
-			if (_actionType == ActionTypes.Attack) {
-				// Attack
-			}
+			// if (_actionType == ActionTypes.Attack) { }
 		}
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	public void _RequestAction(int actionType, Vector3 position, long actorNetworkHandle) {
+		if (!Multiplayer.IsServer()) {
+			return;
+		}
+
+		Rpc(nameof(_CommitAction), actionType, position, actorNetworkHandle);
+	}
+
+	[Rpc(CallLocal = true)]
+	public void _CommitAction(int actionType, Vector3 position, long actorNetworkHandle) {
+		switch (actionType) {
+			case (int)ActionTypes.Move:
+				_MoveTo(position);
+				break;
+
+			case (int)ActionTypes.Attack:
+				_Attack(actorNetworkHandle);
+				break;
+		}
+	}
+
+	public void _RequestActionViaRpcId(ActionTypes actionType, ActorBase actor) {
+		_RequestActionViaRpcId(actionType, Vector3.Zero, actor);
+	}
+
+	public void _RequestActionViaRpcId(ActionTypes actionType, Vector3 position, ActorBase actor = null) {
+		var networkHandle = actor?.serverSynchronizer.networkHandle ?? 0;
+
+		RpcId(1, nameof(_RequestAction), (int)actionType, position, networkHandle);
+	}
+
+	public void _Attack(long targetNetworkHandle) {
+		var success = ActorContainer.instance.TryGetActor(targetNetworkHandle, out var target);
+		if (!success) {
+			GD.Print($"Failed to get target with handle {targetNetworkHandle}");
+			return;
+		}
+
+		GD.Print($"Attacking {target.Name}");
+
+		// @TODO Implement attack logic.
 	}
 }

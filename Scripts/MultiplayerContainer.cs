@@ -59,7 +59,7 @@ public partial class MultiplayerContainer : Node {
 
 		// _controllerPlayer.SpawnPlayer(uniqueId);
 
-		_controllerPlayer.RpcIdRequestPlayerSpawn(0);
+		_controllerPlayer.RequestPlayerSpawnViaRpcId(0);
 
 		DisplayServer.WindowSetTitle($"Starbattle Server: {uniqueId}");
 	}
@@ -74,7 +74,7 @@ public partial class MultiplayerContainer : Node {
 			DisplayServer.WindowSetTitle($"Starbattle Client: {uniqueId}");
 
 			// _controllerPlayer.SpawnPlayer(uniqueId);
-			_controllerPlayer.RpcIdRequestPlayerSpawn(1);
+			_controllerPlayer.RequestPlayerSpawnViaRpcId(1);
 		};
 
 		Multiplayer.ConnectionFailed += () => {

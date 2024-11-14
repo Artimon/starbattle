@@ -10,7 +10,7 @@ public partial class ControllerPlayer : Node {
 	[Export]
 	public PackedScene[] _playerPrefabs;
 
-	public void RpcIdRequestPlayerSpawn(int actorPrefabIndex) {
+	public void RequestPlayerSpawnViaRpcId(int actorPrefabIndex) {
 		RpcId(1, nameof(_RequestPlayerSpawn), actorPrefabIndex);
 	}
 
