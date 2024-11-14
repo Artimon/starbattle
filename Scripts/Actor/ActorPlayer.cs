@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using Godot;
+﻿using Godot;
 
 namespace Starbattle;
 
 [GlobalClass]
 public partial class ActorPlayer : ActorBase {
 	public static ActorPlayer player;
-
-	public static readonly List<ActorPlayer> players = new();
 
 	public bool isPlayer;
 
@@ -28,8 +25,10 @@ public partial class ActorPlayer : ActorBase {
 	public override void _Ready() {
 		// Note: Synchronizer fields are set now!
 
-		players.Add(this); // Add here, to ensure all synchronizer fields are set.
-		GD.Print($"_Ready: {serverSynchronizer.networkHandle} / {serverSynchronizer.ownerId} ({Multiplayer.GetUniqueId()})");
+		// Add here, to ensure all synchronizer fields are set.
+		ActorContainer.instance.Add(this);
+
+		// GD.Print($"_Ready: {serverSynchronizer.networkHandle} / {serverSynchronizer.ownerId} ({Multiplayer.GetUniqueId()})");
 
 		isPlayer = serverSynchronizer.ownerId == Multiplayer.GetUniqueId();
 		if (!isPlayer) {
@@ -42,7 +41,7 @@ public partial class ActorPlayer : ActorBase {
 	}
 
 	public override void _ExitTree() {
-		players.Remove(this);
+		ActorContainer.instance.Remove(this);
 	}
 
 	public bool _TryGetClickPosition(Vector2 mousePosition, out Vector3 clickPosition, out ActorBase actor) {

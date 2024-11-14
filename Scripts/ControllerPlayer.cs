@@ -5,7 +5,7 @@ namespace Starbattle;
 [GlobalClass]
 public partial class ControllerPlayer : Node {
 	[Export]
-	public Node3D _actorContainer;
+	public ActorContainer _actorContainer;
 
 	[Export]
 	public PackedScene[] _playerPrefabs;

@@ -11,7 +11,7 @@ public partial class ControllerSpawner : Node {
 	public MultiplayerContainer _multiplayerContainer;
 
 	[Export]
-	public Node3D _actorContainer;
+	public ActorContainer _actorContainer;
 
 	[Export]
 	public Node3D _spawnPoint;
