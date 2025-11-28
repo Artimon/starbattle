@@ -45,13 +45,14 @@ public partial class PlayerController : Node {
 		clickPosition.Y = 0f;
 
 		var collider = _rayCast.GetCollider();
-		if (collider is not ActorBody3D actorBody) {
+		var parent = (collider as Node)?.GetParent();
+		if (parent is not Actor clickedActor) {
 			return true;
 		}
 
-		actor = actorBody.Actor;
+		actor = clickedActor;
 
-		GD.Print($"Detected collision with {actorBody.Actor.Name}");
+		GD.Print($"Detected collision with {actor.Name}");
 
 		return true;
 
@@ -74,6 +75,16 @@ public partial class PlayerController : Node {
 	}
 
 	public override void _Input(InputEvent @event) {
+		if (@event is InputEventMouseButton { Pressed: true } mouseEvent) {
+			var success = _TryGetClickPosition(mouseEvent.Position, out var clickPosition, out var actor);
+			if (!success) {
+				GD.Print($"Failed to get click position");
+				return;
+			}
+
+			GD.Print($"Clicked target: {actor?.Name ?? "None"} at {clickPosition}");
+		}
+
 		// if (!isPlayer) {
 		// 	return;
 		// }

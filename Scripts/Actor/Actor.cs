@@ -15,10 +15,14 @@ public partial class Actor : Node3D {
 	[Export]
 	public CollisionShape3D collisionShape;
 
+	public CapsuleShape3D capsuleShape;
+
 	public float Size => collisionShape.Shape.GetMargin();
 
 	[Export]
 	public AnimatedSprite3D sprite;
+
+	public float Height => sprite.PixelSize * setup.pixelHeight;
 
 	public ActorSetup setup;
 
@@ -28,11 +32,12 @@ public partial class Actor : Node3D {
 	public ActorSetups Setups => _setups;
 
 	public override void _EnterTree() {
+		capsuleShape = collisionShape.Shape as CapsuleShape3D;
+
 		// Warning: Synchronizer fields are not set yet!
 
 		synchronizer.DeltaSynchronized += () => {
 			GD.Print($"Actor (delta) synchronized: {synchronizer.handle} / {synchronizer.playerId} ({Multiplayer.GetUniqueId()})");
-
 		};
 	}
 
@@ -53,10 +58,16 @@ public partial class Actor : Node3D {
 
 		GD.Print($"Created with {actorId} / {setup.name} at {synchronizer.spawnPosition} / {Position}");
 
-		var offset = sprite.PixelSize * setup.SpriteSize / 2f;
+		var spriteOffset = sprite.PixelSize * setup.SpriteSize / 2f;
 
-		sprite.Position = new Vector3(0, offset, 0);
+		sprite.Position = new Vector3(0, spriteOffset, 0);
 		sprite.Play("Idle");
+
+		var height = Height;
+
+		collisionShape.Position = new Vector3(0, height / 2f , 0);
+		capsuleShape.Height = height ;
+		capsuleShape.Radius = height / 4f; // May require customization for certain actors.
 
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		if (!isPlayer) {

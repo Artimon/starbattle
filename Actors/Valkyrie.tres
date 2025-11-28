@@ -145,3 +145,4 @@ animations = [{
 script = ExtResource("1_pxfe4")
 name = "Valkyrie"
 _animationFrames = SubResource("SpriteFrames_6em5t")
+pixelHeight = 80.0

@@ -14,6 +14,9 @@ public partial class ActorSetup : Resource {
 
 	public SpriteFrames AnimationFrames => _animationFrames;
 
+	[Export]
+	public float pixelHeight;
+
 	public float _spriteSize;
 
 	public float SpriteSize {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb3j6sa8w2cm3"]
+[gd_scene load_steps=9 format=3 uid="uid://cb3j6sa8w2cm3"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
@@ -34,9 +34,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "sprite")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1m2qn"]
+radius = 0.4
+height = 1.6
+
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "collisionShape", "sprite")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
+collisionShape = NodePath("CharacterBody3D/CollisionShape3D")
 sprite = NodePath("AnimatedSprite3D")
 _setups = ExtResource("2_eb7re")
 
@@ -49,3 +54,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 pixel_size = 0.02
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_pinw1")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_1m2qn")

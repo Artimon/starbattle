@@ -34,13 +34,14 @@ public partial class ActorSpawner : Node {
 		// _multiplayerContainer.OnConnectionReady += _Begin;
 	}
 
-	public void CreatePlayer(Vector3 position, uint actorId, int playerId) {
+	public void CreatePlayer(Vector3 position, string actorName, int playerId) {
+		var setup = _setups.GetSetup(actorName);
 		var actor = _actorPrefab.Instantiate<Actor>(_actorContainer, actor => {
 			actor.synchronizer.handle = GD.Randi();
 			actor.synchronizer.playerId = playerId;
-			actor.synchronizer.actorId = actorId;
+			actor.synchronizer.actorId = setup.ActorId;
 			actor.synchronizer.spawnPosition = position;
-			actor.Name = $"{actor.Name} {actor.synchronizer.handle}";
+			actor.Name = $"{setup.name} {actor.synchronizer.handle}";
 		});
 	}
 
@@ -61,7 +62,7 @@ public partial class ActorSpawner : Node {
 
 		CreatePlayer(
 			RandomSpawnPosition,
-			_setups.GetSetup(actorName).ActorId,
+			actorName,
 			Multiplayer.GetRemoteSenderId()
 		);
 	}

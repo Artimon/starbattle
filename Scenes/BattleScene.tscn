@@ -19,8 +19,11 @@
 
 [node name="Controllers" type="Node" parent="."]
 
-[node name="PlayerController" type="Node" parent="Controllers"]
+[node name="PlayerController" type="Node" parent="Controllers" node_paths=PackedStringArray("_rayCast")]
 script = ExtResource("1_d62xq")
+_rayCast = NodePath("RayCast3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="Controllers/PlayerController"]
 
 [node name="ControllerCamera" type="Node3D" parent="."]
 process_mode = 4
@@ -126,5 +129,5 @@ texture = ExtResource("9_ftk6f")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
 shape = SubResource("BoxShape3D_t4n4b")
