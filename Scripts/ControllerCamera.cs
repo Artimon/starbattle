@@ -6,7 +6,7 @@ namespace Starbattle;
 public partial class ControllerCamera : Node3D {
 	public static ControllerCamera instance;
 
-	public ActorPlayer _actor;
+	public Actor _actor;
 	public Camera3D _camera;
 
 	public Vector3 _selfieStick;
@@ -27,16 +27,16 @@ public partial class ControllerCamera : Node3D {
 	}
 
 	public override void _Process(double delta) {
-		var targetPosition = _actor.cameraTarget.GlobalPosition + _selfieStick;
+		var targetPosition = _actor.GlobalPosition + _selfieStick;
 		var progress = Mathf.Min(1f, 10f * (float)delta);
 
 		GlobalPosition = GlobalPosition.Lerp(targetPosition, progress);
 	}
 
-	public void Follow(ActorPlayer actor) {
+	public void Follow(Actor actor) {
 		_actor = actor;
 
-		GlobalPosition = actor.cameraTarget.GlobalPosition + _selfieStick;
+		GlobalPosition = actor.GlobalPosition + _selfieStick;
 
 		SetProcessMode(ProcessModeEnum.Pausable);
 		SetProcess(true);

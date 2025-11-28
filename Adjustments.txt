@@ -1,0 +1,9 @@
+- ATB in 5 Segemente teilen. Bewegen braucht 1, angreifen 2, 3 oder 4 macht doppel-Angriff.
+- Balken werden erst bei aktivierung verbraucht, so kann bei Doppel-Angriff nach dem ersten Hit eine Unterbrechung folgen, ohne dass "alles weg" ist. Entweder durch Treffer einstecken oder selbst "Move" auslösen ggfls. um auf was neues zu reagieren.
+- Mitten in Cast/Attack etc. Aktionswechsel erlauben, ähnlich zu stagger erlauben.
+- Skills eher wie bei Bergsons behandeln, Zusatzzeug drauf, nicht mehr hinzufügen.
+- Konter dürfen erst nach player-aktionen ausgeführt werden und nicht selbst unterbrechungen auslösen, oder sogar einfach nur ausgelöst werden.
+- Auto-HP-Regen wenn man nichts tut oder dauerhaft wie ff14.
+- Wellen nicht alle Gegnaz instant, sondern mit kurzen Time-delays einzeln/in Grüppchen.
+- Gegner droppen items zum einsammeln beim drauflaufen?
+- Invul pets wie pokemon, eins im kampf, passiv skills oder aktive (heal atk)

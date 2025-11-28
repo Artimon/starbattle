@@ -4,7 +4,10 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class ActorSetup : Resource {
-	public uint ActorId => ResourceName.Hash();
+	[Export]
+	public string name;
+
+	public uint ActorId => name.Hash();
 
 	[Export]
 	public SpriteFrames _animationFrames;

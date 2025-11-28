@@ -6,9 +6,13 @@ namespace Starbattle;
 [GlobalClass]
 public partial class ActorSetups : Resource {
 	[Export]
-	public ActorSetup[] setups;
+	public ActorSetup[] list;
 
-	public ActorSetup GetSetupById(uint setupActorId) {
-		return setups.FirstOrDefault(setup => setup.ActorId == setupActorId);
+	public ActorSetup GetSetup(uint actorId) {
+		return list.FirstOrDefault(setup => setup.ActorId == actorId);
+	}
+
+	public ActorSetup GetSetup(string actorName) {
+		return list.FirstOrDefault(setup => setup.name == actorName);
 	}
 }

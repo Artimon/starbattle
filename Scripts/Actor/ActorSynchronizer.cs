@@ -5,11 +5,14 @@ namespace Starbattle;
 [GlobalClass]
 public partial class ActorSynchronizer : MultiplayerSynchronizer {
 	[Export]
-	public long handle; // Network-wide unique identifier.
+	public uint handle; // Network-wide unique identifier.
 
 	[Export]
-	public long ownerId;
+	public int playerId;
 
 	[Export]
 	public uint actorId;
+
+	[Export]
+	public Vector3 spawnPosition;
 }

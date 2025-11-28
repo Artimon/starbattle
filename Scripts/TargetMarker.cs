@@ -8,9 +8,9 @@ namespace Starbattle;
 public partial class TargetMarker : Node3D {
 	public static TargetMarker instance;
 
-	public ActorMob _target;
+	public Actor _target;
 
-	public ActorMob Target {
+	public Actor Target {
 		get => _target;
 		set => _target = value;
 	}
@@ -29,44 +29,44 @@ public partial class TargetMarker : Node3D {
 	}
 
 	public void TargetCloser() {
-		var mobs = ControllerSpawner.instance.Mobs;
-		if (mobs.Length == 0) {
-			return;
-		}
-
-		var position = ActorPlayer.player.GlobalPosition;
-		var sortedMobs = mobs
-			.OrderByDescending(mob => mob.GlobalPosition.DistanceTo(position))
-			.ToArray();
-
-		var index = Array.IndexOf(sortedMobs, _target);
-		index = (index + 1) % sortedMobs.Length;
-
-		_target = sortedMobs[index];
-
-		if (_target != null) {
-			GD.Print($"Targeted closer: {_target.Name}");
-		}
+		// var mobs = ControllerSpawner.instance.Mobs;
+		// if (mobs.Length == 0) {
+		// 	return;
+		// }
+		//
+		// var position = ActorPlayer.player.GlobalPosition;
+		// var sortedMobs = mobs
+		// 	.OrderByDescending(mob => mob.GlobalPosition.DistanceTo(position))
+		// 	.ToArray();
+		//
+		// var index = Array.IndexOf(sortedMobs, _target);
+		// index = (index + 1) % sortedMobs.Length;
+		//
+		// _target = sortedMobs[index];
+		//
+		// if (_target != null) {
+		// 	GD.Print($"Targeted closer: {_target.Name}");
+		// }
 	}
 
 	public void TargetFurther() {
-		var mobs = ControllerSpawner.instance.Mobs;
-		if (mobs.Length == 0) {
-			return;
-		}
-
-		var position = ActorPlayer.player.GlobalPosition;
-		var sortedMobs = mobs
-			.OrderBy(mob => mob.GlobalPosition.DistanceTo(position))
-			.ToArray();
-
-		var index = Array.IndexOf(sortedMobs, _target);
-		index = (index + 1) % sortedMobs.Length;
-
-		_target = sortedMobs[index];
-
-		if (_target != null) {
-			GD.Print($"Targeted closer: {_target.Name}");
-		}
+		// var mobs = ControllerSpawner.instance.Mobs;
+		// if (mobs.Length == 0) {
+		// 	return;
+		// }
+		//
+		// var position = ActorPlayer.player.GlobalPosition;
+		// var sortedMobs = mobs
+		// 	.OrderBy(mob => mob.GlobalPosition.DistanceTo(position))
+		// 	.ToArray();
+		//
+		// var index = Array.IndexOf(sortedMobs, _target);
+		// index = (index + 1) % sortedMobs.Length;
+		//
+		// _target = sortedMobs[index];
+		//
+		// if (_target != null) {
+		// 	GD.Print($"Targeted closer: {_target.Name}");
+		// }
 	}
 }

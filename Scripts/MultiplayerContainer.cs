@@ -7,7 +7,7 @@ namespace Starbattle;
 [GlobalClass]
 public partial class MultiplayerContainer : Node {
 	[Export]
-	public ControllerPlayer _controllerPlayer;
+	public ActorSpawner _actorSpawner;
 
 	public event Action OnConnectionReady;
 
@@ -57,9 +57,7 @@ public partial class MultiplayerContainer : Node {
 
 		// Print($"ID {uniqueId}, {peer.GetConnectionStatus()}");
 
-		// _controllerPlayer.SpawnPlayer(uniqueId);
-
-		_controllerPlayer.RequestPlayerSpawnViaRpcId(0);
+		_actorSpawner.RequestPlayerSpawnViaRpcId("Wizard");
 
 		DisplayServer.WindowSetTitle($"Starbattle Server: {uniqueId}");
 	}
@@ -73,8 +71,7 @@ public partial class MultiplayerContainer : Node {
 
 			DisplayServer.WindowSetTitle($"Starbattle Client: {uniqueId}");
 
-			// _controllerPlayer.SpawnPlayer(uniqueId);
-			_controllerPlayer.RequestPlayerSpawnViaRpcId(1);
+			_actorSpawner.RequestPlayerSpawnViaRpcId("Valkyrie");
 		};
 
 		Multiplayer.ConnectionFailed += () => {

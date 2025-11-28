@@ -13,17 +13,21 @@ public static class PackedSceneExtension {
 		return thing;
 	}
 
+	/**
+	 * With AddChild() the objects _EnterTree() and _Ready() methods are called, before the method returns.
+	 */
 	public static T Instantiate<T>(
 		this PackedScene packedScene,
 		Node3D parent,
-		Action<T> preAdd
+		Action<T> onBeforeAdd
 	) where T : Node3D {
 		var thing = packedScene.Instantiate<T>();
 
-		preAdd?.Invoke(thing);
+		onBeforeAdd?.Invoke(thing);
 		parent.AddChild(thing);
 
-		thing.GlobalPosition = parent.GlobalPosition;
+		// Disabled as it overwrites positions set in onBeforeAdd;
+		// thing.GlobalPosition = parent.GlobalPosition;
 
 		return thing;
 	}
