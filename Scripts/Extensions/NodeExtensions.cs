@@ -1,8 +1,9 @@
-﻿using Godot;
+﻿using System.Threading.Tasks;
+using Godot;
 
 namespace Artimus.Extensions;
 
-public static class NodeExtension {
+public static class NodeExtensions {
 	public static void Remove(this Node node) {
 #if TOOLS
 		var hasParent = node.GetParent() != null;
@@ -19,5 +20,13 @@ public static class NodeExtension {
 		 */
 		node.GetParent().RemoveChild(node);
 		node.QueueFree();
+	}
+
+	public static async Task NextFrame(this Node node) {
+		await node.ToSignal(node.GetTree(), "process_frame");
+	}
+
+	public static async Task WaitForSeconds(this Node node, double seconds) {
+		await node.ToSignal(node.GetTree().CreateTimer(seconds), "timeout");
 	}
 }

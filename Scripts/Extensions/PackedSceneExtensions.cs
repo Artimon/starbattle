@@ -3,7 +3,7 @@ using Godot;
 
 namespace Artimus.Extensions;
 
-public static class PackedSceneExtension {
+public static class PackedSceneExtensions {
 	public static T Instantiate<T>(this PackedScene packedScene, Node3D parent) where T : Node3D {
 		var thing = packedScene.Instantiate<T>();
 

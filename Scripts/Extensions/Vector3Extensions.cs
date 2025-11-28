@@ -2,7 +2,7 @@
 
 namespace Artimus.Extensions;
 
-public static class Vector3Extension {
+public static class Vector3Extensions {
 	public static bool ApproximateArea(this Vector3 vector, float range) {
 		return (
 			Mathf.Abs(vector.X) <= range &&
