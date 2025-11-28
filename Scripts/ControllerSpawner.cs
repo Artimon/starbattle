@@ -19,6 +19,9 @@ public partial class ControllerSpawner : Node {
 	[Export]
 	public PackedScene _mobPrefab;
 
+	[Export]
+	public PackedScene _actorPrefab;
+
 	public List<ActorMob> _mobs = new ();
 
 	public ActorMob[] Mobs => _mobs.ToArray();
@@ -42,9 +45,15 @@ public partial class ControllerSpawner : Node {
 	}
 
 	public void _Begin() {
-		_mobPrefab.Instantiate<ActorMob>(_actorContainer, (actor) => {
-			actor.serverSynchronizer.networkHandle = GD.Randi(); // @TODO Get from a global system that ensure 100% unique identifiers.
-			actor.Name = $"{actor.Name} {actor.serverSynchronizer.networkHandle}";
+		// _mobPrefab.Instantiate<ActorMob>(_actorContainer, (actor) => {
+		// 	actor.serverSynchronizer.networkHandle = GD.Randi(); // @TODO Get from a global system that ensure 100% unique identifiers.
+		// 	actor.Name = $"{actor.Name} {actor.serverSynchronizer.networkHandle}";
+		// });
+
+		_actorPrefab.Instantiate<Actor>(_actorContainer, actor => {
+			actor.synchronizer.handle = GD.Randi();
+			actor.synchronizer.ownerId = actor._setups.setups[1].ActorId;
+			actor.Name = $"{actor.Name} {actor.synchronizer.handle}";
 		});
 	}
 }

@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=18 format=3 uid="uid://dqbe2220e2hdv"]
 
+[ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Script" path="res://Scripts/ControllerPlayer.cs" id="2_whdc0"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="PackedScene" uid="uid://ckru28eyyrw5k" path="res://Prefabs/Actors/Sao.tscn" id="3_ch0nk"]
@@ -13,11 +14,17 @@
 [ext_resource type="Script" path="res://Scripts/Actor/ActorContainer.cs" id="9_0vfcd"]
 [ext_resource type="Script" path="res://Scripts/TargetMarker.cs" id="9_eusdq"]
 [ext_resource type="Texture2D" uid="uid://catxthhhls552" path="res://Images/Grass2.png" id="9_ftk6f"]
+[ext_resource type="PackedScene" uid="uid://cb3j6sa8w2cm3" path="res://Actors/Actor.tscn" id="9_m5eed"]
 [ext_resource type="Texture2D" uid="uid://cqeuq2r4fatri" path="res://Images/TargetMarker.png" id="10_5w3ir"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t4n4b"]
 
 [node name="BattleScene" type="Node3D"]
+
+[node name="Controllers" type="Node" parent="."]
+
+[node name="PlayerController" type="Node" parent="Controllers"]
+script = ExtResource("1_d62xq")
 
 [node name="ControllerCamera" type="Node3D" parent="."]
 process_mode = 4
@@ -33,7 +40,7 @@ script = ExtResource("3_5vdu8")
 _controllerPlayer = NodePath("ControllerPlayer")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MultiplayerContainer"]
-_spawnable_scenes = PackedStringArray("res://Prefabs/Actors/Lynea.tscn", "res://Prefabs/Actors/Sao.tscn", "res://Prefabs/Actors/GreenSlime.tscn")
+_spawnable_scenes = PackedStringArray("res://Prefabs/Actors/Lynea.tscn", "res://Prefabs/Actors/Sao.tscn", "res://Prefabs/Actors/GreenSlime.tscn", "res://Actors/Actor.tscn")
 spawn_path = NodePath("../ActorContainer")
 
 [node name="ControllerPlayer" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_actorContainer")]
@@ -47,6 +54,7 @@ _multiplayerContainer = NodePath("..")
 _actorContainer = NodePath("../ActorContainer")
 _spawnPoint = NodePath("Spawn Point 1")
 _mobPrefab = ExtResource("7_a8oyc")
+_actorPrefab = ExtResource("9_m5eed")
 
 [node name="Spawn Point 1" type="Node3D" parent="MultiplayerContainer/ControllerSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.01098, 0, 0)
