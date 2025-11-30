@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cb3j6sa8w2cm3"]
+[gd_scene load_steps=14 format=3 uid="uid://cb3j6sa8w2cm3"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Actor/ActorAction.cs" id="3_x85sy"]
 [ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="5_kcnqb"]
 [ext_resource type="Texture2D" uid="uid://c6uflpge3imdb" path="res://Actors/Valkyrie.png" id="5_p5emc"]
+[ext_resource type="Texture2D" uid="uid://ds0oqb6jsnxdb" path="res://Actors/shadow.png" id="6_0u77m"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="6_bol2m"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateMove.cs" id="7_lvwdo"]
 
@@ -42,11 +43,12 @@ animations = [{
 radius = 0.4
 height = 1.6
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "collisionShape", "sprite", "action", "stateMachine")]
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "collisionShape", "sprite", "shadow", "action", "stateMachine")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
 collisionShape = NodePath("CharacterBody3D/CollisionShape3D")
 sprite = NodePath("AnimatedSprite3D")
+shadow = NodePath("Shadow Sprite3D")
 _setups = ExtResource("2_eb7re")
 action = NodePath("ActorAction")
 stateMachine = NodePath("StateMachine")
@@ -66,6 +68,11 @@ billboard = 1
 double_sided = false
 sprite_frames = SubResource("SpriteFrames_pinw1")
 animation = &"Idle"
+
+[node name="Shadow Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0.05, 0)
+modulate = Color(1, 1, 1, 0.8)
+texture = ExtResource("6_0u77m")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 

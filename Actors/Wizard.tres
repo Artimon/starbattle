@@ -145,4 +145,4 @@ animations = [{
 script = ExtResource("1_616bd")
 name = "Wizard"
 _animationFrames = SubResource("SpriteFrames_et4xs")
-pixelHeight = 70.0
+pixelHeight = 80.0

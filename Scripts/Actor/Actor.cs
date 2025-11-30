@@ -25,6 +25,9 @@ public partial class Actor : Node3D {
 	[Export]
 	public AnimatedSprite3D sprite;
 
+	[Export]
+	public Sprite3D shadow;
+
 	public float Height => sprite.PixelSize * setup.pixelHeight;
 
 	public Vector3 CameraTarget => collisionShape.GlobalPosition;
@@ -86,6 +89,7 @@ public partial class Actor : Node3D {
 		collisionShape.Position = new Vector3(0, height / 2f , 0);
 		capsuleShape.Height = height ;
 		capsuleShape.Radius = height / 4f; // May require customization for certain actors.
+		shadow.Scale = new Vector3(1, 1, 1) * setup.SpriteSize / 35f;
 
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		if (!isPlayer) {
