@@ -16,6 +16,12 @@ public partial class PlayerController : Node {
 	[Export]
 	public RayCast3D _rayCast;
 
+	[Export]
+	public uint _targetMask;
+
+	[Export]
+	public uint _groundMask;
+
 	public override void _EnterTree() {
 		instance = this;
 	}
@@ -29,6 +35,7 @@ public partial class PlayerController : Node {
 		var from = camera.ProjectRayOrigin(mousePosition);
 		var to = camera.ProjectRayNormal(mousePosition) * 1000f;
 
+		_rayCast.CollisionMask = _nextMove ? _groundMask : _targetMask; // @TODO Get from action setup.
 		_rayCast.GlobalPosition = from;
 		_rayCast.TargetPosition = to;
 		_rayCast.ForceRaycastUpdate();
@@ -74,6 +81,8 @@ public partial class PlayerController : Node {
 		// return true;
 	}
 
+	public bool _nextMove;
+
 	public override void _Input(InputEvent @event) {
 		if (@event is InputEventMouseButton { Pressed: true } mouseEvent) {
 			var success = _TryGetClickPosition(mouseEvent.Position, out var clickPosition, out var actor);
@@ -83,6 +92,20 @@ public partial class PlayerController : Node {
 			}
 
 			GD.Print($"Clicked target: {actor?.Name ?? "None"} at {clickPosition}");
+
+			if (_nextMove) {
+				_nextMove = false;
+				_player.action.RequestAction(1, clickPosition);
+			}
+
+			return;
+		}
+
+		if (@event.IsActionPressed("Move")) {
+			_nextMove = true; // Temporary till we have action setups.
+			GD.Print("Now moving");
+
+			return;
 		}
 
 		// if (!isPlayer) {
@@ -138,27 +161,27 @@ public partial class PlayerController : Node {
 		// }
 	}
 
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-	public void _RequestAction(int actionType, Vector3 position, long actorNetworkHandle) {
-		if (!Multiplayer.IsServer()) {
-			return;
-		}
+	// [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	// public void _RequestAction(int actionType, Vector3 position, long actorNetworkHandle) {
+	// 	if (!Multiplayer.IsServer()) {
+	// 		return;
+	// 	}
+	//
+	// 	Rpc(nameof(_CommitAction), actionType, position, actorNetworkHandle);
+	// }
 
-		Rpc(nameof(_CommitAction), actionType, position, actorNetworkHandle);
-	}
-
-	[Rpc(CallLocal = true)]
-	public void _CommitAction(int actionType, Vector3 position, long actorNetworkHandle) {
-		// switch (actionType) {
-		// 	case (int)ActionTypes.Move:
-		// 		_MoveTo(position);
-		// 		break;
-		//
-		// 	case (int)ActionTypes.Attack:
-		// 		_Attack(actorNetworkHandle);
-		// 		break;
-		// }
-	}
+	// [Rpc(CallLocal = true)]
+	// public void _CommitAction(int actionType, Vector3 position, long actorNetworkHandle) {
+	// 	// switch (actionType) {
+	// 	// 	case (int)ActionTypes.Move:
+	// 	// 		_MoveTo(position);
+	// 	// 		break;
+	// 	//
+	// 	// 	case (int)ActionTypes.Attack:
+	// 	// 		_Attack(actorNetworkHandle);
+	// 	// 		break;
+	// 	// }
+	// }
 
 	// public void _RequestActionViaRpcId(ActionTypes actionType, ActorBase actor) {
 	// 	_RequestActionViaRpcId(actionType, Vector3.Zero, actor);

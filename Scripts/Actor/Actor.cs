@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using Artimus.Services;
+using Godot;
 using Starbattle.Controllers;
 
 namespace Starbattle;
@@ -8,6 +9,8 @@ public partial class Actor : Node3D {
 	public static Actor player;
 
 	public bool isPlayer;
+
+	public float angle;
 
 	[Export]
 	public ActorSynchronizer synchronizer;
@@ -24,12 +27,20 @@ public partial class Actor : Node3D {
 
 	public float Height => sprite.PixelSize * setup.pixelHeight;
 
+	public Vector3 CameraTarget => collisionShape.GlobalPosition;
+
 	public ActorSetup setup;
 
 	[Export]
 	public ActorSetups _setups;
 
 	public ActorSetups Setups => _setups;
+
+	[Export]
+	public ActorAction action;
+
+	[Export]
+	public StateMachine stateMachine;
 
 	public override void _EnterTree() {
 		capsuleShape = collisionShape.Shape as CapsuleShape3D;
@@ -49,6 +60,13 @@ public partial class Actor : Node3D {
 	// public override void _Process(double delta) {
 	// 	GD.Print($"ActorID on {Multiplayer.GetUniqueId()}: {synchronizer.actorId}");
 	// }
+
+	public void ApplyAngle() {
+		var cameraAngle = CameraController.instance.Angle;
+		var angleToCamera = angle - cameraAngle;
+
+		sprite.FlipH = Mathf.Sin(angleToCamera) > 0f;
+	}
 
 	private void OnCreated(uint actorId) {
 		Position = synchronizer.spawnPosition;
@@ -77,6 +95,6 @@ public partial class Actor : Node3D {
 		player = this;
 
 		PlayerController.instance.Begin(this);
-		ControllerCamera.instance.Follow(this);
+		CameraController.instance.Follow(this);
 	}
 }

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
+[ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="3_s4vdo"]
-[ext_resource type="Script" path="res://Scripts/ControllerCamera.cs" id="5_887w4"]
 [ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
 [ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorContainer.cs" id="9_0vfcd"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cqeuq2r4fatri" path="res://Images/TargetMarker.png" id="10_5w3ir"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t4n4b"]
+size = Vector3(100, 1, 100)
 
 [node name="BattleScene" type="Node3D"]
 
@@ -22,17 +23,18 @@
 [node name="PlayerController" type="Node" parent="Controllers" node_paths=PackedStringArray("_rayCast")]
 script = ExtResource("1_d62xq")
 _rayCast = NodePath("RayCast3D")
+_targetMask = 3
+_groundMask = 2
 
 [node name="RayCast3D" type="RayCast3D" parent="Controllers/PlayerController"]
 
-[node name="ControllerCamera" type="Node3D" parent="."]
-process_mode = 4
-script = ExtResource("5_887w4")
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("2_7n0hf")
+camera = NodePath("Camera3D")
 
-[node name="AudioListener3D" type="AudioListener3D" parent="ControllerCamera"]
+[node name="AudioListener3D" type="AudioListener3D" parent="CameraController"]
 
-[node name="Camera3D" type="Camera3D" parent="ControllerCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.597302, 2.55741)
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_actorSpawner")]
 script = ExtResource("3_5vdu8")
@@ -66,68 +68,79 @@ texture = ExtResource("10_5w3ir")
 [node name="Sprite3D" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.583194, 0.0836654, -1.71772)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("7_1rh3b")
 
 [node name="Sprite3D2" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86943, 0.0836654, -1.45185)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("7_1rh3b")
 
 [node name="Sprite3D3" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47206, 0.0836654, 1.13332)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("7_1rh3b")
 
 [node name="Sprite3D4" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37297, 0.157111, -2.71903)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("8_bfhsi")
 
 [node name="Sprite3D5" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12995, 0.157111, -1.00702)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("8_bfhsi")
 
 [node name="Sprite3D6" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129022, 0.157111, 1.15628)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("8_bfhsi")
 
 [node name="Sprite3D7" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25739, 0.0897831, 0.932156)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("9_ftk6f")
 
 [node name="Sprite3D8" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.06453, 0.0897829, 0.378813)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("9_ftk6f")
 
 [node name="Sprite3D9" type="Sprite3D" parent="Scene Decoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264362, 0.0897831, -0.294441)
 pixel_size = 0.0625
-billboard = 2
+billboard = 1
+double_sided = false
 texture_filter = 0
 texture = ExtResource("9_ftk6f")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_t4n4b")

@@ -14,6 +14,10 @@ public partial class StateMachine : Node {
 		_state.OnProcess(delta);
 	}
 
+	public T GetState<T>(string name) where T : StateBase {
+		return (T)_states[name];
+	}
+
 	public void Add(StateBase state) {
 		_states.Add(state.StateName, state);
 

@@ -3,11 +3,15 @@
 namespace Starbattle;
 
 [GlobalClass]
-public partial class ControllerCamera : Node3D {
-	public static ControllerCamera instance;
+public partial class CameraController : Node3D {
+	public static CameraController instance;
 
 	public Actor _actor;
-	public Camera3D _camera;
+
+	[Export]
+	public Camera3D camera;
+
+	public float Angle => Rotation.Y;
 
 	public Vector3 _selfieStick;
 
@@ -27,7 +31,8 @@ public partial class ControllerCamera : Node3D {
 	}
 
 	public override void _Process(double delta) {
-		var targetPosition = _actor.GlobalPosition + _selfieStick;
+		var anchorPosition = _actor?.CameraTarget ?? Vector3.Zero;
+		var targetPosition = anchorPosition + _selfieStick;
 		var progress = Mathf.Min(1f, 10f * (float)delta);
 
 		GlobalPosition = GlobalPosition.Lerp(targetPosition, progress);

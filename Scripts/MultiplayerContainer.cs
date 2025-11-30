@@ -60,6 +60,7 @@ public partial class MultiplayerContainer : Node {
 		_actorSpawner.RequestPlayerSpawnViaRpcId("Wizard");
 
 		DisplayServer.WindowSetTitle($"Starbattle Server: {uniqueId}");
+		DisplayServer.WindowSetPosition(new Vector2I(768, 382));
 	}
 
 	public void ConnectToServer() {
@@ -70,6 +71,7 @@ public partial class MultiplayerContainer : Node {
 			var uniqueId = Multiplayer.GetUniqueId();
 
 			DisplayServer.WindowSetTitle($"Starbattle Client: {uniqueId}");
+			DisplayServer.WindowSetPosition(new Vector2I(0, 30));
 
 			_actorSpawner.RequestPlayerSpawnViaRpcId("Valkyrie");
 		};

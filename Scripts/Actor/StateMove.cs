@@ -1,4 +1,5 @@
-﻿using Artimus.Services;
+﻿using System;
+using Artimus.Services;
 using Godot;
 
 namespace Starbattle;
@@ -12,39 +13,59 @@ public partial class StateMove : StateBase {
 
 	public Vector3 _startPosition;
 	public Vector3 _targetPosition;
-	public Vector3 _remainingDistance;
+	public Vector3 _virtualPosition;
 
-	public float _lerpTime;
-	private float _elapsedTime;
+	public float _lerpDuration;
+	public float _elapsedTime;
 
-	public override void OnProcess(double deltaTime) {
-		// _elapsedTime += (float)deltaTime;
-		//
-		// var progress = Mathf.Clamp(_elapsedTime / _lerpTime, 0f, 1f);
-		//
-		// _actor.GlobalPosition = _startPosition.Lerp(_targetPosition, progress);
-		// // @TODO Add "movement target" object and follow it just like the camera.
-		//
-		// if (progress < 1f) {
-		// 	return;
-		// }
-		//
-		// _actor.stateMachine.TryEnter("Idle");
+	public Action _onFinished;
+
+	public override void OnEnter() {
+		_actor.sprite.Animation = "Move";
+		_actor.sprite.Frame = 0;
+
+		var direction = _targetPosition - _startPosition;
+		_actor.angle = Mathf.Atan2(direction.X, direction.Z);
+		_actor.ApplyAngle();
 	}
 
-	public void MoveTo(Vector3 position) {
-		// var canEnterState = _actor.stateMachine.CanEnter("Move");
-		// if (!canEnterState) {
-		// 	return;
-		// }
-		//
-		// _startPosition = _actor.GlobalPosition;
-		// _targetPosition = position;
-		// _remainingDistance = _targetPosition - _startPosition;
-		//
-		// _lerpTime = _remainingDistance.Length() / 4f;
-		// _elapsedTime = 0f;
-		//
-		// _actor.stateMachine.Force("Move");
+	public override void OnProcess(double deltaTime) {
+		// Linear moving virtual point.
+		_elapsedTime += (float)deltaTime;
+
+		var virtualProgress = Mathf.Clamp(_elapsedTime / _lerpDuration, 0f, 1f);
+		if (virtualProgress >= 1f) {
+			_actor.sprite.Frame = 2;
+		}
+
+		_virtualPosition = _startPosition.Lerp(_targetPosition, virtualProgress);
+
+		// Linear follow moving point to accelerate/decelerate.
+		var moveProgress = Mathf.Min(1f, 8f * (float)deltaTime);
+
+		_actor.GlobalPosition = _actor.GlobalPosition.Lerp(_virtualPosition, moveProgress);
+
+		var distance = (_actor.GlobalPosition - _targetPosition).Length();
+		if (distance > 0.1f) {
+			return;
+		}
+
+		_actor.stateMachine.TryEnter("Idle");
+		_onFinished?.Invoke();
+	}
+
+	public void MoveTo(Vector3 position, Action onFinished) {
+		_startPosition = _actor.GlobalPosition;
+		_targetPosition = position;
+
+		var distance = _targetPosition - _startPosition;
+		var speed = 10f; // @TODO Get from somewhere else, roughly og speed.
+
+		_lerpDuration = distance.Length() / speed;
+		_elapsedTime = 0f;
+
+		_onFinished = onFinished;
+
+		_actor.stateMachine.Force("Move");
 	}
 }
