@@ -25,8 +25,6 @@ public partial class ActorSelection : Node3D {
 			return;
 		}
 
-		GD.Print("Vis");
-
 		if (_actor == actor) {
 			return;
 		}
@@ -39,13 +37,9 @@ public partial class ActorSelection : Node3D {
 		sprite.Visible = true;
 
 		Scale = Vector3.One * _actor.setup.SpritePixels / 300f;
-		GD.Print($"New scale: {Scale}");
-
-		// Position = Vector3.Zero;
 	}
 
 	public void ClearActor() {
-		GD.Print("Invis");
 		sprite.Visible = false;
 		_actor = null;
 	}

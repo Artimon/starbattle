@@ -44,7 +44,7 @@ public partial class PlayerController : Node {
 		var from = camera.ProjectRayOrigin(mousePosition);
 		var to = camera.ProjectRayNormal(mousePosition) * 1000f;
 
-		_rayCast.CollisionMask = _nextMove ? _groundMask : _targetMask; // @TODO Get from action setup.
+		_rayCast.CollisionMask = _nextAction.targetType == ActionSetup.TargetTypes.Ground ? _groundMask : _targetMask;
 		_rayCast.GlobalPosition = from;
 		_rayCast.TargetPosition = to;
 		_rayCast.ForceRaycastUpdate();
@@ -90,34 +90,57 @@ public partial class PlayerController : Node {
 		// return true;
 	}
 
-	public bool _nextMove;
+	public ActionSetup _nextAction;
+
+	[Export]
+	public ActionSetup _actionMove;
+
+	[Export]
+	public ActionSetup _actionAttack;
 
 	public override void _Input(InputEvent @event) {
 		if (@event is InputEventMouseButton { Pressed: true } mouseEvent) {
-			var success = _TryGetClickPosition(mouseEvent.Position, out var clickPosition, out var actor);
-			if (!success) {
+			if (_nextAction == null) {
+				_actorSelection.ClearActor();
+
+				return;
+			}
+
+			var hasPosition = _TryGetClickPosition(mouseEvent.Position, out var clickPosition, out var actor);
+			if (!hasPosition) {
 				GD.Print($"Failed to get click position");
 				return;
 			}
 
 			GD.Print($"Clicked target: {actor?.Name ?? "None"} at {clickPosition}");
 
-			if (_nextMove) {
-				_nextMove = false;
-				_actionRange.Visible = false;
-				_player.action.RequestAction(1, clickPosition);
+			if (_nextAction == null) {
+				return;
 			}
-			else {
-				_actorSelection.SetActor(actor);
+
+			var isRequested = _player.action.TryRequestAction(_nextAction, actor, clickPosition);
+			if (!isRequested) {
+				return; // Allow re-clicking on a correct target without cancelling the action.
 			}
+
+			_actionRange.Visible = false;
+			_nextAction = null;
 
 			return;
 		}
 
 		if (@event.IsActionPressed("Move")) {
-			_nextMove = true; // Temporary till we have action setups.
+			_nextAction = _actionMove; // Temporary till we have action setups.
 			_actionRange.Visible = true;
 			GD.Print("Now moving");
+
+			return;
+		}
+
+		if (@event.IsActionPressed("Attack")) {
+			_nextAction = _actionAttack; // Temporary till we have action setups.
+			_actionRange.Visible = true;
+			GD.Print("Now attacking");
 
 			return;
 		}

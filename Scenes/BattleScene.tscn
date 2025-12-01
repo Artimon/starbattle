@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=17 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
 [ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="3_s4vdo"]
+[ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Action/Move.tres" id="4_dxrxp"]
+[ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Action/Attack.tres" id="5_1b6o0"]
 [ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
 [ext_resource type="PackedScene" uid="uid://bh025c2qwoxiv" path="res://Action/ActionRange.tscn" id="8_8chmn"]
 [ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
@@ -36,6 +38,8 @@ _targetMask = 3
 _groundMask = 2
 _actionRangePrefab = ExtResource("8_8chmn")
 _actorSelection = NodePath("ActorSelection")
+_actionMove = ExtResource("4_dxrxp")
+_actionAttack = ExtResource("5_1b6o0")
 
 [node name="RayCast3D" type="RayCast3D" parent="Controllers/PlayerController"]
 
