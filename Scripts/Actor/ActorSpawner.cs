@@ -22,16 +22,29 @@ public partial class ActorSpawner : Node {
 		GD.Randf(),
 		0f,
 		GD.Randf()
-	).Normalized() * 5f;
+	).Normalized() * 8f;
 
-	public override void _EnterTree() {
-		if (!Multiplayer.IsServer()) {
-			return;
-		}
-
+	public override void _Ready() {
+		// All start as "server" (id 1) only when the connection is established, the client will be marked as "client".
 		instance = this;
 
-		// _multiplayerContainer.OnConnectionReady += _Begin;
+		_multiplayerContainer.OnConnectionReady += () => {
+			if (!Multiplayer.IsServer()) {
+				return;
+			}
+
+			CreateMob(RandomSpawnPosition, _setups.GetSetup("ElderGhost"));
+		};
+
+	}
+
+	public void CreateMob(Vector3 position, ActorSetup setup) {
+		var actor = _actorPrefab.Instantiate<Actor>(_actorContainer, actor => {
+			actor.synchronizer.handle = GD.Randi();
+			actor.synchronizer.actorId = setup.ActorId;
+			actor.synchronizer.spawnPosition = position;
+			actor.Name = $"{setup.name} {actor.synchronizer.handle}";
+		});
 	}
 
 	public void CreatePlayer(Vector3 position, string actorName, int playerId) {

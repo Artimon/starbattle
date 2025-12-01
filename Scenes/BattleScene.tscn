@@ -18,6 +18,14 @@ size = Vector3(100, 1, 100)
 
 [node name="BattleScene" type="Node3D"]
 
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("2_7n0hf")
+camera = NodePath("Camera3D")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="CameraController"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+
 [node name="Controllers" type="Node" parent="."]
 
 [node name="PlayerController" type="Node" parent="Controllers" node_paths=PackedStringArray("_rayCast")]
@@ -27,14 +35,6 @@ _targetMask = 3
 _groundMask = 2
 
 [node name="RayCast3D" type="RayCast3D" parent="Controllers/PlayerController"]
-
-[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
-script = ExtResource("2_7n0hf")
-camera = NodePath("Camera3D")
-
-[node name="AudioListener3D" type="AudioListener3D" parent="CameraController"]
-
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_actorSpawner")]
 script = ExtResource("3_5vdu8")
@@ -53,6 +53,14 @@ _setups = ExtResource("3_s4vdo")
 
 [node name="ActorContainer" type="Node3D" parent="MultiplayerContainer"]
 script = ExtResource("9_0vfcd")
+
+[node name="Ground StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_t4n4b")
 
 [node name="TargetMarker" type="Node3D" parent="."]
 script = ExtResource("9_eusdq")
@@ -136,11 +144,3 @@ billboard = 1
 double_sided = false
 texture_filter = 0
 texture = ExtResource("9_ftk6f")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_t4n4b")
