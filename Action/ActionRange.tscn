@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh025c2qwoxiv"]
+
+[ext_resource type="Script" path="res://Scripts/Action/ActionRange.cs" id="1_kgnvb"]
+[ext_resource type="Texture2D" uid="uid://pto16jja6odi" path="res://Images/ActionCircle.png" id="2_ij1h1"]
+
+[node name="ActionRange" type="Node3D" node_paths=PackedStringArray("_sprite")]
+script = ExtResource("1_kgnvb")
+_sprite = NodePath("Sprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.85, 0, 0, 0, -8.08661e-08, -1.85, 0, 1.85, -8.08661e-08, 0, 0, 0)
+pixel_size = 0.02
+texture = ExtResource("2_ij1h1")

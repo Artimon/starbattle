@@ -5,16 +5,20 @@ namespace Starbattle;
 [GlobalClass]
 public partial class ActionRange : Node3D {
 	public Actor _actor;
+
+	[Export]
 	public Sprite3D _sprite;
 
 	public override void _EnterTree() {
 		Position = new Vector3(0, 0, 0.2f);
 		Visible = false;
 
-		var diameter = _actor.actionRange * 2f;
-		var spriteSize = _sprite.Texture.GetWidth();
-		var scale = diameter / spriteSize;
+		_actor = GetParent<Actor>();
 
-		_sprite.Scale = Vector3.One * (scale + 0.5f);
+		var actionDiameter = _actor.actionRange * 2f;
+		var spriteDiameter = _sprite.Texture.GetWidth() * _sprite.PixelSize;
+		var scale = actionDiameter / spriteDiameter;
+
+		_sprite.Scale = Vector3.One * scale;
 	}
 }
