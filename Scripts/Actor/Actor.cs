@@ -34,6 +34,8 @@ public partial class Actor : Node3D {
 
 	public Vector3 CameraTarget => collisionShape.GlobalPosition;
 
+	public float SpriteSize => setup.SpritePixels * sprite.PixelSize;
+
 	public ActorSetup setup;
 
 	[Export]
@@ -81,7 +83,7 @@ public partial class Actor : Node3D {
 
 		GD.Print($"Created with {actorId} / {setup.name} at {synchronizer.spawnPosition} / {Position}");
 
-		var spriteOffset = sprite.PixelSize * setup.SpriteSize / 2f;
+		var spriteOffset = sprite.PixelSize * setup.SpritePixels / 2f;
 
 		sprite.Position = new Vector3(0, spriteOffset, 0);
 		sprite.Play("Idle");
@@ -91,7 +93,7 @@ public partial class Actor : Node3D {
 		collisionShape.Position = new Vector3(0, height / 2f , 0);
 		capsuleShape.Height = height ;
 		capsuleShape.Radius = height / 4f; // May require customization for certain actors.
-		shadow.Scale = new Vector3(1, 1, 1) * setup.SpriteSize / 35f;
+		shadow.Scale = new Vector3(1, 1, 1) * setup.SpritePixels / 35f;
 
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		if (!isPlayer) {

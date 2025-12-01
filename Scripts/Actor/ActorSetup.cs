@@ -17,20 +17,20 @@ public partial class ActorSetup : Resource {
 	[Export]
 	public float pixelHeight;
 
-	public float _spriteSize;
+	public float _spritePixels;
 
-	public float SpriteSize {
+	public float SpritePixels {
 		get {
-			if (_spriteSize != 0d) {
-				return _spriteSize;
+			if (_spritePixels != 0d) {
+				return _spritePixels;
 			}
 
-			_spriteSize = _animationFrames
+			_spritePixels = _animationFrames
 				.GetFrameTexture("Idle", 0)
 				.GetSize()
 				.X;
 
-			return _spriteSize;
+			return _spritePixels;
 		}
 	}
 }

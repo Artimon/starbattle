@@ -27,6 +27,9 @@ public partial class PlayerController : Node {
 	[Export]
 	public PackedScene _actionRangePrefab;
 
+	[Export]
+	public ActorSelection _actorSelection;
+
 	public override void _EnterTree() {
 		instance = this;
 	}
@@ -103,6 +106,9 @@ public partial class PlayerController : Node {
 				_nextMove = false;
 				_actionRange.Visible = false;
 				_player.action.RequestAction(1, clickPosition);
+			}
+			else {
+				_actorSelection.SetActor(actor);
 			}
 
 			return;
