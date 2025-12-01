@@ -12,6 +12,8 @@ public partial class Actor : Node3D {
 
 	public float angle;
 
+	public float actionRange = 6f;
+
 	[Export]
 	public ActorSynchronizer synchronizer;
 

@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/Actor/ActorAction.cs" id="3_x85sy"]
 [ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="5_kcnqb"]
 [ext_resource type="Texture2D" uid="uid://c6uflpge3imdb" path="res://Actors/Valkyrie.png" id="5_p5emc"]
-[ext_resource type="Texture2D" uid="uid://ds0oqb6jsnxdb" path="res://Actors/shadow.png" id="6_0u77m"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="6_bol2m"]
+[ext_resource type="Texture2D" uid="uid://ds0oqb6jsnxdb" path="res://Images/ActorShadow.png" id="6_d5h64"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateMove.cs" id="7_lvwdo"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_f5ovo"]
@@ -72,7 +72,7 @@ animation = &"Idle"
 [node name="Shadow Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0.05, 0)
 modulate = Color(1, 1, 1, 0.8)
-texture = ExtResource("6_0u77m")
+texture = ExtResource("6_d5h64")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 

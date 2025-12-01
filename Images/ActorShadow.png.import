@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chnmo5qbqeocv"
-path="res://.godot/imported/TempCharacterSao.png-7bc5fd6b3267cf20ac33dde985af7324.ctex"
+uid="uid://ds0oqb6jsnxdb"
+path="res://.godot/imported/ActorShadow.png-ec23351cf731a9856dea924aef7a7368.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/TempCharacterSao.png"
-dest_files=["res://.godot/imported/TempCharacterSao.png-7bc5fd6b3267cf20ac33dde985af7324.ctex"]
+source_file="res://Images/ActorShadow.png"
+dest_files=["res://.godot/imported/ActorShadow.png-ec23351cf731a9856dea924aef7a7368.ctex"]
 
 [params]
 

@@ -28,6 +28,12 @@ public partial class ActorAction : Node {
 			return;
 		}
 
+		var playerPosition = _player.GlobalPosition;
+		var distance = position - playerPosition;
+		if (distance.Length() > _player.actionRange) {
+			position = playerPosition + distance.Normalized() * _player.actionRange;
+		}
+
 		Rpc(nameof(RpcBeginAction), actionId, position);
 	}
 

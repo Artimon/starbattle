@@ -22,12 +22,18 @@ public partial class PlayerController : Node {
 	[Export]
 	public uint _groundMask;
 
+	public ActionRange _actionRange;
+
+	[Export]
+	public PackedScene _actionRangePrefab;
+
 	public override void _EnterTree() {
 		instance = this;
 	}
 
 	public void Begin(Actor player) {
 		_player = player;
+		_actionRange = _actionRangePrefab.Instantiate<ActionRange>(_player);
 	}
 
 	public bool _TryGetClickPosition(Vector2 mousePosition, out Vector3 clickPosition, out Actor actor) {
@@ -95,6 +101,7 @@ public partial class PlayerController : Node {
 
 			if (_nextMove) {
 				_nextMove = false;
+				_actionRange.Visible = false;
 				_player.action.RequestAction(1, clickPosition);
 			}
 
@@ -103,6 +110,7 @@ public partial class PlayerController : Node {
 
 		if (@event.IsActionPressed("Move")) {
 			_nextMove = true; // Temporary till we have action setups.
+			_actionRange.Visible = true;
 			GD.Print("Now moving");
 
 			return;
