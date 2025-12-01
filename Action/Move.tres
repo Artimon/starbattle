@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ActionSetup" load_steps=2 format=3 uid="uid://cddgg8vvo6ggf"]
+
+[ext_resource type="Script" path="res://Scripts/Action/ActionSetup.cs" id="1_jdp8w"]
+
+[resource]
+script = ExtResource("1_jdp8w")
+name = "Move"
+actionType = 0
+targetType = 0
