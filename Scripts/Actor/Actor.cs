@@ -71,6 +71,9 @@ public partial class Actor : Node3D {
 		};
 	}
 
+	/**
+	 * Initially set synchronized data is available here.
+	 */
 	public override void _Ready() {
 		OnCreated(synchronizer.actorId);
 		// GD.Print($"My network handle: {synchronizer.handle} / {synchronizer.ownerId} ({Multiplayer.GetUniqueId()})");
@@ -160,6 +163,7 @@ public partial class Actor : Node3D {
 	public static Actor Resolve(uint handle) => actors.Find(actor => actor.synchronizer.handle == handle);
 
 	private void OnCreated(uint actorId) {
+		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		Position = synchronizer.spawnPosition;
 
 		setup = _setups.GetSetup(actorId);
@@ -183,7 +187,8 @@ public partial class Actor : Node3D {
 		hp = stats.Vitality;
 		mp = stats.Intelligence;
 
-		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
+		ActorAvatars.instance.Add(this);
+
 		if (!isPlayer) {
 			return;
 		}
@@ -192,7 +197,9 @@ public partial class Actor : Node3D {
 		CameraController.instance.Follow(this);
 	}
 
-	public override void _ExitTree() {
+	public void OnDeath() {
 		actors.Remove(this);
+
+		ActorAvatars.instance.Remove(this);
 	}
 }

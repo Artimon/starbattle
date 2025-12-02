@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=19 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
@@ -10,9 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
 [ext_resource type="PackedScene" uid="uid://bh025c2qwoxiv" path="res://Action/ActionRange.tscn" id="8_8chmn"]
 [ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
+[ext_resource type="Script" path="res://Scripts/Actor/ActorAvatars.cs" id="8_e7axk"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorContainer.cs" id="9_0vfcd"]
 [ext_resource type="Texture2D" uid="uid://catxthhhls552" path="res://Images/Grass2.png" id="9_ftk6f"]
 [ext_resource type="PackedScene" uid="uid://cb3j6sa8w2cm3" path="res://Actors/Actor.tscn" id="9_m5eed"]
+[ext_resource type="PackedScene" uid="uid://cqauknin6ppw1" path="res://Actors/ActorAvatar.tscn" id="9_yr3ug"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSelection.cs" id="12_t8ruj"]
 [ext_resource type="Texture2D" uid="uid://idoo2rtmn6n" path="res://Images/SelectCircle.png" id="13_dwphc"]
 
@@ -52,6 +54,36 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.2
 pixel_size = 0.02
 double_sided = false
 texture = ExtResource("13_dwphc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ActorAvatars" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_playerAvatarsContainer", "_enemyAvatarsContainer")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("8_e7axk")
+_avatarPrefab = ExtResource("9_yr3ug")
+_playerAvatarsContainer = NodePath("PlayerAvatars HBoxContainer")
+_enemyAvatarsContainer = NodePath("EnemyAvatars HBoxContainer")
+
+[node name="PlayerAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="EnemyAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 140.0
+alignment = 1
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_actorSpawner")]
 script = ExtResource("3_5vdu8")

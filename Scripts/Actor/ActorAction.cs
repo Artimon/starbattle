@@ -8,15 +8,34 @@ public partial class ActorAction : Node {
 	[Export]
 	public Actor _player;
 
+	public double _actionTime;
+
+	public double ActionTime => _actionTime;
+
 	[Export]
 	public ActionSetups _actionSetups;
 
 	public bool IsIdle => _player.stateMachine.IsInState("Idle");
 
+	public override void _Process(double delta) {
+		if (!IsIdle) {
+			return;
+		}
+
+		var statsFactor = 1f + _player.stats.Agility / 200f;
+
+		_actionTime += 0.6f * statsFactor * delta; // Take 5 second with 0 agi to reach 3.
+		_actionTime = Mathf.Clamp(_actionTime, 0d, 3d);
+	}
+
 	/**
 	 * This time we sanitize on client, cuz who's gonna manipulate this anyway, riiight?
 	 */
 	public bool TryRequestAction(ActionSetup actionSetup, Actor actor, Vector3 position) {
+		if (!IsIdle) {
+			return false;
+		}
+
 		if (
 			actionSetup.TargetsActor &&
 			!HasValidActor(actionSetup, actor)
@@ -24,6 +43,12 @@ public partial class ActorAction : Node {
 			GD.Print("False");
 			return false;
 		}
+
+		if (_actionTime < actionSetup.actionCost) {
+			return false;
+		}
+
+		_actionTime -= actionSetup.actionCost;
 
 		var actorHandle = actor?.synchronizer.handle ?? 0;
 

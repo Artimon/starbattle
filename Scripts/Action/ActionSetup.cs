@@ -14,6 +14,9 @@ public partial class ActionSetup : Resource {
 	public uint ActionId => name.Hash();
 
 	[Export]
+	public int actionCost;
+
+	[Export]
 	public ActionTypes actionType;
 
 	[Export]

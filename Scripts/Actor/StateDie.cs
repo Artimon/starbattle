@@ -10,5 +10,6 @@ public partial class StateDie : StateBase {
 
 	public override void OnEnter() {
 		_actor.sprite.Play("Die");
+		_actor.OnDeath();
 	}
 }
