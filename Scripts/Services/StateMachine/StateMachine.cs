@@ -14,7 +14,9 @@ public partial class StateMachine : Node {
 		_state.OnProcess(delta);
 	}
 
-	public T GetState<T>(string name) where T : StateBase {
+	public T Get<T>() where T : StateBase {
+		var name = StateBase.GetSimplifiedStateName(typeof(T));
+
 		return (T)_states[name];
 	}
 

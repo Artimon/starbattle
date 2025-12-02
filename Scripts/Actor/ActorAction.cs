@@ -89,7 +89,7 @@ public partial class ActorAction : Node {
 	}
 
 	public void PerformMove(Vector3 position) {
-		_player.stateMachine.GetState<StateMove>("Move").MoveTo(position);
+		_player.stateMachine.Get<StateMove>().MoveTo(position);
 	}
 
 	/**
@@ -106,17 +106,17 @@ public partial class ActorAction : Node {
 
 		if (distance <= 0.35f) {
 			_player.stateMachine
-				.GetState<StateAttack>("Attack")
+				.Get<StateAttack>()
 				.Attack(actor);
 
 			return;
 		}
 
 		_player.stateMachine
-			.GetState<StateMove>("Move")
+			.Get<StateMove>()
 			.MoveTo(position, () => {
 				_player.stateMachine
-					.GetState<StateAttack>("Attack")
+					.Get<StateAttack>()
 					.Attack(actor);
 			});
 	}

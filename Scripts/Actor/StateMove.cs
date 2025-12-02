@@ -9,8 +9,6 @@ public partial class StateMove : StateBase {
 	[Export]
 	public Actor _actor;
 
-	public override string StateName => "Move";
-
 	public Vector3 _startPosition;
 	public Vector3 _targetPosition;
 	public Vector3 _virtualPosition;

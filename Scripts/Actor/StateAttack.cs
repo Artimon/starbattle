@@ -10,8 +10,6 @@ public partial class StateAttack : StateBase {
 
 	public Actor _target;
 
-	public override string StateName => "Attack";
-
 	public override void OnEnter() {
 		_actor.sprite.Connect("animation_finished", Callable.From(OnAnimationFinished));
 
