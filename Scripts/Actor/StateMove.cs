@@ -25,6 +25,7 @@ public partial class StateMove : StateBase {
 		_actor.sprite.Frame = 0;
 
 		var direction = _targetPosition - _startPosition;
+
 		_actor.angle = Mathf.Atan2(direction.X, direction.Z);
 		_actor.ApplyAngle();
 	}
@@ -54,7 +55,7 @@ public partial class StateMove : StateBase {
 		_onFinished?.Invoke();
 	}
 
-	public void MoveTo(Vector3 position, Action onFinished) {
+	public void MoveTo(Vector3 position, Action onFinished = null) {
 		_startPosition = _actor.GlobalPosition;
 		_targetPosition = position;
 
@@ -66,6 +67,6 @@ public partial class StateMove : StateBase {
 
 		_onFinished = onFinished;
 
-		_actor.stateMachine.Force("Move");
+		_actor.stateMachine.TryEnter("Move");
 	}
 }

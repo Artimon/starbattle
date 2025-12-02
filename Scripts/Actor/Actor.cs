@@ -1,4 +1,5 @@
-﻿using Artimus.Services;
+﻿using System.Collections.Generic;
+using Artimus.Services;
 using Godot;
 using Starbattle.Controllers;
 
@@ -6,9 +7,11 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class Actor : Node3D {
-	public static Actor player;
+	public static readonly List<Actor> actors = new (16);
 
 	public bool isPlayer;
+
+	public bool IsPlayerGroup => synchronizer.playerId != 0;
 
 	public float angle;
 
@@ -21,8 +24,6 @@ public partial class Actor : Node3D {
 	public CollisionShape3D collisionShape;
 
 	public CapsuleShape3D capsuleShape;
-
-	public float Size => collisionShape.Shape.GetMargin();
 
 	[Export]
 	public AnimatedSprite3D sprite;
@@ -50,10 +51,13 @@ public partial class Actor : Node3D {
 	public StateMachine stateMachine;
 
 	public override void _EnterTree() {
+		actors.Add(this);
+
 		capsuleShape = collisionShape.Shape as CapsuleShape3D;
 
 		// Warning: Synchronizer fields are not set yet!
 
+		// Does not get called on the server!
 		synchronizer.DeltaSynchronized += () => {
 			GD.Print($"Actor (delta) synchronized: {synchronizer.handle} / {synchronizer.playerId} ({Multiplayer.GetUniqueId()})");
 		};
@@ -74,6 +78,8 @@ public partial class Actor : Node3D {
 
 		sprite.FlipH = Mathf.Sin(angleToCamera) > 0f;
 	}
+
+	public static Actor Resolve(uint handle) => actors.Find(actor => actor.synchronizer.handle == handle);
 
 	private void OnCreated(uint actorId) {
 		Position = synchronizer.spawnPosition;
@@ -100,9 +106,11 @@ public partial class Actor : Node3D {
 			return;
 		}
 
-		player = this;
-
 		PlayerController.instance.Begin(this);
 		CameraController.instance.Follow(this);
+	}
+
+	public override void _ExitTree() {
+		actors.Remove(this);
 	}
 }

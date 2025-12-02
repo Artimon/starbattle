@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cb3j6sa8w2cm3"]
+[gd_scene load_steps=30 format=3 uid="uid://cb3j6sa8w2cm3"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="6_bol2m"]
 [ext_resource type="Texture2D" uid="uid://ds0oqb6jsnxdb" path="res://Images/ActorShadow.png" id="6_d5h64"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateMove.cs" id="7_lvwdo"]
+[ext_resource type="Script" path="res://Scripts/Actor/StateAttack.cs" id="11_jslh3"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_f5ovo"]
 properties/0/path = NodePath("ActorSynchronizer:handle")
@@ -25,18 +26,141 @@ properties/3/path = NodePath("ActorSynchronizer:playerId")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gsund"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g187"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(0, 300, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3buw"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(150, 300, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlxu6"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(300, 300, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xd5tu"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(450, 300, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8efy"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(0, 450, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxhe8"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(150, 450, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl0qg"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(300, 450, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js75y"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(450, 450, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duiiw"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(150, 150, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gyog"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(300, 150, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q167"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(450, 150, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prgwk"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(0, 150, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ce8ei"]
 atlas = ExtResource("5_p5emc")
 region = Rect2(0, 0, 150, 150)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_pinw1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdkqy"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26wy3"]
+atlas = ExtResource("5_p5emc")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqh74"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gsund")
+"texture": SubResource("AtlasTexture_4g187")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3buw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlxu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xd5tu")
 }],
-"loop": true,
+"loop": false,
+"name": &"Attack",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8efy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxhe8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl0qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js75y")
+}],
+"loop": false,
+"name": &"Cast",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duiiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gyog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8q167")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prgwk")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ce8ei")
+}],
+"loop": false,
 "name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdkqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26wy3")
+}],
+"loop": false,
+"name": &"Move",
 "speed": 5.0
 }]
 
@@ -68,7 +192,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 pixel_size = 0.02
 billboard = 1
 double_sided = false
-sprite_frames = SubResource("SpriteFrames_pinw1")
+sprite_frames = SubResource("SpriteFrames_hqh74")
 animation = &"Idle"
 
 [node name="Shadow Sprite3D" type="Sprite3D" parent="."]
@@ -93,5 +217,10 @@ isDefault = true
 
 [node name="StateMove" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
 script = ExtResource("7_lvwdo")
+_actor = NodePath("../..")
+_stateMachine = NodePath("..")
+
+[node name="StateAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
+script = ExtResource("11_jslh3")
 _actor = NodePath("../..")
 _stateMachine = NodePath("..")

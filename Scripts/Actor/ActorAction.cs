@@ -1,4 +1,5 @@
 ﻿using Godot;
+using TargetTypes = Starbattle.ActionSetup.TargetTypes;
 
 namespace Starbattle;
 
@@ -10,21 +11,23 @@ public partial class ActorAction : Node {
 	[Export]
 	public ActionSetups _actionSetups;
 
-	public bool _isPerformingAction;
+	public bool IsIdle => _player.stateMachine.IsInState("Idle");
 
 	/**
 	 * This time we sanitize on client, cuz who's gonna manipulate this anyway, riiight?
 	 */
 	public bool TryRequestAction(ActionSetup actionSetup, Actor actor, Vector3 position) {
-		var hasValidActor = HasValidActor(actionSetup, actor);
-		if (!hasValidActor) {
+		if (
+			actionSetup.TargetsActor &&
+			!HasValidActor(actionSetup, actor)
+		) {
+			GD.Print("False");
 			return false;
 		}
 
 		var actorHandle = actor?.synchronizer.handle ?? 0;
-		var limitedPosition = GetLimitedPosition(position); // Can always be done.
 
-		RpcId(1, nameof(_RpcRequestAction), actionSetup.ActionId, actorHandle, limitedPosition);
+		RpcId(1, nameof(_RpcRequestAction), actionSetup.ActionId, actorHandle, position);
 
 		return true;
 	}
@@ -40,12 +43,32 @@ public partial class ActorAction : Node {
 			return;
 		}
 
-		if (_isPerformingAction) {
+		if (!IsIdle) {
 			// Maybe communicate back to re-open the action menu? Or timeout on client.
 			return;
 		}
 
-		Rpc(nameof(RpcBeginAction), actionId, actorHandle, position);
+		var targetPosition = position;
+		var action = _actionSetups.GetSetup(actionId);
+
+		switch (action.actionType) {
+			case ActionSetup.ActionTypes.Move:
+				targetPosition = GetLimitedPosition(position);
+
+				break;
+
+			case ActionSetup.ActionTypes.Attack:
+				var actor = Actor.Resolve(actorHandle);
+				if (actor == null) {
+					return;
+				}
+
+				targetPosition = GetAttackPosition(actor);
+
+				break;
+		}
+
+		Rpc(nameof(RpcBeginAction), actionId, actorHandle, targetPosition);
 	}
 
 	[Rpc(CallLocal = true)]
@@ -59,26 +82,58 @@ public partial class ActorAction : Node {
 				break;
 
 			case ActionSetup.ActionTypes.Attack:
+				PerformAttack(actorHandle, position);
+
 				break;
 		}
 	}
 
 	public void PerformMove(Vector3 position) {
-		_isPerformingAction = true;
-		_player.stateMachine.GetState<StateMove>("Move").MoveTo(position, () => _isPerformingAction = false);
+		_player.stateMachine.GetState<StateMove>("Move").MoveTo(position);
+	}
+
+	/**
+	 * Clients are allowed to decide if they need to move or not, just like in the original game.
+	 */
+	public void PerformAttack(uint actorHandle, Vector3 position) {
+		var actor = Actor.Resolve(actorHandle);
+		if (actor == null) {
+			return; // Not synchronized or already removed.
+		}
+
+		var playerPosition = _player.GlobalPosition;
+		var distance = playerPosition.DistanceTo(position);
+
+		if (distance <= 0.35f) {
+			_player.stateMachine
+				.GetState<StateAttack>("Attack")
+				.Attack(actor);
+
+			return;
+		}
+
+		_player.stateMachine
+			.GetState<StateMove>("Move")
+			.MoveTo(position, () => {
+				_player.stateMachine
+					.GetState<StateAttack>("Attack")
+					.Attack(actor);
+			});
 	}
 
 	public bool HasValidActor(ActionSetup actionSetup, Actor actor) {
-		var requiresActor = actionSetup.targetType == ActionSetup.TargetTypes.Actor;
-		if (!requiresActor) {
-			return true; // No need to check anything else.
-		}
-
 		if (actor == null) {
 			return false;
 		}
 
-		return IsInRange(actor);
+		switch (actionSetup.targetType) {
+			case TargetTypes.Opponent when actor.IsPlayerGroup == _player.IsPlayerGroup:
+			case TargetTypes.Friend when actor.IsPlayerGroup != _player.IsPlayerGroup:
+				return false;
+
+			default:
+				return IsInRange(actor);
+		}
 	}
 
 	public bool IsInRange(Actor actor) {
@@ -96,5 +151,14 @@ public partial class ActorAction : Node {
 		}
 
 		return position;
+	}
+
+	public Vector3 GetAttackPosition(Actor actor) {
+		var playerPosition = _player.GlobalPosition;
+		var targetPosition = actor.GlobalPosition;
+
+		var direction = (playerPosition - targetPosition).Normalized();
+
+		return targetPosition + direction * 1.5f;
 	}
 }

@@ -80,7 +80,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -97,7 +97,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Cast",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -111,7 +111,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Die",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,

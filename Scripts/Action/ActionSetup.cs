@@ -6,7 +6,7 @@ namespace Starbattle;
 public partial class ActionSetup : Resource {
 	public enum ActionTypes { Move, Attack }
 
-	public enum TargetTypes { Ground, Actor, Self }
+	public enum TargetTypes { Position, Opponent, Friend, None }
 
 	[Export]
 	public string name;
@@ -18,4 +18,6 @@ public partial class ActionSetup : Resource {
 
 	[Export]
 	public TargetTypes targetType;
+
+	public bool TargetsActor => targetType is TargetTypes.Opponent or TargetTypes.Friend;
 }

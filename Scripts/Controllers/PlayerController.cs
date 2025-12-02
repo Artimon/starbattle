@@ -44,7 +44,7 @@ public partial class PlayerController : Node {
 		var from = camera.ProjectRayOrigin(mousePosition);
 		var to = camera.ProjectRayNormal(mousePosition) * 1000f;
 
-		_rayCast.CollisionMask = _nextAction.targetType == ActionSetup.TargetTypes.Ground ? _groundMask : _targetMask;
+		_rayCast.CollisionMask = _nextAction.targetType == ActionSetup.TargetTypes.Position ? _groundMask : _targetMask;
 		_rayCast.GlobalPosition = from;
 		_rayCast.TargetPosition = to;
 		_rayCast.ForceRaycastUpdate();
@@ -101,8 +101,6 @@ public partial class PlayerController : Node {
 	public override void _Input(InputEvent @event) {
 		if (@event is InputEventMouseButton { Pressed: true } mouseEvent) {
 			if (_nextAction == null) {
-				_actorSelection.ClearActor();
-
 				return;
 			}
 
@@ -113,10 +111,6 @@ public partial class PlayerController : Node {
 			}
 
 			GD.Print($"Clicked target: {actor?.Name ?? "None"} at {clickPosition}");
-
-			if (_nextAction == null) {
-				return;
-			}
 
 			var isRequested = _player.action.TryRequestAction(_nextAction, actor, clickPosition);
 			if (!isRequested) {
@@ -197,50 +191,6 @@ public partial class PlayerController : Node {
 		// 	// if (_actionType == ActionTypes.Attack) { }
 		// }
 	}
-
-	// [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-	// public void _RequestAction(int actionType, Vector3 position, long actorNetworkHandle) {
-	// 	if (!Multiplayer.IsServer()) {
-	// 		return;
-	// 	}
-	//
-	// 	Rpc(nameof(_CommitAction), actionType, position, actorNetworkHandle);
-	// }
-
-	// [Rpc(CallLocal = true)]
-	// public void _CommitAction(int actionType, Vector3 position, long actorNetworkHandle) {
-	// 	// switch (actionType) {
-	// 	// 	case (int)ActionTypes.Move:
-	// 	// 		_MoveTo(position);
-	// 	// 		break;
-	// 	//
-	// 	// 	case (int)ActionTypes.Attack:
-	// 	// 		_Attack(actorNetworkHandle);
-	// 	// 		break;
-	// 	// }
-	// }
-
-	// public void _RequestActionViaRpcId(ActionTypes actionType, ActorBase actor) {
-	// 	_RequestActionViaRpcId(actionType, Vector3.Zero, actor);
-	// }
-	//
-	// public void _RequestActionViaRpcId(ActionTypes actionType, Vector3 position, ActorBase actor = null) {
-	// 	var networkHandle = actor?.serverSynchronizer.networkHandle ?? 0;
-	//
-	// 	RpcId(1, nameof(_RequestAction), (int)actionType, position, networkHandle);
-	// }
-
-	// public void _Attack(long targetNetworkHandle) {
-	// 	var success = ActorContainer.instance.TryGetActor(targetNetworkHandle, out var target);
-	// 	if (!success) {
-	// 		GD.Print($"Failed to get target with handle {targetNetworkHandle}");
-	// 		return;
-	// 	}
-	//
-	// 	GD.Print($"Attacking {target.Name}");
-	//
-	// 	// @TODO Implement attack logic.
-	// }
 
 	public override void _ExitTree() {
 		instance = null;
