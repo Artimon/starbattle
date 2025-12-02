@@ -19,6 +19,11 @@ public partial class ActorSetup : Resource {
 
 	public float _spritePixels;
 
+	[Export]
+	public Stats _baseStats;
+
+	public Stats BaseStats => _baseStats.Clone;
+
 	public float SpritePixels {
 		get {
 			if (_spritePixels != 0d) {

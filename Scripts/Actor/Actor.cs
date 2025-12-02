@@ -11,6 +11,14 @@ public partial class Actor : Node3D {
 
 	public bool isPlayer;
 
+	public Stats stats;
+
+	public float hp;
+	public float mp;
+
+	/**
+	 * @TODO Does not consider summons, yet.
+	 */
 	public bool IsPlayerGroup => synchronizer.playerId != 0;
 
 	public float angle;
@@ -72,6 +80,76 @@ public partial class Actor : Node3D {
 	// 	GD.Print($"ActorID on {Multiplayer.GetUniqueId()}: {synchronizer.actorId}");
 	// }
 
+	public void Face(Actor actor) {
+		Face(actor.GlobalPosition);
+	}
+
+	public void Face(Vector3 position) {
+		var direction = position - GlobalPosition;
+
+		angle = Mathf.Atan2(direction.X, direction.Z);
+		ApplyAngle();
+	}
+
+	/**
+	 * @TODO Maybe turn all damagers to collider based detection?
+	 */
+	public bool TryAttackArea(Actor target, Vector3 attackPosition, float range = 1f) {
+		if (!Multiplayer.IsServer()) {
+			return false;
+		}
+
+		if (target.GlobalPosition.DistanceTo(attackPosition) > range) {
+			return false; // Target moved away.
+		}
+
+		// base + 5 * (lvl + 1)
+		// var weaponpDam[4] = 40, 40, 20, 15;	// Weapon basic values for all player classes
+		// var weaponmDam[4] =  0, 30, 35, 40;
+
+		var baseDamage = 45; // @TODO Read from stats/weapon.
+
+		var statsFactor = 0.5f + stats.Strength / 200f;
+		var randomFactor = 1f + GD.Randf() * 0.5f; // @TODO Use Gauss later.
+		var damage = baseDamage * statsFactor * randomFactor;
+
+		var isCritical = false;
+		var critChance = stats.Dexterity * 0.25f / 100f;
+
+		if (GD.Randf() < critChance) {
+			isCritical = true;
+			damage *= 1.5f;
+		}
+
+		damage = Mathf.Floor(damage);
+
+		var newHp = Mathf.Max(0f, target.hp - damage);
+
+		target.Rpc(nameof(RpcReceiveDamage), damage, newHp, isCritical);
+
+		return true;
+	}
+
+	[Rpc(CallLocal = true)]
+	public void RpcReceiveDamage(float damage, uint newHp, bool isCritical) {
+		hp = newHp;
+
+		// @TODO Show damage and crit on screen.
+		GD.Print($"Damage dealt: {damage}, {hp}/{stats.Vitality} (crit: {isCritical})");
+
+		if (hp > 0f) {
+			stateMachine.Force("Hit");
+
+			return;
+		}
+
+		if (stateMachine.IsInState("Die")) {
+			return;
+		}
+
+		stateMachine.Force("Die");
+	}
+
 	public void ApplyAngle() {
 		var cameraAngle = CameraController.instance.Angle;
 		var angleToCamera = angle - cameraAngle;
@@ -100,6 +178,10 @@ public partial class Actor : Node3D {
 		capsuleShape.Height = height ;
 		capsuleShape.Radius = height / 4f; // May require customization for certain actors.
 		shadow.Scale = new Vector3(1, 1, 1) * setup.SpritePixels / 35f;
+
+		stats = setup.BaseStats.Clone;
+		hp = stats.Vitality;
+		mp = stats.Intelligence;
 
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		if (!isPlayer) {

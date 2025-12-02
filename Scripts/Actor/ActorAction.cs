@@ -101,13 +101,14 @@ public partial class ActorAction : Node {
 			return; // Not synchronized or already removed.
 		}
 
+		var attackPosition = actor.GlobalPosition;
 		var playerPosition = _player.GlobalPosition;
 		var distance = playerPosition.DistanceTo(position);
 
 		if (distance <= 0.35f) {
 			_player.stateMachine
 				.Get<StateAttack>()
-				.Attack(actor);
+				.Attack(actor, attackPosition);
 
 			return;
 		}
@@ -117,7 +118,7 @@ public partial class ActorAction : Node {
 			.MoveTo(position, () => {
 				_player.stateMachine
 					.Get<StateAttack>()
-					.Attack(actor);
+					.Attack(actor, attackPosition);
 			});
 	}
 

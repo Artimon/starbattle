@@ -22,10 +22,7 @@ public partial class StateMove : StateBase {
 		_actor.sprite.Animation = "Move";
 		_actor.sprite.Frame = 0;
 
-		var direction = _targetPosition - _startPosition;
-
-		_actor.angle = Mathf.Atan2(direction.X, direction.Z);
-		_actor.ApplyAngle();
+		_actor.Face(_targetPosition);
 	}
 
 	public override void OnProcess(double deltaTime) {
