@@ -17,6 +17,10 @@ public partial class ActorAction : Node {
 
 	public bool IsIdle => _player.stateMachine.IsInState("Idle");
 
+	public override void _EnterTree() {
+		SetProcess(false);
+	}
+
 	public override void _Process(double delta) {
 		if (!IsIdle) {
 			return;

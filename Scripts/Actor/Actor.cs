@@ -34,6 +34,9 @@ public partial class Actor : Node3D {
 	public CapsuleShape3D capsuleShape;
 
 	[Export]
+	public ActorAnimator _animator;
+
+	[Export]
 	public AnimatedSprite3D sprite;
 
 	[Export]
@@ -66,9 +69,9 @@ public partial class Actor : Node3D {
 		// Warning: Synchronizer fields are not set yet!
 
 		// Does not get called on the server!
-		synchronizer.DeltaSynchronized += () => {
-			GD.Print($"Actor (delta) synchronized: {synchronizer.handle} / {synchronizer.playerId} ({Multiplayer.GetUniqueId()})");
-		};
+		// synchronizer.DeltaSynchronized += () => {
+		// 	GD.Print($"Actor (delta) synchronized: {synchronizer.handle} / {synchronizer.playerId} ({Multiplayer.GetUniqueId()})");
+		// };
 	}
 
 	/**
@@ -169,25 +172,27 @@ public partial class Actor : Node3D {
 		setup = _setups.GetSetup(actorId);
 		sprite.SpriteFrames = setup.AnimationFrames;
 
-		GD.Print($"Created with {actorId} / {setup.name} at {synchronizer.spawnPosition} / {Position}");
+		// GD.Print($"Created with {actorId} / {setup.name} at {synchronizer.spawnPosition} / {Position}");
 
 		var spriteOffset = sprite.PixelSize * setup.SpritePixels / 2f;
 
-		sprite.Position = new Vector3(0, spriteOffset, 0);
+		sprite.Position = new Vector3(0f, spriteOffset, 0f);
 		sprite.Play("Idle");
 
 		var height = Height;
 
-		collisionShape.Position = new Vector3(0, height / 2f , 0);
+		collisionShape.Position = new Vector3(0f, height / 2f , 0f);
 		capsuleShape.Height = height ;
 		capsuleShape.Radius = height / 4f; // May require customization for certain actors.
-		shadow.Scale = new Vector3(1, 1, 1) * setup.SpritePixels / 35f;
+		shadow.Scale = new Vector3(1f, 1f, 1f) * setup.SpritePixels / 35f;
 
 		stats = setup.BaseStats.Clone;
 		hp = stats.Vitality;
 		mp = stats.Intelligence;
 
 		ActorAvatars.instance.Add(this);
+
+		_animator.FadeIn();
 
 		if (!isPlayer) {
 			return;
@@ -198,8 +203,11 @@ public partial class Actor : Node3D {
 	}
 
 	public void OnDeath() {
+		collisionShape.Disabled = true;
 		actors.Remove(this);
 
 		ActorAvatars.instance.Remove(this);
+
+		_animator.FadeOut();
 	}
 }

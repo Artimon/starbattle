@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://cb3j6sa8w2cm3"]
+[gd_scene load_steps=37 format=3 uid="uid://cb3j6sa8w2cm3"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSynchronizer.cs" id="2_k4hrp"]
+[ext_resource type="Script" path="res://Scripts/Actor/ActorAnimator.cs" id="3_5khln"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorAction.cs" id="3_x85sy"]
 [ext_resource type="Resource" uid="uid://csnnosx23trwb" path="res://Action/ActionSetups.tres" id="4_35ykf"]
 [ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="5_kcnqb"]
@@ -13,6 +14,108 @@
 [ext_resource type="Script" path="res://Scripts/Actor/StateAttack.cs" id="11_jslh3"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateHit.cs" id="12_tpf5m"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateDie.cs" id="12_w1nuh"]
+
+[sub_resource type="Animation" id="Animation_chqir"]
+resource_name = "FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.8)]
+}
+
+[sub_resource type="Animation" id="Animation_sx73s"]
+resource_name = "FadeOut"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 5.5),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4, 5.5),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gheq4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate.a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow Sprite3D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o0tut"]
+_data = {
+"FadeIn": SubResource("Animation_chqir"),
+"FadeOut": SubResource("Animation_sx73s"),
+"RESET": SubResource("Animation_gheq4")
+}
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_f5ovo"]
 properties/0/path = NodePath("ActorSynchronizer:handle")
@@ -170,17 +273,30 @@ animations = [{
 radius = 0.4
 height = 1.6
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "collisionShape", "sprite", "shadow", "action", "stateMachine")]
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "collisionShape", "_animator", "sprite", "shadow", "action", "stateMachine")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
 collisionShape = NodePath("CharacterBody3D/CollisionShape3D")
+_animator = NodePath("ActorAnimator")
 sprite = NodePath("AnimatedSprite3D")
 shadow = NodePath("Shadow Sprite3D")
 _setups = ExtResource("2_eb7re")
 action = NodePath("ActorAction")
 stateMachine = NodePath("StateMachine")
 
+[node name="ActorAnimator" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
+script = ExtResource("3_5khln")
+_actor = NodePath("..")
+_animationPlayer = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ActorAnimator"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_o0tut")
+}
+
 [node name="ActorAction" type="Node" parent="." node_paths=PackedStringArray("_player")]
+process_mode = 1
 script = ExtResource("3_x85sy")
 _player = NodePath("..")
 _actionSetups = ExtResource("4_35ykf")
@@ -236,3 +352,5 @@ _stateMachine = NodePath("..")
 script = ExtResource("12_w1nuh")
 _actor = NodePath("../..")
 _stateMachine = NodePath("..")
+
+[connection signal="animation_finished" from="ActorAnimator/AnimationPlayer" to="ActorAnimator" method="OnAnimationFinished"]
