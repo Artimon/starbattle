@@ -23,6 +23,9 @@ public partial class ActorAvatar : Control {
 	public TextureProgressBar _hpBar;
 
 	[Export]
+	public Texture2D _progressBarEnemy;
+
+	[Export]
 	public TextureProgressBar _atbBar;
 
 	public override void _Ready() {
@@ -47,6 +50,10 @@ public partial class ActorAvatar : Control {
 
 		if (!actor.isPlayer) {
 			_atbBar.Visible = false;
+		}
+
+		if (!actor.IsPlayerGroup) {
+			_hpBar.TextureProgress = _progressBarEnemy;
 		}
 	}
 

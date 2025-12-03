@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh025c2qwoxiv"]
+[gd_scene load_steps=6 format=3 uid="uid://bh025c2qwoxiv"]
 
 [ext_resource type="Script" path="res://Scripts/Action/ActionRange.cs" id="1_kgnvb"]
 [ext_resource type="Texture2D" uid="uid://pto16jja6odi" path="res://Images/ActionCircle.png" id="2_ij1h1"]
+[ext_resource type="Shader" uid="uid://y58w4lidpj7u" path="res://Shaders/ActionRange.tres" id="3_kycce"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vnpjl"]
+render_priority = 0
+shader = ExtResource("3_kycce")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8eeo3"]
+material = SubResource("ShaderMaterial_vnpjl")
 
 [node name="ActionRange" type="Node3D" node_paths=PackedStringArray("_sprite")]
 script = ExtResource("1_kgnvb")
@@ -13,3 +21,7 @@ pixel_size = 0.02
 double_sided = false
 render_priority = 2
 texture = ExtResource("2_ij1h1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_8eeo3")

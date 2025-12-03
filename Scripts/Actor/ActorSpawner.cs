@@ -18,6 +18,9 @@ public partial class ActorSpawner : Node {
 	[Export]
 	public ActorSetups _setups;
 
+	[Export]
+	public Timer _spawnTimer;
+
 	public static Vector3 RandomSpawnPosition => new Vector3(
 		GD.Randf() - 0.5f,
 		0f,
@@ -28,14 +31,18 @@ public partial class ActorSpawner : Node {
 		// All start as "server" (id 1) only when the connection is established, the client will be marked as "client".
 		instance = this;
 
+		_spawnTimer.Timeout += SpawnMob;
 		_multiplayerContainer.OnConnectionReady += () => {
 			if (!Multiplayer.IsServer()) {
 				return;
 			}
 
-			CreateMob(RandomSpawnPosition, _setups.GetSetup("ElderGhost"));
+			SpawnMob();
 		};
+	}
 
+	public void SpawnMob() {
+		CreateMob(RandomSpawnPosition, _setups.GetSetup("ElderGhost"));
 	}
 
 	public void CreateMob(Vector3 position, ActorSetup setup) {
@@ -45,6 +52,10 @@ public partial class ActorSpawner : Node {
 			actor.synchronizer.spawnPosition = position;
 			actor.Name = $"{setup.name} {actor.synchronizer.handle}";
 		});
+
+		actor.Death += () => {
+			_spawnTimer.Start();
+		};
 	}
 
 	public void CreatePlayer(Vector3 position, string actorName, int playerId) {

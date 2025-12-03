@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Artimus.Services;
 using Godot;
 using Starbattle.Controllers;
@@ -60,6 +61,8 @@ public partial class Actor : Node3D {
 
 	[Export]
 	public StateMachine stateMachine;
+
+	public event Action Death;
 
 	public override void _EnterTree() {
 		actors.Add(this);
@@ -205,11 +208,13 @@ public partial class Actor : Node3D {
 	}
 
 	public void OnDeath() {
+		_animator.FadeOut();
+
 		collisionShape.Disabled = true;
 		actors.Remove(this);
 
 		ActorAvatars.instance.Remove(this);
 
-		_animator.FadeOut();
+		Death?.Invoke();
 	}
 }

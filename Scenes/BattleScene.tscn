@@ -109,12 +109,17 @@ _actorSpawner = NodePath("ActorSpawner")
 _spawnable_scenes = PackedStringArray("res://Actors/Actor.tscn")
 spawn_path = NodePath("../ActorContainer")
 
-[node name="ActorSpawner" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_multiplayerContainer", "_actorContainer")]
+[node name="ActorSpawner" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_multiplayerContainer", "_actorContainer", "_spawnTimer")]
 script = ExtResource("1_ogvtl")
 _multiplayerContainer = NodePath("..")
 _actorContainer = NodePath("../ActorContainer")
 _actorPrefab = ExtResource("9_m5eed")
 _setups = ExtResource("3_s4vdo")
+_spawnTimer = NodePath("SpawnTimer")
+
+[node name="SpawnTimer" type="Timer" parent="MultiplayerContainer/ActorSpawner"]
+wait_time = 2.0
+one_shot = true
 
 [node name="ActorContainer" type="Node3D" parent="MultiplayerContainer"]
 script = ExtResource("9_0vfcd")
