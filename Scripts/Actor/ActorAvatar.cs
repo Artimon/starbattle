@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Godot;
+using Starbattle.Controllers;
 
 namespace Starbattle;
 
@@ -13,6 +14,9 @@ public partial class ActorAvatar : Control {
 	public TextureRect _textureRect;
 
 	[Export]
+	public Control _inputArea;
+
+	[Export]
 	public Label _hpLabel;
 
 	[Export]
@@ -20,6 +24,10 @@ public partial class ActorAvatar : Control {
 
 	[Export]
 	public TextureProgressBar _atbBar;
+
+	public override void _Ready() {
+		_inputArea.GuiInput += OnTextureRectGuiInput;
+	}
 
 	public override void _Process(double delta) {
 		UpdateBars();
@@ -49,5 +57,11 @@ public partial class ActorAvatar : Control {
 			sprite.Animation,
 			sprite.Frame
 		);
+	}
+
+	public void OnTextureRectGuiInput(InputEvent @event) {
+		if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) {
+			PlayerController.instance.TryRequestAction(_actor, _actor.GlobalPosition);
+		}
 	}
 }

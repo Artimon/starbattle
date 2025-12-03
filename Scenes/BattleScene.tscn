@@ -67,22 +67,25 @@ anchor_bottom = 1.0
 offset_top = -250.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("8_e7axk")
 _avatarPrefab = ExtResource("9_yr3ug")
 _playerAvatarsContainer = NodePath("PlayerAvatars HBoxContainer")
 _enemyAvatarsContainer = NodePath("EnemyAvatars HBoxContainer")
-
-[node name="PlayerAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-alignment = 1
 
 [node name="EnemyAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars"]
 layout_mode = 0
 offset_top = 100.0
 offset_right = 40.0
 offset_bottom = 140.0
+mouse_filter = 2
+alignment = 1
+
+[node name="PlayerAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
 alignment = 1
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_actorSpawner")]

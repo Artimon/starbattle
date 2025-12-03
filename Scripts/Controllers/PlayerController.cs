@@ -98,9 +98,24 @@ public partial class PlayerController : Node {
 	[Export]
 	public ActionSetup _actionAttack;
 
+	public void TryRequestAction(Actor actor, Vector3 position) {
+		var isRequested = _player.action.TryRequestAction(_nextAction, actor, position);
+		if (!isRequested) {
+			return; // Allow re-clicking on a correct target without cancelling the action.
+		}
+
+		_actionRange.Visible = false;
+		_nextAction = null;
+	}
+
 	public override void _Input(InputEvent @event) {
-		if (@event is InputEventMouseButton { Pressed: true } mouseEvent) {
+		if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } mouseEvent) {
 			if (_nextAction == null) {
+				return;
+			}
+
+			var isHoveringUi = GetViewport().GuiGetHoveredControl() != null;
+			if (isHoveringUi) {
 				return;
 			}
 
@@ -112,13 +127,7 @@ public partial class PlayerController : Node {
 
 			GD.Print($"Clicked target: {actor?.Name ?? "None"} at {clickPosition}");
 
-			var isRequested = _player.action.TryRequestAction(_nextAction, actor, clickPosition);
-			if (!isRequested) {
-				return; // Allow re-clicking on a correct target without cancelling the action.
-			}
-
-			_actionRange.Visible = false;
-			_nextAction = null;
+			TryRequestAction(actor, clickPosition);
 
 			return;
 		}
@@ -126,7 +135,6 @@ public partial class PlayerController : Node {
 		if (@event.IsActionPressed("Move")) {
 			_nextAction = _actionMove; // Temporary till we have action setups.
 			_actionRange.Visible = true;
-			GD.Print("Now moving");
 
 			return;
 		}
@@ -134,7 +142,6 @@ public partial class PlayerController : Node {
 		if (@event.IsActionPressed("Attack")) {
 			_nextAction = _actionAttack; // Temporary till we have action setups.
 			_actionRange.Visible = true;
-			GD.Print("Now attacking");
 
 			return;
 		}

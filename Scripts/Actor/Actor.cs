@@ -141,7 +141,9 @@ public partial class Actor : Node3D {
 		hp = newHp;
 
 		// @TODO Show damage and crit on screen.
-		GD.Print($"Damage dealt: {damage}, {hp}/{stats.Vitality} (crit: {isCritical})");
+		// if (Multiplayer.IsServer()) {
+		// 	GD.Print($"Damage dealt: {damage}, {hp}/{stats.Vitality} (crit: {isCritical})");
+		// }
 
 		if (hp > 0f) {
 			stateMachine.Force("Hit");

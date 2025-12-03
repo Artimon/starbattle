@@ -36,6 +36,10 @@ public partial class ActorAction : Node {
 	 * This time we sanitize on client, cuz who's gonna manipulate this anyway, riiight?
 	 */
 	public bool TryRequestAction(ActionSetup actionSetup, Actor actor, Vector3 position) {
+		if (actionSetup == null) {
+			return false;
+		}
+
 		if (!IsIdle) {
 			return false;
 		}
@@ -44,7 +48,6 @@ public partial class ActorAction : Node {
 			actionSetup.TargetsActor &&
 			!HasValidActor(actionSetup, actor)
 		) {
-			GD.Print("False");
 			return false;
 		}
 
