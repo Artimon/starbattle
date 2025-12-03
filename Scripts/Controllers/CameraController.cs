@@ -20,7 +20,7 @@ public partial class CameraController : Node3D {
 
 		var angle = Mathf.DegToRad(57f);
 
-		_selfieStick = new Vector3(6f, 2f, 0f)
+		_selfieStick = new Vector3(8f, 2.5f, 0f)
 			.Rotated(Vector3.Down, angle);
 
 		var lookAtPosition = GlobalPosition - _selfieStick;

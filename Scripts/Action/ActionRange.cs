@@ -9,8 +9,7 @@ public partial class ActionRange : Node3D {
 	[Export]
 	public Sprite3D _sprite;
 
-	public override void _EnterTree() {
-		Position = new Vector3(0, 0, 0.2f);
+	public override void _Ready() {
 		Visible = false;
 
 		_actor = GetParent<Actor>();

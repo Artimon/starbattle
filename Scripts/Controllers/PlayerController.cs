@@ -37,6 +37,7 @@ public partial class PlayerController : Node {
 	public void Begin(Actor player) {
 		_player = player;
 		_actionRange = _actionRangePrefab.Instantiate<ActionRange>(_player);
+		_actionRange.Position = Vector3.Up * 0.02f;
 	}
 
 	public bool _TryGetClickPosition(Vector2 mousePosition, out Vector3 clickPosition, out Actor actor) {

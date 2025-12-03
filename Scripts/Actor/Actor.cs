@@ -23,7 +23,7 @@ public partial class Actor : Node3D {
 
 	public float angle;
 
-	public float actionRange = 6f;
+	public float actionRange = 4.5f;
 
 	[Export]
 	public ActorSynchronizer synchronizer;
@@ -44,7 +44,7 @@ public partial class Actor : Node3D {
 
 	public float Height => sprite.PixelSize * setup.pixelHeight;
 
-	public Vector3 CameraTarget => collisionShape.GlobalPosition;
+	public Vector3 CameraTarget => GlobalPosition;
 
 	public float SpriteSize => setup.SpritePixels * sprite.PixelSize;
 
@@ -183,7 +183,7 @@ public partial class Actor : Node3D {
 
 		var height = Height;
 
-		collisionShape.Position = new Vector3(0f, height / 2f , 0f);
+		collisionShape.Position = new Vector3(0f, height * 0.5f , 0f);
 		capsuleShape.Height = height ;
 		capsuleShape.Radius = height / 4f; // May require customization for certain actors.
 		shadow.Scale = new Vector3(1f, 1f, 1f) * setup.SpritePixels / 35f;
