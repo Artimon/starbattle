@@ -19,10 +19,10 @@ public partial class ActorSpawner : Node {
 	public ActorSetups _setups;
 
 	public static Vector3 RandomSpawnPosition => new Vector3(
-		GD.Randf(),
+		GD.Randf() - 0.5f,
 		0f,
-		GD.Randf()
-	).Normalized() * 8f;
+		GD.Randf() - 0.5f
+	).Normalized() * 4f;
 
 	public override void _Ready() {
 		// All start as "server" (id 1) only when the connection is established, the client will be marked as "client".
