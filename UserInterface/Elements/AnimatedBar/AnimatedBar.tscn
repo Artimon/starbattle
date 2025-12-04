@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmi0hdv6xctod"]
+
+[ext_resource type="Script" path="res://Scripts/UserInterface/Elements/AnimatedBar.cs" id="1_a32tb"]
+[ext_resource type="Texture2D" uid="uid://1ffohvlryrdf" path="res://UserInterface/Elements/AnimatedBar/AnimatedBarUnder.png" id="2_gyoqs"]
+[ext_resource type="Texture2D" uid="uid://daimtq6ky508h" path="res://UserInterface/Elements/AnimatedBar/HpBarProgress.png" id="3_da22r"]
+[ext_resource type="Texture2D" uid="uid://bbrei6rpvr6dw" path="res://UserInterface/Elements/AnimatedBar/HpBarProgressBottom.png" id="3_f30as"]
+
+[node name="AnimatedBar" type="Control" node_paths=PackedStringArray("_topBar", "_bottomBar")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 11.0
+script = ExtResource("1_a32tb")
+_topBar = NodePath("Top TextureProgressBar")
+_bottomBar = NodePath("Bottom TextureProgressBar")
+
+[node name="Bottom TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 11.0
+step = 0.1
+value = 60.0
+texture_under = ExtResource("2_gyoqs")
+texture_progress = ExtResource("3_f30as")
+
+[node name="Top TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 11.0
+step = 0.1
+value = 50.0
+texture_progress = ExtResource("3_da22r")

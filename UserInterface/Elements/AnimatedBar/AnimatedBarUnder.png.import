@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://1ffohvlryrdf"
-path="res://.godot/imported/HpBarUnder.png-ae826e8c60091055760eba6c16e4e73e.ctex"
+path="res://.godot/imported/AnimatedBarUnder.png-b5535ae5ac1810c464bdf57fb8583a1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/HpBarUnder.png"
-dest_files=["res://.godot/imported/HpBarUnder.png-ae826e8c60091055760eba6c16e4e73e.ctex"]
+source_file="res://UserInterface/Elements/AnimatedBar/AnimatedBarUnder.png"
+dest_files=["res://.godot/imported/AnimatedBarUnder.png-b5535ae5ac1810c464bdf57fb8583a1a.ctex"]
 
 [params]
 

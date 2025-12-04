@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ux2bmdegcinp"
-path="res://.godot/imported/HpBarProgressEnemy.png-25822cf4d42676641e4d1e4637da96ca.ctex"
+uid="uid://bbrei6rpvr6dw"
+path="res://.godot/imported/HpBarProgressBottom.png-40c157ae68eb160e18fa7d42707d7fc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/HpBarProgressEnemy.png"
-dest_files=["res://.godot/imported/HpBarProgressEnemy.png-25822cf4d42676641e4d1e4637da96ca.ctex"]
+source_file="res://UserInterface/Elements/AnimatedBar/HpBarProgressBottom.png"
+dest_files=["res://.godot/imported/HpBarProgressBottom.png-40c157ae68eb160e18fa7d42707d7fc3.ctex"]
 
 [params]
 

@@ -20,10 +20,13 @@ public partial class ActorAvatar : Control {
 	public Label _hpLabel;
 
 	[Export]
-	public TextureProgressBar _hpBar;
+	public AnimatedBar _hpBar;
 
 	[Export]
-	public Texture2D _progressBarEnemy;
+	public Texture2D _progressBarEnemyTop;
+
+	[Export]
+	public Texture2D _progressBarEnemyBottom;
 
 	[Export]
 	public TextureProgressBar _atbBar;
@@ -39,8 +42,7 @@ public partial class ActorAvatar : Control {
 
 	public void UpdateBars() {
 		_hpLabel.Text = _actor.hp.ToString(CultureInfo.InvariantCulture);
-		_hpBar.MaxValue = _actor.stats.Vitality;
-		_hpBar.Value = _actor.hp;
+		_hpBar.SetValues(_actor.hp, _actor.stats.Vitality);
 
 		_atbBar.Value = _actor.action.ActionTime;
 	}
@@ -48,12 +50,14 @@ public partial class ActorAvatar : Control {
 	public void SetActor(Actor actor) {
 		_actor = actor;
 
+		_hpBar.InitValues(_actor.hp, _actor.stats.Vitality);
+
 		if (!actor.isPlayer) {
 			_atbBar.Visible = false;
 		}
 
 		if (!actor.IsPlayerGroup) {
-			_hpBar.TextureProgress = _progressBarEnemy;
+			_hpBar.SetBars(_progressBarEnemyTop, _progressBarEnemyBottom);
 		}
 	}
 

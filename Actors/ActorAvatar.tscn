@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/Actor/ActorAvatar.cs" id="1_hc7oo"]
 [ext_resource type="Texture2D" uid="uid://c2mc5vo2djkyo" path="res://Actors/Wizard.png" id="2_7gpdc"]
-[ext_resource type="Texture2D" uid="uid://ux2bmdegcinp" path="res://Images/HpBarProgressEnemy.png" id="2_yfcva"]
-[ext_resource type="Texture2D" uid="uid://1ffohvlryrdf" path="res://Images/HpBarUnder.png" id="3_6olva"]
-[ext_resource type="Texture2D" uid="uid://daimtq6ky508h" path="res://Images/HpBarProgress.png" id="4_ej5w7"]
+[ext_resource type="Texture2D" uid="uid://ux2bmdegcinp" path="res://UserInterface/Elements/AnimatedBar/HpBarProgressEnemy.png" id="2_8viah"]
+[ext_resource type="Texture2D" uid="uid://cjsfgq8hw65k7" path="res://UserInterface/Elements/AnimatedBar/HpBarProgressEnemyBottom.png" id="3_tonhp"]
+[ext_resource type="PackedScene" uid="uid://dmi0hdv6xctod" path="res://UserInterface/Elements/AnimatedBar/AnimatedBar.tscn" id="4_4iba4"]
 [ext_resource type="Texture2D" uid="uid://q80fj3rexta8" path="res://Images/AtbBarUnder.png" id="5_13ici"]
 [ext_resource type="Texture2D" uid="uid://da65vlndgnt1f" path="res://Images/AtbBarOver.png" id="6_ocses"]
 [ext_resource type="Texture2D" uid="uid://cmoqxw438swjl" path="res://Images/AtbBarProgress.png" id="7_v4814"]
@@ -27,9 +27,10 @@ offset_bottom = 104.0
 script = ExtResource("1_hc7oo")
 _textureRect = NodePath("AvatarTexture")
 _inputArea = NodePath("InputArea")
-_hpLabel = NodePath("StatsPlacer/Hp TextureProgressBar/Label")
-_hpBar = NodePath("StatsPlacer/Hp TextureProgressBar")
-_progressBarEnemy = ExtResource("2_yfcva")
+_hpLabel = NodePath("StatsPlacer/Hp AnimatedBar/Label")
+_hpBar = NodePath("StatsPlacer/Hp AnimatedBar")
+_progressBarEnemyTop = ExtResource("2_8viah")
+_progressBarEnemyBottom = ExtResource("3_tonhp")
 _atbBar = NodePath("StatsPlacer/Atb TextureProgressBar")
 
 [node name="InputArea" type="Control" parent="."]
@@ -56,17 +57,14 @@ offset_left = 15.0
 offset_right = 15.0
 mouse_filter = 2
 
-[node name="Hp TextureProgressBar" type="TextureProgressBar" parent="StatsPlacer"]
-layout_mode = 0
+[node name="Hp AnimatedBar" type="Control" parent="StatsPlacer" instance=ExtResource("4_4iba4")]
+layout_mode = 3
+anchors_preset = 0
 offset_top = 87.0
 offset_right = 150.0
 offset_bottom = 98.0
-mouse_filter = 2
-value = 50.0
-texture_under = ExtResource("3_6olva")
-texture_progress = ExtResource("4_ej5w7")
 
-[node name="Label" type="Label" parent="StatsPlacer/Hp TextureProgressBar"]
+[node name="Label" type="Label" parent="StatsPlacer/Hp AnimatedBar"]
 layout_mode = 0
 offset_top = -25.0
 offset_right = 150.0
