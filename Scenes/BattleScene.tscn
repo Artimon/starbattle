@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=24 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
@@ -18,6 +18,8 @@
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSelection.cs" id="12_t8ruj"]
 [ext_resource type="Texture2D" uid="uid://idoo2rtmn6n" path="res://Images/SelectCircle.png" id="13_dwphc"]
 [ext_resource type="Texture2D" uid="uid://cn3yslcng2fxn" path="res://Images/FlowerMeadow.jpg" id="15_31iqn"]
+[ext_resource type="Script" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
+[ext_resource type="PackedScene" uid="uid://cos6glel8tb51" path="res://Effects/CombatNumber.tscn" id="19_nn7ws"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osk5p"]
 albedo_texture = ExtResource("15_31iqn")
@@ -124,6 +126,9 @@ one_shot = true
 [node name="ActorContainer" type="Node3D" parent="MultiplayerContainer"]
 script = ExtResource("9_0vfcd")
 
+[node name="EffectContainer" type="Node3D" parent="."]
+script = ExtResource("15_x12mc")
+
 [node name="Ground" type="Node" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
@@ -219,3 +224,5 @@ double_sided = false
 texture_filter = 0
 render_priority = 10
 texture = ExtResource("9_ftk6f")
+
+[node name="CombatNumber" parent="." instance=ExtResource("19_nn7ws")]

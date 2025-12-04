@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cos6glel8tb51"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/CombatNumber.cs" id="1_2cxnq"]
+[ext_resource type="FontFile" uid="uid://jg8oo85iacga" path="res://Fonts/OxygenBold.tres" id="2_huedi"]
+
+[node name="CombatNumber" type="Node3D" node_paths=PackedStringArray("_label")]
+process_mode = 1
+script = ExtResource("1_2cxnq")
+_label = NodePath("Label3D")
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+double_sided = false
+render_priority = 15
+outline_render_priority = 14
+text = "172"
+font = ExtResource("2_huedi")
+font_size = 48
+outline_size = 24

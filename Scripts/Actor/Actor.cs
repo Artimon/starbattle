@@ -47,6 +47,8 @@ public partial class Actor : Node3D {
 
 	public Vector3 CameraTarget => GlobalPosition;
 
+	public Vector3 GlobalCenter => collisionShape.GlobalPosition;
+
 	public float SpriteSize => setup.SpritePixels * sprite.PixelSize;
 
 	public ActorSetup setup;
@@ -61,6 +63,9 @@ public partial class Actor : Node3D {
 
 	[Export]
 	public StateMachine stateMachine;
+
+	[Export]
+	public PackedScene _damageNumberPrefab;
 
 	public event Action Death;
 
@@ -130,18 +135,21 @@ public partial class Actor : Node3D {
 			damage *= 1.5f;
 		}
 
-		damage = Mathf.Floor(damage);
+		var finalDamage = Mathf.FloorToInt(damage);
 
-		var newHp = Mathf.Max(0f, target.hp - damage);
+		var newHp = Mathf.Max(0f, target.hp - finalDamage);
 
-		target.Rpc(nameof(RpcReceiveDamage), damage, newHp, isCritical);
+		target.Rpc(nameof(RpcReceiveDamage), finalDamage, newHp, isCritical);
 
 		return true;
 	}
 
 	[Rpc(CallLocal = true)]
-	public void RpcReceiveDamage(float damage, uint newHp, bool isCritical) {
+	public void RpcReceiveDamage(int damage, uint newHp, bool isCritical) {
 		hp = newHp;
+
+		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+			.Begin(this, damage);
 
 		// @TODO Show damage and crit on screen.
 		// if (Multiplayer.IsServer()) {
