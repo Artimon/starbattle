@@ -149,7 +149,7 @@ public partial class Actor : Node3D {
 		hp = newHp;
 
 		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
-			.Begin(this, damage);
+			.ShowDamage(this, damage, isCritical);
 
 		// @TODO Show damage and crit on screen.
 		// if (Multiplayer.IsServer()) {

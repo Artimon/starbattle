@@ -7,6 +7,9 @@ public partial class CombatNumber : Node3D {
 	[Export]
 	public Label3D _label;
 
+	[Export]
+	public Color _criticalColor;
+
 	public float _timer;
 	public float _speed;
 
@@ -31,7 +34,7 @@ public partial class CombatNumber : Node3D {
 		_label.Position = position;
 	}
 
-	public void Begin(Actor actor, int number) {
+	public void ShowDamage(Actor actor, int number, bool isCritical) {
 		var position = actor.GlobalCenter + Vector3.Up * 0.25f * actor.Height;
 		position.X += GD.Randf() * 1f - 0.5f;
 		position.Y += GD.Randf() * 1f - 0.5f;
@@ -41,6 +44,28 @@ public partial class CombatNumber : Node3D {
 
 		_label.Text = number.ToString();
 		_speed = 1f + GD.Randf() * 0.2f;
+
+		var sizeFactor = 1f;
+
+		switch (number) {
+			case > 150:
+				sizeFactor += 1.5f;
+				break;
+			case > 100:
+				sizeFactor += 1f;
+				break;
+			case > 50:
+				sizeFactor += 0.5f;
+				break;
+		}
+
+		if (isCritical) {
+			sizeFactor += 1f;
+
+			_label.Modulate = _criticalColor;
+		}
+
+		_label.FontSize = Mathf.RoundToInt(_label.FontSize * sizeFactor);
 
 		SetProcess(true);
 	}
