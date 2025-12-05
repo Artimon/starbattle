@@ -34,7 +34,7 @@ public partial class CombatNumber : Node3D {
 		_label.Position = position;
 	}
 
-	public void ShowDamage(Actor actor, int number, bool isCritical) {
+	public void ShowDamage(Actor actor, float number, bool isCritical) {
 		var position = actor.GlobalCenter + Vector3.Up * 0.25f * actor.Height;
 		position.X += GD.Randf() * 1f - 0.5f;
 		position.Y += GD.Randf() * 1f - 0.5f;
@@ -42,7 +42,7 @@ public partial class CombatNumber : Node3D {
 
 		GlobalPosition = position;
 
-		_label.Text = number.ToString();
+		_label.Text = Mathf.RoundToInt(number).ToString();
 		_speed = 1f + GD.Randf() * 0.2f;
 
 		var sizeFactor = 1f;

@@ -15,7 +15,13 @@ public partial class Actor : Node3D {
 	public Stats stats;
 
 	public float hp;
+	public float MaxHp => stats.Vitality;
+
 	public float mp;
+	public float MaxMp => stats.Intelligence;
+
+	public bool IsHurt => hp < MaxHp;
+	public bool IsDead => hp <= 0f;
 
 	/**
 	 * @TODO Does not consider summons, yet.
@@ -60,6 +66,9 @@ public partial class Actor : Node3D {
 
 	[Export]
 	public ActorAction action;
+
+	[Export]
+	public ActorRegenerate _regenerate;
 
 	[Export]
 	public StateMachine stateMachine;
@@ -135,17 +144,19 @@ public partial class Actor : Node3D {
 			damage *= 1.5f;
 		}
 
-		var finalDamage = Mathf.FloorToInt(damage);
-
-		var newHp = Mathf.Max(0f, target.hp - finalDamage);
-
-		target.Rpc(nameof(RpcReceiveDamage), finalDamage, newHp, isCritical);
+		target.Damage(damage, isCritical);
 
 		return true;
 	}
 
+	public void Damage(float damage, bool isCritical) {
+		var newHp = Mathf.Max(0f, hp - damage);
+
+		Rpc(nameof(RpcDamage), damage, newHp, isCritical);
+	}
+
 	[Rpc(CallLocal = true)]
-	public void RpcReceiveDamage(int damage, uint newHp, bool isCritical) {
+	public void RpcDamage(float damage, float newHp, bool isCritical) {
 		hp = newHp;
 
 		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
@@ -167,6 +178,24 @@ public partial class Actor : Node3D {
 		}
 
 		stateMachine.Force("Die");
+	}
+
+	public void Heal(float heal, bool showNumber) {
+		var newHp = Mathf.Min(MaxHp, hp + heal);
+
+		Rpc(nameof(RpcHeal), heal, newHp, showNumber);
+	}
+
+	[Rpc(CallLocal = true)]
+	public void RpcHeal(float heal, float newHp, bool showNumber) {
+		hp = newHp;
+
+		if (!showNumber) {
+			return;
+		}
+
+		// _damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+		// 	.ShowHeal(this, heal);
 	}
 
 	public void ApplyAngle() {
@@ -207,12 +236,16 @@ public partial class Actor : Node3D {
 
 		_animator.FadeIn();
 
-		if (!isPlayer) {
-			return;
+		if (isPlayer) {
+			PlayerController.instance.Begin(this);
+			CameraController.instance.Follow(this);
 		}
 
-		PlayerController.instance.Begin(this);
-		CameraController.instance.Follow(this);
+		if (IsPlayerGroup && Multiplayer.IsServer()) {
+			hp -= 50; // @TODO Remove, temp for regen testing.
+
+			_regenerate.Start();
+		}
 	}
 
 	public void OnDeath() {

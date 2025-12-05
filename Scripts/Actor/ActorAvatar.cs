@@ -41,7 +41,7 @@ public partial class ActorAvatar : Control {
 	}
 
 	public void UpdateBars() {
-		_hpLabel.Text = _actor.hp.ToString(CultureInfo.InvariantCulture);
+		_hpLabel.Text = Mathf.RoundToInt(_actor.hp).ToString();
 		_hpBar.SetValues(_actor.hp, _actor.stats.Vitality);
 
 		_atbBar.Value = _actor.action.ActionTime;

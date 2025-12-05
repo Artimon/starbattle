@@ -11,7 +11,7 @@ public partial class AnimatedBar : Control {
 	public float _targetValue;
 
 	public override void _Process(double delta) {
-		var deltaProgress = _animatedBar.MaxValue * 0.5f * (float)delta;
+		var deltaProgress = _animatedBar.MaxValue * 0.35f * (float)delta;
 
 		_animatedBar.Value = Mathf.MoveToward(_animatedBar.Value, _targetValue, deltaProgress);
 	}
