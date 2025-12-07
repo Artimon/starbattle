@@ -24,6 +24,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 180.0
 offset_bottom = 104.0
+mouse_filter = 2
 script = ExtResource("1_hc7oo")
 _textureRect = NodePath("AvatarTexture")
 _inputArea = NodePath("InputArea")
@@ -57,11 +58,8 @@ offset_left = 15.0
 offset_right = 15.0
 mouse_filter = 2
 
-[node name="Hp AnimatedBar" type="Control" parent="StatsPlacer" instance=ExtResource("4_4iba4")]
-layout_mode = 3
-anchors_preset = 0
+[node name="Hp AnimatedBar" parent="StatsPlacer" instance=ExtResource("4_4iba4")]
 offset_top = 87.0
-offset_right = 150.0
 offset_bottom = 98.0
 
 [node name="Label" type="Label" parent="StatsPlacer/Hp AnimatedBar"]
