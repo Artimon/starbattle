@@ -20,17 +20,19 @@ public partial class ScreenFlash : Node {
 		_flashRect.Visible = false;
 	}
 
-	public void FastFlash(float chance = 1f) {
+	public bool TryFastFlash(float chance = 1f) {
 		if (_animationPlayer.IsPlaying()) {
-			return;
+			return false;
 		}
 
 		if (chance < 1f && GD.Randf() > chance) {
-			return;
+			return false;
 		}
 
 		_flashRect.Visible = true;
 		_animationPlayer.Play("FastFlash");
+
+		return true;
 	}
 
 	public override void _ExitTree() {
