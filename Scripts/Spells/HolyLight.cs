@@ -7,6 +7,11 @@ public partial class HolyLight : Node3D {
 	public readonly FastNoiseLite _noise = new ();
 
 	[Export]
+	public OmniLight3D _light;
+
+	public float _lightRange;
+
+	[Export]
 	public Sprite3D _lightBeamSprite;
 
 	[Export]
@@ -15,6 +20,7 @@ public partial class HolyLight : Node3D {
 	public float _timer;
 
 	public override void _Ready() {
+		_lightRange = _light.OmniRange;
 		_animationPlayer.Play("LightBeam");
 	}
 
@@ -36,5 +42,6 @@ public partial class HolyLight : Node3D {
 		scale.X = 1f + 0.2f * noiseValue;
 
 		_lightBeamSprite.Scale = scale;
+		_light.OmniRange = _lightRange * (1f + 0.5f * noiseValue) * _lightBeamSprite.Modulate.A;
 	}
 }

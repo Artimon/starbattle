@@ -326,6 +326,7 @@ animation = &"Idle"
 [node name="Shadow Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0.01, 0)
 modulate = Color(1, 1, 1, 0.8)
+render_priority = 1
 texture = ExtResource("6_d5h64")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
