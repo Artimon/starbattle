@@ -1,2 +1,5 @@
 ﻿1. EnterTree (When calling AddChild)
 2. Ready
+
+# Particle3D Animations
+https://docs.godotengine.org/en/stable/tutorials/3d/particles/process_material_properties.html#animation

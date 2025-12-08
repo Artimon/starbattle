@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=26 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
+[ext_resource type="PackedScene" uid="uid://5si2jcjsx627" path="res://UserInterface/Elements/ScreenFlash.tscn" id="1_oewvn"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
 [ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
@@ -20,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cn3yslcng2fxn" path="res://Images/FlowerMeadow.jpg" id="15_31iqn"]
 [ext_resource type="Script" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
 [ext_resource type="PackedScene" uid="uid://cos6glel8tb51" path="res://Effects/CombatNumber.tscn" id="19_nn7ws"]
+[ext_resource type="PackedScene" uid="uid://cgu3ehqwy7133" path="res://Spells/HolyLight/HolyLight.tscn" id="21_misdk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osk5p"]
 albedo_texture = ExtResource("15_31iqn")
@@ -38,6 +40,8 @@ size = Vector3(100, 1, 100)
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScreenFlash" parent="CanvasLayer" instance=ExtResource("1_oewvn")]
 
 [node name="ActorAvatars" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_playerAvatarsContainer", "_enemyAvatarsContainer")]
 layout_mode = 3
@@ -226,3 +230,5 @@ render_priority = 10
 texture = ExtResource("9_ftk6f")
 
 [node name="CombatNumber" parent="." instance=ExtResource("19_nn7ws")]
+
+[node name="HolyLight" parent="." instance=ExtResource("21_misdk")]
