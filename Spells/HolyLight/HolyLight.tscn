@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgu3ehqwy7133"]
+[gd_scene load_steps=11 format=3 uid="uid://cgu3ehqwy7133"]
 
 [ext_resource type="Script" path="res://Scripts/Spells/HolyLight.cs" id="1_244ww"]
 [ext_resource type="Texture2D" uid="uid://cpri5q7e4ltn8" path="res://Spells/HolyLight/HolyLight.png" id="2_0hads"]
@@ -7,12 +7,11 @@
 [sub_resource type="Animation" id="Animation_xkamt"]
 resource_name = "LightBeam"
 length = 2.25
-loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LightBeam Sprite3D:modulate")
+tracks/0/path = NodePath("LightBeam Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,7 +26,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LightBeam Sprite3D:modulate")
+tracks/0/path = NodePath("LightBeam Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -71,11 +70,19 @@ size = Vector2(0.5, 0.5)
 subdivide_width = 3
 subdivide_depth = 3
 
-[node name="HolyLight" type="Node3D" node_paths=PackedStringArray("_light", "_lightBeamSprite", "_animationPlayer")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vyf8h"]
+radius = 0.85
+height = 10.0
+
+[node name="HolyLight" type="Node3D" node_paths=PackedStringArray("_light", "_lightBeamSprite", "_animationPlayer", "_stoneParticles", "_shockActivationTimer", "_effectDurationTimer", "_area")]
 script = ExtResource("1_244ww")
 _light = NodePath("OmniLight3D")
-_lightBeamSprite = NodePath("LightBeam Sprite3D")
+_lightBeamSprite = NodePath("LightBeam Sprite")
 _animationPlayer = NodePath("AnimationPlayer")
+_stoneParticles = NodePath("Stone Particles")
+_shockActivationTimer = NodePath("ShockActivationTimer")
+_effectDurationTimer = NodePath("EffectDurationTimer")
+_area = NodePath("Area3D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -87,7 +94,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 light_energy = 16.0
 omni_attenuation = 2.0
 
-[node name="LightBeam Sprite3D" type="Sprite3D" parent="."]
+[node name="LightBeam Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 30, 0, 0, 0, 1, 0, 0, 0)
 offset = Vector2(0, 8)
 pixel_size = 0.02
@@ -96,7 +103,38 @@ double_sided = false
 render_priority = 10
 texture = ExtResource("2_0hads")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="Stone Particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 4
 explosiveness = 0.2
 process_material = SubResource("ParticleProcessMaterial_y1rom")
 draw_pass_1 = SubResource("QuadMesh_cf6ol")
+
+[node name="Area3D" type="Area3D" parent="."]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+shape = SubResource("CapsuleShape3D_vyf8h")
+
+[node name="SpellActivateTimer" type="Timer" parent="."]
+wait_time = 0.125
+one_shot = true
+autostart = true
+
+[node name="ShockActivationTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="EffectDurationTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SelfRemoveTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpellActivateTimer" to="." method="OnSpellActivate"]
+[connection signal="timeout" from="ShockActivationTimer" to="." method="OnEffectActivate"]
+[connection signal="timeout" from="EffectDurationTimer" to="." method="OnEffectFinished"]
+[connection signal="timeout" from="SelfRemoveTimer" to="." method="OnRemove"]

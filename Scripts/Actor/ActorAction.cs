@@ -26,7 +26,7 @@ public partial class ActorAction : Node {
 			return;
 		}
 
-		var statsFactor = 1f + _player.stats.Agility / 200f;
+		var statsFactor = 1f + _player.stats.agility / 200f;
 
 		_actionTime += 0.6f * statsFactor * delta; // Take 5 second with 0 agi to reach 3.
 		_actionTime = Mathf.Clamp(_actionTime, 0d, 3d);
@@ -82,6 +82,7 @@ public partial class ActorAction : Node {
 
 		var targetPosition = position;
 		var action = _actionSetups.GetSetup(actionId);
+		var actor = Actor.Resolve(actorHandle);
 
 		switch (action.actionType) {
 			case ActionSetup.ActionTypes.Move:
@@ -90,12 +91,20 @@ public partial class ActorAction : Node {
 				break;
 
 			case ActionSetup.ActionTypes.Attack:
-				var actor = Actor.Resolve(actorHandle);
 				if (actor == null) {
 					return;
 				}
 
 				targetPosition = GetAttackPosition(actor);
+
+				break;
+
+			case ActionSetup.ActionTypes.Magic:
+				if (actor == null) {
+					return;
+				}
+
+				targetPosition = actor.GlobalPosition;
 
 				break;
 		}
@@ -114,7 +123,12 @@ public partial class ActorAction : Node {
 				break;
 
 			case ActionSetup.ActionTypes.Attack:
-				PerformAttack(actorHandle, position);
+				PerformAttack(action, actorHandle, position);
+
+				break;
+
+			case ActionSetup.ActionTypes.Magic:
+				PerformMagic(action, actorHandle, position);
 
 				break;
 		}
@@ -127,7 +141,7 @@ public partial class ActorAction : Node {
 	/**
 	 * Clients are allowed to decide if they need to move or not, just like in the original game.
 	 */
-	public void PerformAttack(uint actorHandle, Vector3 position) {
+	public void PerformAttack(ActionSetup actionSetup, uint actorHandle, Vector3 position) {
 		var actor = Actor.Resolve(actorHandle);
 		if (actor == null) {
 			return; // Not synchronized or already removed.
@@ -140,7 +154,7 @@ public partial class ActorAction : Node {
 		if (distance <= 0.35f) {
 			_player.stateMachine
 				.Get<StateAttack>()
-				.Attack(actor, attackPosition);
+				.Attack(actionSetup, actor, attackPosition);
 
 			return;
 		}
@@ -150,8 +164,19 @@ public partial class ActorAction : Node {
 			.MoveTo(position, () => {
 				_player.stateMachine
 					.Get<StateAttack>()
-					.Attack(actor, attackPosition);
+					.Attack(actionSetup, actor, attackPosition);
 			});
+	}
+
+	public void PerformMagic(ActionSetup actionSetup, uint actorHandle, Vector3 position) {
+		var actor = Actor.Resolve(actorHandle);
+		if (actor == null) {
+			return;
+		}
+
+		_player.stateMachine
+			.Get<StateCast>()
+			.Cast(actionSetup, actor, position);
 	}
 
 	public bool HasValidActor(ActionSetup actionSetup, Actor actor) {
@@ -159,14 +184,12 @@ public partial class ActorAction : Node {
 			return false;
 		}
 
-		switch (actionSetup.targetType) {
-			case TargetTypes.Opponent when actor.IsPlayerGroup == _player.IsPlayerGroup:
-			case TargetTypes.Friend when actor.IsPlayerGroup != _player.IsPlayerGroup:
-				return false;
-
-			default:
-				return IsInRange(actor);
+		var canTarget = actionSetup.CanTarget(_player, actor);
+		if (!canTarget) {
+			return false;
 		}
+
+		return IsInRange(actor);
 	}
 
 	public bool IsInRange(Actor actor) {

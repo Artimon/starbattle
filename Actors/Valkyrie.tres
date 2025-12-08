@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=21 format=3 uid="uid://dqutttvqe3g20"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=25 format=3 uid="uid://dqutttvqe3g20"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_pxfe4"]
 [ext_resource type="Texture2D" uid="uid://c6uflpge3imdb" path="res://Actors/Valkyrie.png" id="1_yy5ye"]
 [ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_7pe00"]
+[ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Action/Attack.tres" id="3_xcqno"]
+[ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Action/Move.tres" id="4_opj84"]
+[ext_resource type="Script" path="res://Scripts/Action/PlayerActions.cs" id="5_583s1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4g187"]
 atlas = ExtResource("1_yy5ye")
@@ -144,12 +147,21 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_c3bn0"]
 script = ExtResource("2_7pe00")
-Strength = 65
-Dexterity = 95
-Agility = 95
-Vitality = 95
-Intelligence = 60
-Wisdom = 60
+strength = 65.0
+dexterity = 95.0
+agility = 95.0
+vitality = 95.0
+intelligence = 60.0
+wisdom = 60.0
+physicalBaseValue = 50.0
+magicalBaseValue = 5.0
+physicalDefense = 20.0
+magicalDefense = 15.0
+
+[sub_resource type="Resource" id="Resource_abm6w"]
+script = ExtResource("5_583s1")
+move = ExtResource("4_opj84")
+attack = ExtResource("3_xcqno")
 
 [resource]
 script = ExtResource("1_pxfe4")
@@ -157,3 +169,4 @@ name = "Valkyrie"
 _animationFrames = SubResource("SpriteFrames_6em5t")
 pixelHeight = 80.0
 _baseStats = SubResource("Resource_c3bn0")
+playerActions = SubResource("Resource_abm6w")

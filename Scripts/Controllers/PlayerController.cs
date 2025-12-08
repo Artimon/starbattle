@@ -69,7 +69,7 @@ public partial class PlayerController : Node {
 
 		actor = clickedActor;
 
-		GD.Print($"Detected collision with {actor.Name}");
+		// GD.Print($"Detected collision with {actor.Name}");
 
 		return true;
 
@@ -126,26 +126,20 @@ public partial class PlayerController : Node {
 				return;
 			}
 
-			GD.Print($"Clicked target: {actor?.Name ?? "None"} at {clickPosition}");
+			// GD.Print($"Clicked target: {actor?.Name ?? "None"} at {clickPosition}");
 
 			TryRequestAction(actor, clickPosition);
 
 			return;
 		}
 
-		if (@event.IsActionPressed("Move")) {
-			_nextAction = _actionMove; // Temporary till we have action setups.
-			_actionRange.Visible = true;
-
+		var nextAction = GetNextAction(@event);
+		if (nextAction == null) {
 			return;
 		}
 
-		if (@event.IsActionPressed("Attack")) {
-			_nextAction = _actionAttack; // Temporary till we have action setups.
-			_actionRange.Visible = true;
-
-			return;
-		}
+		_nextAction = nextAction;
+		_actionRange.Visible = true;
 
 		// if (!isPlayer) {
 		// 	return;
@@ -198,6 +192,22 @@ public partial class PlayerController : Node {
 		//
 		// 	// if (_actionType == ActionTypes.Attack) { }
 		// }
+	}
+
+	public ActionSetup GetNextAction(InputEvent @event) {
+		if (@event.IsActionPressed("Move")) {
+			return _player.setup.playerActions.move;
+		}
+
+		if (@event.IsActionPressed("Attack")) {
+			return _player.setup.playerActions.attack;
+		}
+
+		if (@event.IsActionPressed("W")) {
+			return _player.setup.playerActions.w;
+		}
+
+		return null;
 	}
 
 	public override void _ExitTree() {

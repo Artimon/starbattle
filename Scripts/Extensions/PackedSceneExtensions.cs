@@ -13,6 +13,15 @@ public static class PackedSceneExtensions {
 		return thing;
 	}
 
+	public static T Instantiate<T>(this PackedScene packedScene, Node3D parent, Vector3 position) where T : Node3D {
+		var thing = packedScene.Instantiate<T>();
+
+		parent.AddChild(thing);
+		thing.GlobalPosition = position;
+
+		return thing;
+	}
+
 	/**
 	 * With AddChild() the objects _EnterTree() and _Ready() methods are called, before the method returns.
 	 */

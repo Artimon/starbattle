@@ -42,7 +42,7 @@ public partial class ActorAvatar : Control {
 
 	public void UpdateBars() {
 		_hpLabel.Text = Mathf.RoundToInt(_actor.hp).ToString();
-		_hpBar.SetValues(_actor.hp, _actor.stats.Vitality);
+		_hpBar.SetValues(_actor.hp, _actor.stats.vitality);
 
 		_atbBar.Value = _actor.action.ActionTime;
 	}
@@ -50,7 +50,7 @@ public partial class ActorAvatar : Control {
 	public void SetActor(Actor actor) {
 		_actor = actor;
 
-		_hpBar.InitValues(_actor.hp, _actor.stats.Vitality);
+		_hpBar.InitValues(_actor.hp, _actor.stats.vitality);
 
 		if (!actor.isPlayer) {
 			_atbBar.Visible = false;

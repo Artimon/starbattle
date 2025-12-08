@@ -8,8 +8,8 @@ public partial class StateAttack : StateBase {
 	[Export]
 	public Actor _actor;
 
+	public ActionSetup _actionSetup;
 	public Actor _target;
-
 	public Vector3 _attackPosition;
 
 	public override void OnEnter() {
@@ -30,7 +30,8 @@ public partial class StateAttack : StateBase {
 	 * Otherwise, evading would not work, since we'd just apply the damage to the target,
 	 * independent of their changed position.
 	 */
-	public void Attack(Actor target, Vector3 attackPosition) {
+	public void Attack(ActionSetup actionSetup, Actor target, Vector3 attackPosition) {
+		_actionSetup = actionSetup;
 		_target = target;
 		_attackPosition = attackPosition;
 
@@ -38,7 +39,7 @@ public partial class StateAttack : StateBase {
 	}
 
 	public void OnAnimationFinished() {
-		_actor.TryAttackArea(_target, _attackPosition);
+		_actor.TryAttackArea(_actionSetup, _target, _attackPosition);
 		_actor.stateMachine.TryEnter("Idle");
 	}
 }

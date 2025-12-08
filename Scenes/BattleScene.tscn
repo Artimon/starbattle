@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=25 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="PackedScene" uid="uid://5si2jcjsx627" path="res://UserInterface/Elements/ScreenFlash.tscn" id="1_oewvn"]
@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://cn3yslcng2fxn" path="res://Images/FlowerMeadow.jpg" id="15_31iqn"]
 [ext_resource type="Script" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
 [ext_resource type="PackedScene" uid="uid://cos6glel8tb51" path="res://Effects/CombatNumber.tscn" id="19_nn7ws"]
-[ext_resource type="PackedScene" uid="uid://cgu3ehqwy7133" path="res://Spells/HolyLight/HolyLight.tscn" id="21_misdk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osk5p"]
 albedo_texture = ExtResource("15_31iqn")
@@ -130,7 +129,7 @@ one_shot = true
 [node name="ActorContainer" type="Node3D" parent="MultiplayerContainer"]
 script = ExtResource("9_0vfcd")
 
-[node name="EffectContainer" type="Node3D" parent="."]
+[node name="EffectContainer" type="Node3D" parent="MultiplayerContainer"]
 script = ExtResource("15_x12mc")
 
 [node name="Ground" type="Node" parent="."]
@@ -230,5 +229,3 @@ render_priority = 10
 texture = ExtResource("9_ftk6f")
 
 [node name="CombatNumber" parent="." instance=ExtResource("19_nn7ws")]
-
-[node name="HolyLight" parent="." instance=ExtResource("21_misdk")]

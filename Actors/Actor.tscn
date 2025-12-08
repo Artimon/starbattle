@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cb3j6sa8w2cm3"]
+[gd_scene load_steps=40 format=3 uid="uid://cb3j6sa8w2cm3"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/Actor/StateAttack.cs" id="11_jslh3"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateHit.cs" id="12_tpf5m"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateDie.cs" id="12_w1nuh"]
+[ext_resource type="Script" path="res://Scripts/Actor/StateCast.cs" id="15_37747"]
 
 [sub_resource type="Animation" id="Animation_chqir"]
 resource_name = "FadeIn"
@@ -351,6 +352,11 @@ _stateMachine = NodePath("..")
 
 [node name="StateAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
 script = ExtResource("11_jslh3")
+_actor = NodePath("../..")
+_stateMachine = NodePath("..")
+
+[node name="StateCast" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
+script = ExtResource("15_37747")
 _actor = NodePath("../..")
 _stateMachine = NodePath("..")
 

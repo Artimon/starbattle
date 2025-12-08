@@ -15,10 +15,10 @@ public partial class Actor : Node3D {
 	public Stats stats;
 
 	public float hp;
-	public float MaxHp => stats.Vitality;
+	public float MaxHp => stats.vitality;
 
 	public float mp;
-	public float MaxMp => stats.Intelligence;
+	public float MaxMp => stats.intelligence;
 
 	public bool IsHurt => hp < MaxHp;
 	public bool IsDead => hp <= 0f;
@@ -117,7 +117,7 @@ public partial class Actor : Node3D {
 	/**
 	 * @TODO Maybe turn all damagers to collider based detection?
 	 */
-	public bool TryAttackArea(Actor target, Vector3 attackPosition, float range = 1f) {
+	public bool TryAttackArea(ActionSetup actionSetup, Actor target, Vector3 attackPosition, float range = 1f) {
 		if (!Multiplayer.IsServer()) {
 			return false;
 		}
@@ -130,14 +130,10 @@ public partial class Actor : Node3D {
 		// var weaponpDam[4] = 40, 40, 20, 15;	// Weapon basic values for all player classes
 		// var weaponmDam[4] =  0, 30, 35, 40;
 
-		var baseDamage = 45; // @TODO Read from stats/weapon.
-
-		var statsFactor = 0.5f + stats.Strength / 200f;
-		var randomFactor = 1f + GD.Randf() * 0.5f; // @TODO Use Gauss later.
-		var damage = baseDamage * statsFactor * randomFactor;
+		var damage = stats.GetPhysicalDamage(actionSetup.power, target);
 
 		var isCritical = false;
-		var critChance = stats.Dexterity * 0.25f / 100f;
+		var critChance = stats.dexterity * 0.25f / 100f;
 
 		if (GD.Randf() < critChance) {
 			isCritical = true;
@@ -229,8 +225,8 @@ public partial class Actor : Node3D {
 		shadow.Scale = new Vector3(1f, 1f, 1f) * setup.SpritePixels / 35f;
 
 		stats = setup.BaseStats.Clone;
-		hp = stats.Vitality;
-		mp = stats.Intelligence;
+		hp = stats.vitality;
+		mp = stats.intelligence;
 
 		ActorAvatars.instance.Add(this);
 
