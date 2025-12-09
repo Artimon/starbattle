@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgu3ehqwy7133"]
+[gd_scene load_steps=13 format=3 uid="uid://cgu3ehqwy7133"]
 
 [ext_resource type="Script" path="res://Scripts/Spells/HolyLight.cs" id="1_244ww"]
 [ext_resource type="Texture2D" uid="uid://cpri5q7e4ltn8" path="res://Spells/HolyLight/HolyLight.png" id="2_0hads"]
+[ext_resource type="Shader" uid="uid://kfjlo04ac7q3" path="res://Shaders/AlphaShine.tres" id="2_2f3gr"]
 [ext_resource type="Texture2D" uid="uid://b1psdsjfnsp6n" path="res://Effects/StoneParticles.png" id="3_8ru8p"]
 
 [sub_resource type="Animation" id="Animation_xkamt"]
@@ -41,6 +42,12 @@ _data = {
 "LightBeam": SubResource("Animation_xkamt"),
 "RESET": SubResource("Animation_0uvvo")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfere"]
+render_priority = 0
+shader = ExtResource("2_2f3gr")
+shader_parameter/IntParameter = 2
+shader_parameter/tex_frg_13 = ExtResource("2_0hads")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y1rom"]
 angle_min = -720.0
@@ -96,6 +103,7 @@ omni_attenuation = 2.0
 
 [node name="LightBeam Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 30, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_kfere")
 offset = Vector2(0, 8)
 pixel_size = 0.02
 billboard = 2
