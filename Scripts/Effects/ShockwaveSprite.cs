@@ -3,7 +3,7 @@
 namespace Starbattle.Effects;
 
 [GlobalClass]
-public partial class Shockwave : Node3D {
+public partial class ShockwaveSprite : Node3D {
 	[Export]
 	public bool _autoStart = true;
 
@@ -21,7 +21,6 @@ public partial class Shockwave : Node3D {
 
 	public float _time;
 	public bool _stopping;
-	public bool _running;
 
 	public override void _Ready() {
 		if (_autoStart) {
@@ -31,13 +30,11 @@ public partial class Shockwave : Node3D {
 		}
 
 		_sprite.Visible = false;
+
+		SetProcess(false);
 	}
 
 	public override void _Process(double delta) {
-		if (!_running) {
-			return;
-		}
-
 		_time += (float)delta;
 		var progress = _time / _duration;
 		if (progress > 1.0f) {
@@ -67,10 +64,7 @@ public partial class Shockwave : Node3D {
 
 	public void Start(float phaseOffset = 0f) {
 		_time = phaseOffset * _duration;
-
-		_running = true;
 		_stopping = false;
-
 		_sprite.Visible = true;
 
 		SetProcess(true);

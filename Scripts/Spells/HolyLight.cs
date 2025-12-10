@@ -31,10 +31,13 @@ public partial class HolyLight : AoeNode {
 	public GpuParticles3D _dustParticles;
 
 	[Export]
-	public Shockwave _shockwave1;
+	public ShockwaveModel _shockwave1;
 
 	[Export]
-	public Shockwave _shockwave2;
+	public ShockwaveModel _shockwave2;
+
+	[Export]
+	public OffsetSprite _offsetSprite;
 
 	[Export]
 	public Timer _shockActivationTimer;
@@ -58,8 +61,12 @@ public partial class HolyLight : AoeNode {
 		var scale = _lightBeamSprite.Scale;
 		scale.X = 1f + 0.2f * noiseValue;
 
+		var alpha = _lightBeamSprite.Modulate.A;
+
 		_lightBeamSprite.Scale = scale;
-		_light.OmniRange = _lightRange * (1f + 0.5f * noiseValue) * _lightBeamSprite.Modulate.A;
+		_light.OmniRange = _lightRange * (1f + 0.5f * noiseValue) * alpha;
+
+		_offsetSprite.Alpha = alpha;
 	}
 
 	public void OnSpellActivate() {

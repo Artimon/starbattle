@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjr8tbq7ssrg6"]
+[gd_scene load_steps=3 format=3 uid="uid://c88gjdjssfxw4"]
 
-[ext_resource type="Script" path="res://Scripts/Effects/Shockwave.cs" id="1_kcxuq"]
-[ext_resource type="Texture2D" uid="uid://pjvp18cqhfiw" path="res://Spells/HolyLight/HolyShockwave.png" id="2_8t3m0"]
+[ext_resource type="Script" path="res://Scripts/Effects/ShockwaveSprite.cs" id="1_tcxux"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uexxp"]
+load_path = "res://.godot/imported/HolyShockwave.png-26e7f7290f45e1d4db024c69886de080.ctex"
 
 [node name="Shockwave" type="Node3D" node_paths=PackedStringArray("_sprite")]
-script = ExtResource("1_kcxuq")
+script = ExtResource("1_tcxux")
 _autoStart = false
 _duration = 0.35
 _minScale = 0.25
@@ -14,4 +16,4 @@ _sprite = NodePath("Sprite3D")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0, 0)
 double_sided = false
-texture = ExtResource("2_8t3m0")
+texture = SubResource("CompressedTexture2D_uexxp")

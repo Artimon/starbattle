@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pjvp18cqhfiw"
-path="res://.godot/imported/HolyShockwave.png-26e7f7290f45e1d4db024c69886de080.ctex"
+uid="uid://dl1q6m1v3xpn3"
+path="res://.godot/imported/HolyLightShock.png-b23ed8a1fc5bd043b3dbe8718c8f2fd7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spells/HolyLight/HolyShockwave.png"
-dest_files=["res://.godot/imported/HolyShockwave.png-26e7f7290f45e1d4db024c69886de080.ctex"]
+source_file="res://Models/HolyLightShock.png"
+dest_files=["res://.godot/imported/HolyLightShock.png-b23ed8a1fc5bd043b3dbe8718c8f2fd7.ctex"]
 
 [params]
 
