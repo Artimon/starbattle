@@ -84,7 +84,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-865.054, 64.9055)
 flags/unshaded = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeColorConstant_us1y5")
 nodes/vertex/2/position = Vector2(-234.355, 265.321)

@@ -163,7 +163,7 @@ magicalDefense = 20.0
 script = ExtResource("5_tc4dp")
 move = ExtResource("4_1c2br")
 attack = ExtResource("3_7wfde")
-w = ExtResource("6_7pgvu")
+e = ExtResource("6_7pgvu")
 
 [resource]
 script = ExtResource("1_616bd")

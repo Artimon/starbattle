@@ -203,8 +203,20 @@ public partial class PlayerController : Node {
 			return _player.setup.playerActions.attack;
 		}
 
+		if (@event.IsActionPressed("Q")) {
+			return _player.setup.playerActions.q;
+		}
+
 		if (@event.IsActionPressed("W")) {
 			return _player.setup.playerActions.w;
+		}
+
+		if (@event.IsActionPressed("E")) {
+			return _player.setup.playerActions.e;
+		}
+
+		if (@event.IsActionPressed("R")) {
+			return _player.setup.playerActions.r;
 		}
 
 		return null;

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjr8tbq7ssrg6"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/Shockwave.cs" id="1_kcxuq"]
+[ext_resource type="Texture2D" uid="uid://pjvp18cqhfiw" path="res://Spells/HolyLight/HolyShockwave.png" id="2_8t3m0"]
+
+[node name="Shockwave" type="Node3D" node_paths=PackedStringArray("_sprite")]
+script = ExtResource("1_kcxuq")
+_autoStart = false
+_duration = 0.35
+_minScale = 0.25
+_maxScale = 1.0
+_sprite = NodePath("Sprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0, 0)
+double_sided = false
+texture = ExtResource("2_8t3m0")

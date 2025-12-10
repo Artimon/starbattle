@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Starbattle.Effects;
 
 namespace Starbattle.Spells;
 
@@ -19,6 +20,21 @@ public partial class HolyLight : AoeNode {
 
 	[Export]
 	public GpuParticles3D _stoneParticles;
+
+	[Export]
+	public GpuParticles3D _glowParticles;
+
+	[Export]
+	public GpuParticles3D _sparkleParticles;
+
+	[Export]
+	public GpuParticles3D _dustParticles;
+
+	[Export]
+	public Shockwave _shockwave1;
+
+	[Export]
+	public Shockwave _shockwave2;
 
 	[Export]
 	public Timer _shockActivationTimer;
@@ -48,6 +64,12 @@ public partial class HolyLight : AoeNode {
 
 	public void OnSpellActivate() {
 		_stoneParticles.Emitting = true;
+		_glowParticles.Emitting = true;
+		_sparkleParticles.Emitting = true;
+
+		_shockwave1.Start();
+		_shockwave2.Start(0.5f);
+
 		_shockActivationTimer.Start();
 		_effectDurationTimer.Start();
 
@@ -63,6 +85,13 @@ public partial class HolyLight : AoeNode {
 
 	public void OnEffectFinished() {
 		_stoneParticles.Emitting = false;
+		_glowParticles.Emitting = false;
+		_sparkleParticles.Emitting = false;
+		_dustParticles.Emitting = false;
+
+		_shockwave1.Stop();
+		_shockwave2.Stop();
+
 		_shockActivationTimer.Stop();
 	}
 

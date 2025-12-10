@@ -70,7 +70,6 @@ void vertex() {
 
 }
 "
-graph_offset = Vector2(-1302.97, -314.31)
 flags/unshaded = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeColorConstant_us1y5")
 nodes/vertex/2/position = Vector2(-234.355, 265.321)
