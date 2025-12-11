@@ -23,7 +23,6 @@ public partial class AoeNode : Node3D {
 
 		var bodies = _area.GetOverlappingBodies();
 		foreach (var body in bodies) {
-
 			var target = body.GetParent<Actor>();
 			if (target == null) {
 				continue;

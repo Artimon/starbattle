@@ -6,8 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Actor/ActorAnimator.cs" id="3_5khln"]
 [ext_resource type="PackedScene" uid="uid://cos6glel8tb51" path="res://Effects/CombatNumber.tscn" id="3_fojym"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorAction.cs" id="3_x85sy"]
-[ext_resource type="Resource" uid="uid://csnnosx23trwb" path="res://Action/ActionSetups.tres" id="4_35ykf"]
-[ext_resource type="AudioStream" uid="uid://rf27mjwgie1e" path="res://Actors/CastSpell.ogg" id="4_vl55p"]
+[ext_resource type="Resource" uid="uid://csnnosx23trwb" path="res://Actions/ActionSetups.tres" id="4_35ykf"]
 [ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="5_kcnqb"]
 [ext_resource type="Texture2D" uid="uid://c6uflpge3imdb" path="res://Actors/Valkyrie.png" id="5_p5emc"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="6_bol2m"]
@@ -18,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Actor/StateHit.cs" id="12_tpf5m"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateDie.cs" id="12_w1nuh"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateCast.cs" id="15_37747"]
+[ext_resource type="Script" path="res://Scripts/Actor/StateRegenerate.cs" id="16_75xxn"]
 [ext_resource type="AudioStream" uid="uid://gatjqs8i5wvs" path="res://Actors/SpellCast_Replace.ogg" id="17_kbeq4"]
 
 [sub_resource type="Animation" id="Animation_chqir"]
@@ -292,7 +292,7 @@ stateMachine = NodePath("StateMachine")
 _damageNumberPrefab = ExtResource("3_fojym")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_vl55p")
+stream = ExtResource("17_kbeq4")
 
 [node name="ActorAnimator" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("3_5khln")
@@ -357,6 +357,11 @@ _stateMachine = NodePath("..")
 
 [node name="StateAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
 script = ExtResource("11_jslh3")
+_actor = NodePath("../..")
+_stateMachine = NodePath("..")
+
+[node name="StateRegenerate" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
+script = ExtResource("16_75xxn")
 _actor = NodePath("../..")
 _stateMachine = NodePath("..")
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcjuqui43miav"
-path="res://.godot/imported/GlowParticle.png-abce23d9079540b23bd4aedfe8ebdbfb.ctex"
+uid="uid://bhp4qcqacvt0q"
+path="res://.godot/imported/HolyDustParticle.png-837b8f72a75f75302ef4b356247aba8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spells/HolyLight/GlowParticle.png"
-dest_files=["res://.godot/imported/GlowParticle.png-abce23d9079540b23bd4aedfe8ebdbfb.ctex"]
+source_file="res://Actions/HolyLight/HolyDustParticle.png"
+dest_files=["res://.godot/imported/HolyDustParticle.png-837b8f72a75f75302ef4b356247aba8b.ctex"]
 
 [params]
 

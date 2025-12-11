@@ -51,6 +51,10 @@ public partial class ActorAction : Node {
 			return false;
 		}
 
+		if (!actionSetup.MeetsCondition(actor)) {
+			return false;
+		}
+
 		if (_actionTime < actionSetup.actionCost) {
 			return false;
 		}
@@ -99,6 +103,9 @@ public partial class ActorAction : Node {
 
 				break;
 
+			case ActionSetup.ActionTypes.Regenerate:
+				break;
+
 			case ActionSetup.ActionTypes.Magic:
 				if (actor == null) {
 					return;
@@ -124,6 +131,11 @@ public partial class ActorAction : Node {
 
 			case ActionSetup.ActionTypes.Attack:
 				PerformAttack(action, actorHandle, position);
+
+				break;
+
+			case ActionSetup.ActionTypes.Regenerate:
+				PerformRegenerate(action);
 
 				break;
 
@@ -166,6 +178,12 @@ public partial class ActorAction : Node {
 					.Get<StateAttack>()
 					.Attack(actionSetup, actor, attackPosition);
 			});
+	}
+
+	public void PerformRegenerate(ActionSetup actionSetup) {
+		_player.stateMachine
+			.Get<StateRegenerate>()
+			.Regenerate(actionSetup);
 	}
 
 	public void PerformMagic(ActionSetup actionSetup, uint actorHandle, Vector3 position) {

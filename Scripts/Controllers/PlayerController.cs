@@ -30,6 +30,8 @@ public partial class PlayerController : Node {
 	[Export]
 	public ActorSelection _actorSelection;
 
+	public ActionSetup _nextAction;
+
 	public override void _EnterTree() {
 		instance = this;
 	}
@@ -91,14 +93,6 @@ public partial class PlayerController : Node {
 		// return true;
 	}
 
-	public ActionSetup _nextAction;
-
-	[Export]
-	public ActionSetup _actionMove;
-
-	[Export]
-	public ActionSetup _actionAttack;
-
 	public void TryRequestAction(Actor actor, Vector3 position) {
 		var isRequested = _player.action.TryRequestAction(_nextAction, actor, position);
 		if (!isRequested) {
@@ -140,6 +134,17 @@ public partial class PlayerController : Node {
 
 		_nextAction = nextAction;
 		_actionRange.Visible = true;
+
+		var autoTargetsSelf = nextAction.targetType == ActionSetup.TargetTypes.None;
+		if (autoTargetsSelf) {
+			TryRequestAction(_player, _player.GlobalPosition);
+
+			_actionRange.Visible = false;
+			_nextAction = null;
+
+			return;
+		}
+
 
 		// if (!isPlayer) {
 		// 	return;
@@ -201,6 +206,14 @@ public partial class PlayerController : Node {
 
 		if (@event.IsActionPressed("Attack")) {
 			return _player.setup.playerActions.attack;
+		}
+
+		if (@event.IsActionPressed("RegenerateHits")) {
+			return _player.setup.playerActions.regenerateHp;
+		}
+
+		if (@event.IsActionPressed("RegenerateMana")) {
+			return _player.setup.playerActions.regenerateMp;
 		}
 
 		if (@event.IsActionPressed("Q")) {

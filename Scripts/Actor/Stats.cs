@@ -28,6 +28,12 @@ public partial class Stats : Resource {
 	public float wisdom;
 
 	[Export]
+	public float regenerateHp;
+
+	[Export]
+	public float regenerateMp;
+
+	[Export]
 	public float physicalBaseValue;
 
 	[Export]
@@ -42,18 +48,15 @@ public partial class Stats : Resource {
 	/**
 	 * @TODO Add 80-120% RNG for mobs.
 	 */
-	public Stats Clone => new () {
-		strength = strength,
-		dexterity = dexterity,
-		agility = agility,
-		vitality = vitality,
-		intelligence = intelligence,
-		wisdom = wisdom,
-		physicalBaseValue = physicalBaseValue,
-		magicalBaseValue = magicalBaseValue,
-		physicalDefense = physicalDefense,
-		magicalDefense = magicalDefense
-	};
+	public Stats Clone => Duplicate(true) as Stats;
+
+	public float GetHpRegeneration(float power) {
+		return power * regenerateHp * (1f + GD.Randf() * 0.5f);
+	}
+
+	public float GetMpRegeneration(float power) {
+		return power * regenerateMp * (1f + GD.Randf() * 0.5f);
+	}
 
 	public float GetPhysicalDamage(float power, Actor target) {
 		var attack = power * physicalBaseValue * (0.5f + strength / 200f) * (1f + GD.Randf() * 0.5f);

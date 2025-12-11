@@ -8,6 +8,9 @@ public partial class CombatNumber : Node3D {
 	public Label3D _label;
 
 	[Export]
+	public Color _healColor;
+
+	[Export]
 	public Color _criticalColor;
 
 	public float _timer;
@@ -34,7 +37,17 @@ public partial class CombatNumber : Node3D {
 		_label.Position = position;
 	}
 
+	public void ShowHeal(Actor actor, float number) {
+		_label.Modulate = _healColor;
+
+		_Show(actor, number, false);
+	}
+
 	public void ShowDamage(Actor actor, float number, bool isCritical) {
+		_Show(actor, number, isCritical);
+	}
+
+	public void _Show(Actor actor, float number, bool isCritical) {
 		var position = actor.GlobalCenter + Vector3.Up * 0.25f * actor.Height;
 		position.X += GD.Randf() * 1f - 0.5f;
 		position.Y += GD.Randf() * 1f - 0.5f;

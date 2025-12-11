@@ -18,7 +18,8 @@ public partial class StateCast : StateBase {
 	public Vector3 _spellPosition;
 
 	public override void OnEnter() {
-		_actor.sprite.Connect("animation_finished", Callable.From(OnAnimationFinished));
+		// OG cast time: 0.78125s
+		_actor.sprite.AnimationFinished += OnAnimationFinished;
 		_actor.sprite.Play("Cast");
 
 		_actor.Face(_target);
@@ -27,7 +28,7 @@ public partial class StateCast : StateBase {
 	}
 
 	public override void OnExit() {
-		_actor.sprite.Disconnect("animation_finished", Callable.From(OnAnimationFinished));
+		_actor.sprite.AnimationFinished -= OnAnimationFinished;
 	}
 
 	public void Cast(ActionSetup actionSetup, Actor target, Vector3 castPosition) {

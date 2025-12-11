@@ -8,7 +8,7 @@ public partial class ActorRegenerate : Timer {
 	public Actor _actor;
 
 	public void OnTick() {
-		if (!_actor.IsHurt || _actor.IsDead) {
+		if (!_actor.IsHpMissing || _actor.IsDead) {
 			return;
 		}
 

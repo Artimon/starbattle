@@ -4,9 +4,11 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class ActionSetup : Resource {
-	public enum ActionTypes { Move, Attack, Skill, Magic }
+	public enum ActionTypes { Move, Attack, Regenerate, Magic }
 
 	public enum TargetTypes { Position, Opponent, Friend, None }
+
+	public enum Conditions { None, IsHpMissing, IsMpMissing }
 
 	[Export]
 	public string name;
@@ -28,6 +30,9 @@ public partial class ActionSetup : Resource {
 	public bool TargetsActor => targetType is TargetTypes.Opponent or TargetTypes.Friend;
 
 	[Export]
+	public Conditions condition;
+
+	[Export]
 	public PackedScene aoePrefab;
 
 	[Export]
@@ -45,6 +50,20 @@ public partial class ActionSetup : Resource {
 
 			case TargetTypes.Position:
 			case TargetTypes.None:
+			default:
+				return true;
+		}
+	}
+
+	public bool MeetsCondition(Actor actor) {
+		switch (condition) {
+			case Conditions.IsHpMissing:
+				return actor.IsHpMissing;
+
+			case Conditions.IsMpMissing:
+				return actor.IsMpMissing;
+
+			case Conditions.None:
 			default:
 				return true;
 		}

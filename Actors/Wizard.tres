@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=26 format=3 uid="uid://c5mqeknwjumis"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=27 format=3 uid="uid://c5mqeknwjumis"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_616bd"]
 [ext_resource type="Texture2D" uid="uid://c2mc5vo2djkyo" path="res://Actors/Wizard.png" id="1_quwa7"]
 [ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_s6yqu"]
-[ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Action/Attack.tres" id="3_7wfde"]
-[ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Action/Move.tres" id="4_1c2br"]
+[ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Actions/Attack.tres" id="3_v2p2x"]
+[ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="4_jtier"]
+[ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Actions/Move.tres" id="5_nx5po"]
 [ext_resource type="Script" path="res://Scripts/Action/PlayerActions.cs" id="5_tc4dp"]
-[ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Spells/HolyLight/HolyLight.tres" id="6_7pgvu"]
+[ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHits/RegenerateHits.tres" id="6_8s1bt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otd2d"]
 atlas = ExtResource("1_quwa7")
@@ -154,6 +155,8 @@ agility = 80.0
 vitality = 90.0
 intelligence = 120.0
 wisdom = 80.0
+regenerateHp = 18.0
+regenerateMp = 0.0
 physicalBaseValue = 15.0
 magicalBaseValue = 40.0
 physicalDefense = 5.0
@@ -161,9 +164,10 @@ magicalDefense = 20.0
 
 [sub_resource type="Resource" id="Resource_e3wda"]
 script = ExtResource("5_tc4dp")
-move = ExtResource("4_1c2br")
-attack = ExtResource("3_7wfde")
-e = ExtResource("6_7pgvu")
+move = ExtResource("5_nx5po")
+attack = ExtResource("3_v2p2x")
+regenerateHp = ExtResource("6_8s1bt")
+e = ExtResource("4_jtier")
 
 [resource]
 script = ExtResource("1_616bd")

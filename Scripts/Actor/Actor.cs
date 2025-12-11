@@ -20,7 +20,8 @@ public partial class Actor : Node3D {
 	public float mp;
 	public float MaxMp => stats.intelligence;
 
-	public bool IsHurt => hp < MaxHp;
+	public bool IsHpMissing => hp < MaxHp;
+	public bool IsMpMissing => mp < MaxMp;
 	public bool IsDead => hp <= 0f;
 
 	/**
@@ -177,6 +178,10 @@ public partial class Actor : Node3D {
 	}
 
 	public void Heal(float heal, bool showNumber) {
+		if (heal == 0f) {
+			return;
+		}
+
 		var newHp = Mathf.Min(MaxHp, hp + heal);
 
 		Rpc(nameof(RpcHeal), heal, newHp, showNumber);
@@ -190,8 +195,8 @@ public partial class Actor : Node3D {
 			return;
 		}
 
-		// _damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
-		// 	.ShowHeal(this, heal);
+		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+			.ShowHeal(this, heal);
 	}
 
 	public void ApplyAngle() {

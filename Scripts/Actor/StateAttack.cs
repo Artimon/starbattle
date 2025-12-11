@@ -13,7 +13,7 @@ public partial class StateAttack : StateBase {
 	public Vector3 _attackPosition;
 
 	public override void OnEnter() {
-		_actor.sprite.Connect("animation_finished", Callable.From(OnAnimationFinished));
+		_actor.sprite.AnimationFinished += OnAnimationFinished;
 
 		_actor.sprite.SpriteFrames.SetAnimationSpeed("Attack", 8d);
 		_actor.sprite.Play("Attack");
@@ -22,7 +22,7 @@ public partial class StateAttack : StateBase {
 	}
 
 	public override void OnExit() {
-		_actor.sprite.Disconnect("animation_finished", Callable.From(OnAnimationFinished));
+		_actor.sprite.AnimationFinished -= OnAnimationFinished;
 	}
 
 	/**
