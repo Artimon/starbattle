@@ -1,5 +1,6 @@
 ﻿using Artimus.Services;
 using Godot;
+using Starbattle.Effects;
 using Starbattle.Spells;
 
 namespace Starbattle;
@@ -8,6 +9,9 @@ namespace Starbattle;
 public partial class StateCast : StateBase {
 	[Export]
 	public Actor _actor;
+
+	[Export]
+	public AudioStream _castAudio;
 
 	public ActionSetup _actionSetup;
 	public Actor _target;
@@ -18,6 +22,8 @@ public partial class StateCast : StateBase {
 		_actor.sprite.Play("Cast");
 
 		_actor.Face(_target);
+
+		LocalAudio.Play(_actor.CameraTarget, _castAudio, 0.75f);
 	}
 
 	public override void OnExit() {

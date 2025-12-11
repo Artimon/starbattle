@@ -16,6 +16,9 @@ public partial class HolyLight : AoeNode {
 	public Sprite3D _lightBeamSprite;
 
 	[Export]
+	public AudioStream _holyLightAudio;
+
+	[Export]
 	public AnimationPlayer _animationPlayer;
 
 	[Export]
@@ -52,6 +55,8 @@ public partial class HolyLight : AoeNode {
 
 		_lightRange = _light.OmniRange;
 		_animationPlayer.Play("LightBeam");
+
+		LocalAudio.Play(GlobalPosition, _holyLightAudio);
 	}
 
 	public override void _Process(double delta) {
@@ -64,7 +69,7 @@ public partial class HolyLight : AoeNode {
 		var alpha = _lightBeamSprite.Modulate.A;
 
 		_lightBeamSprite.Scale = scale;
-		_light.OmniRange = _lightRange * (1f + 0.5f * noiseValue) * alpha;
+		_light.OmniRange = _lightRange * alpha;
 
 		_offsetSprite.Alpha = alpha;
 	}
