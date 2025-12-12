@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="ActionSetups" load_steps=6 format=3 uid="uid://csnnosx23trwb"]
+[gd_resource type="Resource" script_class="ActionSetups" load_steps=7 format=3 uid="uid://csnnosx23trwb"]
 
 [ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Actions/Move.tres" id="1_3yi5q"]
 [ext_resource type="Script" path="res://Scripts/Action/ActionSetups.cs" id="1_d371w"]
 [ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Actions/Attack.tres" id="2_a437f"]
 [ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="3_dgfh2"]
-[ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHits/RegenerateHits.tres" id="3_rjxws"]
+[ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="3_hd1ud"]
+[ext_resource type="Resource" uid="uid://byxk6s2vvj844" path="res://Actions/RegenerateSp/RegenerateSp.tres" id="4_csfff"]
 
 [resource]
 script = ExtResource("1_d371w")
-list = Array[Object]([ExtResource("1_3yi5q"), ExtResource("2_a437f"), ExtResource("3_rjxws"), ExtResource("3_dgfh2")])
+list = Array[Object]([ExtResource("1_3yi5q"), ExtResource("2_a437f"), ExtResource("3_hd1ud"), ExtResource("4_csfff"), ExtResource("3_dgfh2")])

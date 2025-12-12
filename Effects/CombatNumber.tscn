@@ -7,7 +7,8 @@
 process_mode = 1
 script = ExtResource("1_2cxnq")
 _label = NodePath("Label3D")
-_healColor = Color(0.658824, 0.803922, 0.470588, 1)
+_hpColor = Color(0.658824, 0.803922, 0.470588, 1)
+_spColor = Color(0.466667, 0.603922, 0.964706, 1)
 _criticalColor = Color(0.94902, 0.972549, 0.298039, 1)
 
 [node name="Label3D" type="Label3D" parent="."]

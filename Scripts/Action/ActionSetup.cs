@@ -8,7 +8,7 @@ public partial class ActionSetup : Resource {
 
 	public enum TargetTypes { Position, Opponent, Friend, None }
 
-	public enum Conditions { None, IsHpMissing, IsMpMissing }
+	public enum Conditions { None, IsHpMissing, IsSpMissing }
 
 	[Export]
 	public string name;
@@ -60,8 +60,8 @@ public partial class ActionSetup : Resource {
 			case Conditions.IsHpMissing:
 				return actor.IsHpMissing;
 
-			case Conditions.IsMpMissing:
-				return actor.IsMpMissing;
+			case Conditions.IsSpMissing:
+				return actor.IsSpMissing;
 
 			case Conditions.None:
 			default:

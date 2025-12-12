@@ -208,12 +208,12 @@ public partial class PlayerController : Node {
 			return _player.setup.playerActions.attack;
 		}
 
-		if (@event.IsActionPressed("RegenerateHits")) {
+		if (@event.IsActionPressed("RegenerateHp")) {
 			return _player.setup.playerActions.regenerateHp;
 		}
 
-		if (@event.IsActionPressed("RegenerateMana")) {
-			return _player.setup.playerActions.regenerateMp;
+		if (@event.IsActionPressed("RegenerateSp")) {
+			return _player.setup.playerActions.regenerateSp;
 		}
 
 		if (@event.IsActionPressed("Q")) {

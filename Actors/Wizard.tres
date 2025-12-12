@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=27 format=3 uid="uid://c5mqeknwjumis"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=28 format=3 uid="uid://c5mqeknwjumis"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_616bd"]
 [ext_resource type="Texture2D" uid="uid://c2mc5vo2djkyo" path="res://Actors/Wizard.png" id="1_quwa7"]
@@ -7,7 +7,8 @@
 [ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="4_jtier"]
 [ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Actions/Move.tres" id="5_nx5po"]
 [ext_resource type="Script" path="res://Scripts/Action/PlayerActions.cs" id="5_tc4dp"]
-[ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHits/RegenerateHits.tres" id="6_8s1bt"]
+[ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="6_kt0o1"]
+[ext_resource type="Resource" uid="uid://byxk6s2vvj844" path="res://Actions/RegenerateSp/RegenerateSp.tres" id="7_rc6md"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otd2d"]
 atlas = ExtResource("1_quwa7")
@@ -156,7 +157,7 @@ vitality = 90.0
 intelligence = 120.0
 wisdom = 80.0
 regenerateHp = 18.0
-regenerateMp = 0.0
+regenerateSp = 24.0
 physicalBaseValue = 15.0
 magicalBaseValue = 40.0
 physicalDefense = 5.0
@@ -166,7 +167,8 @@ magicalDefense = 20.0
 script = ExtResource("5_tc4dp")
 move = ExtResource("5_nx5po")
 attack = ExtResource("3_v2p2x")
-regenerateHp = ExtResource("6_8s1bt")
+regenerateHp = ExtResource("6_kt0o1")
+regenerateSp = ExtResource("7_rc6md")
 e = ExtResource("4_jtier")
 
 [resource]

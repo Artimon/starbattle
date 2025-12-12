@@ -49,8 +49,8 @@ public partial class StateRegenerate : StateBase {
 			return;
 		}
 
-		// var refresh = _actor.stats.GetMpRegeneration(_actionSetup.power);
-		// _actor.Refresh(refresh, true);
+		var refresh = _actor.stats.GetSpRegeneration(_actionSetup.power);
+		_actor.Refresh(refresh, true);
 	}
 
 	public void OnAnimationFinished() {

@@ -14,7 +14,7 @@ public partial class PlayerActions : Resource {
 	public ActionSetup regenerateHp;
 
 	[Export]
-	public ActionSetup regenerateMp;
+	public ActionSetup regenerateSp;
 
 	[Export]
 	public ActionSetup q;

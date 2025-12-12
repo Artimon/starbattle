@@ -29,6 +29,9 @@ public partial class ActorAvatar : Control {
 	public Texture2D _progressBarEnemyBottom;
 
 	[Export]
+	public AnimatedBar _spBar;
+
+	[Export]
 	public TextureProgressBar _atbBar;
 
 	public override void _Ready() {
@@ -42,7 +45,8 @@ public partial class ActorAvatar : Control {
 
 	public void UpdateBars() {
 		_hpLabel.Text = Mathf.RoundToInt(_actor.hp).ToString();
-		_hpBar.SetValues(_actor.hp, _actor.stats.vitality);
+		_hpBar.SetValues(_actor.hp, _actor.MaxHp);
+		_spBar.SetValues(_actor.sp, _actor.MaxSp);
 
 		_atbBar.Value = _actor.action.ActionTime;
 	}
@@ -50,7 +54,8 @@ public partial class ActorAvatar : Control {
 	public void SetActor(Actor actor) {
 		_actor = actor;
 
-		_hpBar.InitValues(_actor.hp, _actor.stats.vitality);
+		_hpBar.InitValues(_actor.hp, _actor.MaxHp);
+		_spBar.InitValues(_actor.sp, _actor.MaxSp);
 
 		if (!actor.isPlayer) {
 			_atbBar.Visible = false;
@@ -58,6 +63,7 @@ public partial class ActorAvatar : Control {
 
 		if (!actor.IsPlayerGroup) {
 			_hpBar.SetBars(_progressBarEnemyTop, _progressBarEnemyBottom);
+			_spBar.Visible = false;
 		}
 	}
 

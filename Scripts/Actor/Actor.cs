@@ -17,11 +17,11 @@ public partial class Actor : Node3D {
 	public float hp;
 	public float MaxHp => stats.vitality;
 
-	public float mp;
-	public float MaxMp => stats.intelligence;
+	public float sp;
+	public float MaxSp => stats.intelligence;
 
 	public bool IsHpMissing => hp < MaxHp;
-	public bool IsMpMissing => mp < MaxMp;
+	public bool IsSpMissing => sp < MaxSp;
 	public bool IsDead => hp <= 0f;
 
 	/**
@@ -199,6 +199,28 @@ public partial class Actor : Node3D {
 			.ShowHeal(this, heal);
 	}
 
+	public void Refresh(float refresh, bool showNumber) {
+		if (refresh == 0f) {
+			return;
+		}
+
+		var newSp = Mathf.Min(MaxSp, sp + refresh);
+
+		Rpc(nameof(RpcRefresh), refresh, newSp, showNumber);
+	}
+
+	[Rpc(CallLocal = true)]
+	public void RpcRefresh(float refresh, float newSp, bool showNumber) {
+		sp = newSp;
+
+		if (!showNumber) {
+			return;
+		}
+
+		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+			.ShowRefresh(this, refresh);
+	}
+
 	public void ApplyAngle() {
 		var cameraAngle = CameraController.instance.Angle;
 		var angleToCamera = angle - cameraAngle;
@@ -231,7 +253,7 @@ public partial class Actor : Node3D {
 
 		stats = setup.BaseStats.Clone;
 		hp = stats.vitality;
-		mp = stats.intelligence;
+		sp = stats.intelligence;
 
 		ActorAvatars.instance.Add(this);
 
@@ -244,6 +266,7 @@ public partial class Actor : Node3D {
 
 		if (IsPlayerGroup && Multiplayer.IsServer()) {
 			hp -= 50; // @TODO Remove, temp for regen testing.
+			sp -= 35;
 
 			_regenerate.Start();
 		}

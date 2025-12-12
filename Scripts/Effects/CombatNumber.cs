@@ -8,7 +8,10 @@ public partial class CombatNumber : Node3D {
 	public Label3D _label;
 
 	[Export]
-	public Color _healColor;
+	public Color _hpColor;
+
+	[Export]
+	public Color _spColor;
 
 	[Export]
 	public Color _criticalColor;
@@ -38,7 +41,13 @@ public partial class CombatNumber : Node3D {
 	}
 
 	public void ShowHeal(Actor actor, float number) {
-		_label.Modulate = _healColor;
+		_label.Modulate = _hpColor;
+
+		_Show(actor, number, false);
+	}
+
+	public void ShowRefresh(Actor actor, float number) {
+		_label.Modulate = _spColor;
 
 		_Show(actor, number, false);
 	}
