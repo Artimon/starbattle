@@ -6,6 +6,7 @@
 script = ExtResource("1_c35hn")
 name = "Attack"
 actionCost = 2
-power = 1.0
+power = 100.0
 actionType = 1
 targetType = 1
+condition = 0

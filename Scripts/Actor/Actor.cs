@@ -15,10 +15,10 @@ public partial class Actor : Node3D {
 	public Stats stats;
 
 	public float hp;
-	public float MaxHp => stats.vitality;
+	public float MaxHp => stats.MaxHp;
 
 	public float sp;
-	public float MaxSp => stats.intelligence;
+	public float MaxSp => stats.MaxSp;
 
 	public bool IsHpMissing => hp < MaxHp;
 	public bool IsSpMissing => sp < MaxSp;

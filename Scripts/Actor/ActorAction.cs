@@ -106,7 +106,7 @@ public partial class ActorAction : Node {
 			case ActionSetup.ActionTypes.Regenerate:
 				break;
 
-			case ActionSetup.ActionTypes.Magic:
+			case ActionSetup.ActionTypes.Special:
 				if (actor == null) {
 					return;
 				}
@@ -139,7 +139,7 @@ public partial class ActorAction : Node {
 
 				break;
 
-			case ActionSetup.ActionTypes.Magic:
+			case ActionSetup.ActionTypes.Special:
 				PerformMagic(action, actorHandle, position);
 
 				break;

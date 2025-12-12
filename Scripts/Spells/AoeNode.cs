@@ -16,7 +16,7 @@ public partial class AoeNode : Node3D {
 		_actionSetup = actionSetup;
 	}
 
-	public void MagicAttack(float power) {
+	public void Attack(ActionSetup actionSetup) {
 		if (!Multiplayer.IsServer()) {
 			return;
 		}
@@ -33,8 +33,16 @@ public partial class AoeNode : Node3D {
 				continue;
 			}
 
-			var damage = _actor.stats.GetMagicalDamage(power, target);
+			var damage = GetDamage(actionSetup, target);
 			target.Damage(damage, false);
 		}
+	}
+
+	public float GetDamage(ActionSetup actionSetup, Actor target) {
+		return actionSetup.damageType switch {
+			ActionSetup.DamageTypes.Physical => _actor.stats.GetPhysicalDamage(actionSetup.power, target),
+			ActionSetup.DamageTypes.Magical => _actor.stats.GetMagicalDamage(actionSetup.power, target),
+			_ => 0f
+		};
 	}
 }

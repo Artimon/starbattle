@@ -291,9 +291,6 @@ _regenerate = NodePath("ActorRegenerate")
 stateMachine = NodePath("StateMachine")
 _damageNumberPrefab = ExtResource("3_fojym")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("17_kbeq4")
-
 [node name="ActorAnimator" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("3_5khln")
 _actor = NodePath("..")

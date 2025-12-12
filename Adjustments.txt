@@ -11,3 +11,33 @@
 - Konter dürfen erst nach player-aktionen ausgeführt werden und nicht selbst unterbrechungen auslösen, oder sogar einfach nur ausgelöst werden.- Mitten in Cast/Attack etc. Aktionswechsel erlauben, ähnlich zu stagger erlauben.
 - Gegner droppen items zum einsammeln beim drauflaufen?
 - Invul pets wie pokemon, eins im kampf, passiv skills oder aktive (heal atk)
+
+Skills or enhancements (uncategorized)
+- Life leech
+- Shield buff
+- Speed buff
+- Mark +dmg buff
+
+
+Knight
+- Distance slash / Shield throw / Javelin
+- Battle Rally buff?
+- Bulwark Counter (counter% buff)
+
+Valkyrie
+- Winged Lance: Jump up, then land down with AoE
+- Athenes Aegis (shield)
+
+Archer
+- Multi Shot
+- Piercing Arrow (added effect?)
+
+Wizard
+- Chain Lightning
+- Arcane Nova (around self, stronk)
+- Fire Pool / Meteor DoT
+
+Priest
+- Heal
+- Holy Sanctuary (AoE regen area)
+- Holy Light

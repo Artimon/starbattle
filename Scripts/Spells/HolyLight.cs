@@ -85,7 +85,7 @@ public partial class HolyLight : AoeNode {
 		_shockActivationTimer.Start();
 		_effectDurationTimer.Start();
 
-		MagicAttack(_actionSetup.power);
+		Attack(_actionSetup);
 	}
 
 	public void OnEffectActivate() {

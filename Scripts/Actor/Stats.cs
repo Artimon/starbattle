@@ -28,10 +28,16 @@ public partial class Stats : Resource {
 	public float wisdom;
 
 	[Export]
-	public float regenerateHp;
+	public float passiveHpRegenPercent = 2f; // Players only.
 
 	[Export]
-	public float regenerateSp;
+	public float passiveSpRegenPercent = 3f; // Players only.
+
+	[Export]
+	public float activeHpRegenPower;
+
+	[Export]
+	public float activeSpRegenPower;
 
 	[Export]
 	public float physicalBaseValue;
@@ -50,23 +56,26 @@ public partial class Stats : Resource {
 	 */
 	public Stats Clone => Duplicate(true) as Stats;
 
+	public float MaxHp => vitality;
+	public float MaxSp => intelligence;
+
 	public float GetHpRegeneration(float power) {
-		return power * regenerateHp * (1f + GD.Randf() * 0.5f);
+		return power * activeHpRegenPower * (1f + GD.Randf() * 0.5f);
 	}
 
 	public float GetSpRegeneration(float power) {
-		return power * regenerateSp * (1f + GD.Randf() * 0.5f);
+		return power * activeSpRegenPower * (1f + GD.Randf() * 0.5f);
 	}
 
 	public float GetPhysicalDamage(float power, Actor target) {
-		var attack = power * physicalBaseValue * (0.5f + strength / 200f) * (1f + GD.Randf() * 0.5f);
+		var attack = power / 100f * physicalBaseValue * (0.5f + strength / 200f) * (1f + GD.Randf() * 0.5f);
 		var defense = target.stats.physicalDefense;
 
 		return Mathf.Max(1f, attack - defense);
 	}
 
 	public float GetMagicalDamage(float power, Actor target) {
-		var attack = power * magicalBaseValue * (0.5f + wisdom / 200f) * (1f + GD.Randf() * 0.5f);
+		var attack = power / 100f * magicalBaseValue * (0.5f + wisdom / 200f) * (1f + GD.Randf() * 0.5f);
 		var defense = target.stats.magicalDefense;
 
 		return Mathf.Max(1f, attack - defense);

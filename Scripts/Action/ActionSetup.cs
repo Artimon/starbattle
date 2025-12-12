@@ -4,7 +4,9 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class ActionSetup : Resource {
-	public enum ActionTypes { Move, Attack, Regenerate, Magic }
+	public enum ActionTypes { Move, Attack, Regenerate, Special }
+
+	public enum DamageTypes { Physical, Magical, True }
 
 	public enum TargetTypes { Position, Opponent, Friend, None }
 
@@ -23,6 +25,9 @@ public partial class ActionSetup : Resource {
 
 	[Export]
 	public ActionTypes actionType;
+
+	[Export]
+	public DamageTypes damageType;
 
 	[Export]
 	public TargetTypes targetType;
