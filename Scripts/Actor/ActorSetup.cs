@@ -27,6 +27,10 @@ public partial class ActorSetup : Resource {
 	[Export]
 	public PlayerActions playerActions;
 
+	public float GetVitality(float difficulty) {
+		return _baseStats.vitality * difficulty * (0.8f + GD.Randf() * 0.4f);
+	}
+
 	public float SpritePixels {
 		get {
 			if (_spritePixels != 0d) {

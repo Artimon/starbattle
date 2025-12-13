@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Linq;
+using Godot;
 
 namespace Starbattle;
 
@@ -32,12 +33,28 @@ public partial class ActorSpawner : Node {
 		instance = this;
 	}
 
-	public void CreateMob(Vector3 position, ActorSetup setup) {
+	public static uint UniqueHandle {
+		get {
+			while (true) {
+				var handle = GD.Randi();
+
+				var exists = Actor.actors.Any(actor => actor.synchronizer.handle == handle);
+				if (!exists) {
+					return handle;
+				}
+			}
+		}
+	}
+
+	public void CreateMob(Vector3 position, ActorSetup setup, float difficulty) {
+		var handle = UniqueHandle;
+
 		var actor = _actorPrefab.Instantiate<Actor>(_actorContainer, actor => {
-			actor.synchronizer.handle = GD.Randi();
+			actor.Name = $"{setup.name} {handle}";
+			actor.synchronizer.handle = handle;
 			actor.synchronizer.actorId = setup.ActorId;
 			actor.synchronizer.spawnPosition = position;
-			actor.Name = $"{setup.name} {actor.synchronizer.handle}";
+			actor.synchronizer.vitality = setup.GetVitality(difficulty);
 		});
 
 		actor.Death += () => {
@@ -47,12 +64,14 @@ public partial class ActorSpawner : Node {
 
 	public void CreatePlayer(Vector3 position, string actorName, int playerId) {
 		var setup = _setups.GetSetup(actorName);
+		var handle = UniqueHandle;
+
 		var actor = _actorPrefab.Instantiate<Actor>(_actorContainer, actor => {
-			actor.synchronizer.handle = GD.Randi();
+			actor.Name = $"{setup.name} {handle}";
+			actor.synchronizer.handle = handle;
 			actor.synchronizer.playerId = playerId;
 			actor.synchronizer.actorId = setup.ActorId;
 			actor.synchronizer.spawnPosition = position;
-			actor.Name = $"{setup.name} {actor.synchronizer.handle}";
 		});
 	}
 

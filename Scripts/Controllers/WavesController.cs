@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Godot;
 
 namespace Starbattle.Controllers;
@@ -49,13 +50,13 @@ public partial class WavesController : Node {
 		_time += (float)delta;
 
 		var wave = (int)(_time / 60.0f);
-		var isNextWave = wave > _currentWave;
+		wave = Math.Min(wave, _waveSetups.Length - 1); // @TODO Check for level end here.
 
+		var isNextWave = wave > _currentWave;
 		if (!isNextWave) {
 			return false;
 		}
 
-		wave = Math.Min(wave, _waveSetups.Length - 1); // @TODO Check for level end here.
 		GD.Print($"Now entering wave {wave + 1}");
 
 		_currentWave = wave;
@@ -66,21 +67,33 @@ public partial class WavesController : Node {
 		return true;
 	}
 
+	public float GetDifficulty() {
+		var players = Actor.Players;
+		if (players.Length == 0) {
+			return 1f;
+		}
+
+		var maxLevel = players.Max(actor => actor.stats.level);
+
+		return 0.5f + (maxLevel + _currentWave) / 2f; // 0.5 + (1 + 0) / 2 = 1 (100%)
+	}
+
 	public void _TrySpawnMobs() {
 		if (!Multiplayer.IsServer()) {
 			return;
 		}
 
-		var mobs = Actor.Mobs;
+		var mobs = Actor.EnemyGroup;
 		if (mobs.Length >= MaxMobs) {
 			return;
 		}
 
+		var difficulty = GetDifficulty();
 		var spawnAmount = Mathf.Max(1, _waveSetup.minAmount - mobs.Length);
 		while (spawnAmount > 0) {
 			spawnAmount -= 1;
 
-			_spawner.CreateMob(ActorSpawner.RandomSpawnPosition, _waveSetup.RandomMobSetup);
+			_spawner.CreateMob(ActorSpawner.RandomSpawnPosition, _waveSetup.RandomMobSetup, difficulty);
 		}
 	}
 }

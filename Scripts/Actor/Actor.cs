@@ -82,6 +82,12 @@ public partial class Actor : Node3D {
 
 	public event Action Death;
 
+	public static Actor[] EnemyGroup => actors.Where(actor => !actor.IsPlayerGroup).ToArray();
+
+	public static Actor[] PlayerGroup => actors.Where(actor => actor.IsPlayerGroup).ToArray();
+
+	public static Actor[] Players => actors.Where(actor => actor.isPlayer).ToArray();
+
 	public override void _EnterTree() {
 		actors.Add(this);
 
@@ -243,8 +249,6 @@ public partial class Actor : Node3D {
 
 	public static Actor Resolve(uint handle) => actors.Find(actor => actor.synchronizer.handle == handle);
 
-	public static Actor[] Mobs => actors.Where(actor => !actor.IsPlayerGroup).ToArray();
-
 	private void OnCreated(uint actorId) {
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		Position = synchronizer.spawnPosition;
@@ -267,6 +271,12 @@ public partial class Actor : Node3D {
 		shadow.Scale = new Vector3(1f, 1f, 1f) * setup.SpritePixels / 35f;
 
 		stats = setup.BaseStats.Clone;
+
+		// @TODO Maybe sync all stats for having a unified system.
+		if (!IsPlayerGroup) {
+			stats.vitality = synchronizer.vitality;
+		}
+
 		hp = stats.vitality;
 		sp = stats.intelligence;
 

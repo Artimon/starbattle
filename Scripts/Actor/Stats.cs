@@ -9,6 +9,8 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class Stats : Resource {
+	public int level = 1;
+
 	[Export]
 	public float strength;
 

@@ -15,4 +15,7 @@ public partial class ActorSynchronizer : MultiplayerSynchronizer {
 
 	[Export]
 	public Vector3 spawnPosition;
+
+	[Export]
+	public float vitality;
 }
