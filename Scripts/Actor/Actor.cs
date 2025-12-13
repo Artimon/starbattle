@@ -52,6 +52,8 @@ public partial class Actor : Node3D {
 
 	public float Height => sprite.PixelSize * setup.pixelHeight;
 
+	public float EffectScale => setup.pixelHeight / 80f;
+
 	public Vector3 CameraTarget => GlobalPosition;
 
 	public Vector3 GlobalCenter => collisionShape.GlobalPosition;

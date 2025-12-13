@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=3 uid="uid://bmx0h10f6oyke"]
+
+[ext_resource type="Script" path="res://Scripts/Spells/RegenerateHpEffect.cs" id="1_ew8kh"]
+[ext_resource type="Texture2D" uid="uid://r6tsq7416ofv" path="res://Actions/RegenerateHp/SparkleParticle.png" id="2_i6n2k"]
+[ext_resource type="Texture2D" uid="uid://c2wok7q7xeuwd" path="res://Actions/RegenerateHp/GlowParticle.png" id="3_nibm0"]
+
+[sub_resource type="Curve" id="Curve_r54l8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.152174, 1), 0.0, 0.0, 0, 0, Vector2(0.304348, 0.296703), 0.0, 0.0, 0, 0, Vector2(0.492754, 1), 0.0, 0.0, 0, 0, Vector2(0.644928, 0.285714), 0.0, 0.0, 0, 0, Vector2(0.818841, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_dkukh"]
+curve = SubResource("Curve_r54l8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hv2mg"]
+emission_shape_offset = Vector3(0, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0.65, 0.8, 0.65)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_dkukh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_082uh"]
+render_priority = 10
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_i6n2k")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_jj3e1"]
+material = SubResource("StandardMaterial3D_082uh")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="Curve" id="Curve_hggck"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.449275, 0.56044), 0.0, 0.0, 0, 0, Vector2(0.804348, 0.857143), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_rweh0"]
+curve = SubResource("Curve_hggck")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_weyp7"]
+emission_shape_offset = Vector3(0, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.8, 0.5)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.35
+initial_velocity_max = 0.65
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_rweh0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_823e8"]
+render_priority = 10
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_nibm0")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_iuohb"]
+material = SubResource("StandardMaterial3D_823e8")
+size = Vector2(0.25, 0.25)
+
+[node name="RegenerateHpEffect" type="Node3D" node_paths=PackedStringArray("_sparkParticles", "_glowParticles")]
+script = ExtResource("1_ew8kh")
+_sparkParticles = NodePath("Sparkle GPUParticles3D")
+_glowParticles = NodePath("Glow GPUParticles3D")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Sparkle GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.85
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_hv2mg")
+draw_pass_1 = SubResource("QuadMesh_jj3e1")
+
+[node name="Glow GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.85
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_weyp7")
+draw_pass_1 = SubResource("QuadMesh_iuohb")
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

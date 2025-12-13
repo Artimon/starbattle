@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ActionSetup" load_steps=2 format=3 uid="uid://8x7djuuesurn"]
+[gd_resource type="Resource" script_class="ActionSetup" load_steps=3 format=3 uid="uid://8x7djuuesurn"]
 
+[ext_resource type="PackedScene" uid="uid://bmx0h10f6oyke" path="res://Actions/RegenerateHp/RegenerateHpEffect.tscn" id="1_icsdn"]
 [ext_resource type="Script" path="res://Scripts/Action/ActionSetup.cs" id="1_qlhdn"]
 
 [resource]
@@ -8,5 +9,7 @@ name = "RegenerateHits"
 actionCost = 2
 power = 1.0
 actionType = 2
+damageType = 0
 targetType = 3
 condition = 1
+pointPrefab = ExtResource("1_icsdn")

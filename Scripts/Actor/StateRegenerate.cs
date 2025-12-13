@@ -36,21 +36,34 @@ public partial class StateRegenerate : StateBase {
 			return;
 		}
 
-		// @TODO Play effects.
+		if (_actionSetup.condition == ActionSetup.Conditions.IsHpMissing) {
+			_Heal();
+			_PlayEffect();
 
-		if (!Multiplayer.IsServer()) {
 			return;
 		}
 
-		if (_actionSetup.condition == ActionSetup.Conditions.IsHpMissing) {
+		_Refresh();
+		_PlayEffect();
+	}
+
+	public void _Heal() {
+		if (Multiplayer.IsServer()) {
 			var heal = _actor.stats.GetHpRegeneration(_actionSetup.power);
 			_actor.Heal(heal, true);
-
-			return;
 		}
+	}
 
-		var refresh = _actor.stats.GetSpRegeneration(_actionSetup.power);
-		_actor.Refresh(refresh, true);
+	public void _Refresh() {
+		if (Multiplayer.IsServer()) {
+			var refresh = _actor.stats.GetSpRegeneration(_actionSetup.power);
+			_actor.Refresh(refresh, true);
+		}
+	}
+
+	public void _PlayEffect() {
+		var effect = EffectContainer.instance.Instantiate<Node3D>(_actionSetup.pointPrefab, _actor.GlobalPosition);
+		effect.Scale = Vector3.One * _actor.EffectScale;
 	}
 
 	public void OnAnimationFinished() {
