@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=39 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://idoo2rtmn6n" path="res://Images/SelectCircle.png" id="13_dwphc"]
 [ext_resource type="Script" path="res://Scripts/Controllers/WaveSetup.cs" id="14_hvisv"]
 [ext_resource type="Texture2D" uid="uid://cn3yslcng2fxn" path="res://Images/FlowerMeadow.jpg" id="15_31iqn"]
-[ext_resource type="Resource" uid="uid://ce40rayktpge3" path="res://Actors/ElderGhost.tres" id="15_rt1xd"]
+[ext_resource type="Resource" uid="uid://c52wgcwnm17eq" path="res://Actors/Raptor.tres" id="15_v5cgv"]
 [ext_resource type="Script" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
 [ext_resource type="PackedScene" uid="uid://cos6glel8tb51" path="res://Effects/CombatNumber.tscn" id="19_nn7ws"]
 
@@ -63,8 +63,13 @@ actors = Array[Object]([ExtResource("13_24srk")])
 
 [sub_resource type="Resource" id="Resource_bebsy"]
 script = ExtResource("14_hvisv")
-minAmount = 1
-actors = Array[Object]([ExtResource("15_rt1xd")])
+minAmount = 2
+actors = Array[Object]([ExtResource("15_v5cgv")])
+
+[sub_resource type="Resource" id="Resource_sor8t"]
+script = ExtResource("14_hvisv")
+minAmount = 3
+actors = Array[Object]([ExtResource("13_24srk"), ExtResource("13_24srk"), ExtResource("15_v5cgv")])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osk5p"]
 albedo_texture = ExtResource("15_31iqn")
@@ -168,7 +173,7 @@ spawn_path = NodePath("../ActorContainer")
 script = ExtResource("12_pqm43")
 _multiplayerContainer = NodePath("..")
 _timer = NodePath("Timer")
-_waveSetups = Array[Object]([SubResource("Resource_qr6hu"), SubResource("Resource_68hij"), SubResource("Resource_bebsy")])
+_waveSetups = Array[Object]([SubResource("Resource_qr6hu"), SubResource("Resource_68hij"), SubResource("Resource_bebsy"), SubResource("Resource_sor8t")])
 _spawner = NodePath("../ActorSpawner")
 
 [node name="Timer" type="Timer" parent="MultiplayerContainer/WavesController"]
@@ -290,4 +295,4 @@ texture = ExtResource("9_ftk6f")
 
 [node name="CombatNumber" parent="." instance=ExtResource("19_nn7ws")]
 
-[connection signal="timeout" from="MultiplayerContainer/WavesController/Timer" to="MultiplayerContainer/WavesController" method="TrySpawnMobs"]
+[connection signal="timeout" from="MultiplayerContainer/WavesController/Timer" to="MultiplayerContainer/WavesController" method="_TrySpawnMobs"]

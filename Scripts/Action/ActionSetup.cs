@@ -21,6 +21,9 @@ public partial class ActionSetup : Resource {
 	public int actionCost;
 
 	[Export]
+	public float spCost;
+
+	[Export]
 	public float power;
 
 	[Export]

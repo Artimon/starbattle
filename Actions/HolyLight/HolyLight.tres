@@ -7,6 +7,7 @@
 script = ExtResource("1_ju12d")
 name = "HolyLight"
 actionCost = 2
+spCost = 6.0
 power = 110.0
 actionType = 3
 damageType = 1

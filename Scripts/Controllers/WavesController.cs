@@ -14,7 +14,7 @@ public partial class WavesController : Node {
 	public Timer _timer;
 
 	public float _time;
-	public int _lastWave = -1;
+	public int _currentWave = -1;
 
 	public WaveSetup _waveSetup;
 
@@ -34,7 +34,7 @@ public partial class WavesController : Node {
 
 			_timer.Start();
 
-			_OnNewWave(0);
+			_TryProgressWave(0);
 			_TrySpawnMobs();
 
 			SetProcess(true);
@@ -42,23 +42,28 @@ public partial class WavesController : Node {
 	}
 
 	public override void _Process(double delta) {
-		_time += (float)delta;
-
-		var waveMinute = (int)(_time / 60.0f);
-		if (waveMinute > _lastWave) {
-			_lastWave = waveMinute;
-
-			_OnNewWave(waveMinute);
-		}
+		_TryProgressWave(delta);
 	}
 
-	public void _OnNewWave(int wave) {
+	public bool _TryProgressWave(double delta) {
+		_time += (float)delta;
+
+		var wave = (int)(_time / 60.0f);
+		var isNextWave = wave > _currentWave;
+
+		if (!isNextWave) {
+			return false;
+		}
+
 		wave = Math.Min(wave, _waveSetups.Length - 1); // @TODO Check for level end here.
 		GD.Print($"Now entering wave {wave + 1}");
 
+		_currentWave = wave;
 		_waveSetup = _waveSetups[wave];
 
 		// @TODO Spawn boss here.
+
+		return true;
 	}
 
 	public void _TrySpawnMobs() {

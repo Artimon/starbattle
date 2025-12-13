@@ -59,6 +59,10 @@ public partial class ActorAction : Node {
 			return false;
 		}
 
+		if (_player.sp < actionSetup.spCost) {
+			return false;
+		}
+
 		_actionTime -= actionSetup.actionCost;
 
 		var actorHandle = actor?.synchronizer.handle ?? 0;
@@ -112,6 +116,8 @@ public partial class ActorAction : Node {
 				}
 
 				targetPosition = actor.GlobalPosition;
+
+				_player.Drain(action.spCost);
 
 				break;
 		}

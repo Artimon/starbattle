@@ -202,6 +202,16 @@ public partial class Actor : Node3D {
 			.ShowHeal(this, heal);
 	}
 
+	public void Drain(float drain) {
+		if (drain == 0f) {
+			return;
+		}
+
+		var newSp = Mathf.Max(0f, sp - drain);
+
+		Rpc(nameof(RpcSpChange), drain, newSp, false);
+	}
+
 	public void Refresh(float refresh, bool showNumber) {
 		if (refresh == 0f) {
 			return;
@@ -209,11 +219,11 @@ public partial class Actor : Node3D {
 
 		var newSp = Mathf.Min(MaxSp, sp + refresh);
 
-		Rpc(nameof(RpcRefresh), refresh, newSp, showNumber);
+		Rpc(nameof(RpcSpChange), refresh, newSp, showNumber);
 	}
 
 	[Rpc(CallLocal = true)]
-	public void RpcRefresh(float refresh, float newSp, bool showNumber) {
+	public void RpcSpChange(float refresh, float newSp, bool showNumber) {
 		sp = newSp;
 
 		if (!showNumber) {
