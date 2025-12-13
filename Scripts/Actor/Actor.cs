@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Artimus.Services;
 using Godot;
 using Starbattle.Controllers;
@@ -231,6 +232,8 @@ public partial class Actor : Node3D {
 	}
 
 	public static Actor Resolve(uint handle) => actors.Find(actor => actor.synchronizer.handle == handle);
+
+	public static Actor[] Mobs => actors.Where(actor => !actor.IsPlayerGroup).ToArray();
 
 	private void OnCreated(uint actorId) {
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();

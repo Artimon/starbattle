@@ -30,19 +30,6 @@ public partial class ActorSpawner : Node {
 	public override void _Ready() {
 		// All start as "server" (id 1) only when the connection is established, the client will be marked as "client".
 		instance = this;
-
-		_spawnTimer.Timeout += SpawnMob;
-		_multiplayerContainer.OnConnectionReady += () => {
-			if (!Multiplayer.IsServer()) {
-				return;
-			}
-
-			SpawnMob();
-		};
-	}
-
-	public void SpawnMob() {
-		CreateMob(RandomSpawnPosition, _setups.GetSetup("ElderGhost"));
 	}
 
 	public void CreateMob(Vector3 position, ActorSetup setup) {

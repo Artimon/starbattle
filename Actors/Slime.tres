@@ -1,0 +1,167 @@
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=21 format=3 uid="uid://j1x3dmibjlmm"]
+
+[ext_resource type="Texture2D" uid="uid://cu1oqsvdl5xp4" path="res://Actors/Slime.png" id="1_0mfbx"]
+[ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_6gw58"]
+[ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_0q7ls"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6g28"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27qmv"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyv6n"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfxod"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4ewb"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2j3h"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhh6b"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lrd2"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgxv8"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48t0g"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5fc7"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t3cv"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djhpm"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcmdx"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yxag"]
+atlas = ExtResource("1_0mfbx")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ggh8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6g28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27qmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyv6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfxod")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4ewb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2j3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhh6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lrd2")
+}],
+"loop": false,
+"name": &"Cast",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgxv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48t0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5fc7")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t3cv")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djhpm")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcmdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yxag")
+}],
+"loop": false,
+"name": &"Move",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_m10b6"]
+script = ExtResource("2_0q7ls")
+strength = 30.0
+dexterity = 60.0
+agility = 70.0
+vitality = 30.0
+intelligence = 5.0
+wisdom = 5.0
+passiveHpRegenPercent = 2.0
+passiveSpRegenPercent = 3.0
+activeHpRegenPower = 6.0
+activeSpRegenPower = 1.0
+physicalBaseValue = 25.0
+magicalBaseValue = 5.0
+physicalDefense = 5.0
+magicalDefense = 5.0
+
+[resource]
+script = ExtResource("1_6gw58")
+name = "Slime"
+_animationFrames = SubResource("SpriteFrames_2ggh8")
+pixelHeight = 80.0
+_baseStats = SubResource("Resource_m10b6")

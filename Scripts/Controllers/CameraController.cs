@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Starbattle;
+namespace Starbattle.Controllers;
 
 [GlobalClass]
 public partial class CameraController : Node3D {

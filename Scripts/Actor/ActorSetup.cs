@@ -15,7 +15,7 @@ public partial class ActorSetup : Resource {
 	public SpriteFrames AnimationFrames => _animationFrames;
 
 	[Export]
-	public float pixelHeight;
+	public float pixelHeight = 80f; // Should be default and only bigger for larger actors.
 
 	public float _spritePixels;
 
