@@ -84,9 +84,10 @@ public partial class Actor : Node3D {
 
 	public static Actor[] EnemyGroup => actors.Where(actor => !actor.IsPlayerGroup).ToArray();
 
+	/**
+	 * @TODO Requires re-check to exclude usage for summons.
+	 */
 	public static Actor[] PlayerGroup => actors.Where(actor => actor.IsPlayerGroup).ToArray();
-
-	public static Actor[] Players => actors.Where(actor => actor.isPlayer).ToArray();
 
 	public override void _EnterTree() {
 		actors.Add(this);

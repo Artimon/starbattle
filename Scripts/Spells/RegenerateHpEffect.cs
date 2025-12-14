@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Starbattle.Effects;
 
 namespace Starbattle.Spells;
 
@@ -10,9 +11,14 @@ public partial class RegenerateHpEffect : Node3D {
 	[Export]
 	public GpuParticles3D _glowParticles;
 
+	[Export]
+	public AudioStream _regenerateAudio;
+
 	public override void _Ready() {
 		_sparkParticles.Emitting = true;
 		_glowParticles.Emitting = true;
+
+		LocalAudio.Play(GlobalPosition, _regenerateAudio);
 	}
 
 	public void OnTimerTimeout() {

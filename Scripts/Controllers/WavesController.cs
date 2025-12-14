@@ -68,14 +68,15 @@ public partial class WavesController : Node {
 	}
 
 	public float GetDifficulty() {
-		var players = Actor.Players;
+		var players = Actor.PlayerGroup;
 		if (players.Length == 0) {
 			return 1f;
 		}
 
 		var maxLevel = players.Max(actor => actor.stats.level);
+		var difficultyFactor = 0.5f + (maxLevel + _currentWave) / 2f; // 0.5 + (1 + 0) / 2 = 1 (100%)
 
-		return 0.5f + (maxLevel + _currentWave) / 2f; // 0.5 + (1 + 0) / 2 = 1 (100%)
+		return difficultyFactor * Mathf.Max(1, players.Length);
 	}
 
 	public void _TrySpawnMobs() {
