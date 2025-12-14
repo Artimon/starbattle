@@ -73,10 +73,21 @@ public partial class WavesController : Node {
 			return 1f;
 		}
 
+		/*
+		 * @TODO Separate wave and player levels in actor setup scale config?
+		 */
 		var maxLevel = players.Max(actor => actor.stats.level);
 		var difficultyFactor = 0.5f + (maxLevel + _currentWave) / 2f; // 0.5 + (1 + 0) / 2 = 1 (100%)
 
-		return difficultyFactor * Mathf.Max(1, players.Length);
+		/*
+		 * 1 -> 1.0
+		 * 2 -> 1.68
+		 * 3 -> 2.28
+		 * 4 -> 2.83
+		 */
+		var partyScale = Mathf.Pow(players.Length, 0.75f);
+
+		return difficultyFactor * partyScale;
 	}
 
 	public void _TrySpawnMobs() {

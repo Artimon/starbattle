@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmkyue4bg5mos"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/CombatMessage.cs" id="1_yl7vj"]
+[ext_resource type="Texture2D" uid="uid://ds0pswku711uk" path="res://Effects/MessageCounter.png" id="2_37hwk"]
+[ext_resource type="Texture2D" uid="uid://bmm1aqovxhsgy" path="res://Effects/MessageCritical.png" id="2_gdoak"]
+[ext_resource type="Texture2D" uid="uid://bjf0vtx1e1wo" path="res://Effects/MessageSwapp.png" id="4_cslqe"]
+
+[sub_resource type="Animation" id="Animation_5bumy"]
+resource_name = "default"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_macv2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_amlkn"]
+_data = {
+"RESET": SubResource("Animation_macv2"),
+"default": SubResource("Animation_5bumy")
+}
+
+[node name="CombatMessage" type="Node3D" node_paths=PackedStringArray("_sprite")]
+script = ExtResource("1_yl7vj")
+_sprite = NodePath("Sprite3D")
+_criticalTexture = ExtResource("2_gdoak")
+_counterTexture = ExtResource("2_37hwk")
+_missTexture = ExtResource("4_cslqe")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.005
+billboard = 1
+render_priority = 10
+texture = ExtResource("2_37hwk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_amlkn")
+}
+autoplay = "default"

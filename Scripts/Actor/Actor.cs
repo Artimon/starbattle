@@ -78,7 +78,10 @@ public partial class Actor : Node3D {
 	public StateMachine stateMachine;
 
 	[Export]
-	public PackedScene _damageNumberPrefab;
+	public PackedScene _combatNumberPrefab;
+
+	[Export]
+	public PackedScene _combatMessagePrefab;
 
 	public event Action Death;
 
@@ -144,7 +147,7 @@ public partial class Actor : Node3D {
 		var damage = stats.GetPhysicalDamage(actionSetup.power, target);
 
 		var isCritical = false;
-		var critChance = stats.dexterity * 0.25f / 100f;
+		var critChance = stats.dexterity * 0.25f / 100f + 100f;
 
 		if (GD.Randf() < critChance) {
 			isCritical = true;
@@ -166,8 +169,13 @@ public partial class Actor : Node3D {
 	public void RpcDamage(float damage, float newHp, bool isCritical) {
 		hp = newHp;
 
-		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+		_combatNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
 			.ShowDamage(this, damage, isCritical);
+
+		if (isCritical) {
+			_combatMessagePrefab.Instantiate<CombatMessage>(EffectContainer.instance)
+				.ShowMessage(this, CombatMessage.Types.Critical);
+		}
 
 		// @TODO Show damage and crit on screen.
 		// if (Multiplayer.IsServer()) {
@@ -205,7 +213,7 @@ public partial class Actor : Node3D {
 			return;
 		}
 
-		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+		_combatNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
 			.ShowHeal(this, heal);
 	}
 
@@ -237,7 +245,7 @@ public partial class Actor : Node3D {
 			return;
 		}
 
-		_damageNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+		_combatNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
 			.ShowRefresh(this, refresh);
 	}
 
