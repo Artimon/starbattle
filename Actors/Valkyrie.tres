@@ -155,6 +155,7 @@ agility = 95.0
 vitality = 95.0
 intelligence = 60.0
 wisdom = 60.0
+critChance = 15.0
 passiveHpRegenPercent = 2.0
 passiveSpRegenPercent = 3.0
 activeHpRegenPower = 19.0
