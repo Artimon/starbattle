@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("1_culj1")
 name = ""
-actionCost = 2
+actionCost = 1
+spCost = 0.0
 power = 1.0
 actionType = 2
 damageType = 0

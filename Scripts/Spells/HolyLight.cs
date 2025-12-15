@@ -86,14 +86,13 @@ public partial class HolyLight : AoeNode {
 		_shockActivationTimer.Start();
 		_effectDurationTimer.Start();
 
+		CameraController.instance.AddTrauma(0.75f);
+
 		Attack(_actionSetup);
 	}
 
 	public void OnEffectActivate() {
-		var flashes = ScreenFlash.instance.TryFastFlash(0.35f);
-		if (flashes) {
-			CameraController.instance.AddTrauma(0.35f);
-		}
+		// ScreenFlash.instance.TryFastFlash(0.35f);
 	}
 
 	public void OnEffectFinished() {

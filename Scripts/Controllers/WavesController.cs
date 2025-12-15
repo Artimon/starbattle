@@ -6,7 +6,7 @@ namespace Starbattle.Controllers;
 
 [GlobalClass]
 public partial class WavesController : Node {
-	public static int MaxMobs = 20;
+	public static int MaxMobs = 10;
 
 	[Export]
 	public MultiplayerContainer _multiplayerContainer;

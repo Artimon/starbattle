@@ -65,21 +65,24 @@ public partial class CameraController : Node3D {
 		}
 
 		var shake = _trauma * _trauma;
-		var time = (float)(Time.GetTicksMsec() / 10d);
+		var time = (float)(Time.GetTicksMsec() / 1000d);
+
+		var offset = Mathf.Sin(16f * time * Mathf.Pi) * shake * 0.05f;
+		GlobalPosition += new Vector3(0f, offset, 0f);
 
 		var angles = new Vector3 {
-			X = _noise.GetNoise1D(time) * shake * 3f,
-			Y = _noise.GetNoise1D(time + 60) * shake * 3f,
-			Z = _noise.GetNoise1D(time + 120) * shake * 6f
+			X = _noise.GetNoise1D(time) * shake * 1f,
+			Y = _noise.GetNoise1D(time + 60f) * shake * 1f,
+			Z = _noise.GetNoise1D(time + 120f) * shake * 2f
 		};
 
-		var offset = new Vector3 {
-			X = _noise.GetNoise1D(5f * time + 180) * shake * 0.05f,
-			Y = _noise.GetNoise1D(5f * time + 240) * shake * 0.05f,
-			Z = _noise.GetNoise1D(5f * time + 300) * shake * 0.05f
-		};
+		// var offset = new Vector3 {
+		// 	X = _noise.GetNoise1D(5f * time + 180) * shake * 0.05f,
+		// 	Y = _noise.GetNoise1D(5f * time + 240) * shake * 0.05f,
+		// 	Z = _noise.GetNoise1D(5f * time + 300) * shake * 0.05f
+		// };
 
 		RotationDegrees += angles;
-		GlobalPosition += offset;
+		// GlobalPosition += offset;
 	}
 }

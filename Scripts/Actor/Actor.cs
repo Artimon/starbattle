@@ -18,6 +18,8 @@ public partial class Actor : Node3D {
 	public float hp;
 	public float MaxHp => stats.MaxHp;
 
+	public string DisplayHp => Mathf.RoundToInt(Mathf.Max(1f, hp)).ToString();
+
 	public float sp;
 	public float MaxSp => stats.MaxSp;
 
@@ -142,7 +144,7 @@ public partial class Actor : Node3D {
 
 		var hitChance = stats.GetHitChance(target);
 		if (GD.Randf() > hitChance) {
-			Message(CombatMessage.Types.Miss);
+			target.Message(CombatMessage.Types.Miss);
 
 			return false;
 		}

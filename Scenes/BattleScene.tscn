@@ -95,32 +95,47 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 
 [node name="ActorAvatars" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_playerAvatarsContainer", "_enemyAvatarsContainer")]
 layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -250.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("8_e7axk")
 _avatarPrefab = ExtResource("9_yr3ug")
-_playerAvatarsContainer = NodePath("PlayerAvatars HBoxContainer")
-_enemyAvatarsContainer = NodePath("EnemyAvatars HBoxContainer")
+_playerAvatarsContainer = NodePath("Players CenterContainer/PlayerAvatars HBoxContainer")
+_enemyAvatarsContainer = NodePath("Enemies CenterContainer/EnemyAvatars HBoxContainer")
 
-[node name="EnemyAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars"]
-layout_mode = 0
-offset_top = 100.0
-offset_right = 40.0
-offset_bottom = 140.0
+[node name="Enemies CenterContainer" type="CenterContainer" parent="CanvasLayer/ActorAvatars"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="EnemyAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars/Enemies CenterContainer"]
+layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="PlayerAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Players CenterContainer" type="CenterContainer" parent="CanvasLayer/ActorAvatars"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayerAvatars HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ActorAvatars/Players CenterContainer"]
+layout_mode = 2
 mouse_filter = 2
 alignment = 1
 

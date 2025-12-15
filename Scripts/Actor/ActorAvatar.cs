@@ -44,7 +44,7 @@ public partial class ActorAvatar : Control {
 	}
 
 	public void UpdateBars() {
-		_hpLabel.Text = Mathf.RoundToInt(_actor.hp).ToString();
+		_hpLabel.Text = _actor.DisplayHp;
 		_hpBar.SetValues(_actor.hp, _actor.MaxHp);
 		_spBar.SetValues(_actor.sp, _actor.MaxSp);
 
