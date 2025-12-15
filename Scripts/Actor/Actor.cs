@@ -140,6 +140,13 @@ public partial class Actor : Node3D {
 			return false; // Target moved away.
 		}
 
+		var hitChance = stats.GetHitChance(target);
+		if (GD.Randf() > hitChance) {
+			Message(CombatMessage.Types.Miss);
+
+			return false;
+		}
+
 		// base + 5 * (lvl + 1)
 		// var weaponpDam[4] = 40, 40, 20, 15;	// Weapon basic values for all player classes
 		// var weaponmDam[4] =  0, 30, 35, 40;
@@ -147,7 +154,7 @@ public partial class Actor : Node3D {
 		var damage = stats.GetPhysicalDamage(actionSetup.power, target);
 
 		var isCritical = false;
-		var critChance = stats.dexterity * 0.25f / 100f + 100f;
+		var critChance = stats.CritChance;
 
 		if (GD.Randf() < critChance) {
 			isCritical = true;
@@ -157,6 +164,16 @@ public partial class Actor : Node3D {
 		target.Damage(damage, isCritical);
 
 		return true;
+	}
+
+	public void Message(CombatMessage.Types type) {
+		Rpc(nameof(RpcMessage), (int)type);
+	}
+
+	[Rpc(CallLocal = true)]
+	public void RpcMessage(int type) {
+		_combatMessagePrefab.Instantiate<CombatMessage>(EffectContainer.instance)
+			.ShowMessage(this, (CombatMessage.Types)type);
 	}
 
 	public void Damage(float damage, bool isCritical) {

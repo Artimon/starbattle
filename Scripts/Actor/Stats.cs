@@ -30,6 +30,9 @@ public partial class Stats : Resource {
 	public float wisdom;
 
 	[Export]
+	public float critChance;
+
+	[Export]
 	public float passiveHpRegenPercent = 2f; // Players only.
 
 	[Export]
@@ -60,6 +63,38 @@ public partial class Stats : Resource {
 
 	public float MaxHp => vitality;
 	public float MaxSp => intelligence;
+
+	/**
+	 * Critical chances at scale 120:
+	 * 5 -> 0,05
+	 * 10 -> 0,079
+	 * 15 -> 0,117
+	 * 50 -> 0,340
+	 * 80 -> 0,486
+	 * 100 -> 0,565
+	 * 120 -> 0,632
+	 * 150 -> 0,713
+	 * 200 -> 0,811
+	 */
+	public float CritChance {
+		get {
+			const float scale = 120f;
+			var chance = 1f - Mathf.Exp(-critChance / scale);
+
+			return Mathf.Clamp(chance, 0.05f, 0.95f);
+		}
+	}
+
+	public float GetHitChance(Actor target) {
+		const float baseChance = 0.85f;
+
+		var total = Mathf.Max(1f, dexterity + target.stats.agility);
+		var diff = dexterity - target.stats.agility;
+
+		var hitChance = baseChance + 0.3f * (diff / total);
+
+		return Mathf.Clamp(hitChance, 0.05f, 0.99f);
+	}
 
 	public float GetHpRegeneration(float power) {
 		return power * activeHpRegenPower * (1f + GD.Randf() * 0.5f);
