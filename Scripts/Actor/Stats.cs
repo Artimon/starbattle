@@ -30,7 +30,10 @@ public partial class Stats : Resource {
 	public float wisdom;
 
 	[Export]
-	public float critChance;
+	public float critRate;
+
+	[Export]
+	public float counterRate;
 
 	[Export]
 	public float passiveHpRegenPercent = 2f; // Players only.
@@ -79,7 +82,16 @@ public partial class Stats : Resource {
 	public float CritChance {
 		get {
 			const float scale = 120f;
-			var chance = 1f - Mathf.Exp(-critChance / scale);
+			var chance = 1f - Mathf.Exp(-critRate / scale);
+
+			return Mathf.Clamp(chance, 0.05f, 0.95f);
+		}
+	}
+
+	public float CounterChance {
+		get {
+			const float scale = 120f;
+			var chance = 1f - Mathf.Exp(-counterRate / scale);
 
 			return Mathf.Clamp(chance, 0.05f, 0.95f);
 		}

@@ -36,6 +36,8 @@ public partial class Actor : Node3D {
 
 	public float actionRange = 4.5f;
 
+	public Actor counterTarget;
+
 	[Export]
 	public ActorSynchronizer synchronizer;
 
@@ -163,7 +165,7 @@ public partial class Actor : Node3D {
 			damage *= 1.5f;
 		}
 
-		target.Damage(damage, isCritical);
+		target.Damage(this, damage, isCritical);
 
 		return true;
 	}
@@ -178,7 +180,12 @@ public partial class Actor : Node3D {
 			.ShowMessage(this, (CombatMessage.Types)type);
 	}
 
-	public void Damage(float damage, bool isCritical, int hitCount = 0) {
+	public void Damage(Actor attacker, float damage, bool isCritical, int hitCount = 0) {
+		var counterChance = stats.CounterChance;
+		if (GD.Randf() < counterChance) {
+			counterTarget = attacker;
+		}
+
 		var newHp = Mathf.Max(0f, hp - damage);
 
 		Rpc(nameof(RpcDamage), damage, newHp, isCritical, hitCount);

@@ -46,7 +46,7 @@ material = SubResource("StandardMaterial3D_i1pme")
 
 [sub_resource type="Resource" id="Resource_qr6hu"]
 script = ExtResource("14_hvisv")
-minAmount = 8
+minAmount = 2
 actors = Array[Object]([ExtResource("13_24srk")])
 
 [sub_resource type="Resource" id="Resource_68hij"]
@@ -207,7 +207,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.2
 material_override = SubResource("ShaderMaterial_wxb5y")
 pixel_size = 0.02
 double_sided = false
-render_priority = 1
+render_priority = 2
 texture = ExtResource("13_dwphc")
 
 [node name="Ground" type="Node" parent="."]

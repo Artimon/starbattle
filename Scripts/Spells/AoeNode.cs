@@ -36,7 +36,7 @@ public partial class AoeNode : Node3D {
 			}
 
 			var damage = GetDamage(actionSetup, target);
-			target.Damage(damage, false, hits);
+			target.Damage(_actor, damage, false, hits);
 
 			hits += 1;
 		}

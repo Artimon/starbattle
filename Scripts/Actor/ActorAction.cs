@@ -15,6 +15,8 @@ public partial class ActorAction : Node {
 	[Export]
 	public ActionSetups _actionSetups;
 
+	public ActionSetups ActionSetups => _actionSetups;
+
 	public bool IsIdle => _player.stateMachine.IsInState("Idle");
 
 	public override void _EnterTree() {
@@ -35,7 +37,7 @@ public partial class ActorAction : Node {
 	/**
 	 * This time we sanitize on client, cuz who's gonna manipulate this anyway, riiight?
 	 */
-	public bool TryRequestAction(ActionSetup actionSetup, Actor actor, Vector3 position) {
+	public bool TryRequestAction(ActionSetup actionSetup, Actor actor, Vector3 position, bool isCounter = false) {
 		if (actionSetup == null) {
 			return false;
 		}
@@ -55,15 +57,17 @@ public partial class ActorAction : Node {
 			return false;
 		}
 
-		if (_actionTime < actionSetup.actionCost) {
-			return false;
-		}
-
 		if (_player.sp < actionSetup.spCost) {
 			return false;
 		}
 
-		_actionTime -= actionSetup.actionCost;
+		if (!isCounter) {
+			if (_actionTime < actionSetup.actionCost) {
+				return false;
+			}
+
+			_actionTime -= actionSetup.actionCost;
+		}
 
 		var actorHandle = actor?.synchronizer.handle ?? 0;
 
