@@ -14,15 +14,12 @@ public partial class PlayerController : Node {
 	public RayCast3D _rayCast;
 
 	[Export]
-	public uint _targetMask;
-
-	[Export]
-	public uint _groundMask;
-
-	public ActionRange _actionRange;
+	public TargetingController _targetingController;
 
 	[Export]
 	public PackedScene _actionRangePrefab;
+
+	public ActionRange _actionRange;
 
 	public ActionSetup _nextAction;
 
@@ -41,7 +38,7 @@ public partial class PlayerController : Node {
 		var from = camera.ProjectRayOrigin(mousePosition);
 		var to = camera.ProjectRayNormal(mousePosition) * 1000f;
 
-		_rayCast.CollisionMask = _nextAction.targetType == ActionSetup.TargetTypes.Position ? _groundMask : _targetMask;
+		_rayCast.CollisionMask = _targetingController.GetTargetMask(_nextAction.targetType);
 		_rayCast.GlobalPosition = from;
 		_rayCast.TargetPosition = to;
 		_rayCast.ForceRaycastUpdate();

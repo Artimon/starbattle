@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Starbattle.Controllers;
 
 namespace Starbattle.Spells;
 
@@ -14,6 +15,9 @@ public partial class AoeNode : Node3D {
 	public void Initialize(ActionSetup actionSetup, Actor actor) {
 		_actor = actor;
 		_actionSetup = actionSetup;
+
+		_area.CollisionLayer = TargetingController.instance.GetOpposingMask(actor);
+		_area.CollisionMask = _area.CollisionLayer;
 	}
 
 	public void Attack(ActionSetup actionSetup) {

@@ -8,7 +8,7 @@ public partial class ActionSetup : Resource {
 
 	public enum DamageTypes { Physical, Magical, True }
 
-	public enum TargetTypes { Position, Opponent, Friend, None }
+	public enum TargetTypes { Position, Opponent, Friend, None, Any }
 
 	public enum Conditions { None, IsHpMissing, IsSpMissing }
 

@@ -282,9 +282,10 @@ animations = [{
 radius = 0.4
 height = 1.6
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "collisionShape", "_animator", "sprite", "shadow", "action", "_regenerate", "stateMachine")]
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "_regenerate", "stateMachine")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
+characterBody = NodePath("CharacterBody3D")
 collisionShape = NodePath("CharacterBody3D/CollisionShape3D")
 _animator = NodePath("ActorAnimator")
 sprite = NodePath("AnimatedSprite3D")

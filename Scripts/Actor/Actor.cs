@@ -42,6 +42,9 @@ public partial class Actor : Node3D {
 	public ActorSynchronizer synchronizer;
 
 	[Export]
+	public CharacterBody3D characterBody;
+
+	[Export]
 	public CollisionShape3D collisionShape;
 
 	public CapsuleShape3D capsuleShape;
@@ -299,6 +302,9 @@ public partial class Actor : Node3D {
 		sprite.Play("Idle");
 
 		var height = Height;
+
+		characterBody.CollisionLayer = TargetingController.instance.GetActorMask(this);
+		characterBody.CollisionMask = characterBody.CollisionLayer;
 
 		collisionShape.Position = new Vector3(0f, height * 0.5f , 0f);
 		capsuleShape.Height = height ;

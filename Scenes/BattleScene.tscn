@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=39 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="3_s4vdo"]
+[ext_resource type="Script" path="res://Scripts/Controllers/TargetingController.cs" id="6_23bu1"]
 [ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
 [ext_resource type="PackedScene" uid="uid://bh025c2qwoxiv" path="res://Actions/ActionRange.tscn" id="8_8chmn"]
 [ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
@@ -153,11 +154,13 @@ mesh = SubResource("PlaneMesh_c18f7")
 
 [node name="Controllers" type="Node" parent="."]
 
-[node name="PlayerController" type="Node" parent="Controllers" node_paths=PackedStringArray("_rayCast")]
+[node name="TargetingController" type="Node" parent="Controllers"]
+script = ExtResource("6_23bu1")
+
+[node name="PlayerController" type="Node" parent="Controllers" node_paths=PackedStringArray("_rayCast", "_targetingController")]
 script = ExtResource("1_d62xq")
 _rayCast = NodePath("RayCast3D")
-_targetMask = 3
-_groundMask = 2
+_targetingController = NodePath("../TargetingController")
 _actionRangePrefab = ExtResource("8_8chmn")
 
 [node name="RayCast3D" type="RayCast3D" parent="Controllers/PlayerController"]
@@ -216,8 +219,6 @@ texture = ExtResource("13_dwphc")
 mesh = SubResource("PlaneMesh_1j380")
 
 [node name="Ground StaticBody3D" type="StaticBody3D" parent="Ground"]
-collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
