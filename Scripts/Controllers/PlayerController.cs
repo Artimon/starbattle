@@ -11,9 +11,6 @@ public partial class PlayerController : Node {
 	public Actor _player;
 
 	[Export]
-	public Node3D cameraTarget;
-
-	[Export]
 	public RayCast3D _rayCast;
 
 	[Export]
@@ -26,9 +23,6 @@ public partial class PlayerController : Node {
 
 	[Export]
 	public PackedScene _actionRangePrefab;
-
-	[Export]
-	public ActorSelection _actorSelection;
 
 	public ActionSetup _nextAction;
 

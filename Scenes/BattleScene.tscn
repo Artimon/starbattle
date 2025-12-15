@@ -44,12 +44,6 @@ uv1_scale = Vector3(3.5, 3.5, 3.5)
 [sub_resource type="PlaneMesh" id="PlaneMesh_c18f7"]
 material = SubResource("StandardMaterial3D_i1pme")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxb5y"]
-render_priority = 0
-shader = ExtResource("10_2dd70")
-shader_parameter/IntParameter = 2
-shader_parameter/tex_frg_13 = ExtResource("13_dwphc")
-
 [sub_resource type="Resource" id="Resource_qr6hu"]
 script = ExtResource("14_hvisv")
 minAmount = 8
@@ -69,6 +63,12 @@ actors = Array[Object]([ExtResource("15_v5cgv")])
 script = ExtResource("14_hvisv")
 minAmount = 3
 actors = Array[Object]([ExtResource("13_24srk"), ExtResource("13_24srk"), ExtResource("15_v5cgv")])
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxb5y"]
+render_priority = 0
+shader = ExtResource("10_2dd70")
+shader_parameter/IntParameter = 2
+shader_parameter/tex_frg_13 = ExtResource("13_dwphc")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osk5p"]
 albedo_texture = ExtResource("15_31iqn")
@@ -153,27 +153,14 @@ mesh = SubResource("PlaneMesh_c18f7")
 
 [node name="Controllers" type="Node" parent="."]
 
-[node name="PlayerController" type="Node" parent="Controllers" node_paths=PackedStringArray("_rayCast", "_actorSelection")]
+[node name="PlayerController" type="Node" parent="Controllers" node_paths=PackedStringArray("_rayCast")]
 script = ExtResource("1_d62xq")
 _rayCast = NodePath("RayCast3D")
 _targetMask = 3
 _groundMask = 2
 _actionRangePrefab = ExtResource("8_8chmn")
-_actorSelection = NodePath("ActorSelection")
 
 [node name="RayCast3D" type="RayCast3D" parent="Controllers/PlayerController"]
-
-[node name="ActorSelection" type="Node3D" parent="Controllers/PlayerController" node_paths=PackedStringArray("sprite")]
-script = ExtResource("12_t8ruj")
-sprite = NodePath("Sprite3D")
-
-[node name="Sprite3D" type="Sprite3D" parent="Controllers/PlayerController/ActorSelection"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.2, 0)
-material_override = SubResource("ShaderMaterial_wxb5y")
-pixel_size = 0.02
-double_sided = false
-render_priority = 1
-texture = ExtResource("13_dwphc")
 
 [node name="MultiplayerContainer" type="Node" parent="." node_paths=PackedStringArray("_actorSpawner")]
 script = ExtResource("3_5vdu8")
@@ -210,6 +197,18 @@ script = ExtResource("9_0vfcd")
 
 [node name="EffectContainer" type="Node3D" parent="MultiplayerContainer"]
 script = ExtResource("15_x12mc")
+
+[node name="ActorSelection" type="Node3D" parent="MultiplayerContainer/EffectContainer" node_paths=PackedStringArray("sprite")]
+script = ExtResource("12_t8ruj")
+sprite = NodePath("Sprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="MultiplayerContainer/EffectContainer/ActorSelection"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.2, 0)
+material_override = SubResource("ShaderMaterial_wxb5y")
+pixel_size = 0.02
+double_sided = false
+render_priority = 1
+texture = ExtResource("13_dwphc")
 
 [node name="Ground" type="Node" parent="."]
 

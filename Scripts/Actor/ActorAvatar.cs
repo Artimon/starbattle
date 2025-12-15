@@ -35,6 +35,8 @@ public partial class ActorAvatar : Control {
 	public TextureProgressBar _atbBar;
 
 	public override void _Ready() {
+		_inputArea.MouseEntered += OnMouseEntered;
+		_inputArea.MouseExited += OnMouseExited;
 		_inputArea.GuiInput += OnTextureRectGuiInput;
 	}
 
@@ -74,6 +76,14 @@ public partial class ActorAvatar : Control {
 			sprite.Animation,
 			sprite.Frame
 		);
+	}
+
+	public void OnMouseEntered() {
+		ActorSelection.instance?.SetActor(_actor);
+	}
+
+	public void OnMouseExited() {
+		ActorSelection.instance?.ClearActor();
 	}
 
 	public void OnTextureRectGuiInput(InputEvent @event) {

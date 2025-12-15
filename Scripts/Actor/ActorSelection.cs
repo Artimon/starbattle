@@ -40,8 +40,12 @@ public partial class ActorSelection : Node3D {
 	}
 
 	public void ClearActor() {
-		sprite.Visible = false;
+		GetParent().RemoveChild(this);
+		EffectContainer.instance.AddChild(this);
+
 		_actor = null;
+
+		sprite.Visible = false;
 	}
 
 	public override void _ExitTree() {
