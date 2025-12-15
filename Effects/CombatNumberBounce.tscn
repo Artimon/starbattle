@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmrlb4lwmotrn"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/CombatNumberBounce.cs" id="1_kmija"]
+[ext_resource type="PackedScene" uid="uid://dckdxoettltcf" path="res://Effects/CombatDigit.tscn" id="2_weemp"]
+
+[node name="CombatNumberBounce" type="Node3D" node_paths=PackedStringArray("_delayTimer")]
+script = ExtResource("1_kmija")
+_delayTimer = NodePath("Timer")
+_digitPrefab = ExtResource("2_weemp")
+_damageColor = Color(1, 1, 1, 1)
+_criticalColor = Color(0.94902, 0.972549, 0.298039, 1)
+_healColor = Color(0.658824, 0.803922, 0.470588, 1)
+_refreshColor = Color(0.466667, 0.603922, 0.964706, 1)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

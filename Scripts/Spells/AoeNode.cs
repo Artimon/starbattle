@@ -22,6 +22,8 @@ public partial class AoeNode : Node3D {
 		}
 
 		var bodies = _area.GetOverlappingBodies();
+		var hits = 0;
+
 		foreach (var body in bodies) {
 			var target = body.GetParent<Actor>();
 			if (target == null) {
@@ -34,7 +36,9 @@ public partial class AoeNode : Node3D {
 			}
 
 			var damage = GetDamage(actionSetup, target);
-			target.Damage(damage, false);
+			target.Damage(damage, false, hits);
+
+			hits += 1;
 		}
 	}
 

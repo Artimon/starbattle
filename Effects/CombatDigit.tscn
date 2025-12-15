@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dckdxoettltcf"]
+
+[ext_resource type="FontFile" uid="uid://jg8oo85iacga" path="res://Fonts/OxygenBold.tres" id="1_etfus"]
+[ext_resource type="Script" path="res://Scripts/Effects/CombatDigit.cs" id="1_ymeci"]
+
+[node name="CombatDigit" type="Label3D"]
+render_priority = 15
+outline_render_priority = 14
+text = "1"
+font = ExtResource("1_etfus")
+font_size = 96
+outline_size = 24
+script = ExtResource("1_ymeci")

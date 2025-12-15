@@ -178,18 +178,18 @@ public partial class Actor : Node3D {
 			.ShowMessage(this, (CombatMessage.Types)type);
 	}
 
-	public void Damage(float damage, bool isCritical) {
+	public void Damage(float damage, bool isCritical, int hitCount = 0) {
 		var newHp = Mathf.Max(0f, hp - damage);
 
-		Rpc(nameof(RpcDamage), damage, newHp, isCritical);
+		Rpc(nameof(RpcDamage), damage, newHp, isCritical, hitCount);
 	}
 
 	[Rpc(CallLocal = true)]
-	public void RpcDamage(float damage, float newHp, bool isCritical) {
+	public void RpcDamage(float damage, float newHp, bool isCritical, int hitCount) {
 		hp = newHp;
 
-		_combatNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
-			.ShowDamage(this, damage, isCritical);
+		_combatNumberPrefab.Instantiate<CombatNumberBounce>(EffectContainer.instance)
+			.ShowDamage(this, damage, isCritical, hitCount);
 
 		if (isCritical) {
 			_combatMessagePrefab.Instantiate<CombatMessage>(EffectContainer.instance)
@@ -232,7 +232,7 @@ public partial class Actor : Node3D {
 			return;
 		}
 
-		_combatNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+		_combatNumberPrefab.Instantiate<CombatNumberBounce>(EffectContainer.instance)
 			.ShowHeal(this, heal);
 	}
 
@@ -264,7 +264,7 @@ public partial class Actor : Node3D {
 			return;
 		}
 
-		_combatNumberPrefab.Instantiate<CombatNumber>(EffectContainer.instance)
+		_combatNumberPrefab.Instantiate<CombatNumberBounce>(EffectContainer.instance)
 			.ShowRefresh(this, refresh);
 	}
 

@@ -52,7 +52,7 @@ shader_parameter/tex_frg_13 = ExtResource("13_dwphc")
 
 [sub_resource type="Resource" id="Resource_qr6hu"]
 script = ExtResource("14_hvisv")
-minAmount = 2
+minAmount = 8
 actors = Array[Object]([ExtResource("13_24srk")])
 
 [sub_resource type="Resource" id="Resource_68hij"]
