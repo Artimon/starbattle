@@ -43,7 +43,7 @@ public partial class ActorBehaviour : Node {
 			return false; // During initialization.
 		}
 
-		var performsAction = _actor.setup.behaviour.TryNextAction(_actor);
+		var performsAction = _actor.setup.defaultBehaviour.TryNextAction(_actor);
 		if (!performsAction) {
 			GD.Print($"No action selected, implement re-try in 1.5s.");
 		}

@@ -46,6 +46,10 @@ public partial class ActionSetup : Resource {
 	[Export]
 	public PackedScene pointPrefab;
 
+	public bool HasSp(Actor actor) {
+		return actor.sp >= spCost;
+	}
+
 	public bool CanTarget(Actor actor, Actor target) {
 		if (target == null) {
 			return false;

@@ -1,0 +1,176 @@
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=24 format=3 uid="uid://boijb83b4qonl"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_57d22"]
+[ext_resource type="Texture2D" uid="uid://dy6mq3md6impy" path="res://Actors/Oktion.png" id="1_usmrp"]
+[ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_j1icj"]
+[ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="3_se0lx"]
+[ext_resource type="Script" path="res://Scripts/Behaviour/OktionBehaviour.cs" id="4_lkg5h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8bji"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44bxe"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_825f6"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qxtv"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e26vk"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik8ve"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jumy"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txtlv"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hidqf"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bofvx"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5jls"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r52wi"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apnuu"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgndh"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7twg3"]
+atlas = ExtResource("1_usmrp")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1oy5c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8bji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44bxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_825f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qxtv")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e26vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik8ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jumy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txtlv")
+}],
+"loop": false,
+"name": &"Cast",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hidqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bofvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5jls")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r52wi")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apnuu")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgndh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7twg3")
+}],
+"loop": false,
+"name": &"Move",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_dsy2p"]
+script = ExtResource("2_j1icj")
+strength = 65.0
+dexterity = 65.0
+agility = 55.0
+vitality = 80.0
+intelligence = 60.0
+wisdom = 55.0
+critRate = 5.0
+counterRate = 10.0
+passiveHpRegenPercent = 2.0
+passiveSpRegenPercent = 3.0
+activeHpRegenPower = 0.0
+activeSpRegenPower = 0.0
+physicalBaseValue = 20.0
+magicalBaseValue = 25.0
+physicalDefense = 15.0
+magicalDefense = 25.0
+
+[sub_resource type="Resource" id="Resource_tx3rs"]
+script = ExtResource("4_lkg5h")
+_holyLight = ExtResource("3_se0lx")
+
+[resource]
+script = ExtResource("1_57d22")
+name = "Oktion"
+_animationFrames = SubResource("SpriteFrames_1oy5c")
+pixelHeight = 80.0
+_baseStats = SubResource("Resource_dsy2p")
+defaultBehaviour = SubResource("Resource_tx3rs")
