@@ -1,0 +1,210 @@
+[gd_scene load_steps=29 format=3 uid="uid://b536a86allesx"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/LevelUpEffect.cs" id="1_l8o63"]
+[ext_resource type="AudioStream" uid="uid://btxd5qk4qscta" path="res://Effects/LevelUpEffect/LevelUp_Replace.wav" id="2_bhstj"]
+[ext_resource type="Script" path="res://Scripts/Effects/OffsetNode.cs" id="2_ejtrb"]
+[ext_resource type="Texture2D" uid="uid://cdatlifxv7h0c" path="res://Effects/LevelUpEffect/LevelUpWings_Replace.png" id="3_fgktg"]
+[ext_resource type="Texture2D" uid="uid://ndy26eafn543" path="res://Effects/LevelUpEffect/SparkleParticle.png" id="5_o2aqe"]
+[ext_resource type="Texture2D" uid="uid://spaa2o48gbcg" path="res://Effects/LevelUpEffect/GlowParticle.png" id="6_tdo3r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uglrv"]
+atlas = ExtResource("3_fgktg")
+region = Rect2(0, 0, 100, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o8fx"]
+atlas = ExtResource("3_fgktg")
+region = Rect2(100, 0, 100, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr8vk"]
+atlas = ExtResource("3_fgktg")
+region = Rect2(200, 0, 100, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewbew"]
+atlas = ExtResource("3_fgktg")
+region = Rect2(300, 0, 100, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxejq"]
+atlas = ExtResource("3_fgktg")
+region = Rect2(300, 0, 100, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4od1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uglrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o8fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gr8vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewbew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxejq")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="Curve" id="Curve_bg7fq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.152174, 1), 0.0, 0.0, 0, 0, Vector2(0.304348, 0.296703), 0.0, 0.0, 0, 0, Vector2(0.492754, 1), 0.0, 0.0, 0, 0, Vector2(0.644928, 0.285714), 0.0, 0.0, 0, 0, Vector2(0.818841, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_dkukh"]
+curve = SubResource("Curve_bg7fq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vlucv"]
+emission_shape_offset = Vector3(0, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0.65, 0.8, 0.65)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_dkukh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_082uh"]
+render_priority = 10
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("5_o2aqe")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_l7qyv"]
+material = SubResource("StandardMaterial3D_082uh")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="Curve" id="Curve_isdyj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.449275, 0.56044), 0.0, 0.0, 0, 0, Vector2(0.804348, 0.857143), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_rweh0"]
+curve = SubResource("Curve_isdyj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rxj11"]
+emission_shape_offset = Vector3(0, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.8, 0.5)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.35
+initial_velocity_max = 0.65
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_rweh0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_823e8"]
+render_priority = 10
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("6_tdo3r")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_se71x"]
+material = SubResource("StandardMaterial3D_823e8")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="Gradient" id="Gradient_bp7hl"]
+offsets = PackedFloat32Array(0, 0.681818, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_18yrx"]
+gradient = SubResource("Gradient_bp7hl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ci3e"]
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.4, 0.5)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 4.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_18yrx")
+
+[sub_resource type="Curve" id="Curve_f7442"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.296703), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cfwnp"]
+render_priority = 10
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_tdo3r")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_an5ru"]
+material = SubResource("StandardMaterial3D_cfwnp")
+size = 0.15
+section_length = 0.3
+curve = SubResource("Curve_f7442")
+
+[node name="LevelUpEffect" type="Node3D" node_paths=PackedStringArray("_sprite", "_particleEffects")]
+script = ExtResource("1_l8o63")
+_sprite = NodePath("OffsetNode/AnimatedSprite3D")
+_particleEffects = [NodePath("Sparkle GPUParticles3D"), NodePath("Glow GPUParticles3D"), NodePath("Streak GPUParticles3D")]
+_levelUpAudio = ExtResource("2_bhstj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="OffsetNode" type="Node3D" parent="." node_paths=PackedStringArray("_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("2_ejtrb")
+_node = NodePath("AnimatedSprite3D")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="OffsetNode"]
+pixel_size = 0.03
+billboard = 1
+double_sided = false
+render_priority = 10
+sprite_frames = SubResource("SpriteFrames_4od1j")
+autoplay = "default"
+
+[node name="Sparkle GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.85
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_vlucv")
+draw_pass_1 = SubResource("QuadMesh_l7qyv")
+
+[node name="Glow GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.85
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_rxj11")
+draw_pass_1 = SubResource("QuadMesh_se71x")
+
+[node name="Streak GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+lifetime = 0.5
+one_shot = true
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_3ci3e")
+draw_pass_1 = SubResource("RibbonTrailMesh_an5ru")
+
+[connection signal="timeout" from="Timer" to="." method="OnTimeout"]

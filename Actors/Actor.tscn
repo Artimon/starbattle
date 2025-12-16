@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cb3j6sa8w2cm3"]
+[gd_scene load_steps=47 format=3 uid="uid://cb3j6sa8w2cm3"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
@@ -10,12 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://dmkyue4bg5mos" path="res://Effects/CombatMessage.tscn" id="4_p8d2m"]
 [ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="5_kcnqb"]
 [ext_resource type="Texture2D" uid="uid://c6uflpge3imdb" path="res://Actors/Valkyrie.png" id="5_p5emc"]
+[ext_resource type="Script" path="res://Scripts/Actor/ActorExperience.cs" id="6_43p3x"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="6_bol2m"]
 [ext_resource type="Texture2D" uid="uid://ds0oqb6jsnxdb" path="res://Images/ActorShadow.png" id="6_d5h64"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorRegenerate.cs" id="7_apaue"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateMove.cs" id="7_lvwdo"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorPoise.cs" id="8_1lgyp"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorBehaviour.cs" id="8_wh0uv"]
+[ext_resource type="PackedScene" uid="uid://b536a86allesx" path="res://Effects/LevelUpEffect/LevelUpEffect.tscn" id="11_38adi"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateAttack.cs" id="11_jslh3"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateHit.cs" id="12_tpf5m"]
 [ext_resource type="Script" path="res://Scripts/Actor/StateDie.cs" id="12_w1nuh"]
@@ -284,7 +286,7 @@ animations = [{
 radius = 0.4
 height = 1.6
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "poise", "behaviour", "_regenerate", "stateMachine")]
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "poise", "behaviour", "experience", "_regenerate", "stateMachine")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
 characterBody = NodePath("CharacterBody3D")
@@ -296,6 +298,7 @@ _setups = ExtResource("2_eb7re")
 action = NodePath("ActorAction")
 poise = NodePath("ActorPoise")
 behaviour = NodePath("ActorBehaviour")
+experience = NodePath("ActorExperience")
 _regenerate = NodePath("ActorRegenerate")
 stateMachine = NodePath("StateMachine")
 _combatNumberPrefab = ExtResource("3_edhfj")
@@ -330,6 +333,11 @@ _timer = NodePath("Retry Timer")
 [node name="Retry Timer" type="Timer" parent="ActorBehaviour"]
 wait_time = 1.5
 one_shot = true
+
+[node name="ActorExperience" type="Node" parent="." node_paths=PackedStringArray("_actor")]
+script = ExtResource("6_43p3x")
+_actor = NodePath("..")
+_levelUpEffectPrefab = ExtResource("11_38adi")
 
 [node name="ActorRegenerate" type="Timer" parent="." node_paths=PackedStringArray("_actor")]
 wait_time = 3.0

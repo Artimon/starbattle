@@ -89,7 +89,7 @@ emission_box_extents = Vector3(0.5, 0.4, 0.5)
 direction = Vector3(0, 1, 0)
 spread = 0.0
 initial_velocity_min = 4.0
-initial_velocity_max = 6.0
+initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_18yrx")
 
@@ -114,6 +114,7 @@ use_particle_trails = true
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_egtmv"]
 material = SubResource("StandardMaterial3D_cfwnp")
 size = 0.15
+section_length = 0.3
 curve = SubResource("Curve_f7442")
 
 [node name="RegenerateSpEffect" type="Node3D" node_paths=PackedStringArray("_sparkParticles", "_glowParticles", "_streakParticles")]

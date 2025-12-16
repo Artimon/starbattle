@@ -85,6 +85,9 @@ public partial class Actor : Node3D {
 	public ActorBehaviour behaviour;
 
 	[Export]
+	public ActorExperience experience;
+
+	[Export]
 	public ActorRegenerate _regenerate;
 
 	[Export]
@@ -144,7 +147,7 @@ public partial class Actor : Node3D {
 	/**
 	 * @TODO Maybe turn all damagers to collider based detection?
 	 */
-	public bool TryAttackArea(ActionSetup actionSetup, Actor target, Vector3 attackPosition, float range = 1f) {
+	public bool TryAttackArea(ActionSetup actionSetup, Actor target, Vector3 attackPosition, float range = 1.5f) {
 		if (!Multiplayer.IsServer()) {
 			return false;
 		}

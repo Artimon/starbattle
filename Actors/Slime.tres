@@ -161,6 +161,7 @@ physicalBaseValue = 25.0
 magicalBaseValue = 5.0
 physicalDefense = 5.0
 magicalDefense = 5.0
+experience = 1.0
 
 [sub_resource type="Resource" id="Resource_lfaiw"]
 script = ExtResource("3_y60wj")

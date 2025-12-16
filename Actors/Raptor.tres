@@ -161,6 +161,7 @@ physicalBaseValue = 30.0
 magicalBaseValue = 5.0
 physicalDefense = 10.0
 magicalDefense = 10.0
+experience = 1.0
 
 [sub_resource type="Resource" id="Resource_gp1d3"]
 script = ExtResource("3_ct7u1")

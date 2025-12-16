@@ -162,6 +162,7 @@ physicalBaseValue = 20.0
 magicalBaseValue = 25.0
 physicalDefense = 15.0
 magicalDefense = 25.0
+experience = 0.0
 
 [sub_resource type="Resource" id="Resource_tx3rs"]
 script = ExtResource("4_lkg5h")

@@ -9,8 +9,6 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class Stats : Resource {
-	public int level = 1;
-
 	[Export]
 	public float strength;
 
@@ -58,6 +56,9 @@ public partial class Stats : Resource {
 
 	[Export]
 	public float magicalDefense;
+
+	[Export]
+	public float experience;
 
 	/**
 	 * @TODO Add 80-120% RNG for mobs.
