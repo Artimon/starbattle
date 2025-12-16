@@ -18,7 +18,7 @@ public partial class Actor : Node3D {
 	public float hp;
 	public float MaxHp => stats.MaxHp;
 
-	public string DisplayHp => Mathf.RoundToInt(Mathf.Max(1f, hp)).ToString();
+	public string DisplayHp => Mathf.CeilToInt(hp).ToString();
 
 	public float sp;
 	public float MaxSp => stats.MaxSp;
@@ -77,6 +77,9 @@ public partial class Actor : Node3D {
 
 	[Export]
 	public ActorAction action;
+
+	[Export]
+	public ActorPoise poise;
 
 	[Export]
 	public ActorBehaviour behaviour;
@@ -193,8 +196,13 @@ public partial class Actor : Node3D {
 		}
 
 		var newHp = Mathf.Max(0f, hp - damage);
+		if (newHp > 0f) {
+			poise.ApplyPoise(damage, out var isStaggered);
 
-		action.TryRequestHit();
+			if (isStaggered) {
+				action.TryRequestHit();
+			}
+		}
 
 		Rpc(nameof(RpcDamage), damage, newHp, isCritical, hitCount);
 	}
@@ -343,6 +351,10 @@ public partial class Actor : Node3D {
 	}
 
 	public void OnDeath() {
+		if (IsPlayerGroup) {
+			return; // @TODO Add proper player ko handling.
+		}
+
 		_animator.FadeOut();
 
 		collisionShape.Disabled = true;

@@ -22,6 +22,10 @@ public partial class Behaviour : Resource {
 				continue;
 			}
 
+			if (otherActor.IsDead) {
+				continue;
+			}
+
 			var distance = actor.GlobalPosition.DistanceSquaredTo(otherActor.GlobalPosition);
 			if (distance < closestDist) {
 				closestDist = distance;
