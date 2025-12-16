@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=22 format=3 uid="uid://c52wgcwnm17eq"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=24 format=3 uid="uid://c52wgcwnm17eq"]
 
 [ext_resource type="Texture2D" uid="uid://lu6njwr8pdpr" path="res://Actors/Raptor.png" id="1_itc0e"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_p65yl"]
 [ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_u6fk2"]
+[ext_resource type="Script" path="res://Scripts/Behaviour/Behaviour.cs" id="3_wa1a4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqhkn"]
 atlas = ExtResource("1_itc0e")
@@ -168,9 +169,14 @@ magicalBaseValue = 5.0
 physicalDefense = 10.0
 magicalDefense = 10.0
 
+[sub_resource type="Resource" id="Resource_ojfif"]
+script = ExtResource("3_wa1a4")
+actionChecks = null
+
 [resource]
 script = ExtResource("1_p65yl")
 name = "Raptor"
 _animationFrames = SubResource("SpriteFrames_gjncm")
 pixelHeight = 80.0
 _baseStats = SubResource("Resource_eyauv")
+behaviour = SubResource("Resource_ojfif")

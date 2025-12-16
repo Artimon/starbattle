@@ -27,6 +27,9 @@ public partial class ActorSetup : Resource {
 	[Export]
 	public PlayerActions playerActions;
 
+	[Export]
+	public Behaviour behaviour;
+
 	public float GetVitality(float difficulty) {
 		return _baseStats.vitality * difficulty * (0.8f + GD.Randf() * 0.4f);
 	}

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=21 format=3 uid="uid://ce40rayktpge3"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=23 format=3 uid="uid://ce40rayktpge3"]
 
 [ext_resource type="Texture2D" uid="uid://uhi12tqka61y" path="res://Actors/ElderGhost.png" id="1_enb1r"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_lqjuh"]
 [ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_ao3xb"]
+[ext_resource type="Script" path="res://Scripts/Behaviour/Behaviour.cs" id="3_prwmg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hjoxe"]
 atlas = ExtResource("1_enb1r")
@@ -161,9 +162,14 @@ magicalBaseValue = 40.0
 physicalDefense = 55.0
 magicalDefense = 30.0
 
+[sub_resource type="Resource" id="Resource_j5tn5"]
+script = ExtResource("3_prwmg")
+actionChecks = null
+
 [resource]
 script = ExtResource("1_lqjuh")
 name = "ElderGhost"
 _animationFrames = SubResource("SpriteFrames_igopj")
 pixelHeight = 80.0
 _baseStats = SubResource("Resource_7de8c")
+behaviour = SubResource("Resource_j5tn5")

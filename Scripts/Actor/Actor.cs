@@ -79,6 +79,9 @@ public partial class Actor : Node3D {
 	public ActorAction action;
 
 	[Export]
+	public ActorBehaviour behaviour;
+
+	[Export]
 	public ActorRegenerate _regenerate;
 
 	[Export]
@@ -191,6 +194,8 @@ public partial class Actor : Node3D {
 
 		var newHp = Mathf.Max(0f, hp - damage);
 
+		action.TryRequestHit();
+
 		Rpc(nameof(RpcDamage), damage, newHp, isCritical, hitCount);
 	}
 
@@ -212,8 +217,6 @@ public partial class Actor : Node3D {
 		// }
 
 		if (hp > 0f) {
-			stateMachine.Force("Hit");
-
 			return;
 		}
 
@@ -291,6 +294,7 @@ public partial class Actor : Node3D {
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		Position = synchronizer.spawnPosition;
 
+		behaviour.Register();
 		setup = _setups.GetSetup(actorId);
 		sprite.SpriteFrames = setup.AnimationFrames;
 

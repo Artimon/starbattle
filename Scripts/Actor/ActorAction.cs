@@ -1,23 +1,27 @@
-﻿using Godot;
-using TargetTypes = Starbattle.ActionSetup.TargetTypes;
+﻿using System;
+using Godot;
 
 namespace Starbattle;
 
 [GlobalClass]
 public partial class ActorAction : Node {
 	[Export]
-	public Actor _player;
+	public Actor _actor;
 
 	public double _actionTime;
 
 	public double ActionTime => _actionTime;
+
+	public int _lastActionCharges;
 
 	[Export]
 	public ActionSetups _actionSetups;
 
 	public ActionSetups ActionSetups => _actionSetups;
 
-	public bool IsIdle => _player.stateMachine.IsInState("Idle");
+	public bool IsIdle => _actor.stateMachine.IsInState("Idle");
+
+	public event Action ActionCharge;
 
 	public override void _EnterTree() {
 		SetProcess(false);
@@ -28,10 +32,23 @@ public partial class ActorAction : Node {
 			return;
 		}
 
-		var statsFactor = 1f + _player.stats.agility / 200f;
+		var statsFactor = 1f + _actor.stats.agility / 200f;
 
 		_actionTime += 0.6f * statsFactor * delta; // Take 5 second with 0 agi to reach 3.
 		_actionTime = Mathf.Clamp(_actionTime, 0d, 3d);
+
+		var actionCharges = Mathf.FloorToInt(_actionTime);
+		if (_lastActionCharges != actionCharges) {
+			_lastActionCharges = actionCharges;
+
+			ActionCharge?.Invoke();
+		}
+	}
+
+	public bool TryRequestAction(string actionName, Actor actor, Vector3 position, bool isCounter = false) {
+		var actionSetup = _actionSetups.GetSetup(actionName);
+
+		return TryRequestAction(actionSetup, actor, position, isCounter);
 	}
 
 	/**
@@ -57,7 +74,7 @@ public partial class ActorAction : Node {
 			return false;
 		}
 
-		if (_player.sp < actionSetup.spCost) {
+		if (_actor.sp < actionSetup.spCost) {
 			return false;
 		}
 
@@ -121,7 +138,7 @@ public partial class ActorAction : Node {
 
 				targetPosition = actor.GlobalPosition;
 
-				_player.Drain(action.spCost);
+				_actor.Drain(action.spCost);
 
 				break;
 		}
@@ -157,7 +174,7 @@ public partial class ActorAction : Node {
 	}
 
 	public void PerformMove(Vector3 position) {
-		_player.stateMachine.Get<StateMove>().MoveTo(position);
+		_actor.stateMachine.Get<StateMove>().MoveTo(position);
 	}
 
 	/**
@@ -170,28 +187,28 @@ public partial class ActorAction : Node {
 		}
 
 		var attackPosition = actor.GlobalPosition;
-		var playerPosition = _player.GlobalPosition;
+		var playerPosition = _actor.GlobalPosition;
 		var distance = playerPosition.DistanceTo(position);
 
 		if (distance <= 0.35f) {
-			_player.stateMachine
+			_actor.stateMachine
 				.Get<StateAttack>()
 				.Attack(actionSetup, actor, attackPosition);
 
 			return;
 		}
 
-		_player.stateMachine
+		_actor.stateMachine
 			.Get<StateMove>()
 			.MoveTo(position, () => {
-				_player.stateMachine
+				_actor.stateMachine
 					.Get<StateAttack>()
 					.Attack(actionSetup, actor, attackPosition);
 			});
 	}
 
 	public void PerformRegenerate(ActionSetup actionSetup) {
-		_player.stateMachine
+		_actor.stateMachine
 			.Get<StateRegenerate>()
 			.Regenerate(actionSetup);
 	}
@@ -202,9 +219,24 @@ public partial class ActorAction : Node {
 			return;
 		}
 
-		_player.stateMachine
+		_actor.stateMachine
 			.Get<StateCast>()
 			.Cast(actionSetup, actor, position);
+	}
+
+	public bool TryRequestHit() {
+		if (_actor.stateMachine.IsInState("Hit")) {
+			return false;
+		}
+
+		Rpc(nameof(RpcBeginHit));
+
+		return true;
+	}
+
+	[Rpc(CallLocal = true)]
+	public void RpcBeginHit() {
+		_actor.stateMachine.Force("Hit");
 	}
 
 	public bool HasValidActor(ActionSetup actionSetup, Actor actor) {
@@ -212,7 +244,7 @@ public partial class ActorAction : Node {
 			return false;
 		}
 
-		var canTarget = actionSetup.CanTarget(_player, actor);
+		var canTarget = actionSetup.CanTarget(_actor, actor);
 		if (!canTarget) {
 			return false;
 		}
@@ -221,24 +253,24 @@ public partial class ActorAction : Node {
 	}
 
 	public bool IsInRange(Actor actor) {
-		var distance = (_player.GlobalPosition - actor.GlobalPosition).Length();
+		var distance = (_actor.GlobalPosition - actor.GlobalPosition).Length();
 
-		return distance <= _player.actionRange;
+		return distance <= _actor.actionRange;
 	}
 
 	public Vector3 GetLimitedPosition(Vector3 position) {
-		var playerPosition = _player.GlobalPosition;
+		var playerPosition = _actor.GlobalPosition;
 		var distance = position - playerPosition;
 
-		if (distance.Length() > _player.actionRange) {
-			position = playerPosition + distance.Normalized() * _player.actionRange;
+		if (distance.Length() > _actor.actionRange) {
+			position = playerPosition + distance.Normalized() * _actor.actionRange;
 		}
 
 		return position;
 	}
 
 	public Vector3 GetAttackPosition(Actor actor) {
-		var playerPosition = _player.GlobalPosition;
+		var playerPosition = _actor.GlobalPosition;
 		var targetPosition = actor.GlobalPosition;
 
 		var direction = (playerPosition - targetPosition).Normalized();

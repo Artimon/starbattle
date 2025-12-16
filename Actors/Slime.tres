@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=21 format=3 uid="uid://j1x3dmibjlmm"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=23 format=3 uid="uid://j1x3dmibjlmm"]
 
 [ext_resource type="Texture2D" uid="uid://cu1oqsvdl5xp4" path="res://Actors/Slime.png" id="1_0mfbx"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_6gw58"]
 [ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_0q7ls"]
+[ext_resource type="Script" path="res://Scripts/Behaviour/Behaviour.cs" id="3_ourrd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6g28"]
 atlas = ExtResource("1_0mfbx")
@@ -161,9 +162,14 @@ magicalBaseValue = 5.0
 physicalDefense = 5.0
 magicalDefense = 5.0
 
+[sub_resource type="Resource" id="Resource_pywt1"]
+script = ExtResource("3_ourrd")
+actionChecks = null
+
 [resource]
 script = ExtResource("1_6gw58")
 name = "Slime"
 _animationFrames = SubResource("SpriteFrames_2ggh8")
 pixelHeight = 80.0
 _baseStats = SubResource("Resource_m10b6")
+behaviour = SubResource("Resource_pywt1")
