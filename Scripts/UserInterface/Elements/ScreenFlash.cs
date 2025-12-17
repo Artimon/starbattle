@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Starbattle;
+namespace Starbattle.UserInterface.Elements;
 
 [GlobalClass]
 public partial class ScreenFlash : Node {

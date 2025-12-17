@@ -1,11 +1,14 @@
 ﻿using Godot;
 
-namespace Starbattle;
+namespace Starbattle.UserInterface.Elements;
 
 [GlobalClass]
 public partial class AnimatedBar : Control {
-	[Export] public TextureProgressBar _topBar;
-	[Export] public TextureProgressBar _bottomBar;
+	[Export]
+	public TextureProgressBar _topBar;
+
+	[Export]
+	public TextureProgressBar _bottomBar;
 
 	public TextureProgressBar _animatedBar;
 	public float _targetValue;

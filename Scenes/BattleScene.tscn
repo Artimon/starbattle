@@ -1,12 +1,15 @@
-[gd_scene load_steps=39 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=42 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
 [ext_resource type="PackedScene" uid="uid://5si2jcjsx627" path="res://UserInterface/Elements/ScreenFlash.tscn" id="1_oewvn"]
 [ext_resource type="Script" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Components/ExperienceBar.cs" id="2_1nfni"]
 [ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="3_s4vdo"]
+[ext_resource type="Texture2D" uid="uid://03llkhcxxj85" path="res://UserInterface/Components/ExperienceBar/ExperienceBarUnder.png" id="4_homol"]
+[ext_resource type="Texture2D" uid="uid://bgt6vrksk7aqu" path="res://UserInterface/Components/ExperienceBar/ExperienceBarProgress.png" id="5_uvbu8"]
 [ext_resource type="Script" path="res://Scripts/Controllers/TargetingController.cs" id="6_23bu1"]
 [ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
 [ext_resource type="PackedScene" uid="uid://bh025c2qwoxiv" path="res://Actions/ActionRange.tscn" id="8_8chmn"]
@@ -93,6 +96,35 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ScreenFlash" parent="CanvasLayer" instance=ExtResource("1_oewvn")]
+
+[node name="ExperienceBar" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_progressBar")]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 11)
+script = ExtResource("2_1nfni")
+_progressBar = NodePath("TextureProgressBar")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/ExperienceBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("4_homol")
+texture_progress = ExtResource("5_uvbu8")
 
 [node name="ActorAvatars" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_playerAvatarsContainer", "_enemyAvatarsContainer")]
 layout_mode = 3

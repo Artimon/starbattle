@@ -1,5 +1,6 @@
 ﻿using Godot;
 using Starbattle.Effects;
+using Starbattle.UserInterface.Components;
 
 namespace Starbattle;
 
@@ -26,15 +27,41 @@ public partial class ActorExperience : Node {
 
 		foreach (var actor in Actor.PlayerGroup) {
 			actor.experience.Add(experience);
+
+			// Pause the entire network.
+			// if (actor.Multiplayer.IsServer()) {
+			// 	actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPauseGame));
+			// }
 		}
 	}
 
 	public void Add(float experience) {
-		_experience += experience; // @TODO Maybe multiply by "growth" factor?
-		if (_experience < RequiredExperience) {
+		if (_actor.IsDead) {
 			return;
 		}
 
+		_experience += experience; // @TODO Maybe multiply by "growth" factor?
+		if (_experience < RequiredExperience) {
+			ExperienceBar.instance.SetProgress(_experience, RequiredExperience);
+
+			return;
+		}
+
+		level += 1;
+		_experience = 0;
+
+		ExperienceBar.instance.SetProgress(_experience, RequiredExperience);
+
 		_levelUpEffectPrefab.Instantiate<LevelUpEffect>(_actor);
+	}
+
+	[Rpc(CallLocal = true)]
+	public void RpcPauseGame() {
+		Engine.TimeScale = 0.0;
+	}
+
+	[Rpc(CallLocal = true)]
+	public void RpcResumeGame() {
+		Engine.TimeScale = 1.0;
 	}
 }
