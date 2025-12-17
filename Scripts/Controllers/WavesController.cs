@@ -17,6 +17,8 @@ public partial class WavesController : Node {
 	public float _time;
 	public int _currentWave = -1;
 
+	public int _delayedSpawnAmount;
+
 	public WaveSetup _waveSetup;
 
 	[Export]
@@ -100,8 +102,23 @@ public partial class WavesController : Node {
 			return;
 		}
 
+		/*
+		 * Only spawn in bulk to prevent frequent updates to the avatar list.
+		 */
+		var spawnAmount = Mathf.Max(1, _waveSetup.minAmount - mobs.Length) + _delayedSpawnAmount;
+		spawnAmount = Mathf.Min(spawnAmount, _waveSetup.minAmount); // Prevent overshooting.
+		spawnAmount = Mathf.Min(spawnAmount, MaxMobs - mobs.Length); // Don't exceed max mobs.
+
+		if (spawnAmount < _waveSetup.minAmount) {
+			_delayedSpawnAmount = spawnAmount;
+
+			return;
+		}
+
+		_delayedSpawnAmount = 0;
+
 		var difficulty = GetDifficulty();
-		var spawnAmount = Mathf.Max(1, _waveSetup.minAmount - mobs.Length);
+
 		while (spawnAmount > 0) {
 			spawnAmount -= 1;
 
