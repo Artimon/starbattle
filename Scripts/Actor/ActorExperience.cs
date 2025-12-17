@@ -11,6 +11,10 @@ public partial class ActorExperience : Node {
 	[Export]
 	public Actor _actor;
 
+	public int _openLevelUps;
+
+	public bool HasOpenLevelUps => _openLevelUps > 0;
+
 	public float _experience;
 
 	public float RequiredExperience => level * 5f;
@@ -27,11 +31,6 @@ public partial class ActorExperience : Node {
 
 		foreach (var actor in Actor.PlayerGroup) {
 			actor.experience.Add(experience);
-
-			// Pause the entire network.
-			// if (actor.Multiplayer.IsServer()) {
-			// 	actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPauseGame));
-			// }
 		}
 	}
 
@@ -48,9 +47,13 @@ public partial class ActorExperience : Node {
 		}
 
 		level += 1;
+		_openLevelUps += 1;
 		_experience = 0;
 
+		_actor.FullHeal();
+
 		ExperienceBar.instance.SetProgress(_experience, RequiredExperience);
+		ExperienceBar.instance.SetLevel(level);
 
 		_levelUpEffectPrefab.Instantiate<LevelUpEffect>(_actor);
 	}
@@ -63,5 +66,29 @@ public partial class ActorExperience : Node {
 	[Rpc(CallLocal = true)]
 	public void RpcResumeGame() {
 		Engine.TimeScale = 1.0;
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	public void _RpcRequestLevelUp() {
+		if (!Multiplayer.IsServer()) {
+			return;
+		}
+
+		if (!HasOpenLevelUps) {
+			return;
+		}
+
+		foreach (var actor in Actor.PlayerGroup) {
+			// Pause the entire network.
+			actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPauseGame));
+		}
+	}
+
+	public void OnLevelUpPressed() {
+		if (!HasOpenLevelUps) {
+			return;
+		}
+
+		RpcId(1, nameof(_RpcRequestLevelUp));
 	}
 }

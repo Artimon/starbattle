@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=43 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -40,6 +40,11 @@ background_canvas_max_layer = 1
 sky = SubResource("Sky_7770p")
 glow_enabled = true
 glow_strength = 1.35
+
+[sub_resource type="LabelSettings" id="LabelSettings_1dvsm"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1pme"]
 albedo_texture = ExtResource("1_et1wg")
@@ -97,7 +102,7 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 
 [node name="ScreenFlash" parent="CanvasLayer" instance=ExtResource("1_oewvn")]
 
-[node name="ExperienceBar" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_progressBar")]
+[node name="ExperienceBar" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_progressBar", "_levelLabel")]
 custom_minimum_size = Vector2(0, 11)
 layout_mode = 3
 anchors_preset = 12
@@ -108,9 +113,10 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(0, 11)
 script = ExtResource("2_1nfni")
-_progressBar = NodePath("TextureProgressBar")
+_progressBar = NodePath("Experience TextureProgressBar")
+_levelLabel = NodePath("Level Label")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/ExperienceBar"]
+[node name="Experience TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/ExperienceBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,6 +131,23 @@ stretch_margin_right = 2
 stretch_margin_bottom = 2
 texture_under = ExtResource("4_homol")
 texture_progress = ExtResource("5_uvbu8")
+
+[node name="Level Label" type="Label" parent="CanvasLayer/ExperienceBar"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -28.0
+offset_right = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1"
+label_settings = SubResource("LabelSettings_1dvsm")
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="ActorAvatars" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_playerAvatarsContainer", "_enemyAvatarsContainer")]
 layout_mode = 3

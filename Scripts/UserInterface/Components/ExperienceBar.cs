@@ -9,6 +9,9 @@ public partial class ExperienceBar : Control {
 	[Export]
 	public TextureProgressBar _progressBar;
 
+	[Export]
+	public Label _levelLabel;
+
 	public override void _EnterTree() {
 		instance = this;
 	}
@@ -25,5 +28,9 @@ public partial class ExperienceBar : Control {
 	public void SetProgress(float experience, float requiredExperience) {
 		_progressBar.Value = experience;
 		_progressBar.MaxValue = requiredExperience;
+	}
+
+	public void SetLevel(int level) {
+		_levelLabel.Text = level.ToString();
 	}
 }

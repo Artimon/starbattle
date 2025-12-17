@@ -301,6 +301,18 @@ public partial class Actor : Node3D {
 
 	public static Actor Resolve(uint handle) => actors.Find(actor => actor.synchronizer.handle == handle);
 
+	public void FullHeal() {
+		if (!Multiplayer.IsServer()) {
+			return;
+		}
+
+		var heal = MaxHp - hp;
+		Heal(heal, false);
+
+		var refresh = MaxSp - sp;
+		Refresh(refresh, false);
+	}
+
 	private void OnCreated(uint actorId) {
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		Position = synchronizer.spawnPosition;

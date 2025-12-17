@@ -95,6 +95,10 @@ public partial class PlayerController : Node {
 	}
 
 	public override void _Input(InputEvent @event) {
+		if (@event.IsActionPressed("LevelUp")) {
+			_player.experience.OnLevelUpPressed();
+		}
+
 		if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } mouseEvent) {
 			if (_nextAction == null) {
 				return;
