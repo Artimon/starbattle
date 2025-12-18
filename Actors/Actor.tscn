@@ -288,7 +288,7 @@ animations = [{
 radius = 0.4
 height = 1.6
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "poise", "behaviour", "experience", "_regenerate", "stateMachine")]
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "poise", "behaviour", "experience", "perks", "_regenerate", "stateMachine")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
 characterBody = NodePath("CharacterBody3D")
@@ -301,6 +301,7 @@ action = NodePath("Systems/ActorAction")
 poise = NodePath("Systems/ActorPoise")
 behaviour = NodePath("Systems/ActorBehaviour")
 experience = NodePath("Systems/ActorExperience")
+perks = NodePath("Systems/ActorPerks")
 _regenerate = NodePath("Systems/ActorRegenerate")
 stateMachine = NodePath("StateMachine")
 _combatNumberPrefab = ExtResource("3_edhfj")
@@ -347,8 +348,9 @@ script = ExtResource("6_43p3x")
 _actor = NodePath("../..")
 _levelUpEffectPrefab = ExtResource("11_38adi")
 
-[node name="ActorPerks" type="Node" parent="Systems"]
+[node name="ActorPerks" type="Node" parent="Systems" node_paths=PackedStringArray("_actor")]
 script = ExtResource("13_ne8au")
+_actor = NodePath("../..")
 perkSetups = ExtResource("14_m3pml")
 
 [node name="ActorRegenerate" type="Timer" parent="Systems" node_paths=PackedStringArray("_actor")]

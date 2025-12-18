@@ -5,6 +5,7 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class ActorPerks : Node {
+	[Export]
 	public Actor _actor;
 
 	[Export]

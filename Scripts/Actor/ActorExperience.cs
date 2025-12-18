@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Linq;
+using Godot;
 using Starbattle.Effects;
 using Starbattle.UserInterface.Components;
 
@@ -59,6 +60,16 @@ public partial class ActorExperience : Node {
 	}
 
 	[Rpc(CallLocal = true)]
+	public void RpcPerkChoices(int[] cloakedPerkIds) {
+		GD.Print($"{Multiplayer.GetUniqueId()} received perks:");
+
+		foreach (var cloakedPerkId in cloakedPerkIds) {
+			var perk = _actor.perks.perkSetups.GetSetup(cloakedPerkId);
+			GD.Print($"Perk: {perk.ResourcePath}");
+		}
+	}
+
+	[Rpc(CallLocal = true)]
 	public void RpcPauseGame() {
 		Engine.TimeScale = 0.0;
 	}
@@ -81,6 +92,14 @@ public partial class ActorExperience : Node {
 		foreach (var actor in Actor.PlayerGroup) {
 			// Pause the entire network.
 			actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPauseGame));
+
+			// Send choices.
+			var perkIds = _actor.perks
+				.RollChoices()
+				.Select(perk => perk.CloakedId)
+				.ToArray();
+
+			actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPerkChoices), perkIds);
 		}
 	}
 

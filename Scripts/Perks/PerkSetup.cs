@@ -19,6 +19,8 @@ public partial class PerkSetup : Resource {
 
 	public uint Id => ResourcePath.Hash();
 
+	public int CloakedId => unchecked((int)Id);
+
 	[Export]
 	public string displayName;
 
@@ -35,4 +37,8 @@ public partial class PerkSetup : Resource {
 		Rarities.Legendary => 0.05f,
 		_ => 1.0f
 	};
+
+	public static uint RevealId(int cloakedId) {
+		return unchecked((uint)cloakedId);
+	}
 }

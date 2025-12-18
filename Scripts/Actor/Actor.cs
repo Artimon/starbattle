@@ -88,6 +88,9 @@ public partial class Actor : Node3D {
 	public ActorExperience experience;
 
 	[Export]
+	public ActorPerks perks;
+
+	[Export]
 	public ActorRegenerate _regenerate;
 
 	[Export]
