@@ -73,6 +73,7 @@ public partial class ActorAvatar : Control {
 	public void MirrorSprite() {
 		var sprite = _actor.sprite;
 
+		_textureRect.Modulate = sprite.Modulate;
 		_textureRect.Texture = sprite.SpriteFrames.GetFrameTexture(
 			sprite.Animation,
 			sprite.Frame

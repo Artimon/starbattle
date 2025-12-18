@@ -36,7 +36,7 @@ public partial class StateCast : StateBase {
 		_target = target;
 		_spellPosition = castPosition;
 
-		_actor.stateMachine.TryEnter("Cast");
+		_actor.stateMachine.Force("Cast");
 	}
 
 	public void OnAnimationFinished() {

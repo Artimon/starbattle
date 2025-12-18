@@ -23,7 +23,6 @@ public partial class StateHit : StateBase {
 			return;
 		}
 
-		// @TODO Check for counter attack.
-		_actor.stateMachine.TryEnter("Idle");
+		_actor.stateMachine.Force("Idle");
 	}
 }

@@ -79,7 +79,7 @@ public partial class WavesController : Node {
 		 * @TODO Separate wave and player levels in actor setup scale config?
 		 */
 		var maxLevel = players.Max(actor => actor.experience.level);
-		var difficultyFactor = 0.5f + (maxLevel + _currentWave) / 2f; // 0.5 + (1 + 0) / 2 = 1 (100%)
+		var difficultyFactor = 0.75f + _currentWave / 4f; // 0.5 + (1 + 0) / 2 = 1 (100%)
 
 		/*
 		 * 1 -> 1.0

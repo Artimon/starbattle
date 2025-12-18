@@ -217,6 +217,7 @@ public partial class Actor : Node3D {
 	public void RpcDamage(float damage, float newHp, bool isCritical, int hitCount) {
 		hp = newHp;
 
+		_animator.Hit(damage);
 		_combatNumberPrefab.Instantiate<CombatNumberBounce>(EffectContainer.instance)
 			.ShowDamage(this, damage, isCritical, hitCount);
 

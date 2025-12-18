@@ -35,7 +35,7 @@ public partial class StateAttack : StateBase {
 		_target = target;
 		_attackPosition = attackPosition;
 
-		_actor.stateMachine.TryEnter("Attack");
+		_actor.stateMachine.Force("Attack");
 	}
 
 	public void OnAnimationFinished() {

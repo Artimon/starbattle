@@ -27,7 +27,7 @@ public partial class StateRegenerate : StateBase {
 	public void Regenerate(ActionSetup actionSetup) {
 		_actionSetup = actionSetup;
 
-		_actor.stateMachine.TryEnter("Regenerate");
+		_actor.stateMachine.Force("Regenerate");
 	}
 
 	public void OnSpriteFrameChanged() {

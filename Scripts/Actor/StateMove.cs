@@ -1,6 +1,7 @@
 ﻿using System;
 using Artimus.Services;
 using Godot;
+using Starbattle.Effects;
 
 namespace Starbattle;
 
@@ -16,6 +17,9 @@ public partial class StateMove : StateBase {
 	public float _lerpDuration;
 	public float _elapsedTime;
 
+	[Export]
+	public AudioStream _moveAudio;
+
 	public Action _onFinished;
 
 	public override void OnEnter() {
@@ -23,6 +27,8 @@ public partial class StateMove : StateBase {
 		_actor.sprite.Frame = 0;
 
 		_actor.Face(_targetPosition);
+
+		LocalAudio.Play(_actor.GlobalPosition, _moveAudio);
 	}
 
 	public override void OnProcess(double deltaTime) {
@@ -62,6 +68,6 @@ public partial class StateMove : StateBase {
 
 		_onFinished = onFinished;
 
-		_actor.stateMachine.TryEnter("Move");
+		_actor.stateMachine.Force("Move");
 	}
 }
