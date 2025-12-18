@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActionSetup" load_steps=2 format=3 uid="uid://w6fsn0mtbhy0"]
 
-[ext_resource type="Script" path="res://Scripts/Action/ActionSetup.cs" id="1_c35hn"]
+[ext_resource type="Script" path="res://Scripts/Actions/ActionSetup.cs" id="1_c35hn"]
 
 [resource]
 script = ExtResource("1_c35hn")

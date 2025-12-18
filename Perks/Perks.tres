@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PerkSetups" load_steps=11 format=3 uid="uid://bgs0uggqbu0gu"]
+
+[ext_resource type="Resource" uid="uid://dkow41bsfbth6" path="res://Perks/Common/Strength.tres" id="1_1vj2j"]
+[ext_resource type="Resource" uid="uid://cxt87367sba8b" path="res://Perks/Common/Agility.tres" id="1_c67o6"]
+[ext_resource type="Script" path="res://Scripts/Perks/PerkSetups.cs" id="1_ojnff"]
+[ext_resource type="Resource" uid="uid://6h4kyqri8snd" path="res://Perks/Common/Vitality.tres" id="2_5ispt"]
+[ext_resource type="Resource" uid="uid://bcav0qwu8vtu2" path="res://Perks/Common/Dexterity.tres" id="2_pmub0"]
+[ext_resource type="Resource" uid="uid://bfwiho5dl3fs2" path="res://Perks/Common/Intelligence.tres" id="3_ibodt"]
+[ext_resource type="Resource" uid="uid://b2ppnryi2fefm" path="res://Perks/Common/Wisdom.tres" id="6_equmh"]
+[ext_resource type="Resource" uid="uid://3xqym1qql5lj" path="res://Perks/Rare/Meditation Rare.tres" id="7_guthy"]
+[ext_resource type="Resource" uid="uid://kpeyqqb1ri6w" path="res://Perks/Epic/Meditation Epic.tres" id="8_hgsb5"]
+[ext_resource type="Resource" uid="uid://diqaadkqln43v" path="res://Perks/Legendary/Meditation Legendary.tres" id="9_sw5hv"]
+
+[resource]
+script = ExtResource("1_ojnff")
+list = Array[Object]([ExtResource("1_c67o6"), ExtResource("2_pmub0"), ExtResource("3_ibodt"), ExtResource("1_1vj2j"), ExtResource("2_5ispt"), ExtResource("6_equmh"), ExtResource("7_guthy"), ExtResource("8_hgsb5"), ExtResource("9_sw5hv")])

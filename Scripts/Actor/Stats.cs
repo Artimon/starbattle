@@ -28,16 +28,19 @@ public partial class Stats : Resource {
 	public float wisdom;
 
 	[Export]
+	public float luck;
+
+	[Export]
 	public float critRate;
 
 	[Export]
 	public float counterRate;
 
 	[Export]
-	public float passiveHpRegenPercent = 2f; // Players only.
+	public float passiveHpRegenPercent; // Players only.
 
 	[Export]
-	public float passiveSpRegenPercent = 3f; // Players only.
+	public float passiveSpRegenPercent; // Players only.
 
 	[Export]
 	public float activeHpRegenPower;

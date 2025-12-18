@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_7pe00"]
 [ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Actions/Attack.tres" id="3_xcqno"]
 [ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Actions/Move.tres" id="4_opj84"]
-[ext_resource type="Script" path="res://Scripts/Action/PlayerActions.cs" id="5_583s1"]
+[ext_resource type="Script" path="res://Scripts/Actions/PlayerActions.cs" id="5_583s1"]
 [ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="5_i2q6v"]
 [ext_resource type="Resource" uid="uid://byxk6s2vvj844" path="res://Actions/RegenerateSp/RegenerateSp.tres" id="6_kg33t"]
 

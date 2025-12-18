@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bh025c2qwoxiv"]
 
-[ext_resource type="Script" path="res://Scripts/Action/ActionRange.cs" id="1_kgnvb"]
+[ext_resource type="Script" path="res://Scripts/Actions/ActionRange.cs" id="1_kgnvb"]
 [ext_resource type="Texture2D" uid="uid://pto16jja6odi" path="res://Images/ActionCircle.png" id="2_ij1h1"]
 [ext_resource type="Shader" uid="uid://kfjlo04ac7q3" path="res://Shaders/AlphaShine.tres" id="2_nus82"]
 [ext_resource type="Shader" uid="uid://y58w4lidpj7u" path="res://Shaders/ActionRange.tres" id="3_kycce"]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActionSetup" load_steps=3 format=3 uid="uid://byxk6s2vvj844"]
 
-[ext_resource type="Script" path="res://Scripts/Action/ActionSetup.cs" id="1_culj1"]
+[ext_resource type="Script" path="res://Scripts/Actions/ActionSetup.cs" id="1_culj1"]
 [ext_resource type="PackedScene" uid="uid://cs4f85uhp75tv" path="res://Actions/RegenerateSp/RegenerateSpEffect.tscn" id="1_g7qrb"]
 
 [resource]

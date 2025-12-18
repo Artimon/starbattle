@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Actions/Attack.tres" id="3_v2p2x"]
 [ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="4_jtier"]
 [ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Actions/Move.tres" id="5_nx5po"]
-[ext_resource type="Script" path="res://Scripts/Action/PlayerActions.cs" id="5_tc4dp"]
+[ext_resource type="Script" path="res://Scripts/Actions/PlayerActions.cs" id="5_tc4dp"]
 [ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="6_kt0o1"]
 [ext_resource type="Resource" uid="uid://byxk6s2vvj844" path="res://Actions/RegenerateSp/RegenerateSp.tres" id="7_rc6md"]
 
