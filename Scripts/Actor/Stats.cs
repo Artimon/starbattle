@@ -133,4 +133,24 @@ public partial class Stats : Resource {
 
 		return Mathf.Max(1f, attack - defense);
 	}
+
+	public void Add(Stats other) {
+		strength              += other.strength;
+		dexterity             += other.dexterity;
+		agility               += other.agility;
+		vitality              += other.vitality;
+		intelligence          += other.intelligence;
+		wisdom                += other.wisdom;
+		luck                  += other.luck;
+		critRate              += other.critRate;
+		counterRate           += other.counterRate;
+		passiveHpRegenPercent += other.passiveHpRegenPercent;
+		passiveSpRegenPercent += other.passiveSpRegenPercent;
+		activeHpRegenPower    += other.activeHpRegenPower;
+		activeSpRegenPower    += other.activeSpRegenPower;
+		physicalBaseValue     += other.physicalBaseValue;
+		magicalBaseValue      += other.magicalBaseValue;
+		physicalDefense       += other.physicalDefense;
+		magicalDefense        += other.magicalDefense;
+	}
 }

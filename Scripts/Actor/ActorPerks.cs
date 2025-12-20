@@ -11,16 +11,6 @@ public partial class ActorPerks : Node {
 	[Export]
 	public PerkSetups perkSetups;
 
-	public override void _Ready() {
-		// var choices = RollChoices();
-		//
-		// GD.Print("--------------");
-		//
-		// foreach (var perkSetup in choices) {
-		// 	GD.Print($"Rolling perk setup {perkSetup.ResourcePath}");
-		// }
-	}
-
 	public PerkSetup[] RollChoices() {
 		const int picks = 3;
 		var availablePerks = perkSetups.Perks;
@@ -47,5 +37,11 @@ public partial class ActorPerks : Node {
 		}
 
 		return choices.ToArray();
+	}
+
+	public void Apply(int cloakedPerkId) {
+		var perk = perkSetups.GetSetup(cloakedPerkId);
+
+		_actor.stats.Add(perk.stats);
 	}
 }

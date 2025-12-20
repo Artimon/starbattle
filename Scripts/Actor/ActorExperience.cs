@@ -2,6 +2,7 @@
 using Godot;
 using Starbattle.Effects;
 using Starbattle.UserInterface.Components;
+using Array = System.Array;
 
 namespace Starbattle;
 
@@ -61,12 +62,7 @@ public partial class ActorExperience : Node {
 
 	[Rpc(CallLocal = true)]
 	public void RpcPerkChoices(int[] cloakedPerkIds) {
-		GD.Print($"{Multiplayer.GetUniqueId()} received perks:");
-
-		foreach (var cloakedPerkId in cloakedPerkIds) {
-			var perk = _actor.perks.perkSetups.GetSetup(cloakedPerkId);
-			GD.Print($"Perk: {perk.ResourcePath}");
-		}
+		PerkSelection.instance.Show(_actor, cloakedPerkIds);
 	}
 
 	[Rpc(CallLocal = true)]
@@ -77,6 +73,8 @@ public partial class ActorExperience : Node {
 	[Rpc(CallLocal = true)]
 	public void RpcResumeGame() {
 		Engine.TimeScale = 1.0;
+
+		PerkSelection.instance.Hide();
 	}
 
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
@@ -93,13 +91,56 @@ public partial class ActorExperience : Node {
 			// Pause the entire network.
 			actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPauseGame));
 
-			// Send choices.
-			var perkIds = _actor.perks
+			SendChoices(actor);
+		}
+	}
+
+	/**
+	 * Sends an empty array if there are no open level ups.
+	 */
+	public void SendChoices(Actor actor) {
+		var perkIds = Array.Empty<int>();
+
+		if (HasOpenLevelUps) {
+			perkIds = _actor.perks
 				.RollChoices()
 				.Select(perk => perk.CloakedId)
 				.ToArray();
+		}
 
-			actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPerkChoices), perkIds);
+		actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPerkChoices), perkIds);
+	}
+
+	public void SelectPerk(int cloakedPerkId) {
+		RpcId(1, nameof(_RpcSelectPerk), cloakedPerkId);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	public void _RpcSelectPerk(int cloakedPerkId) {
+		if (!Multiplayer.IsServer()) {
+			return;
+		}
+
+		// Not checking for validity at this moment. Could save the current selection.
+		if (HasOpenLevelUps) {
+			_actor.perks.Apply(cloakedPerkId);
+			_openLevelUps -= 1;
+		}
+
+		SendChoices(_actor);
+
+		_CheckAllFinished();
+	}
+
+	public void _CheckAllFinished() {
+		var partyHasOpenLevelUps = Actor.PlayerGroup.Any(actor => actor.experience.HasOpenLevelUps);
+		if (partyHasOpenLevelUps) {
+			return;
+		}
+
+		foreach (var actor in Actor.PlayerGroup) {
+			// Continue the entire network.
+			actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcResumeGame));
 		}
 	}
 

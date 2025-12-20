@@ -7,14 +7,14 @@ namespace Starbattle;
 [GlobalClass]
 public partial class PerkSetups : Resource {
 	[Export]
-	public PerkSetup[] list;
+	public PerkSetup[] items;
 
-	public List<PerkSetup> Perks => list.ToList();
+	public List<PerkSetup> Perks => items.ToList();
 
 	public PerkSetup GetSetup(int cloakedPerkId) {
 		var perkId = PerkSetup.RevealId(cloakedPerkId);
 
-		return list.FirstOrDefault(perk => perk.Id == perkId);
+		return items.FirstOrDefault(perk => perk.Id == perkId);
 	}
 
 	public static float GetWeight(List<PerkSetup> perks) {
