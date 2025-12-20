@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ActionSetup" load_steps=3 format=3 uid="uid://8x7djuuesurn"]
 
 [ext_resource type="PackedScene" uid="uid://bmx0h10f6oyke" path="res://Actions/RegenerateHp/RegenerateHpEffect.tscn" id="1_icsdn"]
-[ext_resource type="Script" path="res://Scripts/Actions/ActionSetup.cs" id="1_qlhdn"]
+[ext_resource type="Script" uid="uid://44osvnlqjfmy" path="res://Scripts/Actions/ActionSetup.cs" id="1_qlhdn"]
 
 [resource]
 script = ExtResource("1_qlhdn")

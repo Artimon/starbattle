@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="PerkSetup" load_steps=4 format=3 uid="uid://bid4migqs3sjy"]
+
+[ext_resource type="Script" uid="uid://jpn88wyeukew" path="res://Scripts/Perks/PerkSetup.cs" id="1_nbnhq"]
+[ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_7r1vf"]
+
+[sub_resource type="Resource" id="Resource_1x0x1"]
+script = ExtResource("2_7r1vf")
+strength = 0.0
+dexterity = 15.0
+agility = 0.0
+vitality = 0.0
+intelligence = 0.0
+wisdom = 0.0
+luck = 0.0
+critRate = 0.0
+counterRate = 0.0
+passiveHpRegenPercent = 0.0
+passiveSpRegenPercent = 0.0
+activeHpRegenPower = 0.0
+activeSpRegenPower = 0.0
+physicalBaseValue = 0.0
+magicalBaseValue = 0.0
+physicalDefense = 0.0
+magicalDefense = 0.0
+experience = 0.0
+
+[resource]
+script = ExtResource("1_nbnhq")
+displayName = "Dexterity"
+rarity = 2
+stats = SubResource("Resource_1x0x1")

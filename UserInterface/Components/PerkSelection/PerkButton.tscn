@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://d33f8roxal3dv"]
+
+[ext_resource type="Script" uid="uid://dfpxfploa0tp7" path="res://Scripts/UserInterface/Components/PerkButton.cs" id="1_l8nye"]
+
+[node name="PerkButton" type="Button" node_paths=PackedStringArray("_titleLabel", "_rarityLabel")]
+custom_minimum_size = Vector2(200, 450)
+script = ExtResource("1_l8nye")
+_titleLabel = NodePath("Title Label")
+_rarityLabel = NodePath("Rarity Label")
+
+[node name="Title Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Title"
+
+[node name="Rarity Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 27.0
+offset_right = 40.0
+offset_bottom = 50.0
+text = "Rarity"

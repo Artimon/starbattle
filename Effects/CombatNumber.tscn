@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cos6glel8tb51"]
 
-[ext_resource type="Script" path="res://Scripts/Effects/CombatNumber.cs" id="1_2cxnq"]
+[ext_resource type="Script" uid="uid://dbgnh5hf2uptr" path="res://Scripts/Effects/CombatNumber.cs" id="1_2cxnq"]
 [ext_resource type="FontFile" uid="uid://jg8oo85iacga" path="res://Fonts/OxygenBold.tres" id="2_huedi"]
 
 [node name="CombatNumber" type="Node3D" node_paths=PackedStringArray("_label")]

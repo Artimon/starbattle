@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cqauknin6ppw1"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/ActorAvatar.cs" id="1_hc7oo"]
+[ext_resource type="Script" uid="uid://ccf3stcon830o" path="res://Scripts/Actor/ActorAvatar.cs" id="1_hc7oo"]
 [ext_resource type="Texture2D" uid="uid://c2mc5vo2djkyo" path="res://Actors/Wizard.png" id="2_7gpdc"]
 [ext_resource type="Texture2D" uid="uid://ux2bmdegcinp" path="res://UserInterface/Elements/AnimatedBar/HpBarProgressEnemy.png" id="2_8viah"]
 [ext_resource type="Texture2D" uid="uid://cjsfgq8hw65k7" path="res://UserInterface/Elements/AnimatedBar/HpBarProgressEnemyBottom.png" id="3_tonhp"]

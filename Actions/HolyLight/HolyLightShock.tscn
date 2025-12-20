@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdyq1qy5lmvkb"]
 
 [ext_resource type="PackedScene" uid="uid://b1o160qlxjrl3" path="res://Models/HolyLightShock.blend" id="1_gtigl"]
-[ext_resource type="Script" path="res://Scripts/Effects/ShockwaveModel.cs" id="2_umevr"]
+[ext_resource type="Script" uid="uid://b4nhqb68vvao8" path="res://Scripts/Effects/ShockwaveModel.cs" id="2_umevr"]
 
 [node name="HolyLightShock" node_paths=PackedStringArray("_model") instance=ExtResource("1_gtigl")]
 script = ExtResource("2_umevr")

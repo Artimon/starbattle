@@ -1,8 +1,8 @@
 [gd_scene load_steps=29 format=3 uid="uid://b536a86allesx"]
 
-[ext_resource type="Script" path="res://Scripts/Effects/LevelUpEffect.cs" id="1_l8o63"]
+[ext_resource type="Script" uid="uid://dvgvq3stniocl" path="res://Scripts/Effects/LevelUpEffect.cs" id="1_l8o63"]
 [ext_resource type="AudioStream" uid="uid://btxd5qk4qscta" path="res://Effects/LevelUpEffect/LevelUp_Replace.wav" id="2_bhstj"]
-[ext_resource type="Script" path="res://Scripts/Effects/OffsetNode.cs" id="2_ejtrb"]
+[ext_resource type="Script" uid="uid://bh1e5sbqs26p5" path="res://Scripts/Effects/OffsetNode.cs" id="2_ejtrb"]
 [ext_resource type="Texture2D" uid="uid://cdatlifxv7h0c" path="res://Effects/LevelUpEffect/LevelUpWings_Replace.png" id="3_fgktg"]
 [ext_resource type="Texture2D" uid="uid://ndy26eafn543" path="res://Effects/LevelUpEffect/SparkleParticle.png" id="5_o2aqe"]
 [ext_resource type="Texture2D" uid="uid://spaa2o48gbcg" path="res://Effects/LevelUpEffect/GlowParticle.png" id="6_tdo3r"]

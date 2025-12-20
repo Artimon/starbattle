@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ActorSetup" load_steps=23 format=3 uid="uid://j1x3dmibjlmm"]
 
 [ext_resource type="Texture2D" uid="uid://cu1oqsvdl5xp4" path="res://Actors/Slime.png" id="1_0mfbx"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_6gw58"]
-[ext_resource type="Script" path="res://Scripts/Actor/Stats.cs" id="2_0q7ls"]
-[ext_resource type="Script" path="res://Scripts/Behaviour/DefaultBehaviour.cs" id="3_y60wj"]
+[ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="1_6gw58"]
+[ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_0q7ls"]
+[ext_resource type="Script" uid="uid://bxors41xs2sgx" path="res://Scripts/Behaviour/DefaultBehaviour.cs" id="3_y60wj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6g28"]
 atlas = ExtResource("1_0mfbx")
@@ -151,6 +151,7 @@ agility = 70.0
 vitality = 30.0
 intelligence = 5.0
 wisdom = 5.0
+luck = 0.0
 critRate = 5.0
 counterRate = 15.0
 passiveHpRegenPercent = 2.0

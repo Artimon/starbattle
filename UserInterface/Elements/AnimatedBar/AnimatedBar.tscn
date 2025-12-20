@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmi0hdv6xctod"]
 
-[ext_resource type="Script" path="res://Scripts/UserInterface/Elements/AnimatedBar.cs" id="1_a32tb"]
+[ext_resource type="Script" uid="uid://ctq7sdp5hgbtf" path="res://Scripts/UserInterface/Elements/AnimatedBar.cs" id="1_a32tb"]
 [ext_resource type="Texture2D" uid="uid://1ffohvlryrdf" path="res://UserInterface/Elements/AnimatedBar/AnimatedBarUnder.png" id="2_gyoqs"]
 [ext_resource type="Texture2D" uid="uid://daimtq6ky508h" path="res://UserInterface/Elements/AnimatedBar/HpBarProgress.png" id="3_da22r"]
 [ext_resource type="Texture2D" uid="uid://bbrei6rpvr6dw" path="res://UserInterface/Elements/AnimatedBar/HpBarProgressBottom.png" id="3_f30as"]

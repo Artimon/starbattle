@@ -1,12 +1,12 @@
 [gd_scene load_steps=36 format=3 uid="uid://cgu3ehqwy7133"]
 
-[ext_resource type="Script" path="res://Scripts/Spells/HolyLight.cs" id="1_244ww"]
+[ext_resource type="Script" uid="uid://cyy3a7nn0gify" path="res://Scripts/Spells/HolyLight.cs" id="1_244ww"]
 [ext_resource type="Texture2D" uid="uid://cpri5q7e4ltn8" path="res://Actions/HolyLight/HolyLight.png" id="2_0hads"]
 [ext_resource type="AudioStream" uid="uid://cn500d8ju2e1d" path="res://Actions/HolyLight/SpellHolyLight.ogg" id="2_mbfcc"]
 [ext_resource type="Texture2D" uid="uid://b1psdsjfnsp6n" path="res://Effects/StoneParticles.png" id="3_8ru8p"]
 [ext_resource type="Texture2D" uid="uid://bu13kxth1m6ya" path="res://Actions/HolyLight/SparkleParticle.png" id="5_bxklu"]
 [ext_resource type="Texture2D" uid="uid://bcjuqui43miav" path="res://Actions/HolyLight/GlowParticle.png" id="5_dj35t"]
-[ext_resource type="Script" path="res://Scripts/Effects/OffsetSprite.cs" id="7_0yg7a"]
+[ext_resource type="Script" uid="uid://c4jkpyi64s8uo" path="res://Scripts/Effects/OffsetSprite.cs" id="7_0yg7a"]
 [ext_resource type="PackedScene" uid="uid://bdyq1qy5lmvkb" path="res://Actions/HolyLight/HolyLightShock.tscn" id="7_ijalq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vyf8h"]
@@ -47,8 +47,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8hakv"]
 _data = {
-"LightBeam": SubResource("Animation_xkamt"),
-"RESET": SubResource("Animation_0uvvo")
+&"LightBeam": SubResource("Animation_xkamt"),
+&"RESET": SubResource("Animation_0uvvo")
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y1rom"]
@@ -242,7 +242,7 @@ shape = SubResource("CapsuleShape3D_vyf8h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_8hakv")
+&"": SubResource("AnimationLibrary_8hakv")
 }
 
 [node name="Effects" type="Node3D" parent="."]

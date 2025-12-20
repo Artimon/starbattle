@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dckdxoettltcf"]
 
 [ext_resource type="FontFile" uid="uid://jg8oo85iacga" path="res://Fonts/OxygenBold.tres" id="1_etfus"]
-[ext_resource type="Script" path="res://Scripts/Effects/CombatDigit.cs" id="1_ymeci"]
+[ext_resource type="Script" uid="uid://8e7ofkam8nmj" path="res://Scripts/Effects/CombatDigit.cs" id="1_ymeci"]
 
 [node name="CombatDigit" type="Label3D"]
 render_priority = 15

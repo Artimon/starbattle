@@ -1,0 +1,20 @@
+<Project Sdk="Godot.NET.Sdk/4.3.0">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Scripts\Notes.txt" />
+    <Content Include="UserInterface\Elements\AnimatedBar\HpBarProgress.png" />
+    <Content Include="UserInterface\Elements\AnimatedBar\HpBarProgress.png.import" />
+    <Content Include="UserInterface\Elements\AnimatedBar\HpBarProgressEnemy.png" />
+    <Content Include="UserInterface\Elements\AnimatedBar\HpBarProgressEnemy.png.import" />
+    <Content Include="UserInterface\Elements\AnimatedBar\AnimatedBarUnder.png" />
+    <Content Include="UserInterface\Elements\AnimatedBar\AnimatedBarUnder.png.import" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\Perks\" />
+  </ItemGroup>
+</Project>

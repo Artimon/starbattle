@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://bmx0h10f6oyke"]
 
-[ext_resource type="Script" path="res://Scripts/Spells/RegenerateHpEffect.cs" id="1_ew8kh"]
+[ext_resource type="Script" uid="uid://dvgp0hid6ew6q" path="res://Scripts/Spells/RegenerateHpEffect.cs" id="1_ew8kh"]
 [ext_resource type="Texture2D" uid="uid://r6tsq7416ofv" path="res://Actions/RegenerateHp/SparkleParticle.png" id="2_i6n2k"]
 [ext_resource type="AudioStream" uid="uid://bq3kdd1ai1ekg" path="res://Actions/RegenerateHp/RegenerateHp.wav" id="2_lxg4m"]
 [ext_resource type="Texture2D" uid="uid://c2wok7q7xeuwd" path="res://Actions/RegenerateHp/GlowParticle.png" id="3_nibm0"]

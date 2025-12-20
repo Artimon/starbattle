@@ -1,12 +1,14 @@
 [gd_resource type="Resource" script_class="ActionSetup" load_steps=2 format=3 uid="uid://w6fsn0mtbhy0"]
 
-[ext_resource type="Script" path="res://Scripts/Actions/ActionSetup.cs" id="1_c35hn"]
+[ext_resource type="Script" uid="uid://44osvnlqjfmy" path="res://Scripts/Actions/ActionSetup.cs" id="1_c35hn"]
 
 [resource]
 script = ExtResource("1_c35hn")
 name = "Attack"
 actionCost = 2
+spCost = 0.0
 power = 100.0
 actionType = 1
+damageType = 0
 targetType = 1
 condition = 0

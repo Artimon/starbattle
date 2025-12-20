@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActorSetups" load_steps=8 format=3 uid="uid://dj3kma3ilnn7q"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/ActorSetups.cs" id="1_j7cpw"]
+[ext_resource type="Script" uid="uid://bx10jj8iv2qr5" path="res://Scripts/Actor/ActorSetups.cs" id="1_j7cpw"]
 [ext_resource type="Resource" uid="uid://dqutttvqe3g20" path="res://Actors/Valkyrie.tres" id="2_0b1b7"]
 [ext_resource type="Resource" uid="uid://ce40rayktpge3" path="res://Actors/ElderGhost.tres" id="3_3lw0w"]
 [ext_resource type="Resource" uid="uid://c5mqeknwjumis" path="res://Actors/Wizard.tres" id="3_3sm4g"]

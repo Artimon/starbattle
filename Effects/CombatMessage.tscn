@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dmkyue4bg5mos"]
 
-[ext_resource type="Script" path="res://Scripts/Effects/CombatMessage.cs" id="1_yl7vj"]
+[ext_resource type="Script" uid="uid://lsohqxfho8oi" path="res://Scripts/Effects/CombatMessage.cs" id="1_yl7vj"]
 [ext_resource type="Texture2D" uid="uid://ds0pswku711uk" path="res://Effects/MessageCounter.png" id="2_37hwk"]
 [ext_resource type="Texture2D" uid="uid://bmm1aqovxhsgy" path="res://Effects/MessageCritical.png" id="2_gdoak"]
 [ext_resource type="Texture2D" uid="uid://v31t4h5hvrag" path="res://Effects/Miss.png" id="4_yg33j"]
@@ -38,8 +38,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amlkn"]
 _data = {
-"RESET": SubResource("Animation_macv2"),
-"default": SubResource("Animation_5bumy")
+&"RESET": SubResource("Animation_macv2"),
+&"default": SubResource("Animation_5bumy")
 }
 
 [node name="CombatMessage" type="Node3D" node_paths=PackedStringArray("_sprite")]

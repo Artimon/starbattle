@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://5si2jcjsx627"]
 
-[ext_resource type="Script" path="res://Scripts/UserInterface/Elements/ScreenFlash.cs" id="1_osn75"]
+[ext_resource type="Script" uid="uid://dwuwsmw0m6kc" path="res://Scripts/UserInterface/Elements/ScreenFlash.cs" id="1_osn75"]
 
 [sub_resource type="Animation" id="Animation_wv6j0"]
 resource_name = "FastFlash"
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n7v03"]
 _data = {
-"FastFlash": SubResource("Animation_wv6j0"),
-"RESET": SubResource("Animation_ohi0a")
+&"FastFlash": SubResource("Animation_wv6j0"),
+&"RESET": SubResource("Animation_ohi0a")
 }
 
 [node name="ScreenFlash" type="Node" node_paths=PackedStringArray("_animationPlayer", "_flashRect")]
@@ -47,7 +47,7 @@ _flashRect = NodePath("ColorRect")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_n7v03")
+&"": SubResource("AnimationLibrary_n7v03")
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]

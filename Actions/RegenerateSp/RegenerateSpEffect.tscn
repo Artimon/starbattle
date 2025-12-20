@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://cs4f85uhp75tv"]
 
-[ext_resource type="Script" path="res://Scripts/Spells/RegenerateSpEffect.cs" id="1_7f7pq"]
+[ext_resource type="Script" uid="uid://drcshbp5vxys2" path="res://Scripts/Spells/RegenerateSpEffect.cs" id="1_7f7pq"]
 [ext_resource type="Texture2D" uid="uid://cw6t06selnn6x" path="res://Actions/RegenerateSp/SparkleParticle.png" id="2_pkxwd"]
 [ext_resource type="AudioStream" uid="uid://dok65w4lhxo84" path="res://Actions/RegenerateSp/RegenerateSp.wav" id="2_r6evx"]
 [ext_resource type="Texture2D" uid="uid://c7mnofflostbx" path="res://Actions/RegenerateSp/GlowParticle.png" id="3_b1uwd"]

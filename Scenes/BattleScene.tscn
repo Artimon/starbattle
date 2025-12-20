@@ -1,33 +1,35 @@
-[gd_scene load_steps=43 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=45 format=3 uid="uid://dqbe2220e2hdv"]
 
-[ext_resource type="Script" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
+[ext_resource type="Script" uid="uid://c64pyrw7r0vqt" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
 [ext_resource type="PackedScene" uid="uid://5si2jcjsx627" path="res://UserInterface/Elements/ScreenFlash.tscn" id="1_oewvn"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
-[ext_resource type="Script" path="res://Scripts/UserInterface/Components/ExperienceBar.cs" id="2_1nfni"]
-[ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
-[ext_resource type="Script" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
+[ext_resource type="Script" uid="uid://dwj7xqe76fl5i" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
+[ext_resource type="Script" uid="uid://dyr4ktq12fm1j" path="res://Scripts/UserInterface/Components/ExperienceBar.cs" id="2_1nfni"]
+[ext_resource type="Script" uid="uid://rqoiknjjc5w0" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
+[ext_resource type="Script" uid="uid://c7jye6tj8r1ss" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="3_s4vdo"]
 [ext_resource type="Texture2D" uid="uid://03llkhcxxj85" path="res://UserInterface/Components/ExperienceBar/ExperienceBarUnder.png" id="4_homol"]
 [ext_resource type="Texture2D" uid="uid://bgt6vrksk7aqu" path="res://UserInterface/Components/ExperienceBar/ExperienceBarProgress.png" id="5_uvbu8"]
-[ext_resource type="Script" path="res://Scripts/Controllers/TargetingController.cs" id="6_23bu1"]
+[ext_resource type="Script" uid="uid://de4121w3apubv" path="res://Scripts/Controllers/TargetingController.cs" id="6_23bu1"]
 [ext_resource type="Texture2D" uid="uid://dl0cm3rsw0n72" path="res://Images/Grass0.png" id="7_1rh3b"]
 [ext_resource type="PackedScene" uid="uid://bh025c2qwoxiv" path="res://Actions/ActionRange.tscn" id="8_8chmn"]
 [ext_resource type="Texture2D" uid="uid://cyclm6ebvxd8h" path="res://Images/Grass1.png" id="8_bfhsi"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorAvatars.cs" id="8_e7axk"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorContainer.cs" id="9_0vfcd"]
+[ext_resource type="Script" uid="uid://ba1fg0b7j75w5" path="res://Scripts/Actor/ActorAvatars.cs" id="8_e7axk"]
+[ext_resource type="Script" uid="uid://buqjiwgqhbakh" path="res://Scripts/UserInterface/Components/PerkSelection.cs" id="8_nlurw"]
+[ext_resource type="Script" uid="uid://c5gq8nc1s5oo3" path="res://Scripts/Actor/ActorContainer.cs" id="9_0vfcd"]
+[ext_resource type="PackedScene" uid="uid://d33f8roxal3dv" path="res://UserInterface/Components/PerkSelection/PerkButton.tscn" id="9_6xyd7"]
 [ext_resource type="Texture2D" uid="uid://catxthhhls552" path="res://Images/Grass2.png" id="9_ftk6f"]
 [ext_resource type="PackedScene" uid="uid://cb3j6sa8w2cm3" path="res://Actors/Actor.tscn" id="9_m5eed"]
 [ext_resource type="PackedScene" uid="uid://cqauknin6ppw1" path="res://Actors/ActorAvatar.tscn" id="9_yr3ug"]
 [ext_resource type="Shader" uid="uid://kfjlo04ac7q3" path="res://Shaders/AlphaShine.tres" id="10_2dd70"]
-[ext_resource type="Script" path="res://Scripts/Controllers/WavesController.cs" id="12_pqm43"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorSelection.cs" id="12_t8ruj"]
+[ext_resource type="Script" uid="uid://dfilhkfl1mt1" path="res://Scripts/Controllers/WavesController.cs" id="12_pqm43"]
+[ext_resource type="Script" uid="uid://cwk2ce2aur7he" path="res://Scripts/Actor/ActorSelection.cs" id="12_t8ruj"]
 [ext_resource type="Resource" uid="uid://j1x3dmibjlmm" path="res://Actors/Slime.tres" id="13_24srk"]
 [ext_resource type="Texture2D" uid="uid://idoo2rtmn6n" path="res://Images/SelectCircle.png" id="13_dwphc"]
-[ext_resource type="Script" path="res://Scripts/Controllers/WaveSetup.cs" id="14_hvisv"]
+[ext_resource type="Script" uid="uid://bh65777vsmrb" path="res://Scripts/Controllers/WaveSetup.cs" id="14_hvisv"]
 [ext_resource type="Texture2D" uid="uid://cn3yslcng2fxn" path="res://Images/FlowerMeadow.jpg" id="15_31iqn"]
 [ext_resource type="Resource" uid="uid://c52wgcwnm17eq" path="res://Actors/Raptor.tres" id="15_v5cgv"]
-[ext_resource type="Script" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
+[ext_resource type="Script" uid="uid://cm7kjjy3frxds" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jimt1"]
 panorama = ExtResource("1_et1wg")
@@ -76,8 +78,8 @@ actors = Array[Object]([ExtResource("13_24srk"), ExtResource("13_24srk"), ExtRes
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wxb5y"]
 render_priority = 0
 shader = ExtResource("10_2dd70")
-shader_parameter/IntParameter = 2
 shader_parameter/tex_frg_13 = ExtResource("13_dwphc")
+shader_parameter/IntParameter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osk5p"]
 albedo_texture = ExtResource("15_31iqn")
@@ -197,6 +199,52 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
+[node name="PerkSelection" type="Panel" parent="CanvasLayer" node_paths=PackedStringArray("_buttonContainer", "_perkButtons")]
+custom_minimum_size = Vector2(800, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_nlurw")
+_buttonContainer = NodePath("HBoxContainer")
+_perkButtons = [NodePath("HBoxContainer/PerkButton"), NodePath("HBoxContainer/PerkButton2"), NodePath("HBoxContainer/PerkButton3")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PerkSelection"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PerkButton" parent="CanvasLayer/PerkSelection/HBoxContainer" instance=ExtResource("9_6xyd7")]
+layout_mode = 2
+
+[node name="PerkButton2" parent="CanvasLayer/PerkSelection/HBoxContainer" instance=ExtResource("9_6xyd7")]
+layout_mode = 2
+
+[node name="PerkButton3" parent="CanvasLayer/PerkSelection/HBoxContainer" instance=ExtResource("9_6xyd7")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PerkSelection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -11.5
+offset_right = 98.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Waiting for other Players."
+
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("2_7n0hf")
 camera = NodePath("Camera3D")
@@ -227,7 +275,7 @@ script = ExtResource("3_5vdu8")
 _actorSpawner = NodePath("ActorSpawner")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MultiplayerContainer"]
-_spawnable_scenes = PackedStringArray("res://Actors/Actor.tscn")
+_spawnable_scenes = PackedStringArray("uid://cb3j6sa8w2cm3")
 spawn_path = NodePath("../ActorContainer")
 
 [node name="WavesController" type="Node" parent="MultiplayerContainer" node_paths=PackedStringArray("_multiplayerContainer", "_timer", "_spawner")]

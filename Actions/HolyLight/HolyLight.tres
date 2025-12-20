@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ActionSetup" load_steps=3 format=3 uid="uid://btb8cya7djm2i"]
 
 [ext_resource type="PackedScene" uid="uid://cgu3ehqwy7133" path="res://Actions/HolyLight/HolyLight.tscn" id="1_68uqe"]
-[ext_resource type="Script" path="res://Scripts/Actions/ActionSetup.cs" id="1_ju12d"]
+[ext_resource type="Script" uid="uid://44osvnlqjfmy" path="res://Scripts/Actions/ActionSetup.cs" id="1_ju12d"]
 
 [resource]
 script = ExtResource("1_ju12d")

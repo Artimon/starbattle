@@ -1,31 +1,31 @@
 [gd_scene load_steps=53 format=3 uid="uid://cb3j6sa8w2cm3"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
+[ext_resource type="Script" uid="uid://3lda46ikfe8i" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorSynchronizer.cs" id="2_k4hrp"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorAnimator.cs" id="3_5khln"]
+[ext_resource type="Script" uid="uid://b08wn0jn1wjoo" path="res://Scripts/Actor/ActorSynchronizer.cs" id="2_k4hrp"]
+[ext_resource type="Script" uid="uid://bru8rq4iv6cq0" path="res://Scripts/Actor/ActorAnimator.cs" id="3_5khln"]
 [ext_resource type="PackedScene" uid="uid://dmrlb4lwmotrn" path="res://Effects/CombatNumberBounce.tscn" id="3_edhfj"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorAction.cs" id="3_x85sy"]
+[ext_resource type="Script" uid="uid://7f8jyqrfx5il" path="res://Scripts/Actor/ActorAction.cs" id="3_x85sy"]
 [ext_resource type="Resource" uid="uid://csnnosx23trwb" path="res://Actions/ActionSetups.tres" id="4_35ykf"]
 [ext_resource type="PackedScene" uid="uid://dmkyue4bg5mos" path="res://Effects/CombatMessage.tscn" id="4_p8d2m"]
-[ext_resource type="Script" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="5_kcnqb"]
+[ext_resource type="Script" uid="uid://evyicelg7k2p" path="res://Scripts/Services/StateMachine/StateMachine.cs" id="5_kcnqb"]
 [ext_resource type="Texture2D" uid="uid://c6uflpge3imdb" path="res://Actors/Valkyrie.png" id="5_p5emc"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorExperience.cs" id="6_43p3x"]
-[ext_resource type="Script" path="res://Scripts/Actor/StateIdle.cs" id="6_bol2m"]
+[ext_resource type="Script" uid="uid://cx4gec28vdrnr" path="res://Scripts/Actor/ActorExperience.cs" id="6_43p3x"]
+[ext_resource type="Script" uid="uid://b7atkqdf3mn6k" path="res://Scripts/Actor/StateIdle.cs" id="6_bol2m"]
 [ext_resource type="Texture2D" uid="uid://ds0oqb6jsnxdb" path="res://Images/ActorShadow.png" id="6_d5h64"]
 [ext_resource type="AudioStream" uid="uid://cqf0v44jcdfuc" path="res://Actors/AttackHit.ogg" id="7_1d7e6"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorRegenerate.cs" id="7_apaue"]
-[ext_resource type="Script" path="res://Scripts/Actor/StateMove.cs" id="7_lvwdo"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorPoise.cs" id="8_1lgyp"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorBehaviour.cs" id="8_wh0uv"]
+[ext_resource type="Script" uid="uid://b6hll7o3pdwq5" path="res://Scripts/Actor/ActorRegenerate.cs" id="7_apaue"]
+[ext_resource type="Script" uid="uid://b5rwis5nbmjpg" path="res://Scripts/Actor/StateMove.cs" id="7_lvwdo"]
+[ext_resource type="Script" uid="uid://d226px5npiwg3" path="res://Scripts/Actor/ActorPoise.cs" id="8_1lgyp"]
+[ext_resource type="Script" uid="uid://dmplajx6g7w31" path="res://Scripts/Actor/ActorBehaviour.cs" id="8_wh0uv"]
 [ext_resource type="PackedScene" uid="uid://b536a86allesx" path="res://Effects/LevelUpEffect/LevelUpEffect.tscn" id="11_38adi"]
-[ext_resource type="Script" path="res://Scripts/Actor/StateAttack.cs" id="11_jslh3"]
-[ext_resource type="Script" path="res://Scripts/Actor/StateHit.cs" id="12_tpf5m"]
-[ext_resource type="Script" path="res://Scripts/Actor/StateDie.cs" id="12_w1nuh"]
-[ext_resource type="Script" path="res://Scripts/Actor/ActorPerks.cs" id="13_ne8au"]
+[ext_resource type="Script" uid="uid://cve2qlewah6ym" path="res://Scripts/Actor/StateAttack.cs" id="11_jslh3"]
+[ext_resource type="Script" uid="uid://b0tgkoqcyh1bx" path="res://Scripts/Actor/StateHit.cs" id="12_tpf5m"]
+[ext_resource type="Script" uid="uid://um5584lccon3" path="res://Scripts/Actor/StateDie.cs" id="12_w1nuh"]
+[ext_resource type="Script" uid="uid://benxo5pkiu8q6" path="res://Scripts/Actor/ActorPerks.cs" id="13_ne8au"]
 [ext_resource type="Resource" uid="uid://bgs0uggqbu0gu" path="res://Perks/Perks.tres" id="14_m3pml"]
-[ext_resource type="Script" path="res://Scripts/Actor/StateCast.cs" id="15_37747"]
-[ext_resource type="Script" path="res://Scripts/Actor/StateRegenerate.cs" id="16_75xxn"]
+[ext_resource type="Script" uid="uid://bm57jneo4at86" path="res://Scripts/Actor/StateCast.cs" id="15_37747"]
+[ext_resource type="Script" uid="uid://dyk1spc3vhgtx" path="res://Scripts/Actor/StateRegenerate.cs" id="16_75xxn"]
 [ext_resource type="AudioStream" uid="uid://gatjqs8i5wvs" path="res://Actors/SpellCast_Replace.ogg" id="17_kbeq4"]
 [ext_resource type="AudioStream" uid="uid://bhu2mbp2vt7eg" path="res://Actors/Move.ogg" id="22_ix5jp"]
 [ext_resource type="AudioStream" uid="uid://bh4534jv8fhgw" path="res://Actors/Die.ogg" id="29_c20ii"]
@@ -103,6 +103,23 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_l7qbr"]
+resource_name = "Hit"
+length = 0.12
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Color(1, 0.2, 0.2, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_gheq4"]
 length = 0.001
 tracks/0/type = "value"
@@ -142,29 +159,12 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0.8)]
 }
 
-[sub_resource type="Animation" id="Animation_l7qbr"]
-resource_name = "Hit"
-length = 0.12
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12),
-"transitions": PackedFloat32Array(1, 2),
-"update": 0,
-"values": [Color(1, 0.2, 0.2, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o0tut"]
 _data = {
-"FadeIn": SubResource("Animation_chqir"),
-"FadeOut": SubResource("Animation_sx73s"),
-"Hit": SubResource("Animation_l7qbr"),
-"RESET": SubResource("Animation_gheq4")
+&"FadeIn": SubResource("Animation_chqir"),
+&"FadeOut": SubResource("Animation_sx73s"),
+&"Hit": SubResource("Animation_l7qbr"),
+&"RESET": SubResource("Animation_gheq4")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4g187"]
@@ -343,7 +343,7 @@ _hitAudio = ExtResource("7_1d7e6")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Systems/ActorAnimator"]
 root_node = NodePath("../../..")
 libraries = {
-"": SubResource("AnimationLibrary_o0tut")
+&"": SubResource("AnimationLibrary_o0tut")
 }
 
 [node name="ActorAction" type="Node" parent="Systems" node_paths=PackedStringArray("_actor")]
