@@ -61,8 +61,10 @@ public partial class ActorExperience : Node {
 	}
 
 	[Rpc(CallLocal = true)]
-	public void RpcPerkChoices(int[] cloakedPerkIds) {
-		PerkSelection.instance.Show(_actor, cloakedPerkIds);
+	public void RpcPerkChoices(int[] cloakedPerkIds, int[] perkRarityIds) {
+		var candidates = _actor.perks.perkSetups.ListsToCandidates(cloakedPerkIds, perkRarityIds);
+
+		PerkSelection.instance.Show(_actor, candidates);
 	}
 
 	[Rpc(CallLocal = true)]
@@ -99,31 +101,31 @@ public partial class ActorExperience : Node {
 	 * Sends an empty array if there are no open level ups.
 	 */
 	public void SendChoices(Actor actor) {
-		var perkIds = Array.Empty<int>();
+		var perkCloakedIds = Array.Empty<int>();
+		var perkRarityIds = Array.Empty<int>();
 
 		if (HasOpenLevelUps) {
-			perkIds = _actor.perks
-				.RollChoices()
-				.Select(perk => perk.CloakedId)
-				.ToArray();
+			var candidates = _actor.perks.RollChoices();
+
+			_actor.perks.perkSetups.CandidatesToLists(candidates, out perkCloakedIds, out perkRarityIds);
 		}
 
-		actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPerkChoices), perkIds);
+		actor.experience.RpcId(actor.synchronizer.playerId, nameof(RpcPerkChoices), perkCloakedIds, perkRarityIds);
 	}
 
-	public void SelectPerk(int cloakedPerkId) {
-		RpcId(1, nameof(_RpcSelectPerk), cloakedPerkId);
+	public void SelectPerk(int cloakedPerkId, int rarityId) {
+		RpcId(1, nameof(_RpcSelectPerk), cloakedPerkId, rarityId);
 	}
 
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-	public void _RpcSelectPerk(int cloakedPerkId) {
+	public void _RpcSelectPerk(int cloakedPerkId, int rarityId) {
 		if (!Multiplayer.IsServer()) {
 			return;
 		}
 
 		// Not checking for validity at this moment. Could save the current selection.
 		if (HasOpenLevelUps) {
-			_actor.perks.Apply(cloakedPerkId);
+			_actor.perks.Apply(cloakedPerkId, rarityId);
 			_openLevelUps -= 1;
 		}
 

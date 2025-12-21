@@ -12,7 +12,4 @@
     <Content Include="UserInterface\Elements\AnimatedBar\AnimatedBarUnder.png" />
     <Content Include="UserInterface\Elements\AnimatedBar\AnimatedBarUnder.png.import" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Perks\" />
-  </ItemGroup>
 </Project>

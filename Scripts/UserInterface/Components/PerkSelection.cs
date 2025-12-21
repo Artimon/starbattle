@@ -20,8 +20,8 @@ public partial class PerkSelection : Panel {
 		Visible = false;
 	}
 
-	public void Show(Actor actor, int[] cloakedPerkIds) {
-		if (cloakedPerkIds.Length == 0) {
+	public void Show(Actor actor, PerkSetup.Candidate[] candidates) {
+		if (candidates.Length == 0) {
 			WaitForOthers();
 
 			return;
@@ -34,13 +34,14 @@ public partial class PerkSelection : Panel {
 
 		var index = 0;
 
-		foreach (var cloakedPerkId in cloakedPerkIds) {
-			var perk = actor.perks.perkSetups.GetSetup(cloakedPerkId);
+		foreach (var candidate in candidates) {
+			var cloakedPerkId = candidate.setup.CloakedId;
+			var rarityId = candidate.RarityId;
 			var button = _perkButtons[index++];
 
-			button.Perk(perk);
+			button.Perk(candidate);
 			button.PerkPressed = () => {
-				actor.experience.SelectPerk(perk.CloakedId);
+				actor.experience.SelectPerk(cloakedPerkId, rarityId);
 			};
 		}
 	}

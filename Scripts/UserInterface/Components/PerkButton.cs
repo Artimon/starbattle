@@ -94,14 +94,14 @@ public partial class PerkButton : Button {
 		};
 	}
 
-	public void Perk(PerkSetup setup) {
+	public void Perk(PerkSetup.Candidate candidate) {
 		foreach (var canvasItem in _rarityElements) {
-			canvasItem.Modulate = _rarityColors[setup.rarity];
+			canvasItem.Modulate = _rarityColors[candidate.rarity];
 		}
 
-		_titleLabel.Text = _titleTemplate.Replace("{name}", setup.displayName).Replace("{rarity}", setup.rarity.ToString());
+		_titleLabel.Text = _titleTemplate.Replace("{name}", candidate.setup.displayName).Replace("{rarity}", candidate.rarity.ToString());
 
-		var stats = setup.stats;
+		var stats = candidate.Stats;
 		var statsLines = new List<string>();
 
 		var statTemplatePairs = new (float value, string template)[] {

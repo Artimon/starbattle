@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Godot;
+using Candidate = Starbattle.PerkSetup.Candidate;
 
 namespace Starbattle;
 
@@ -11,37 +13,17 @@ public partial class ActorPerks : Node {
 	[Export]
 	public PerkSetups perkSetups;
 
-	public PerkSetup[] RollChoices() {
+	public List<Candidate> Candidates => perkSetups.Perks.Select(setup => setup.PickCandidate).ToList();
+
+	public Candidate[] RollChoices() {
 		const int picks = 4;
-		var availablePerks = perkSetups.Perks;
-		var choices = new List<PerkSetup>();
 
-		for (var i = 0; i < picks && availablePerks.Count > 0; i++) {
-			var remainingWeight = PerkSetups.GetWeight(availablePerks);
-			var roll = GD.RandRange(0d, remainingWeight);
-
-			var cumulative = 0d;
-
-			foreach (var perk in availablePerks) {
-				cumulative += perk.Weight;
-
-				if (roll > cumulative) {
-					continue;
-				}
-
-				choices.Add(perk);
-				availablePerks.RemoveAll(p => p.displayName == perk.displayName);
-
-				break;
-			}
-		}
-
-		return choices.ToArray();
+		return Candidates.Shuffle().Take(picks).ToArray();
 	}
 
-	public void Apply(int cloakedPerkId) {
-		var perk = perkSetups.GetSetup(cloakedPerkId);
+	public void Apply(int cloakedPerkId, int rarityId) {
+		var candidate = perkSetups.GetCandidate(cloakedPerkId, rarityId);
 
-		_actor.stats.Add(perk.stats);
+		_actor.stats.Add(candidate.Stats);
 	}
 }

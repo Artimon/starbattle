@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="PerkSetup" load_steps=7 format=3 uid="uid://qms8fktmj4ra"]
+
+[ext_resource type="Script" uid="uid://jpn88wyeukew" path="res://Scripts/Perks/PerkSetup.cs" id="1_s77r2"]
+[ext_resource type="Script" uid="uid://dleyghgrvuk03" path="res://Scripts/Perks/PerkStats.cs" id="2_duymn"]
+
+[sub_resource type="Resource" id="Resource_guhqv"]
+script = ExtResource("2_duymn")
+rarity = 0
+strength = 0.0
+dexterity = 0.0
+agility = 5.0
+vitality = 0.0
+intelligence = 0.0
+wisdom = 0.0
+luck = 0.0
+critRate = 0.0
+counterRate = 0.0
+hpRecovery = 0.0
+spRecovery = 0.0
+regenerateHp = 0.0
+regenerateSp = 0.0
+physicalBaseValue = 0.0
+magicalBaseValue = 0.0
+physicalDefense = 0.0
+magicalDefense = 0.0
+experience = 0.0
+metadata/_custom_type_script = "uid://dleyghgrvuk03"
+
+[sub_resource type="Resource" id="Resource_xlwj1"]
+script = ExtResource("2_duymn")
+rarity = 1
+strength = 0.0
+dexterity = 0.0
+agility = 10.0
+vitality = 0.0
+intelligence = 0.0
+wisdom = 0.0
+luck = 0.0
+critRate = 0.0
+counterRate = 0.0
+hpRecovery = 0.0
+spRecovery = 0.0
+regenerateHp = 0.0
+regenerateSp = 0.0
+physicalBaseValue = 0.0
+magicalBaseValue = 0.0
+physicalDefense = 0.0
+magicalDefense = 0.0
+experience = 0.0
+metadata/_custom_type_script = "uid://dleyghgrvuk03"
+
+[sub_resource type="Resource" id="Resource_yr45o"]
+script = ExtResource("2_duymn")
+rarity = 2
+strength = 0.0
+dexterity = 0.0
+agility = 15.0
+vitality = 0.0
+intelligence = 0.0
+wisdom = 0.0
+luck = 0.0
+critRate = 0.0
+counterRate = 0.0
+hpRecovery = 0.0
+spRecovery = 0.0
+regenerateHp = 0.0
+regenerateSp = 0.0
+physicalBaseValue = 0.0
+magicalBaseValue = 0.0
+physicalDefense = 0.0
+magicalDefense = 0.0
+experience = 0.0
+metadata/_custom_type_script = "uid://dleyghgrvuk03"
+
+[sub_resource type="Resource" id="Resource_lrlgq"]
+script = ExtResource("2_duymn")
+rarity = 3
+strength = 0.0
+dexterity = 0.0
+agility = 20.0
+vitality = 0.0
+intelligence = 0.0
+wisdom = 0.0
+luck = 0.0
+critRate = 0.0
+counterRate = 0.0
+hpRecovery = 0.0
+spRecovery = 0.0
+regenerateHp = 0.0
+regenerateSp = 0.0
+physicalBaseValue = 0.0
+magicalBaseValue = 0.0
+physicalDefense = 0.0
+magicalDefense = 0.0
+experience = 0.0
+metadata/_custom_type_script = "uid://dleyghgrvuk03"
+
+[resource]
+script = ExtResource("1_s77r2")
+displayName = "Agility"
+stats = Array[Object]([SubResource("Resource_guhqv"), SubResource("Resource_xlwj1"), SubResource("Resource_yr45o"), SubResource("Resource_lrlgq")])
+metadata/_custom_type_script = "uid://jpn88wyeukew"

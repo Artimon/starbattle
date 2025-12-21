@@ -135,22 +135,24 @@ public partial class Stats : Resource {
 	}
 
 	public void Add(Stats other) {
-		strength              += other.strength;
-		dexterity             += other.dexterity;
-		agility               += other.agility;
-		vitality              += other.vitality;
-		intelligence          += other.intelligence;
-		wisdom                += other.wisdom;
-		luck                  += other.luck;
-		critRate              += other.critRate;
-		counterRate           += other.counterRate;
-		hpRecovery += other.hpRecovery;
-		spRecovery += other.spRecovery;
-		regenerateHp    += other.regenerateHp;
-		regenerateSp    += other.regenerateSp;
-		physicalBaseValue     += other.physicalBaseValue;
-		magicalBaseValue      += other.magicalBaseValue;
-		physicalDefense       += other.physicalDefense;
-		magicalDefense        += other.magicalDefense;
+		strength          += other.strength;
+		dexterity         += other.dexterity;
+		agility           += other.agility;
+		vitality          += other.vitality;
+		intelligence      += other.intelligence;
+		wisdom            += other.wisdom;
+		luck              += other.luck;
+		critRate          += other.critRate;
+		counterRate       += other.counterRate;
+		hpRecovery        += other.hpRecovery;
+		spRecovery        += other.spRecovery;
+		regenerateHp      += other.regenerateHp;
+		regenerateSp      += other.regenerateSp;
+		physicalBaseValue += other.physicalBaseValue;
+		magicalBaseValue  += other.magicalBaseValue;
+		physicalDefense   += other.physicalDefense;
+		magicalDefense    += other.magicalDefense;
+
+		GD.Print($" Now adding: {other.strength} strength, {other.dexterity} dexterity, {other.agility} agility, {other.vitality} vitality, {other.intelligence} intelligence, {other.wisdom} wisdom, {other.luck} luck, {other.critRate} critRate, {other.counterRate} counterRate, {other.hpRecovery} hpRecovery, {other.spRecovery} spRecovery, {other.regenerateHp} regenerateHp, {other.regenerateSp} regenerateSp, {other.physicalBaseValue} physicalBaseValue, {other.magicalBaseValue} magicalBaseValue, {other.physicalDefense} physicalDefense, {other.magicalDefense} magicalDefense");
 	}
 }
