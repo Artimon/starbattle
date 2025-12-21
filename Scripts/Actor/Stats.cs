@@ -37,16 +37,16 @@ public partial class Stats : Resource {
 	public float counterRate;
 
 	[Export]
-	public float passiveHpRegenPercent; // Players only.
+	public float hpRecovery; // Players only.
 
 	[Export]
-	public float passiveSpRegenPercent; // Players only.
+	public float spRecovery; // Players only.
 
 	[Export]
-	public float activeHpRegenPower;
+	public float regenerateHp;
 
 	[Export]
-	public float activeSpRegenPower;
+	public float regenerateSp;
 
 	[Export]
 	public float physicalBaseValue;
@@ -113,11 +113,11 @@ public partial class Stats : Resource {
 	}
 
 	public float GetHpRegeneration(float power) {
-		return power * activeHpRegenPower * (1f + GD.Randf() * 0.5f);
+		return power * regenerateHp * (1f + GD.Randf() * 0.5f);
 	}
 
 	public float GetSpRegeneration(float power) {
-		return power * activeSpRegenPower * (1f + GD.Randf() * 0.5f);
+		return power * regenerateSp * (1f + GD.Randf() * 0.5f);
 	}
 
 	public float GetPhysicalDamage(float power, Actor target) {
@@ -144,10 +144,10 @@ public partial class Stats : Resource {
 		luck                  += other.luck;
 		critRate              += other.critRate;
 		counterRate           += other.counterRate;
-		passiveHpRegenPercent += other.passiveHpRegenPercent;
-		passiveSpRegenPercent += other.passiveSpRegenPercent;
-		activeHpRegenPower    += other.activeHpRegenPower;
-		activeSpRegenPower    += other.activeSpRegenPower;
+		hpRecovery += other.hpRecovery;
+		spRecovery += other.spRecovery;
+		regenerateHp    += other.regenerateHp;
+		regenerateSp    += other.regenerateSp;
 		physicalBaseValue     += other.physicalBaseValue;
 		magicalBaseValue      += other.magicalBaseValue;
 		physicalDefense       += other.physicalDefense;

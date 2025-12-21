@@ -12,7 +12,7 @@ public partial class ActorPerks : Node {
 	public PerkSetups perkSetups;
 
 	public PerkSetup[] RollChoices() {
-		const int picks = 3;
+		const int picks = 4;
 		var availablePerks = perkSetups.Perks;
 		var choices = new List<PerkSetup>();
 
@@ -30,7 +30,7 @@ public partial class ActorPerks : Node {
 				}
 
 				choices.Add(perk);
-				availablePerks.Remove(perk);
+				availablePerks.RemoveAll(p => p.displayName == perk.displayName);
 
 				break;
 			}

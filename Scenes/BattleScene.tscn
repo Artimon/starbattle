@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=46 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" uid="uid://c64pyrw7r0vqt" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://d33f8roxal3dv" path="res://UserInterface/Components/PerkSelection/PerkButton.tscn" id="9_6xyd7"]
 [ext_resource type="Texture2D" uid="uid://catxthhhls552" path="res://Images/Grass2.png" id="9_ftk6f"]
 [ext_resource type="PackedScene" uid="uid://cb3j6sa8w2cm3" path="res://Actors/Actor.tscn" id="9_m5eed"]
+[ext_resource type="Texture2D" uid="uid://biciriymvmv6j" path="res://Images/BlackFrame.png" id="9_xy0dg"]
 [ext_resource type="PackedScene" uid="uid://cqauknin6ppw1" path="res://Actors/ActorAvatar.tscn" id="9_yr3ug"]
 [ext_resource type="Shader" uid="uid://kfjlo04ac7q3" path="res://Shaders/AlphaShine.tres" id="10_2dd70"]
 [ext_resource type="Script" uid="uid://dfilhkfl1mt1" path="res://Scripts/Controllers/WavesController.cs" id="12_pqm43"]
@@ -200,7 +201,7 @@ mouse_filter = 2
 alignment = 1
 
 [node name="PerkSelection" type="Panel" parent="CanvasLayer" node_paths=PackedStringArray("_buttonContainer", "_perkButtons")]
-custom_minimum_size = Vector2(800, 400)
+custom_minimum_size = Vector2(700, 750)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -213,22 +214,21 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_nlurw")
-_buttonContainer = NodePath("HBoxContainer")
-_perkButtons = [NodePath("HBoxContainer/PerkButton"), NodePath("HBoxContainer/PerkButton2"), NodePath("HBoxContainer/PerkButton3")]
+_buttonContainer = NodePath("VBoxContainer")
+_perkButtons = [NodePath("VBoxContainer/PerkButton"), NodePath("VBoxContainer/PerkButton2"), NodePath("VBoxContainer/PerkButton3"), NodePath("VBoxContainer/PerkButton4")]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PerkSelection"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PerkButton" parent="CanvasLayer/PerkSelection/HBoxContainer" instance=ExtResource("9_6xyd7")]
-layout_mode = 2
-
-[node name="PerkButton2" parent="CanvasLayer/PerkSelection/HBoxContainer" instance=ExtResource("9_6xyd7")]
-layout_mode = 2
-
-[node name="PerkButton3" parent="CanvasLayer/PerkSelection/HBoxContainer" instance=ExtResource("9_6xyd7")]
-layout_mode = 2
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/PerkSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_xy0dg")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="Label" type="Label" parent="CanvasLayer/PerkSelection"]
 layout_mode = 1
@@ -244,6 +244,36 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Waiting for other Players."
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PerkSelection"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -325.0
+offset_top = -640.0
+offset_right = 325.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PerkButton" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+layout_mode = 2
+_rarityElements = []
+
+[node name="PerkButton2" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+layout_mode = 2
+_rarityElements = []
+
+[node name="PerkButton3" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+layout_mode = 2
+_rarityElements = []
+
+[node name="PerkButton4" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+layout_mode = 2
+_rarityElements = []
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("2_7n0hf")

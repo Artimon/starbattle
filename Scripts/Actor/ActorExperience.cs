@@ -19,7 +19,7 @@ public partial class ActorExperience : Node {
 
 	public float _experience;
 
-	public float RequiredExperience => level * 5f;
+	public float RequiredExperience => level * 3f;
 
 	[Export]
 	public PackedScene _levelUpEffectPrefab;

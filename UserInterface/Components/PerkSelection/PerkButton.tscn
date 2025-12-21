@@ -1,24 +1,76 @@
-[gd_scene load_steps=2 format=3 uid="uid://d33f8roxal3dv"]
+[gd_scene load_steps=4 format=3 uid="uid://d33f8roxal3dv"]
 
 [ext_resource type="Script" uid="uid://dfpxfploa0tp7" path="res://Scripts/UserInterface/Components/PerkButton.cs" id="1_l8nye"]
+[ext_resource type="Texture2D" uid="uid://eeadcm0mimr6" path="res://Images/BlueFrame.png" id="2_alvey"]
 
-[node name="PerkButton" type="Button" node_paths=PackedStringArray("_titleLabel", "_rarityLabel")]
-custom_minimum_size = Vector2(200, 450)
+[sub_resource type="LabelSettings" id="LabelSettings_alvey"]
+font_size = 24
+
+[node name="PerkButton" type="Button" node_paths=PackedStringArray("_titleLabel", "_statsList", "_rarityElements")]
+custom_minimum_size = Vector2(650, 150)
 script = ExtResource("1_l8nye")
-_titleLabel = NodePath("Title Label")
-_rarityLabel = NodePath("Rarity Label")
+_titleLabel = NodePath("VBoxContainer/Title Label")
+_statsList = NodePath("VBoxContainer/Stats Label")
+_rarityElements = [NodePath("NinePatchRect"), NodePath("VBoxContainer/Title Label")]
+_titleTemplate = "{name} ({rarity})"
+_strengthTemplate = "{value} Strength"
+_dexterityTemplate = "{value} Dexterity"
+_agilityTemplate = "{value} Agility"
+_vitalityTemplate = "{value} Vitality"
+_intelligenceTemplate = "{value} Intelligence"
+_wisdomTemplate = "{value} Wisdom"
+_luckTemplate = "{value} Luck"
+_critRateTemplate = "{value} Crit. Rate"
+_counterRateTemplate = "{value} Counter Rate"
+_hpRecoveryTemplate = "{value} HP Recovery"
+_spRecoveryTemplate = "{value} SP Recovery"
+_regenerateHpTemplate = "{value} Regenerate HP"
+_regenerateSpTemplate = "{value} Regenerate SP"
+_physicalBaseValueTemplate = "{value} Physical Base Value"
+_magicalBaseValueTemplate = "{value} Magical Base Value"
+_physicalDefenseTemplate = "{value} Physical Defense"
+_magicalDefenseTemplate = "{value} Magical Defense"
 
-[node name="Title Label" type="Label" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 23.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-text = "Title"
+grow_vertical = 2
+texture = ExtResource("2_alvey")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="Rarity Label" type="Label" parent="."]
+[node name="Perk Image" type="TextureRect" parent="."]
 layout_mode = 0
+offset_left = 27.0
 offset_top = 27.0
-offset_right = 40.0
-offset_bottom = 50.0
-text = "Rarity"
+offset_right = 123.0
+offset_bottom = 123.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -505.0
+offset_top = -60.0
+offset_bottom = 60.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Title Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "{name} ({rarity})"
+label_settings = SubResource("LabelSettings_alvey")
+
+[node name="Stats Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Stats List"
