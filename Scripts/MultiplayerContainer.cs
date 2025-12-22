@@ -64,6 +64,8 @@ public partial class MultiplayerContainer : Node {
 	}
 
 	public void ConnectToServer() {
+		AudioServer.SetBusVolumeDb(0, -80); // @TODO Only for testing.
+
 		Multiplayer.ConnectedToServer += () => {
 			// Print("Connected to server.");
 			OnConnectionReady?.Invoke();

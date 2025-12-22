@@ -152,9 +152,9 @@ agility = 55.0
 vitality = 80.0
 intelligence = 60.0
 wisdom = 55.0
-luck = 0.0
+luck = 25.0
 critRate = 5.0
-counterRate = 10.0
+counterRate = 30.0
 hpRecovery = 0.0
 spRecovery = 0.0
 regenerateHp = 0.0
@@ -163,7 +163,7 @@ physicalBaseValue = 20.0
 magicalBaseValue = 25.0
 physicalDefense = 15.0
 magicalDefense = 25.0
-experience = 0.0
+experience = 6.0
 
 [sub_resource type="Resource" id="Resource_tx3rs"]
 script = ExtResource("4_lkg5h")

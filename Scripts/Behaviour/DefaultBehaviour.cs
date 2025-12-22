@@ -37,6 +37,10 @@ public partial class DefaultBehaviour : Resource {
 		return actor.hp < actor.MaxHp * threshold;
 	}
 
+	public bool IsSpBelow(Actor actor, float threshold) {
+		return actor.sp < actor.MaxSp * threshold;
+	}
+
 	public bool ProbeChance(float chance) {
 		return GD.Randf() < chance;
 	}

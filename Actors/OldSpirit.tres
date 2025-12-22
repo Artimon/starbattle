@@ -1,0 +1,181 @@
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=25 format=3 uid="uid://d1q2frskxdjya"]
+
+[ext_resource type="Texture2D" uid="uid://b2x46gbbwcs86" path="res://Actors/OldSpirit.png" id="1_oqhvx"]
+[ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_ifxke"]
+[ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="3_thf1g"]
+[ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="4_m33wo"]
+[ext_resource type="Resource" uid="uid://byxk6s2vvj844" path="res://Actions/RegenerateSp/RegenerateSp.tres" id="4_mtf08"]
+[ext_resource type="Script" uid="uid://bjps27rcc3en0" path="res://Scripts/Behaviour/OldSpiritBehaviour.cs" id="5_esywg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifxke"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thf1g"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(200, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m33wo"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(400, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtf08"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(600, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esywg"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc0hk"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(200, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hrtv"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(400, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8sn3"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(600, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5wea"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3o2ng"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(400, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idxor"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(600, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14xyt"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aom6j"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n7sd"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pckaq"]
+atlas = ExtResource("1_oqhvx")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_igopj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifxke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thf1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m33wo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtf08")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esywg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nc0hk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hrtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8sn3")
+}],
+"loop": false,
+"name": &"Cast",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5wea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3o2ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idxor")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14xyt")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aom6j")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n7sd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pckaq")
+}],
+"loop": false,
+"name": &"Move",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_7de8c"]
+script = ExtResource("2_ifxke")
+strength = 80.0
+dexterity = 75.0
+agility = 70.0
+vitality = 500.0
+intelligence = 60.0
+wisdom = 55.0
+luck = 30.0
+critRate = 20.0
+counterRate = 15.0
+hpRecovery = 0.0
+spRecovery = 0.0
+regenerateHp = 100.0
+regenerateSp = 10.0
+physicalBaseValue = 35.0
+magicalBaseValue = 30.0
+physicalDefense = 5.0
+magicalDefense = 5.0
+experience = 20.0
+
+[sub_resource type="Resource" id="Resource_nc0hk"]
+script = ExtResource("5_esywg")
+_regenerateSp = ExtResource("4_mtf08")
+_holyLight = ExtResource("3_thf1g")
+metadata/_custom_type_script = "uid://bjps27rcc3en0"
+
+[resource]
+script = ExtResource("4_m33wo")
+name = "ElderGhost"
+_animationFrames = SubResource("SpriteFrames_igopj")
+pixelHeight = 80.0
+_baseStats = SubResource("Resource_7de8c")
+defaultBehaviour = SubResource("Resource_nc0hk")

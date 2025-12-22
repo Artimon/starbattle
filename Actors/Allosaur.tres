@@ -1,0 +1,177 @@
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=23 format=3 uid="uid://b56hipgigmnr2"]
+
+[ext_resource type="Texture2D" uid="uid://br5ukrxtk46ya" path="res://Actors/Allosaur.png" id="2_bexpr"]
+[ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_fauia"]
+[ext_resource type="Script" uid="uid://bxors41xs2sgx" path="res://Scripts/Behaviour/DefaultBehaviour.cs" id="3_smyes"]
+[ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="5_ambsh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on82e"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ambsh"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktwfl"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vhlx"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8cha"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45q24"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mglij"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tidd3"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5xvk"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiqn6"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67ee1"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3cd1"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0or5t"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fauia"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bexpr"]
+atlas = ExtResource("2_bexpr")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1oy5c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on82e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ambsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktwfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vhlx")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8cha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45q24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mglij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tidd3")
+}],
+"loop": false,
+"name": &"Cast",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5xvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiqn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67ee1")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3cd1")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0or5t")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fauia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bexpr")
+}],
+"loop": false,
+"name": &"Move",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_dsy2p"]
+script = ExtResource("2_fauia")
+strength = 95.0
+dexterity = 75.0
+agility = 35.0
+vitality = 80.0
+intelligence = 10.0
+wisdom = 5.0
+luck = 0.0
+critRate = 25.0
+counterRate = 10.0
+hpRecovery = 0.0
+spRecovery = 0.0
+regenerateHp = 0.0
+regenerateSp = 0.0
+physicalBaseValue = 25.0
+magicalBaseValue = 5.0
+physicalDefense = 15.0
+magicalDefense = 5.0
+experience = 4.0
+
+[sub_resource type="Resource" id="Resource_on82e"]
+script = ExtResource("3_smyes")
+metadata/_custom_type_script = "uid://bxors41xs2sgx"
+
+[resource]
+script = ExtResource("5_ambsh")
+name = "Oktion"
+_animationFrames = SubResource("SpriteFrames_1oy5c")
+pixelHeight = 110.0
+_baseStats = SubResource("Resource_dsy2p")
+defaultBehaviour = SubResource("Resource_on82e")

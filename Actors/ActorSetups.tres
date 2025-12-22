@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="ActorSetups" load_steps=8 format=3 uid="uid://dj3kma3ilnn7q"]
+[gd_resource type="Resource" script_class="ActorSetups" load_steps=9 format=3 uid="uid://dj3kma3ilnn7q"]
 
 [ext_resource type="Script" uid="uid://bx10jj8iv2qr5" path="res://Scripts/Actor/ActorSetups.cs" id="1_j7cpw"]
 [ext_resource type="Resource" uid="uid://dqutttvqe3g20" path="res://Actors/Valkyrie.tres" id="2_0b1b7"]
 [ext_resource type="Resource" uid="uid://ce40rayktpge3" path="res://Actors/ElderGhost.tres" id="3_3lw0w"]
 [ext_resource type="Resource" uid="uid://c5mqeknwjumis" path="res://Actors/Wizard.tres" id="3_3sm4g"]
 [ext_resource type="Resource" uid="uid://j1x3dmibjlmm" path="res://Actors/Slime.tres" id="3_ls8cd"]
+[ext_resource type="Resource" uid="uid://b56hipgigmnr2" path="res://Actors/Allosaur.tres" id="3_nmggo"]
 [ext_resource type="Resource" uid="uid://c52wgcwnm17eq" path="res://Actors/Raptor.tres" id="4_mtmkg"]
 [ext_resource type="Resource" uid="uid://boijb83b4qonl" path="res://Actors/Oktion.tres" id="5_7iqpy"]
 
 [resource]
 script = ExtResource("1_j7cpw")
-list = Array[Object]([ExtResource("2_0b1b7"), ExtResource("3_3sm4g"), ExtResource("3_ls8cd"), ExtResource("4_mtmkg"), ExtResource("5_7iqpy"), ExtResource("3_3lw0w")])
+list = Array[Object]([ExtResource("2_0b1b7"), ExtResource("3_3sm4g"), ExtResource("3_nmggo"), ExtResource("3_3lw0w"), ExtResource("5_7iqpy"), ExtResource("4_mtmkg"), ExtResource("3_ls8cd")])

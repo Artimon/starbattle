@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=40 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" uid="uid://c64pyrw7r0vqt" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -25,12 +25,10 @@
 [ext_resource type="Shader" uid="uid://kfjlo04ac7q3" path="res://Shaders/AlphaShine.tres" id="10_2dd70"]
 [ext_resource type="Script" uid="uid://dfilhkfl1mt1" path="res://Scripts/Controllers/WavesController.cs" id="12_pqm43"]
 [ext_resource type="Script" uid="uid://cwk2ce2aur7he" path="res://Scripts/Actor/ActorSelection.cs" id="12_t8ruj"]
-[ext_resource type="Resource" uid="uid://j1x3dmibjlmm" path="res://Actors/Slime.tres" id="13_24srk"]
 [ext_resource type="Texture2D" uid="uid://idoo2rtmn6n" path="res://Images/SelectCircle.png" id="13_dwphc"]
-[ext_resource type="Script" uid="uid://bh65777vsmrb" path="res://Scripts/Controllers/WaveSetup.cs" id="14_hvisv"]
 [ext_resource type="Texture2D" uid="uid://cn3yslcng2fxn" path="res://Images/FlowerMeadow.jpg" id="15_31iqn"]
-[ext_resource type="Resource" uid="uid://c52wgcwnm17eq" path="res://Actors/Raptor.tres" id="15_v5cgv"]
 [ext_resource type="Script" uid="uid://cm7kjjy3frxds" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
+[ext_resource type="Resource" uid="uid://c3t6u7qcetsch" path="res://Maps/Forest/ForestSetup.tres" id="17_f2rmj"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jimt1"]
 panorama = ExtResource("1_et1wg")
@@ -55,26 +53,6 @@ uv1_scale = Vector3(3.5, 3.5, 3.5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_c18f7"]
 material = SubResource("StandardMaterial3D_i1pme")
-
-[sub_resource type="Resource" id="Resource_qr6hu"]
-script = ExtResource("14_hvisv")
-minAmount = 2
-actors = Array[Object]([ExtResource("13_24srk")])
-
-[sub_resource type="Resource" id="Resource_68hij"]
-script = ExtResource("14_hvisv")
-minAmount = 3
-actors = Array[Object]([ExtResource("13_24srk")])
-
-[sub_resource type="Resource" id="Resource_bebsy"]
-script = ExtResource("14_hvisv")
-minAmount = 2
-actors = Array[Object]([ExtResource("15_v5cgv")])
-
-[sub_resource type="Resource" id="Resource_sor8t"]
-script = ExtResource("14_hvisv")
-minAmount = 3
-actors = Array[Object]([ExtResource("13_24srk"), ExtResource("13_24srk"), ExtResource("15_v5cgv")])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wxb5y"]
 render_priority = 0
@@ -308,7 +286,7 @@ spawn_path = NodePath("../ActorContainer")
 script = ExtResource("12_pqm43")
 _multiplayerContainer = NodePath("..")
 _timer = NodePath("Timer")
-_waveSetups = Array[Object]([SubResource("Resource_qr6hu"), SubResource("Resource_68hij"), SubResource("Resource_bebsy"), SubResource("Resource_sor8t")])
+_mapSetup = ExtResource("17_f2rmj")
 _spawner = NodePath("../ActorSpawner")
 
 [node name="Timer" type="Timer" parent="MultiplayerContainer/WavesController"]

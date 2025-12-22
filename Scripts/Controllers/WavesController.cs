@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Godot;
+using Starbattle.Maps;
 
 namespace Starbattle.Controllers;
 
@@ -22,7 +23,7 @@ public partial class WavesController : Node {
 	public WaveSetup _waveSetup;
 
 	[Export]
-	public WaveSetup[] _waveSetups;
+	public MapSetup _mapSetup;
 
 	[Export]
 	public ActorSpawner _spawner;
@@ -52,7 +53,7 @@ public partial class WavesController : Node {
 		_time += (float)delta;
 
 		var wave = (int)(_time / 60.0f);
-		wave = Math.Min(wave, _waveSetups.Length - 1); // @TODO Check for level end here.
+		wave = Math.Min(wave, _mapSetup.waveSetups.Length - 1); // @TODO Check for level end here.
 
 		var isNextWave = wave > _currentWave;
 		if (!isNextWave) {
@@ -62,7 +63,7 @@ public partial class WavesController : Node {
 		GD.Print($"Now entering wave {wave + 1}");
 
 		_currentWave = wave;
-		_waveSetup = _waveSetups[wave];
+		_waveSetup = _mapSetup.waveSetups[wave];
 
 		// @TODO Spawn boss here.
 
