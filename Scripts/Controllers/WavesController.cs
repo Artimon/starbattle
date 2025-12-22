@@ -65,7 +65,7 @@ public partial class WavesController : Node {
 		_currentWave = wave;
 		_waveSetup = _mapSetup.waveSetups[wave];
 
-		// @TODO Spawn boss here.
+		_TrySpawnBosses(_waveSetup.bosses);
 
 		return true;
 	}
@@ -91,6 +91,22 @@ public partial class WavesController : Node {
 		var partyScale = Mathf.Pow(players.Length, 0.75f);
 
 		return difficultyFactor * partyScale;
+	}
+
+	public void _TrySpawnBosses(ActorSetup[] bossSetups) {
+		if (bossSetups == null) {
+			return;
+		}
+
+		if (!Multiplayer.IsServer()) {
+			return;
+		}
+
+		var difficulty = GetDifficulty();
+
+		foreach (var setup in bossSetups) {
+			_spawner.CreateMob(ActorSpawner.RandomSpawnPosition, setup, difficulty);
+		}
 	}
 
 	public void _TrySpawnMobs() {

@@ -34,31 +34,56 @@ public partial class PerkSetup : Resource {
 	[Export]
 	public PerkStats[] stats;
 
-	public Rarities PickRarity {
-		get {
-			var total = stats.Sum(s => s.Weight);
-			var roll = GD.RandRange(0d, total);
+	public bool TryPickRarity(out Rarities pickedRarity) {
+		pickedRarity = Rarities.Common;
 
-			var cumulative = 0d;
+		// Do every time, needs to be luck-adjusted anyway.
+		var weights = new[] {
+			CommonWeight,
+			RareWeight,
+			EpicWeight,
+			LegendaryWeight
+		};
 
-			foreach (var perkStats in stats) {
-				cumulative += perkStats.Weight;
+		var total = weights.Sum();
+		var roll = (float)GD.RandRange(0d, total);
 
-				if (roll > cumulative) {
-					continue;
-				}
+		var cumulative = 0f;
 
-				return perkStats.rarity;
+		for (var i = 0; i < weights.Length; i++) {
+			cumulative += weights[i];
+			if (roll > cumulative) {
+				continue;
 			}
 
-			throw new Exception($"No rarity found for perk setup {displayName}");
+			var rarity = (Rarities)i;
+
+			if (stats.Any(perk => perk.rarity == rarity)) {
+				pickedRarity = rarity;
+
+				return true;
+			}
+
+			return false;
 		}
+
+		return false;
 	}
 
-	public Candidate PickCandidate => new() {
-		setup = this,
-		rarity = PickRarity
-	};
+	public bool TryPickCandidate(out Candidate candidate) {
+		if (TryPickRarity(out var rarity)) {
+			candidate = new Candidate {
+				setup = this,
+				rarity = rarity
+			};
+
+			return true;
+		}
+
+		candidate = null;
+
+		return false;
+	}
 
 	public static uint RevealId(int cloakedId) {
 		return unchecked((uint)cloakedId);

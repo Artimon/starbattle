@@ -13,7 +13,20 @@ public partial class ActorPerks : Node {
 	[Export]
 	public PerkSetups perkSetups;
 
-	public List<Candidate> Candidates => perkSetups.Perks.Select(setup => setup.PickCandidate).ToList();
+	public List<Candidate> Candidates {
+		get {
+			var candidates = new List<Candidate>();
+
+			foreach (var perkSetup in perkSetups.Perks) {
+				var hasRarityCandidate = perkSetup.TryPickCandidate(out var candidate);
+				if (hasRarityCandidate) {
+					candidates.Add(candidate);
+				}
+			}
+
+			return candidates;
+		}
+	}
 
 	public Candidate[] RollChoices() {
 		const int picks = 4;

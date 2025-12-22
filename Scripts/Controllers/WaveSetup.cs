@@ -11,4 +11,7 @@ public partial class WaveSetup : Resource {
 	public ActorSetup[] actors;
 
 	public ActorSetup RandomMobSetup => actors[GD.Randi() % actors.Length];
+
+	[Export]
+	public ActorSetup[] bosses;
 }
