@@ -259,21 +259,17 @@ offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PerkButton" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+[node name="PerkButton" parent="CanvasLayer/PerkSelection/VBoxContainer" instance=ExtResource("9_6xyd7")]
 layout_mode = 2
-_rarityElements = []
 
-[node name="PerkButton2" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+[node name="PerkButton2" parent="CanvasLayer/PerkSelection/VBoxContainer" instance=ExtResource("9_6xyd7")]
 layout_mode = 2
-_rarityElements = []
 
-[node name="PerkButton3" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+[node name="PerkButton3" parent="CanvasLayer/PerkSelection/VBoxContainer" instance=ExtResource("9_6xyd7")]
 layout_mode = 2
-_rarityElements = []
 
-[node name="PerkButton4" parent="CanvasLayer/PerkSelection/VBoxContainer" node_paths=PackedStringArray("_rarityElements") instance=ExtResource("9_6xyd7")]
+[node name="PerkButton4" parent="CanvasLayer/PerkSelection/VBoxContainer" instance=ExtResource("9_6xyd7")]
 layout_mode = 2
-_rarityElements = []
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("2_7n0hf")

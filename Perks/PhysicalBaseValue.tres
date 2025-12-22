@@ -97,6 +97,6 @@ metadata/_custom_type_script = "uid://dleyghgrvuk03"
 
 [resource]
 script = ExtResource("1_4pn83")
-displayName = "Weapon Physical Damage"
+displayName = "Physical Damage"
 stats = Array[Object]([SubResource("Resource_qgtou"), SubResource("Resource_8dmyo"), SubResource("Resource_dvqp5"), SubResource("Resource_bxd1o")])
 metadata/_custom_type_script = "uid://jpn88wyeukew"

@@ -75,10 +75,10 @@ public partial class PerkButton : Button {
 	public Color commonColor = Colors.White;
 
 	[Export]
-	public Color rareColor = new (0.15f, 0.57f, 0.95f);
+	public Color rareColor = new (0.1f, 0.57f, 1.0f); // 0.15f, 0.57f, 0.95f
 
 	[Export]
-	public Color epicColor = new (0.58f, 0.20f, 0.71f);
+	public Color epicColor = new (0.64f, 0.04f, 0.84f); // 0.58f, 0.20f, 0.71f
 
 	[Export]
 	public Color legendaryColor = new (0.98f, 0.73f, 0.21f);
@@ -95,8 +95,10 @@ public partial class PerkButton : Button {
 	}
 
 	public void Perk(PerkSetup.Candidate candidate) {
+		GD.Print($"Coloring all in {candidate.setup.displayName}, rarity {candidate.rarity}:");
 		foreach (var canvasItem in _rarityElements) {
 			canvasItem.Modulate = _rarityColors[candidate.rarity];
+			GD.Print($"Modulateded {canvasItem.Name} to {_rarityColors[candidate.rarity]}: {canvasItem.Modulate}");
 		}
 
 		_titleLabel.Text = _titleTemplate.Replace("{name}", candidate.setup.displayName).Replace("{rarity}", candidate.rarity.ToString());

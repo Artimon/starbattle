@@ -97,6 +97,6 @@ metadata/_custom_type_script = "uid://dleyghgrvuk03"
 
 [resource]
 script = ExtResource("1_5ljx8")
-displayName = "Magical Skill Damage"
+displayName = "Magical Damage"
 stats = Array[Object]([SubResource("Resource_l876y"), SubResource("Resource_yxrgh"), SubResource("Resource_jlnr6"), SubResource("Resource_0mmju")])
 metadata/_custom_type_script = "uid://jpn88wyeukew"
