@@ -30,4 +30,10 @@ public partial class EarthStrike : AoeNode {
 
 		Attack(_actionSetup);
 	}
+
+	public void OnEffectFinished() { }
+
+	public void OnRemove() {
+		this.Remove();
+	}
 }

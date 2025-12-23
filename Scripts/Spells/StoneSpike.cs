@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Threading.Tasks;
+using Godot;
 
 namespace Starbattle.Spells;
 
@@ -13,16 +14,22 @@ public partial class StoneSpike : Node3D {
 	[Export]
 	public Timer _timer;
 
-	public void BeginInner() {
+	public async Task BeginInner() {
 		_spike.Rotation = new Vector3(Rotation.X, Mathf.DegToRad(GD.RandRange(0, 360)), Rotation.Z);
 		_spike.Scale = Vector3.One * (float)GD.RandRange(1.3, 1.5);
 
 		_timer.WaitTime = 1.75f;
 		_timer.Timeout += OnStrikeBegin;
 		_timer.Start();
+
+		await ToSignal(_timer, Timer.SignalName.Timeout);
+
+		_timer.WaitTime = 2f;
+		_timer.Timeout += OnRetreatBegin;
+		_timer.Start();
 	}
 
-	public void BeginOuter(StoneSpike inner, float angleOffset) {
+	public async Task BeginOuter(StoneSpike inner, float angleOffset) {
 		var pan = inner.RotationDegrees.Y + angleOffset;
 		var position = Vector3.Right * 0.5f;
 
@@ -39,9 +46,21 @@ public partial class StoneSpike : Node3D {
 		_timer.WaitTime = 1f + 0.25f * angleOffset / 120f;
 		_timer.Timeout += OnStrikeBegin;
 		_timer.Start();
+
+		await ToSignal(_timer, Timer.SignalName.Timeout);
+
+		_timer.WaitTime = 1.5f;
+		_timer.Timeout += OnRetreatBegin;
+		_timer.Start();
 	}
 
 	public void OnStrikeBegin() {
 		_animation.Play("Strike");
+		_timer.Timeout -= OnStrikeBegin;
+	}
+
+	public void OnRetreatBegin() {
+		_animation.Play("Retreat");
+		_timer.Timeout -= OnRetreatBegin;
 	}
 }
