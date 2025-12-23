@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=28 format=3 uid="uid://c5mqeknwjumis"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=29 format=3 uid="uid://c5mqeknwjumis"]
 
 [ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="1_616bd"]
 [ext_resource type="Texture2D" uid="uid://c2mc5vo2djkyo" path="res://Actors/Wizard.png" id="1_quwa7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Actions/Move.tres" id="5_nx5po"]
 [ext_resource type="Script" uid="uid://ptqgb0koc75o" path="res://Scripts/Actions/PlayerActions.cs" id="5_tc4dp"]
 [ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="6_kt0o1"]
+[ext_resource type="Resource" uid="uid://dew3i1k1dqa0o" path="res://Actions/EarthStrike/EarthStrike.tres" id="6_l5b8d"]
 [ext_resource type="Resource" uid="uid://byxk6s2vvj844" path="res://Actions/RegenerateSp/RegenerateSp.tres" id="7_rc6md"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otd2d"]
@@ -176,6 +177,7 @@ attack = ExtResource("3_v2p2x")
 regenerateHp = ExtResource("6_kt0o1")
 regenerateSp = ExtResource("7_rc6md")
 e = ExtResource("4_jtier")
+r = ExtResource("6_l5b8d")
 
 [resource]
 script = ExtResource("1_616bd")

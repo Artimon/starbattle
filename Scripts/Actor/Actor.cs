@@ -362,8 +362,8 @@ public partial class Actor : Node3D {
 		}
 
 		if (IsPlayerGroup && Multiplayer.IsServer()) {
-			hp -= 50; // @TODO Remove, temp for regen testing.
-			sp -= 35;
+			// hp -= 50; // @TODO Remove, temp for regen testing.
+			// sp -= 35;
 
 			_regenerate.Start();
 		}

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7uuhxh08cwtp"]
+
+[ext_resource type="Script" uid="uid://dxocg536f3cxu" path="res://Scripts/Spells/EarthStrike.cs" id="1_2uo16"]
+[ext_resource type="PackedScene" uid="uid://ct1fpimwrmel6" path="res://Actions/EarthStrike/StoneSpike.tscn" id="2_2uo16"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2uo16"]
+radius = 0.2
+height = 4.0
+
+[node name="EarthStrike" type="Node3D" node_paths=PackedStringArray("_spikeInner", "_spike1", "_spike2", "_spike3", "_area")]
+script = ExtResource("1_2uo16")
+_spikeInner = NodePath("StoneSpike Inner")
+_spike1 = NodePath("StoneSpike1")
+_spike2 = NodePath("StoneSpike2")
+_spike3 = NodePath("StoneSpike3")
+_area = NodePath("Area3D")
+metadata/_custom_type_script = "uid://dxocg536f3cxu"
+
+[node name="StoneSpike Inner" parent="." instance=ExtResource("2_2uo16")]
+
+[node name="StoneSpike1" parent="." instance=ExtResource("2_2uo16")]
+
+[node name="StoneSpike2" parent="." instance=ExtResource("2_2uo16")]
+
+[node name="StoneSpike3" parent="." instance=ExtResource("2_2uo16")]
+
+[node name="Area3D" type="Area3D" parent="."]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+shape = SubResource("CapsuleShape3D_2uo16")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnSpellActivate"]

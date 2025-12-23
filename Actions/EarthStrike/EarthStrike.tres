@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ActionSetup" load_steps=3 format=3 uid="uid://dew3i1k1dqa0o"]
+
+[ext_resource type="Script" uid="uid://44osvnlqjfmy" path="res://Scripts/Actions/ActionSetup.cs" id="1_fn876"]
+[ext_resource type="PackedScene" uid="uid://b7uuhxh08cwtp" path="res://Actions/EarthStrike/EarthStrike.tscn" id="1_mtwxu"]
+
+[resource]
+script = ExtResource("1_fn876")
+name = "Earth Strike"
+actionCost = 2
+spCost = 7.0
+power = 115.0
+actionType = 3
+damageType = 1
+targetType = 1
+condition = 0
+aoePrefab = ExtResource("1_mtwxu")
+metadata/_custom_type_script = "uid://44osvnlqjfmy"

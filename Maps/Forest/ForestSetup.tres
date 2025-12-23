@@ -13,116 +13,136 @@
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("2_7oo50")])
+bosses = null
 
 [sub_resource type="Resource" id="Resource_68hij"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("2_7oo50")])
+bosses = null
 
 [sub_resource type="Resource" id="Resource_bebsy"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("4_7wput")])
+bosses = null
 
 [sub_resource type="Resource" id="Resource_sor8t"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("2_7oo50"), ExtResource("2_7oo50"), ExtResource("4_7wput")])
+bosses = null
 
 [sub_resource type="Resource" id="Resource_oskno"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("5_q1o5p"), ExtResource("2_7oo50"), ExtResource("2_7oo50")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_nd4jk"]
 script = ExtResource("3_vk0p7")
 minAmount = 1
 actors = Array[Object]([ExtResource("5_q1o5p")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_ar6iy"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("5_q1o5p"), ExtResource("4_7wput"), ExtResource("4_7wput")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_x3tt7"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("5_q1o5p"), ExtResource("4_7wput"), ExtResource("2_7oo50")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_0ia2v"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("6_a312m"), ExtResource("4_7wput")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_segcg"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("6_a312m")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_tkpxd"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("5_q1o5p"), ExtResource("6_a312m"), ExtResource("6_a312m")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_5hyi2"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("7_a4455")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_6jix8"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("4_7wput"), ExtResource("6_a312m"), ExtResource("7_a4455")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_kf0x2"]
 script = ExtResource("3_vk0p7")
 minAmount = 3
 actors = Array[Object]([ExtResource("7_a4455"), ExtResource("4_7wput"), ExtResource("4_7wput")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_nn4bo"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("7_a4455"), ExtResource("5_q1o5p")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_h22wu"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("8_36clj"), ExtResource("7_a4455")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_qrbtu"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("8_36clj")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_3ldww"]
 script = ExtResource("3_vk0p7")
 minAmount = 4
 actors = Array[Object]([ExtResource("8_36clj"), ExtResource("6_a312m"), ExtResource("2_7oo50"), ExtResource("2_7oo50")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_ait8s"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("8_36clj"), ExtResource("5_q1o5p")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [sub_resource type="Resource" id="Resource_g23mv"]
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("5_q1o5p"), ExtResource("6_a312m"), ExtResource("7_a4455")])
+bosses = null
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [resource]
