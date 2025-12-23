@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://spaa2o48gbcg"
-path="res://.godot/imported/GlowParticle.png-bd9c7e8d7f465f7c319bbbdeeb1b4b19.ctex"
+uid="uid://ndy26eafn543"
+path="res://.godot/imported/SparkleParticle.png-1a2cc984bb1d107bd0f01905ae172034.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Effects/LevelUpEffect/GlowParticle.png"
-dest_files=["res://.godot/imported/GlowParticle.png-bd9c7e8d7f465f7c319bbbdeeb1b4b19.ctex"]
+source_file="res://Effects/Particles/SparkleParticle.png"
+dest_files=["res://.godot/imported/SparkleParticle.png-1a2cc984bb1d107bd0f01905ae172034.ctex"]
 
 [params]
 
