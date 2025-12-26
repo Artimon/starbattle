@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="MapSetup" load_steps=29 format=3 uid="uid://c3t6u7qcetsch"]
+[gd_resource type="Resource" script_class="MapSetup" load_steps=30 format=3 uid="uid://c3t6u7qcetsch"]
 
 [ext_resource type="Script" uid="uid://craqeod24mkcx" path="res://Scripts/Maps/MapSetup.cs" id="1_wn1jk"]
 [ext_resource type="Resource" uid="uid://j1x3dmibjlmm" path="res://Actors/Slime.tres" id="2_7oo50"]
+[ext_resource type="Resource" uid="uid://d1q2frskxdjya" path="res://Actors/OldSpirit.tres" id="3_7wput"]
 [ext_resource type="Script" uid="uid://bh65777vsmrb" path="res://Scripts/Controllers/WaveSetup.cs" id="3_vk0p7"]
 [ext_resource type="Resource" uid="uid://c52wgcwnm17eq" path="res://Actors/Raptor.tres" id="4_7wput"]
 [ext_resource type="Resource" uid="uid://b56hipgigmnr2" path="res://Actors/Allosaur.tres" id="5_q1o5p"]
@@ -142,7 +143,7 @@ metadata/_custom_type_script = "uid://bh65777vsmrb"
 script = ExtResource("3_vk0p7")
 minAmount = 2
 actors = Array[Object]([ExtResource("5_q1o5p"), ExtResource("6_a312m"), ExtResource("7_a4455")])
-bosses = null
+bosses = Array[Object]([ExtResource("3_7wput")])
 metadata/_custom_type_script = "uid://bh65777vsmrb"
 
 [resource]

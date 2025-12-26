@@ -19,10 +19,23 @@ public partial class StateHit : StateBase {
 
 	public override void OnProcess(double deltaTime) {
 		_duration -= deltaTime;
+
+		var progress = 5.5f * GlobalTime.Seconds;
+
+		_actor.sprite.Position += new Vector3(
+			Mathf.Cos(progress * 5f) * (float)deltaTime,
+			Mathf.Sin(progress * 2f) * (float)deltaTime,
+			Mathf.Cos(progress * 5f) * (float)deltaTime
+		);
+
 		if (_duration > 0d) {
 			return;
 		}
 
 		_actor.stateMachine.Force("Idle");
+	}
+
+	public override void OnExit() {
+		_actor.sprite.Position = Vector3.Zero;
 	}
 }

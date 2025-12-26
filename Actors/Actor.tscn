@@ -53,7 +53,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -81,7 +81,7 @@ length = 5.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -110,7 +110,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -125,7 +125,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:modulate.a")
+tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate.a")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -137,7 +137,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:modulate")
+tracks/1/path = NodePath("Display Node/AnimatedSprite3D:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -309,13 +309,14 @@ animations = [{
 radius = 0.4
 height = 1.6
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "poise", "behaviour", "experience", "perks", "_regenerate", "stateMachine")]
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "displayNode", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "poise", "behaviour", "experience", "perks", "_regenerate", "stateMachine")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
+displayNode = NodePath("Display Node")
 characterBody = NodePath("CharacterBody3D")
 collisionShape = NodePath("CharacterBody3D/CollisionShape3D")
 _animator = NodePath("Systems/ActorAnimator")
-sprite = NodePath("AnimatedSprite3D")
+sprite = NodePath("Display Node/AnimatedSprite3D")
 shadow = NodePath("Shadow Sprite3D")
 _setups = ExtResource("2_eb7re")
 action = NodePath("Systems/ActorAction")
@@ -380,8 +381,10 @@ wait_time = 3.0
 script = ExtResource("7_apaue")
 _actor = NodePath("../..")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="Display Node" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Display Node"]
 pixel_size = 0.02
 billboard = 1
 double_sided = false
@@ -390,7 +393,7 @@ sprite_frames = SubResource("SpriteFrames_hqh74")
 animation = &"Idle"
 
 [node name="Shadow Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0.01, 0)
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0.00999999, 0)
 modulate = Color(1, 1, 1, 0.8)
 render_priority = 1
 texture = ExtResource("6_d5h64")

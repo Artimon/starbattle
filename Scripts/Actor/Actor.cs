@@ -42,6 +42,9 @@ public partial class Actor : Node3D {
 	public ActorSynchronizer synchronizer;
 
 	[Export]
+	public Node3D displayNode;
+
+	[Export]
 	public CharacterBody3D characterBody;
 
 	[Export]
@@ -324,13 +327,13 @@ public partial class Actor : Node3D {
 		behaviour.Register();
 		setup = _setups.GetSetup(actorId);
 		sprite.SpriteFrames = setup.AnimationFrames;
+		sprite.Play("Idle");
 
 		// GD.Print($"Created with {actorId} / {setup.name} at {synchronizer.spawnPosition} / {Position}");
 
 		var spriteOffset = sprite.PixelSize * setup.SpritePixels / 2f;
 
-		sprite.Position = new Vector3(0f, spriteOffset, 0f);
-		sprite.Play("Idle");
+		displayNode.Position = new Vector3(0f, spriteOffset, 0f);
 
 		var height = Height;
 

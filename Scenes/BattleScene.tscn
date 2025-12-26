@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=41 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" uid="uid://c64pyrw7r0vqt" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://cn3yslcng2fxn" path="res://Images/FlowerMeadow.jpg" id="15_31iqn"]
 [ext_resource type="Script" uid="uid://cm7kjjy3frxds" path="res://Scripts/Effects/EffectContainer.cs" id="15_x12mc"]
 [ext_resource type="Resource" uid="uid://c3t6u7qcetsch" path="res://Maps/Forest/ForestSetup.tres" id="17_f2rmj"]
+[ext_resource type="AudioStream" uid="uid://cbfq4b7o2e7yn" path="res://Audio/AgaBgm.ogg" id="30_eqbi2"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jimt1"]
 panorama = ExtResource("1_et1wg")
@@ -256,6 +257,7 @@ camera = NodePath("Camera3D")
 [node name="AudioListener3D" type="AudioListener3D" parent="CameraController"]
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
+fov = 60.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraController/Camera3D"]
 transform = Transform3D(200, 0, 0, 0, -8.74228e-06, -200, 0, 200, -8.74228e-06, 0, 0, -100)
@@ -415,5 +417,9 @@ double_sided = false
 texture_filter = 0
 render_priority = 10
 texture = ExtResource("9_ftk6f")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_eqbi2")
+autoplay = true
 
 [connection signal="timeout" from="MultiplayerContainer/WavesController/Timer" to="MultiplayerContainer/WavesController" method="_TrySpawnMobs"]
