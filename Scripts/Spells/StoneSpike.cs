@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Godot;
+using Starbattle.Controllers;
 
 namespace Starbattle.Spells;
 
@@ -7,6 +8,9 @@ namespace Starbattle.Spells;
 public partial class StoneSpike : Node3D {
 	[Export]
 	public Node3D _spike;
+
+	[Export]
+	public GpuParticles3D _stoneParticles;
 
 	[Export]
 	public AnimationPlayer _animation;
@@ -34,7 +38,6 @@ public partial class StoneSpike : Node3D {
 		var position = Vector3.Right * 0.5f;
 
 		_spike.Position = position.Rotated(Vector3.Up, Mathf.RadToDeg(pan));
-		GD.Print(_spike.Position);
 		_spike.RotationDegrees = new Vector3(
 			GD.RandRange(10, 10),
 			pan,
@@ -56,6 +59,9 @@ public partial class StoneSpike : Node3D {
 
 	public void OnStrikeBegin() {
 		_animation.Play("Strike");
+		_stoneParticles.Emitting = true;
+		CameraController.instance.AddTrauma(0.35f);
+
 		_timer.Timeout -= OnStrikeBegin;
 	}
 

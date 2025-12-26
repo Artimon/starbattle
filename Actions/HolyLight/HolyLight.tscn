@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cgu3ehqwy7133"]
+[gd_scene load_steps=31 format=3 uid="uid://cgu3ehqwy7133"]
 
 [ext_resource type="Script" uid="uid://cyy3a7nn0gify" path="res://Scripts/Spells/HolyLight.cs" id="1_244ww"]
 [ext_resource type="Texture2D" uid="uid://cpri5q7e4ltn8" path="res://Actions/HolyLight/HolyLight.png" id="2_0hads"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bcjuqui43miav" path="res://Actions/HolyLight/GlowParticle.png" id="5_dj35t"]
 [ext_resource type="Script" uid="uid://c4jkpyi64s8uo" path="res://Scripts/Effects/OffsetSprite.cs" id="7_0yg7a"]
 [ext_resource type="PackedScene" uid="uid://bdyq1qy5lmvkb" path="res://Actions/HolyLight/HolyLightShock.tscn" id="7_ijalq"]
+[ext_resource type="PackedScene" uid="uid://bnafegcu1op0m" path="res://Effects/Particles/DustParticles.tscn" id="8_8xflc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vyf8h"]
 radius = 0.85
@@ -62,7 +63,7 @@ angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 anim_offset_max = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fatp7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8xflc"]
 render_priority = 10
 transparency = 2
 alpha_scissor_threshold = 0.5
@@ -75,7 +76,7 @@ particles_anim_v_frames = 3
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_cf6ol"]
-material = SubResource("StandardMaterial3D_fatp7")
+material = SubResource("StandardMaterial3D_8xflc")
 size = Vector2(0.5, 0.5)
 subdivide_width = 3
 subdivide_depth = 3
@@ -169,48 +170,6 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_ct61d")
 size = Vector2(0.35, 0.35)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ninji"]
-load_path = "res://.godot/imported/HolyDustParticle.png-66b4407d00979de099189868e94a86d5.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tn0dk"]
-render_priority = 11
-transparency = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_texture = SubResource("CompressedTexture2D_ninji")
-disable_receive_shadows = true
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Curve" id="Curve_j0ejx"]
-_data = [Vector2(0, 0.747253), 0.0, 0.884616, 0, 0, Vector2(0.521739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.725275), -1.71429, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_srlmx"]
-curve = SubResource("Curve_j0ejx")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eoehk"]
-lifetime_randomness = 0.5
-emission_shape_offset = Vector3(0, 0.35, 0)
-emission_shape_scale = Vector3(0.5, 0.5, 0.5)
-emission_shape = 1
-emission_sphere_radius = 1.0
-angle_min = -45.0
-angle_max = 45.0
-direction = Vector3(0, 1, 0)
-spread = 90.0
-initial_velocity_min = 0.1
-initial_velocity_max = 0.35
-gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_srlmx")
-color_ramp = SubResource("GradientTexture1D_pikvt")
-
-[sub_resource type="QuadMesh" id="QuadMesh_kanrg"]
-size = Vector2(2.5, 1.5)
-
 [node name="HolyLight" type="Node3D" node_paths=PackedStringArray("_light", "_lightBeamSprite", "_animationPlayer", "_stoneParticles", "_glowParticles", "_sparkleParticles", "_dustParticles", "_shockwave1", "_shockwave2", "_offsetSprite", "_shockActivationTimer", "_effectDurationTimer", "_area")]
 script = ExtResource("1_244ww")
 _light = NodePath("OmniLight3D")
@@ -296,13 +255,7 @@ lifetime = 1.2
 process_material = SubResource("ParticleProcessMaterial_8gtmc")
 draw_pass_1 = SubResource("QuadMesh_euwwe")
 
-[node name="Dust Particles" type="GPUParticles3D" parent="Effects"]
-material_override = SubResource("StandardMaterial3D_tn0dk")
-amount = 10
-lifetime = 1.5
-trail_lifetime = 1.0
-process_material = SubResource("ParticleProcessMaterial_eoehk")
-draw_pass_1 = SubResource("QuadMesh_kanrg")
+[node name="Dust Particles" parent="Effects" instance=ExtResource("8_8xflc")]
 
 [node name="HolyLightShock" parent="Effects" instance=ExtResource("7_ijalq")]
 _autoStart = false

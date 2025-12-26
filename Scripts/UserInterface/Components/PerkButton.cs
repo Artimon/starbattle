@@ -95,10 +95,8 @@ public partial class PerkButton : Button {
 	}
 
 	public void Perk(PerkSetup.Candidate candidate) {
-		GD.Print($"Coloring all in {candidate.setup.displayName}, rarity {candidate.rarity}:");
 		foreach (var canvasItem in _rarityElements) {
 			canvasItem.Modulate = _rarityColors[candidate.rarity];
-			GD.Print($"Modulateded {canvasItem.Name} to {_rarityColors[candidate.rarity]}: {canvasItem.Modulate}");
 		}
 
 		_titleLabel.Text = _titleTemplate.Replace("{name}", candidate.setup.displayName).Replace("{rarity}", candidate.rarity.ToString());
@@ -139,7 +137,6 @@ public partial class PerkButton : Button {
 	}
 
 	public override void _Pressed() {
-		GD.Print("Perk clicked: " + _titleLabel.Text);
 		PerkPressed?.Invoke();
 	}
 }

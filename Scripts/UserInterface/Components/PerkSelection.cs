@@ -30,8 +30,6 @@ public partial class PerkSelection : Panel {
 		Visible = true;
 		_buttonContainer.Visible = true;
 
-		GD.Print($"{Multiplayer.GetUniqueId()} received perks:");
-
 		var index = 0;
 
 		foreach (var candidate in candidates) {

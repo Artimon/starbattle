@@ -1,10 +1,16 @@
 ﻿using Godot;
-using Starbattle.Controllers;
+using Starbattle.Effects;
 
 namespace Starbattle.Spells;
 
 [GlobalClass]
 public partial class EarthStrike : AoeNode {
+	[Export]
+	public GpuParticles3D _dustParticles;
+
+	[Export]
+	public AudioStream _earthStrikeAudio;
+
 	[Export]
 	public StoneSpike _spikeInner;
 
@@ -23,15 +29,17 @@ public partial class EarthStrike : AoeNode {
 		_spike1.BeginOuter(_spikeInner, 0f);
 		_spike2.BeginOuter(_spikeInner, 120f);
 		_spike3.BeginOuter(_spikeInner, 240f);
+
+		LocalAudio.Play(GlobalPosition, _earthStrikeAudio);
 	}
 
 	public void OnSpellActivate() {
-		CameraController.instance.AddTrauma(0.75f);
-
 		Attack(_actionSetup);
 	}
 
-	public void OnEffectFinished() { }
+	public void OnEffectFinished() {
+		_dustParticles.Emitting = false;
+	}
 
 	public void OnRemove() {
 		this.Remove();
