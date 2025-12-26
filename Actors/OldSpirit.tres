@@ -174,7 +174,7 @@ metadata/_custom_type_script = "uid://bjps27rcc3en0"
 
 [resource]
 script = ExtResource("4_m33wo")
-name = "ElderGhost"
+name = "OldSpirit"
 _animationFrames = SubResource("SpriteFrames_igopj")
 pixelHeight = 80.0
 _baseStats = SubResource("Resource_7de8c")

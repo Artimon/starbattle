@@ -170,7 +170,7 @@ metadata/_custom_type_script = "uid://bxors41xs2sgx"
 
 [resource]
 script = ExtResource("5_ambsh")
-name = "Oktion"
+name = "Allosaur"
 _animationFrames = SubResource("SpriteFrames_1oy5c")
 pixelHeight = 110.0
 _baseStats = SubResource("Resource_dsy2p")

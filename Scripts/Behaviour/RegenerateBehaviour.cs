@@ -15,9 +15,9 @@ public partial class RegenerateBehaviour : DefaultBehaviour {
 
 	public override bool TryCustomAction(Actor actor, Actor target) {
 		if (IsHpBelow(actor, _hpThreshold) && ProbeChance(_probability)) {
-			actor.action.TryRequestAction(_regenerateHp, actor, actor.GlobalPosition);
+			return actor.action.TryRequestAction(_regenerateHp, actor, actor.GlobalPosition);
 		}
 
-		return true;
+		return false;
 	}
 }

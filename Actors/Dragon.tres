@@ -174,7 +174,7 @@ metadata/_custom_type_script = "uid://p4lqlgk14ytq"
 
 [resource]
 script = ExtResource("5_tfae5")
-name = "Slime"
+name = "Dragon"
 _animationFrames = SubResource("SpriteFrames_2ggh8")
 pixelHeight = 100.0
 _baseStats = SubResource("Resource_m10b6")
