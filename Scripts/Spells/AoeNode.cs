@@ -5,12 +5,17 @@ namespace Starbattle.Spells;
 
 [GlobalClass]
 public partial class AoeNode : Node3D {
+	public enum FilterTypes { Opponents, Friends, Any }
+
 	public Actor _actor;
 
 	public ActionSetup _actionSetup;
 
 	[Export]
 	public Area3D _area;
+
+	[Export]
+	public FilterTypes _filterType = FilterTypes.Opponents;
 
 	public void Initialize(ActionSetup actionSetup, Actor actor) {
 		_actor = actor;
@@ -34,7 +39,7 @@ public partial class AoeNode : Node3D {
 				continue;
 			}
 
-			var canTarget = _actionSetup.CanTarget(_actor, target);
+			var canTarget = IsTarget(_actor, target);
 			if (!canTarget) {
 				continue;
 			}
@@ -43,6 +48,22 @@ public partial class AoeNode : Node3D {
 			target.Damage(_actor, damage, false, hits);
 
 			hits += 1;
+		}
+	}
+
+	public bool IsTarget(Actor actor, Actor target) {
+		if (target == null) {
+			return false;
+		}
+
+		switch (_filterType) {
+			case FilterTypes.Opponents when actor.IsPlayerGroup == target.IsPlayerGroup:
+			case FilterTypes.Friends when actor.IsPlayerGroup != target.IsPlayerGroup:
+				return false;
+
+			case FilterTypes.Any:
+			default:
+				return true;
 		}
 	}
 

@@ -45,7 +45,7 @@ size = Vector2(0.25, 0.25)
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.449275, 0.56044), 0.0, 0.0, 0, 0, Vector2(0.804348, 0.857143), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[sub_resource type="CurveTexture" id="CurveTexture_7rba1"]
+[sub_resource type="CurveTexture" id="CurveTexture_owpd8"]
 curve = SubResource("Curve_hggck")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j1xbg"]
@@ -59,9 +59,9 @@ initial_velocity_max = 1.0
 gravity = Vector3(0, 0, 0)
 tangential_accel_min = 2.0
 tangential_accel_max = 2.0
-scale_curve = SubResource("CurveTexture_7rba1")
+scale_curve = SubResource("CurveTexture_owpd8")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5qqu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnfmm"]
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("3_b1uwd")
@@ -73,7 +73,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_iel8v"]
-material = SubResource("StandardMaterial3D_r5qqu")
+material = SubResource("StandardMaterial3D_vnfmm")
 size = Vector2(0.25, 0.25)
 
 [sub_resource type="Gradient" id="Gradient_48hb5"]

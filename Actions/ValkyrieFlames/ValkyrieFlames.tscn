@@ -1,0 +1,164 @@
+[gd_scene load_steps=22 format=3 uid="uid://cec44x5g8fk7i"]
+
+[ext_resource type="Script" uid="uid://ff0o0pb5swlk" path="res://Scripts/Spells/ValkyrieFlames.cs" id="1_7alym"]
+[ext_resource type="Texture2D" uid="uid://oegj6vltwn4t" path="res://Actions/ValkyrieFlames/FireStorm.png" id="2_6gpva"]
+[ext_resource type="Script" uid="uid://bh1e5sbqs26p5" path="res://Scripts/Effects/OffsetNode.cs" id="2_ccebb"]
+[ext_resource type="PackedScene" uid="uid://bh3ut2scrkrwl" path="res://Effects/Particles/SparkleEffect.tscn" id="3_ccebb"]
+[ext_resource type="Texture2D" uid="uid://r6tsq7416ofv" path="res://Actions/RegenerateHp/SparkleParticle.png" id="4_np06e"]
+[ext_resource type="Texture2D" uid="uid://ddam3on3ayq2x" path="res://Actions/ValkyrieFlames/FireGlowParticle.png" id="5_ccebb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q41of"]
+atlas = ExtResource("2_6gpva")
+region = Rect2(0, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np06e"]
+atlas = ExtResource("2_6gpva")
+region = Rect2(600, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jbgp"]
+atlas = ExtResource("2_6gpva")
+region = Rect2(750, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_culbk"]
+atlas = ExtResource("2_6gpva")
+region = Rect2(900, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5er4g"]
+atlas = ExtResource("2_6gpva")
+region = Rect2(1050, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yekbk"]
+atlas = ExtResource("2_6gpva")
+region = Rect2(1200, 0, 150, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_io33n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q41of")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np06e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jbgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_culbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5er4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yekbk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_culbk"]
+render_priority = 10
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_np06e")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5er4g"]
+material = SubResource("StandardMaterial3D_culbk")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="Curve" id="Curve_yekbk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.449275, 0.56044), 0.0, 0.0, 0, 0, Vector2(0.804348, 0.857143), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_7rba1"]
+curve = SubResource("Curve_yekbk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_io33n"]
+emission_shape_offset = Vector3(0, 0.2, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0.65, 0.4, 0.65)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 2.0
+tangential_accel_max = 2.0
+scale_curve = SubResource("CurveTexture_7rba1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5qqu"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("5_ccebb")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_6rxu0"]
+material = SubResource("StandardMaterial3D_r5qqu")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_np06e"]
+height = 3.0
+radius = 1.25
+
+[node name="ValkyrieFlames" type="Node3D" node_paths=PackedStringArray("_sprite", "_sparkParticles", "_glowParticles", "_area")]
+script = ExtResource("1_7alym")
+_sprite = NodePath("OffsetNode/AnimatedSprite3D")
+_sparkParticles = NodePath("Sparkle Effect")
+_glowParticles = NodePath("Glow GPUParticles3D")
+_area = NodePath("Area3D")
+metadata/_custom_type_script = "uid://ff0o0pb5swlk"
+
+[node name="OffsetNode" type="Node3D" parent="." node_paths=PackedStringArray("_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+script = ExtResource("2_ccebb")
+_node = NodePath("AnimatedSprite3D")
+metadata/_custom_type_script = "uid://bh1e5sbqs26p5"
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="OffsetNode"]
+pixel_size = 0.015
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_io33n")
+autoplay = "default"
+
+[node name="Sparkle Effect" parent="." instance=ExtResource("3_ccebb")]
+amount = 10
+draw_pass_1 = SubResource("QuadMesh_5er4g")
+
+[node name="Glow GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+lifetime = 0.65
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_io33n")
+draw_pass_1 = SubResource("QuadMesh_6rxu0")
+
+[node name="Area3D" type="Area3D" parent="."]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_np06e")
+
+[node name="Activation Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[node name="Remove Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Activation Timer" to="." method="OnSpellActivate"]
+[connection signal="timeout" from="Remove Timer" to="." method="OnRemove"]

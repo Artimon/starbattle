@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ActorSetup" load_steps=27 format=3 uid="uid://dqutttvqe3g20"]
+[gd_resource type="Resource" script_class="ActorSetup" load_steps=28 format=3 uid="uid://dqutttvqe3g20"]
 
 [ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="1_pxfe4"]
 [ext_resource type="Texture2D" uid="uid://c6uflpge3imdb" path="res://Actors/Valkyrie.png" id="1_yy5ye"]
 [ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_7pe00"]
 [ext_resource type="Resource" uid="uid://w6fsn0mtbhy0" path="res://Actions/Attack.tres" id="3_xcqno"]
 [ext_resource type="Resource" uid="uid://cddgg8vvo6ggf" path="res://Actions/Move.tres" id="4_opj84"]
+[ext_resource type="Resource" uid="uid://b0r58j5dikfs2" path="res://Actions/ValkyrieFlames/ValkyrieFlames.tres" id="4_wf4uq"]
 [ext_resource type="Script" uid="uid://ptqgb0koc75o" path="res://Scripts/Actions/PlayerActions.cs" id="5_583s1"]
 [ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="5_i2q6v"]
 [ext_resource type="Resource" uid="uid://byxk6s2vvj844" path="res://Actions/RegenerateSp/RegenerateSp.tres" id="6_kg33t"]
@@ -174,6 +175,7 @@ move = ExtResource("4_opj84")
 attack = ExtResource("3_xcqno")
 regenerateHp = ExtResource("5_i2q6v")
 regenerateSp = ExtResource("6_kg33t")
+e = ExtResource("4_wf4uq")
 
 [resource]
 script = ExtResource("1_pxfe4")

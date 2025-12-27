@@ -29,4 +29,8 @@ public static class NodeExtensions {
 	public static async Task WaitForSeconds(this Node node, double seconds) {
 		await node.ToSignal(node.GetTree().CreateTimer(seconds), "timeout");
 	}
+
+	public static async Task AwaitNextPhysicsFrame(this Node node) {
+		await node.ToSignal(node.GetTree(), "physics_frame");
+	}
 }
