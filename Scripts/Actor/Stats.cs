@@ -86,7 +86,9 @@ public partial class Stats : Resource {
 	public float CritChance {
 		get {
 			const float scale = 120f;
-			var chance = 1f - Mathf.Exp(-critRate / scale);
+
+			var effectiveCrit = critRate + 0.5f * luck;
+			var chance = 1f - Mathf.Exp(-effectiveCrit / scale);
 
 			return Mathf.Clamp(chance, 0.05f, 0.95f);
 		}
@@ -135,23 +137,34 @@ public partial class Stats : Resource {
 	}
 
 	public void Add(Stats other) {
-		strength          += other.strength;
+		strength          += other.strength; // Might
 		dexterity         += other.dexterity;
-		agility           += other.agility;
-		vitality          += other.vitality;
+		agility           += other.agility; // Cooldown
+		vitality          += other.vitality; // Max Health
 		intelligence      += other.intelligence;
-		wisdom            += other.wisdom;
-		luck              += other.luck;
+		wisdom            += other.wisdom; // Might
+		luck              += other.luck; // Luck
 		critRate          += other.critRate;
 		counterRate       += other.counterRate;
-		hpRecovery        += other.hpRecovery;
+		hpRecovery        += other.hpRecovery; // Recovery
 		spRecovery        += other.spRecovery;
 		regenerateHp      += other.regenerateHp;
 		regenerateSp      += other.regenerateSp;
 		physicalBaseValue += other.physicalBaseValue;
 		magicalBaseValue  += other.magicalBaseValue;
-		physicalDefense   += other.physicalDefense;
+		physicalDefense   += other.physicalDefense; // Armor
 		magicalDefense    += other.magicalDefense;
+		// Move Speed
+		// Speed (Bullet)
+		// Duration (Spells)
+		// Area (Spells)
+		// Amount (Spells)
+		// Revival
+		// Magnet
+		// Growth
+		// Greed
+		// Curse
+		// Reroll
 
 		GD.Print($" Now adding: {other.strength} strength, {other.dexterity} dexterity, {other.agility} agility, {other.vitality} vitality, {other.intelligence} intelligence, {other.wisdom} wisdom, {other.luck} luck, {other.critRate} critRate, {other.counterRate} counterRate, {other.hpRecovery} hpRecovery, {other.spRecovery} spRecovery, {other.regenerateHp} regenerateHp, {other.regenerateSp} regenerateSp, {other.physicalBaseValue} physicalBaseValue, {other.magicalBaseValue} magicalBaseValue, {other.physicalDefense} physicalDefense, {other.magicalDefense} magicalDefense");
 	}
