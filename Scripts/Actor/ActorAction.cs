@@ -167,6 +167,7 @@ public partial class ActorAction : Node {
 				break;
 
 			case ActionSetup.ActionTypes.Special:
+				// @TODO The spell-position for actor-targeting should be the position at activation.
 				PerformMagic(action, actorHandle, position);
 
 				break;
@@ -190,6 +191,7 @@ public partial class ActorAction : Node {
 		var playerPosition = _actor.GlobalPosition;
 		var distance = playerPosition.DistanceTo(position);
 
+		// @TODO Can lead to a total of 1.85m distance, which may exceed self-targeting range.
 		if (distance <= 0.35f) {
 			_actor.stateMachine
 				.Get<StateAttack>()

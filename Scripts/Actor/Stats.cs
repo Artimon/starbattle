@@ -113,11 +113,11 @@ public partial class Stats : Resource {
 	}
 
 	public float GetHpRegeneration(float power) {
-		return power * regenerateHp * (1f + GD.Randf() * 0.5f);
+		return power / 100f * regenerateHp * (1f + GD.Randf() * 0.5f);
 	}
 
 	public float GetSpRegeneration(float power) {
-		return power * regenerateSp * (1f + GD.Randf() * 0.5f);
+		return power / 100f * regenerateSp * (1f + GD.Randf() * 0.5f);
 	}
 
 	public float GetPhysicalDamage(float power, Actor target) {

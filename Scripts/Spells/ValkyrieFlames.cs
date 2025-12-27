@@ -27,6 +27,16 @@ public partial class ValkyrieFlames : AoeNode {
 		CameraController.instance.AddTrauma(0.75f);
 
 		Attack(_actionSetup);
+		Heal();
+	}
+
+	private void Heal() {
+		if (!Multiplayer.IsServer()) {
+			return;
+		}
+
+		var heal = _actor.stats.GetHpRegeneration(_actionSetup.power);
+		_actor.Heal(heal, true);
 	}
 
 	public void OnRemove() {
