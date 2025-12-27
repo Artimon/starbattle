@@ -18,16 +18,15 @@ public partial class StateHit : StateBase {
 	}
 
 	public override void OnProcess(double deltaTime) {
-		_duration -= deltaTime;
-
 		var progress = 5.5f * GlobalTime.Seconds;
 
-		_actor.sprite.Position += new Vector3(
-			Mathf.Cos(progress * 5f) * (float)deltaTime,
-			Mathf.Sin(progress * 2f) * (float)deltaTime,
-			Mathf.Cos(progress * 5f) * (float)deltaTime
+		_actor.sprite.Position = new Vector3(
+			Mathf.Cos(progress * 5f) * 0.01f,
+			Mathf.Sin(progress * 2f) * 0.01f,
+			Mathf.Cos(progress * 5f) * 0.01f
 		);
 
+		_duration -= deltaTime;
 		if (_duration > 0d) {
 			return;
 		}

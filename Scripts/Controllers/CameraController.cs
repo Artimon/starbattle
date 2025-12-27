@@ -68,7 +68,7 @@ public partial class CameraController : Node3D {
 		var shake = _trauma * _trauma;
 		var time = GlobalTime.Seconds;
 
-		var offset = Mathf.Sin(16f * time * Mathf.Pi) * shake * 0.05f;
+		var offset = Mathf.Sin(16f * time * Mathf.Pi) * shake * 0.025f;
 		GlobalPosition += new Vector3(0f, offset, 0f);
 
 		var angles = new Vector3 {

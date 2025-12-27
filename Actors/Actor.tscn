@@ -329,9 +329,10 @@ stateMachine = NodePath("StateMachine")
 _combatNumberPrefab = ExtResource("3_edhfj")
 _combatMessagePrefab = ExtResource("4_p8d2m")
 
-[node name="ActorSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="ActorSynchronizer" type="MultiplayerSynchronizer" parent="." node_paths=PackedStringArray("_actor")]
 replication_config = SubResource("SceneReplicationConfig_f5ovo")
 script = ExtResource("2_k4hrp")
+_actor = NodePath("..")
 
 [node name="Systems" type="Node" parent="."]
 
