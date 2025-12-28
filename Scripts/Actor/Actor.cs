@@ -353,7 +353,7 @@ public partial class Actor : Node3D {
 		}
 
 		hp = stats.vitality;
-		sp = stats.intelligence;
+		sp = stats.wisdom;
 
 		ActorAvatars.instance.Add(this);
 

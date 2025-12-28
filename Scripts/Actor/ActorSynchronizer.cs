@@ -22,6 +22,8 @@ public partial class ActorSynchronizer : MultiplayerSynchronizer {
 	[Export]
 	public float vitality;
 
+	// @TODO Add all stats here and re-route access from actor.stats?
+
 	public override void _Process(double delta) {
 		// _actor.stats.vitality = vitality;
 	}

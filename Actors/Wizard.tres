@@ -151,12 +151,12 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_5jvqw"]
 script = ExtResource("2_s6yqu")
-strength = 50.0
-dexterity = 75.0
-agility = 80.0
+might = 50.0
+spirit = 80.0
 vitality = 90.0
-intelligence = 120.0
-wisdom = 80.0
+wisdom = 120.0
+agility = 80.0
+dexterity = 75.0
 luck = 5.0
 critRate = 5.0
 counterRate = 20.0

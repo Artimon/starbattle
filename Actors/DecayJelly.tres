@@ -146,12 +146,12 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_m10b6"]
 script = ExtResource("2_fcp0m")
-strength = 50.0
-dexterity = 65.0
-agility = 60.0
+might = 50.0
+spirit = 20.0
 vitality = 45.0
-intelligence = 25.0
-wisdom = 20.0
+wisdom = 25.0
+agility = 60.0
+dexterity = 65.0
 luck = 10.0
 critRate = 10.0
 counterRate = 15.0

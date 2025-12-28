@@ -41,7 +41,6 @@ sky_material = SubResource("PanoramaSkyMaterial_jimt1")
 background_canvas_max_layer = 1
 sky = SubResource("Sky_7770p")
 glow_enabled = true
-glow_strength = 1.35
 
 [sub_resource type="LabelSettings" id="LabelSettings_1dvsm"]
 font_size = 20

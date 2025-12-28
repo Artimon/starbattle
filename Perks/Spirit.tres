@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="PerkSetup" load_steps=7 format=3 uid="uid://bhbcif3hqfwhw"]
+[gd_resource type="Resource" script_class="PerkSetup" load_steps=7 format=3 uid="uid://ct4sy87e5feyx"]
 
-[ext_resource type="Script" uid="uid://jpn88wyeukew" path="res://Scripts/Perks/PerkSetup.cs" id="1_twaet"]
-[ext_resource type="Script" uid="uid://dleyghgrvuk03" path="res://Scripts/Perks/PerkStats.cs" id="2_2yim7"]
+[ext_resource type="Script" uid="uid://jpn88wyeukew" path="res://Scripts/Perks/PerkSetup.cs" id="1_hliwa"]
+[ext_resource type="Script" uid="uid://dleyghgrvuk03" path="res://Scripts/Perks/PerkStats.cs" id="2_sg2of"]
 
-[sub_resource type="Resource" id="Resource_ws22q"]
-script = ExtResource("2_2yim7")
+[sub_resource type="Resource" id="Resource_fgldh"]
+script = ExtResource("2_sg2of")
 rarity = 0
-strength = 0.0
-dexterity = 0.0
-agility = 0.0
+might = 0.0
+spirit = 10.0
 vitality = 0.0
-intelligence = 10.0
 wisdom = 0.0
+agility = 0.0
+dexterity = 0.0
 luck = 0.0
 critRate = 0.0
 counterRate = 0.0
@@ -26,15 +26,15 @@ magicalDefense = 0.0
 experience = 0.0
 metadata/_custom_type_script = "uid://dleyghgrvuk03"
 
-[sub_resource type="Resource" id="Resource_6v8i4"]
-script = ExtResource("2_2yim7")
+[sub_resource type="Resource" id="Resource_1ej0y"]
+script = ExtResource("2_sg2of")
 rarity = 1
-strength = 0.0
-dexterity = 0.0
-agility = 0.0
+might = 0.0
+spirit = 20.0
 vitality = 0.0
-intelligence = 20.0
 wisdom = 0.0
+agility = 0.0
+dexterity = 0.0
 luck = 0.0
 critRate = 0.0
 counterRate = 0.0
@@ -49,15 +49,15 @@ magicalDefense = 0.0
 experience = 0.0
 metadata/_custom_type_script = "uid://dleyghgrvuk03"
 
-[sub_resource type="Resource" id="Resource_jawdo"]
-script = ExtResource("2_2yim7")
+[sub_resource type="Resource" id="Resource_nghrg"]
+script = ExtResource("2_sg2of")
 rarity = 2
-strength = 0.0
-dexterity = 0.0
-agility = 0.0
+might = 0.0
+spirit = 30.0
 vitality = 0.0
-intelligence = 30.0
 wisdom = 0.0
+agility = 0.0
+dexterity = 0.0
 luck = 0.0
 critRate = 0.0
 counterRate = 0.0
@@ -72,15 +72,15 @@ magicalDefense = 0.0
 experience = 0.0
 metadata/_custom_type_script = "uid://dleyghgrvuk03"
 
-[sub_resource type="Resource" id="Resource_3hmu3"]
-script = ExtResource("2_2yim7")
+[sub_resource type="Resource" id="Resource_iowy7"]
+script = ExtResource("2_sg2of")
 rarity = 3
-strength = 0.0
-dexterity = 0.0
-agility = 0.0
+might = 0.0
+spirit = 40.0
 vitality = 0.0
-intelligence = 40.0
 wisdom = 0.0
+agility = 0.0
+dexterity = 0.0
 luck = 0.0
 critRate = 0.0
 counterRate = 0.0
@@ -96,7 +96,8 @@ experience = 0.0
 metadata/_custom_type_script = "uid://dleyghgrvuk03"
 
 [resource]
-script = ExtResource("1_twaet")
-displayName = "Intelligence"
-stats = Array[Object]([SubResource("Resource_ws22q"), SubResource("Resource_6v8i4"), SubResource("Resource_jawdo"), SubResource("Resource_3hmu3")])
+script = ExtResource("1_hliwa")
+displayName = "Spirit"
+description = ""
+stats = Array[Object]([SubResource("Resource_fgldh"), SubResource("Resource_1ej0y"), SubResource("Resource_nghrg"), SubResource("Resource_iowy7")])
 metadata/_custom_type_script = "uid://jpn88wyeukew"

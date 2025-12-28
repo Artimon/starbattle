@@ -6,12 +6,12 @@
 [sub_resource type="Resource" id="Resource_vxrra"]
 script = ExtResource("2_vspc6")
 rarity = 1
-strength = 0.0
-dexterity = 0.0
-agility = 0.0
+might = 0.0
+spirit = 0.0
 vitality = 0.0
-intelligence = 0.0
 wisdom = 0.0
+agility = 0.0
+dexterity = 0.0
 luck = 0.0
 critRate = 0.0
 counterRate = 0.0
@@ -29,12 +29,12 @@ metadata/_custom_type_script = "uid://dleyghgrvuk03"
 [sub_resource type="Resource" id="Resource_wf72s"]
 script = ExtResource("2_vspc6")
 rarity = 2
-strength = 0.0
-dexterity = 0.0
-agility = 0.0
+might = 0.0
+spirit = 0.0
 vitality = 0.0
-intelligence = 0.0
 wisdom = 0.0
+agility = 0.0
+dexterity = 0.0
 luck = 0.0
 critRate = 0.0
 counterRate = 0.0
@@ -52,12 +52,12 @@ metadata/_custom_type_script = "uid://dleyghgrvuk03"
 [sub_resource type="Resource" id="Resource_r13xm"]
 script = ExtResource("2_vspc6")
 rarity = 3
-strength = 0.0
-dexterity = 0.0
-agility = 0.0
+might = 0.0
+spirit = 0.0
 vitality = 0.0
-intelligence = 0.0
 wisdom = 0.0
+agility = 0.0
+dexterity = 0.0
 luck = 0.0
 critRate = 0.0
 counterRate = 0.0
@@ -75,5 +75,6 @@ metadata/_custom_type_script = "uid://dleyghgrvuk03"
 [resource]
 script = ExtResource("1_y4fxb")
 displayName = "Meditation"
+description = ""
 stats = Array[Object]([SubResource("Resource_vxrra"), SubResource("Resource_wf72s"), SubResource("Resource_r13xm")])
 metadata/_custom_type_script = "uid://jpn88wyeukew"

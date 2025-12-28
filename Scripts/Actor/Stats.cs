@@ -9,23 +9,56 @@ namespace Starbattle;
 
 [GlobalClass]
 public partial class Stats : Resource {
-	[Export]
-	public float strength;
+	/*
+	 * ## Options ##
+	 * All stats separate:
+	 * - Contains "useless" stats for different classes.
+	 *
+	 * Combine attacks:
+	 * - Might/Power for both, less classical feeling.
+	 *
+	 * Combine atk/def:
+	 * - Phys atk/def are one stat, mag atk/def are another.
+	 * - Both needed at least for defense, but my feel like wasting one half.
+	 * - May feel op to get dmg and resistance at the same time.
+	 *
+	 * Combine atk/"capacity":
+	 * - Str (konstituation, vigor etc.) raises atk/hp.
+	 * - Int (wisdom, intelligence etc.) raises mag/sp.
+	 * - May feel op to get dmg and hp/sp at the same time.
+	 *
+	 * ## Additional Hints ##
+	 * - The weapon base values can remain separate between phys/mag but then should not be improvable during a run to rpevent splitting up level ups even more. They still modify the damage output, though, to better represent different classes.
+	 * - A stat would ideally only have one purpose, to avoid confusion and to make the game more intuitive.
+	 * - defense can remain split, because what is needed is defined by the enemies of a stage, not the player class.
+	 * - Hybrids should not need too many level ups split up, which would negatively affect their power scaling.
+	 * - A pure warrior also uses SP (skill/special points for certain skills), but it may be not too important to level up too much, which is okay.
+	 *
+	 * STR: Physical ATK (50% for magic)	-> Might
+	 * WIS: Magic ATK (50% for physical)	-> Spirit (Arcana/Focus/Willpower)
+	 * VIT: Max HP (and only that)			-> Vitality
+	 * INT: Max SP (and only that)			-> Wisdom (Mind/Focus/Wisdom/Intellect)
+	 * AGI: Speed/ATB (and only that)		-> Agility
+	 * DEX: Hit/Evasion (and only that)		-> Dexterity
+	 */
 
 	[Export]
-	public float dexterity;
+	public float might;
 
 	[Export]
-	public float agility;
+	public float spirit;
 
 	[Export]
 	public float vitality;
 
 	[Export]
-	public float intelligence;
+	public float wisdom;
 
 	[Export]
-	public float wisdom;
+	public float agility;
+
+	[Export]
+	public float dexterity;
 
 	[Export]
 	public float luck;
@@ -69,7 +102,7 @@ public partial class Stats : Resource {
 	public Stats Clone => Duplicate(true) as Stats;
 
 	public float MaxHp => vitality;
-	public float MaxSp => intelligence;
+	public float MaxSp => wisdom;
 
 	/**
 	 * Critical chances at scale 120:
@@ -106,8 +139,8 @@ public partial class Stats : Resource {
 	public float GetHitChance(Actor target) {
 		const float baseChance = 0.85f;
 
-		var total = Mathf.Max(1f, dexterity + target.stats.agility);
-		var diff = dexterity - target.stats.agility;
+		var total = Mathf.Max(1f, dexterity + target.stats.dexterity);
+		var diff = dexterity - target.stats.dexterity;
 
 		var hitChance = baseChance + 0.3f * (diff / total);
 
@@ -123,26 +156,26 @@ public partial class Stats : Resource {
 	}
 
 	public float GetPhysicalDamage(float power, Actor target) {
-		var attack = power / 100f * physicalBaseValue * (0.5f + strength / 200f) * (1f + GD.Randf() * 0.5f);
+		var attack = power / 100f * physicalBaseValue * (0.5f + might / 200f) * (1f + GD.Randf() * 0.5f);
 		var defense = target.stats.physicalDefense;
 
 		return Mathf.Max(1f, attack - defense);
 	}
 
 	public float GetMagicalDamage(float power, Actor target) {
-		var attack = power / 100f * magicalBaseValue * (0.5f + wisdom / 200f) * (1f + GD.Randf() * 0.5f);
+		var attack = power / 100f * magicalBaseValue * (0.5f + spirit / 200f) * (1f + GD.Randf() * 0.5f);
 		var defense = target.stats.magicalDefense;
 
 		return Mathf.Max(1f, attack - defense);
 	}
 
 	public void Add(Stats other) {
-		strength          += other.strength; // Might
+		might             += other.might; // Might
 		dexterity         += other.dexterity;
 		agility           += other.agility; // Cooldown
 		vitality          += other.vitality; // Max Health
-		intelligence      += other.intelligence;
-		wisdom            += other.wisdom; // Might
+		wisdom            += other.wisdom;
+		spirit            += other.spirit; // Might
 		luck              += other.luck; // Luck
 		critRate          += other.critRate;
 		counterRate       += other.counterRate;
@@ -166,6 +199,6 @@ public partial class Stats : Resource {
 		// Curse
 		// Reroll
 
-		GD.Print($" Now adding: {other.strength} strength, {other.dexterity} dexterity, {other.agility} agility, {other.vitality} vitality, {other.intelligence} intelligence, {other.wisdom} wisdom, {other.luck} luck, {other.critRate} critRate, {other.counterRate} counterRate, {other.hpRecovery} hpRecovery, {other.spRecovery} spRecovery, {other.regenerateHp} regenerateHp, {other.regenerateSp} regenerateSp, {other.physicalBaseValue} physicalBaseValue, {other.magicalBaseValue} magicalBaseValue, {other.physicalDefense} physicalDefense, {other.magicalDefense} magicalDefense");
+		GD.Print($" Now adding: {other.might} strength, {other.dexterity} dexterity, {other.agility} agility, {other.vitality} vitality, {other.wisdom} intelligence, {other.spirit} wisdom, {other.luck} luck, {other.critRate} critRate, {other.counterRate} counterRate, {other.hpRecovery} hpRecovery, {other.spRecovery} spRecovery, {other.regenerateHp} regenerateHp, {other.regenerateSp} regenerateSp, {other.physicalBaseValue} physicalBaseValue, {other.magicalBaseValue} magicalBaseValue, {other.physicalDefense} physicalDefense, {other.magicalDefense} magicalDefense");
 	}
 }

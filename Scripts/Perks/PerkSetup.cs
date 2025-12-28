@@ -32,6 +32,9 @@ public partial class PerkSetup : Resource {
 	public string displayName;
 
 	[Export]
+	public string description;
+
+	[Export]
 	public PerkStats[] stats;
 
 	public bool TryPickRarity(out Rarities pickedRarity) {

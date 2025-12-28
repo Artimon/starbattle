@@ -21,7 +21,7 @@ public partial class PerkButton : Button {
 	public string _titleTemplate;
 
 	[Export]
-	public string _strengthTemplate;
+	public string _mightTemplate;
 
 	[Export]
 	public string _dexterityTemplate;
@@ -33,10 +33,10 @@ public partial class PerkButton : Button {
 	public string _vitalityTemplate;
 
 	[Export]
-	public string _intelligenceTemplate;
+	public string _wisdomTemplate;
 
 	[Export]
-	public string _wisdomTemplate;
+	public string _spiritTemplate;
 
 	[Export]
 	public string _luckTemplate;
@@ -105,12 +105,12 @@ public partial class PerkButton : Button {
 		var statsLines = new List<string>();
 
 		var statTemplatePairs = new (float value, string template)[] {
-			(stats.strength, _strengthTemplate),
-			(stats.dexterity, _dexterityTemplate),
-			(stats.agility, _agilityTemplate),
+			(stats.might, _mightTemplate),
+			(stats.spirit, _spiritTemplate),
 			(stats.vitality, _vitalityTemplate),
-			(stats.intelligence, _intelligenceTemplate),
 			(stats.wisdom, _wisdomTemplate),
+			(stats.agility, _agilityTemplate),
+			(stats.dexterity, _dexterityTemplate),
 			(stats.luck, _luckTemplate),
 			(stats.critRate, _critRateTemplate),
 			(stats.counterRate, _counterRateTemplate),

@@ -145,12 +145,12 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_dsy2p"]
 script = ExtResource("2_fauia")
-strength = 95.0
-dexterity = 75.0
-agility = 35.0
+might = 95.0
+spirit = 5.0
 vitality = 80.0
-intelligence = 10.0
-wisdom = 5.0
+wisdom = 10.0
+agility = 35.0
+dexterity = 75.0
 luck = 0.0
 critRate = 25.0
 counterRate = 10.0

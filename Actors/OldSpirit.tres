@@ -147,12 +147,12 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_7de8c"]
 script = ExtResource("2_ifxke")
-strength = 80.0
-dexterity = 75.0
-agility = 70.0
+might = 80.0
+spirit = 55.0
 vitality = 500.0
-intelligence = 60.0
-wisdom = 55.0
+wisdom = 60.0
+agility = 70.0
+dexterity = 75.0
 luck = 30.0
 critRate = 20.0
 counterRate = 15.0
