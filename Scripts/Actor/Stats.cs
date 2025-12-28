@@ -156,14 +156,16 @@ public partial class Stats : Resource {
 	}
 
 	public float GetPhysicalDamage(float power, Actor target) {
-		var attack = power / 100f * physicalBaseValue * (0.5f + might / 200f) * (1f + GD.Randf() * 0.5f);
+		var statsValue = (might + spirit * 0.5f) / 200f;
+		var attack = power / 100f * physicalBaseValue * (0.5f + statsValue) * (1f + GD.Randf() * 0.5f);
 		var defense = target.stats.physicalDefense;
 
 		return Mathf.Max(1f, attack - defense);
 	}
 
 	public float GetMagicalDamage(float power, Actor target) {
-		var attack = power / 100f * magicalBaseValue * (0.5f + spirit / 200f) * (1f + GD.Randf() * 0.5f);
+		var statsValue = (spirit + might * 0.5f) / 200f;
+		var attack = power / 100f * magicalBaseValue * (0.5f + statsValue) * (1f + GD.Randf() * 0.5f);
 		var defense = target.stats.magicalDefense;
 
 		return Mathf.Max(1f, attack - defense);

@@ -1,48 +1,41 @@
-[gd_scene load_steps=22 format=3 uid="uid://cec44x5g8fk7i"]
+[gd_scene load_steps=27 format=3 uid="uid://cec44x5g8fk7i"]
 
 [ext_resource type="Script" uid="uid://ff0o0pb5swlk" path="res://Scripts/Spells/ValkyrieFlames.cs" id="1_7alym"]
-[ext_resource type="Texture2D" uid="uid://oegj6vltwn4t" path="res://Actions/ValkyrieFlames/FireStorm.png" id="2_6gpva"]
 [ext_resource type="Script" uid="uid://bh1e5sbqs26p5" path="res://Scripts/Effects/OffsetNode.cs" id="2_ccebb"]
+[ext_resource type="AudioStream" uid="uid://bjqftqhgr23jg" path="res://Actions/ValkyrieFlames/Explosion_Replace.wav" id="2_np06e"]
 [ext_resource type="PackedScene" uid="uid://bh3ut2scrkrwl" path="res://Effects/Particles/SparkleEffect.tscn" id="3_ccebb"]
+[ext_resource type="Texture2D" uid="uid://oegj6vltwn4t" path="res://Actions/ValkyrieFlames/FireStorm_Replace.png" id="4_2jbgp"]
 [ext_resource type="Texture2D" uid="uid://r6tsq7416ofv" path="res://Actions/RegenerateHp/SparkleParticle.png" id="4_np06e"]
 [ext_resource type="Texture2D" uid="uid://ddam3on3ayq2x" path="res://Actions/ValkyrieFlames/FireGlowParticle.png" id="5_ccebb"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q41of"]
-atlas = ExtResource("2_6gpva")
-region = Rect2(0, 0, 150, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_np06e"]
-atlas = ExtResource("2_6gpva")
-region = Rect2(600, 0, 150, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2jbgp"]
-atlas = ExtResource("2_6gpva")
-region = Rect2(750, 0, 150, 300)
+[ext_resource type="Texture2D" uid="uid://b1psdsjfnsp6n" path="res://Effects/StoneParticles.png" id="8_2jbgp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_culbk"]
-atlas = ExtResource("2_6gpva")
-region = Rect2(900, 0, 150, 300)
+atlas = ExtResource("4_2jbgp")
+region = Rect2(0, 0, 150, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5er4g"]
-atlas = ExtResource("2_6gpva")
-region = Rect2(1050, 0, 150, 300)
+atlas = ExtResource("4_2jbgp")
+region = Rect2(600, 0, 150, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yekbk"]
-atlas = ExtResource("2_6gpva")
+atlas = ExtResource("4_2jbgp")
+region = Rect2(750, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io33n"]
+atlas = ExtResource("4_2jbgp")
+region = Rect2(900, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rxu0"]
+atlas = ExtResource("4_2jbgp")
+region = Rect2(1050, 0, 150, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0qm3"]
+atlas = ExtResource("4_2jbgp")
 region = Rect2(1200, 0, 150, 300)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_io33n"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q41of")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_np06e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2jbgp")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_culbk")
 }, {
@@ -51,6 +44,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yekbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io33n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rxu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0qm3")
 }],
 "loop": false,
 "name": &"default",
@@ -108,15 +110,46 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_r5qqu")
 size = Vector2(0.25, 0.25)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_culbk"]
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 5.0
+initial_velocity_max = 7.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+anim_offset_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fatp7"]
+render_priority = 10
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("8_2jbgp")
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 3
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_yekbk"]
+material = SubResource("StandardMaterial3D_fatp7")
+size = Vector2(0.5, 0.5)
+subdivide_width = 3
+subdivide_depth = 3
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_np06e"]
 height = 3.0
 radius = 1.25
 
-[node name="ValkyrieFlames" type="Node3D" node_paths=PackedStringArray("_sprite", "_sparkParticles", "_glowParticles", "_area")]
+[node name="ValkyrieFlames" type="Node3D" node_paths=PackedStringArray("_sprite", "_sparkParticles", "_glowParticles", "_stoneParticles", "_area")]
 script = ExtResource("1_7alym")
 _sprite = NodePath("OffsetNode/AnimatedSprite3D")
 _sparkParticles = NodePath("Sparkle Effect")
 _glowParticles = NodePath("Glow GPUParticles3D")
+_stoneParticles = NodePath("Stone Particles")
+_spellAudio = ExtResource("2_np06e")
 _area = NodePath("Area3D")
 metadata/_custom_type_script = "uid://ff0o0pb5swlk"
 
@@ -129,6 +162,7 @@ metadata/_custom_type_script = "uid://bh1e5sbqs26p5"
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="OffsetNode"]
 pixel_size = 0.015
 billboard = 1
+render_priority = 10
 sprite_frames = SubResource("SpriteFrames_io33n")
 autoplay = "default"
 
@@ -142,6 +176,15 @@ lifetime = 0.65
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_io33n")
 draw_pass_1 = SubResource("QuadMesh_6rxu0")
+
+[node name="Stone Particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 6
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_culbk")
+draw_pass_1 = SubResource("QuadMesh_yekbk")
 
 [node name="Area3D" type="Area3D" parent="."]
 monitorable = false

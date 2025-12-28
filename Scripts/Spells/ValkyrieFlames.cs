@@ -1,5 +1,6 @@
 ﻿using Godot;
 using Starbattle.Controllers;
+using Starbattle.Effects;
 
 namespace Starbattle.Spells;
 
@@ -14,6 +15,12 @@ public partial class ValkyrieFlames : AoeNode {
 	[Export]
 	public GpuParticles3D _glowParticles;
 
+	[Export]
+	public GpuParticles3D _stoneParticles;
+
+	[Export]
+	public AudioStream _spellAudio;
+
 	public override async void _Ready() {
 		_sparkParticles.Emitting = true;
 		_glowParticles.Emitting = true;
@@ -25,6 +32,9 @@ public partial class ValkyrieFlames : AoeNode {
 
 	public void OnSpellActivate() {
 		CameraController.instance.AddTrauma(0.75f);
+		LocalAudio.Play(GlobalPosition, _spellAudio);
+
+		_stoneParticles.Emitting = true;
 
 		Attack(_actionSetup);
 		Heal();
