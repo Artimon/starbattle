@@ -150,6 +150,21 @@ public partial class Actor : Node3D {
 		ApplyAngle();
 	}
 
+	public bool TryHit(Actor target) {
+		var hitChance = stats.GetHitChance(target);
+		if (GD.Randf() < hitChance) {
+			return true;
+		}
+
+		// 0.1% lucky hit chance per luck point.
+		var luckyHitChance = Mathf.Clamp(stats.luck / 1000f, 0f, 0.20f);
+		if (GD.Randf() < luckyHitChance) {
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * @TODO Maybe turn all damagers to collider based detection?
 	 */
@@ -162,8 +177,8 @@ public partial class Actor : Node3D {
 			return false; // Target moved away.
 		}
 
-		var hitChance = stats.GetHitChance(target);
-		if (GD.Randf() > hitChance) {
+		var isHit = TryHit(target);
+		if (!isHit) {
 			target.Message(CombatMessage.Types.Miss);
 
 			return false;

@@ -37,15 +37,18 @@ public partial class PerkSetup : Resource {
 	[Export]
 	public PerkStats[] stats;
 
-	public bool TryPickRarity(out Rarities pickedRarity) {
+	public bool TryPickRarity(float luck, out Rarities pickedRarity) {
 		pickedRarity = Rarities.Common;
+
+		// Luck factor is 2 at 400 luck.
+		var luckFactor = Mathf.Min(luck, 400f) / 200f;
 
 		// Do every time, needs to be luck-adjusted anyway.
 		var weights = new[] {
-			CommonWeight,
-			RareWeight,
-			EpicWeight,
-			LegendaryWeight
+			CommonWeight - 0.2f * luckFactor,
+			RareWeight + 0.1f * luckFactor,
+			EpicWeight + 0.1f * luckFactor,
+			LegendaryWeight + 0.05f * luckFactor
 		};
 
 		var total = weights.Sum();
@@ -73,8 +76,8 @@ public partial class PerkSetup : Resource {
 		return false;
 	}
 
-	public bool TryPickCandidate(out Candidate candidate) {
-		if (TryPickRarity(out var rarity)) {
+	public bool TryPickCandidate(float luck, out Candidate candidate) {
+		if (TryPickRarity(luck, out var rarity)) {
 			candidate = new Candidate {
 				setup = this,
 				rarity = rarity

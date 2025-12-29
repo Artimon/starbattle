@@ -18,7 +18,7 @@ public partial class ActorPerks : Node {
 			var candidates = new List<Candidate>();
 
 			foreach (var perkSetup in perkSetups.Perks) {
-				var hasRarityCandidate = perkSetup.TryPickCandidate(out var candidate);
+				var hasRarityCandidate = perkSetup.TryPickCandidate(_actor.stats.luck, out var candidate);
 				if (hasRarityCandidate) {
 					candidates.Add(candidate);
 				}
