@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://bxqfctocxnhc2" path="res://Perks/Might.tres" id="10_8ty00"]
 [ext_resource type="Resource" uid="uid://bhbcif3hqfwhw" path="res://Perks/Wisdom.tres" id="10_wn3qh"]
 [ext_resource type="Resource" uid="uid://bkjr8647s34e3" path="res://Perks/PhysicalDefense.tres" id="11_63yol"]
-[ext_resource type="Resource" path="res://Perks/Spirit.tres" id="12_j74wn"]
+[ext_resource type="Resource" uid="uid://ct4sy87e5feyx" path="res://Perks/Spirit.tres" id="12_j74wn"]
 
 [resource]
 script = ExtResource("1_ojnff")

@@ -37,6 +37,6 @@ public partial class ActorPerks : Node {
 	public void Apply(int cloakedPerkId, int rarityId) {
 		var candidate = perkSetups.GetCandidate(cloakedPerkId, rarityId);
 
-		_actor.stats.Add(candidate.Stats);
+		_actor.synchronizer.AddStats(candidate.Stats);
 	}
 }

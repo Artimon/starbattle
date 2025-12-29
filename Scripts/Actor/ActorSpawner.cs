@@ -54,7 +54,7 @@ public partial class ActorSpawner : Node {
 			actor.synchronizer.handle = handle;
 			actor.synchronizer.actorId = setup.ActorId;
 			actor.synchronizer.spawnPosition = position;
-			actor.synchronizer.vitality = setup.GetVitality(difficulty);
+			actor.synchronizer.SetBaseStats(setup.BaseStats, difficulty);
 		});
 
 		actor.Death += () => {
@@ -72,6 +72,7 @@ public partial class ActorSpawner : Node {
 			actor.synchronizer.playerId = playerId;
 			actor.synchronizer.actorId = setup.ActorId;
 			actor.synchronizer.spawnPosition = position;
+			actor.synchronizer.SetBaseStats(setup.BaseStats);
 		});
 	}
 

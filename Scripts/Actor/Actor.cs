@@ -345,12 +345,8 @@ public partial class Actor : Node3D {
 		capsuleShape.Radius = height / 4f; // May require customization for certain actors.
 		shadow.Scale = new Vector3(1f, 1f, 1f) * setup.SpritePixels / 35f;
 
-		stats = setup.BaseStats.Clone;
-
-		// @TODO Maybe sync all stats for having a unified system.
-		if (!IsPlayerGroup) {
-			stats.vitality = synchronizer.vitality;
-		}
+		stats = setup.BaseStats;
+		synchronizer.SyncStats(); // Overwrite cloned stats with actual values.
 
 		hp = stats.vitality;
 		sp = stats.wisdom;

@@ -171,36 +171,11 @@ public partial class Stats : Resource {
 		return Mathf.Max(1f, attack - defense);
 	}
 
-	public void Add(Stats other) {
-		might             += other.might; // Might
-		dexterity         += other.dexterity;
-		agility           += other.agility; // Cooldown
-		vitality          += other.vitality; // Max Health
-		wisdom            += other.wisdom;
-		spirit            += other.spirit; // Might
-		luck              += other.luck; // Luck
-		critRate          += other.critRate;
-		counterRate       += other.counterRate;
-		hpRecovery        += other.hpRecovery; // Recovery
-		spRecovery        += other.spRecovery;
-		regenerateHp      += other.regenerateHp;
-		regenerateSp      += other.regenerateSp;
-		physicalBaseValue += other.physicalBaseValue;
-		magicalBaseValue  += other.magicalBaseValue;
-		physicalDefense   += other.physicalDefense; // Armor
-		magicalDefense    += other.magicalDefense;
-		// Move Speed
-		// Speed (Bullet)
-		// Duration (Spells)
-		// Area (Spells)
-		// Amount (Spells)
-		// Revival
-		// Magnet
-		// Growth
-		// Greed
-		// Curse
-		// Reroll
+	public static float Modify(float statValue, bool isPlayerGroup, float difficulty = 1f) {
+		if (isPlayerGroup) {
+			return statValue;
+		}
 
-		GD.Print($" Now adding: {other.might} strength, {other.dexterity} dexterity, {other.agility} agility, {other.vitality} vitality, {other.wisdom} intelligence, {other.spirit} wisdom, {other.luck} luck, {other.critRate} critRate, {other.counterRate} counterRate, {other.hpRecovery} hpRecovery, {other.spRecovery} spRecovery, {other.regenerateHp} regenerateHp, {other.regenerateSp} regenerateSp, {other.physicalBaseValue} physicalBaseValue, {other.magicalBaseValue} magicalBaseValue, {other.physicalDefense} physicalDefense, {other.magicalDefense} magicalDefense");
+		return Mathf.Round(statValue * difficulty * (float)GD.RandRange(0.8f, 1.2f));
 	}
 }
