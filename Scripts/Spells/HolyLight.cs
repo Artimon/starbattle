@@ -49,12 +49,15 @@ public partial class HolyLight : AoeNode {
 	[Export]
 	public Timer _effectDurationTimer;
 
+	public Vector3 _baseScale;
+
 	public uint _noiseOffset;
 
 	public override void _Ready() {
 		_noiseOffset = GD.Randi() % 5000;
 
 		_lightRange = _light.OmniRange;
+		_baseScale = _lightBeamSprite.Scale;
 		_animationPlayer.Play("LightBeam");
 
 		LocalAudio.Play(GlobalPosition, _holyLightAudio);
@@ -64,8 +67,8 @@ public partial class HolyLight : AoeNode {
 		var elapsedSeconds = Time.GetTicksMsec() + _noiseOffset;
 		var noiseValue = _noise.GetNoise1D(elapsedSeconds * 0.8f);
 
-		var scale = _lightBeamSprite.Scale;
-		scale.X = 1f + 0.2f * noiseValue;
+		var scale = _baseScale;
+		scale.X = 1f - 0.2f * noiseValue;
 
 		var alpha = _lightBeamSprite.Modulate.A;
 

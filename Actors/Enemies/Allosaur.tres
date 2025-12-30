@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActorSetup" load_steps=23 format=3 uid="uid://b56hipgigmnr2"]
 
-[ext_resource type="Texture2D" uid="uid://br5ukrxtk46ya" path="res://Actors/Allosaur.png" id="2_bexpr"]
+[ext_resource type="Texture2D" uid="uid://br5ukrxtk46ya" path="res://Actors/Enemies/Allosaur.png" id="2_bexpr"]
 [ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_fauia"]
 [ext_resource type="Script" uid="uid://bxors41xs2sgx" path="res://Scripts/Behaviour/DefaultBehaviour.cs" id="3_smyes"]
 [ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="5_ambsh"]

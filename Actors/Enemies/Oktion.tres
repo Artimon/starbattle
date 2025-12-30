@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ActorSetup" load_steps=24 format=3 uid="uid://boijb83b4qonl"]
 
 [ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="1_57d22"]
-[ext_resource type="Texture2D" uid="uid://dy6mq3md6impy" path="res://Actors/Oktion.png" id="1_usmrp"]
+[ext_resource type="Texture2D" uid="uid://dy6mq3md6impy" path="res://Actors/Enemies/Oktion.png" id="1_usmrp"]
 [ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_j1icj"]
 [ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="3_se0lx"]
 [ext_resource type="Script" uid="uid://stdict6ey1ai" path="res://Scripts/Behaviour/OktionBehaviour.cs" id="4_lkg5h"]

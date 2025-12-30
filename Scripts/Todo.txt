@@ -1,0 +1,2 @@
+﻿- Overhead pointer to mark hovered actor.
+- Spell position on cast-finished.

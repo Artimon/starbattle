@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActorSetup" load_steps=25 format=3 uid="uid://d1q2frskxdjya"]
 
-[ext_resource type="Texture2D" uid="uid://b2x46gbbwcs86" path="res://Actors/OldSpirit.png" id="1_oqhvx"]
+[ext_resource type="Texture2D" uid="uid://b2x46gbbwcs86" path="res://Actors/Enemies/OldSpirit.png" id="1_oqhvx"]
 [ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_ifxke"]
 [ext_resource type="Resource" uid="uid://btb8cya7djm2i" path="res://Actions/HolyLight/HolyLight.tres" id="3_thf1g"]
 [ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="4_m33wo"]

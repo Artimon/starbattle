@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Scripts\Notes.txt" />
+    <Content Include="Scripts\Todo.txt" />
     <Content Include="UserInterface\Elements\AnimatedBar\HpBarProgress.png" />
     <Content Include="UserInterface\Elements\AnimatedBar\HpBarProgress.png.import" />
     <Content Include="UserInterface\Elements\AnimatedBar\HpBarProgressEnemy.png" />

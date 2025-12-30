@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActorSetup" load_steps=24 format=3 uid="uid://bhw8gfxnsmopf"]
 
-[ext_resource type="Texture2D" uid="uid://cvp1x6jau67hd" path="res://Actors/DecayJelly.png" id="1_fph4s"]
+[ext_resource type="Texture2D" uid="uid://cvp1x6jau67hd" path="res://Actors/Enemies/DecayJelly.png" id="1_fph4s"]
 [ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_fcp0m"]
 [ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="3_fcp0m"]
 [ext_resource type="Script" uid="uid://cmfdfcf068sdj" path="res://Scripts/Actor/ActorSetup.cs" id="4_35r7g"]

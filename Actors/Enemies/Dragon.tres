@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActorSetup" load_steps=24 format=3 uid="uid://dskq1cndmq3xp"]
 
-[ext_resource type="Texture2D" uid="uid://b3dweplfts37" path="res://Actors/Dragon.png" id="1_bi1f4"]
+[ext_resource type="Texture2D" uid="uid://b3dweplfts37" path="res://Actors/Enemies/Dragon.png" id="1_bi1f4"]
 [ext_resource type="Script" uid="uid://4nms2ktyd0f4" path="res://Scripts/Actor/Stats.cs" id="2_0n2s8"]
 [ext_resource type="Resource" uid="uid://8x7djuuesurn" path="res://Actions/RegenerateHp/RegenerateHp.tres" id="3_vxtat"]
 [ext_resource type="Script" uid="uid://p4lqlgk14ytq" path="res://Scripts/Behaviour/RegenerateBehaviour.cs" id="4_3c2yn"]
