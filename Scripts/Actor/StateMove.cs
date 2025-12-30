@@ -10,6 +10,9 @@ public partial class StateMove : StateBase {
 	[Export]
 	public Actor _actor;
 
+	[Export]
+	public GpuParticles3D _moveDustParticles;
+
 	public Vector3 _startPosition;
 	public Vector3 _targetPosition;
 	public Vector3 _virtualPosition;
@@ -27,6 +30,7 @@ public partial class StateMove : StateBase {
 		_actor.sprite.Frame = 0;
 
 		_actor.Face(_targetPosition);
+		_moveDustParticles.Emitting = true;
 
 		LocalAudio.Play(_actor.GlobalPosition, _moveAudio);
 	}
@@ -54,6 +58,10 @@ public partial class StateMove : StateBase {
 
 		_actor.stateMachine.TryEnter("Idle");
 		_onFinished?.Invoke();
+	}
+
+	public override void OnExit() {
+		_moveDustParticles.Emitting = false;
 	}
 
 	public void MoveTo(Vector3 position, Action onFinished = null) {

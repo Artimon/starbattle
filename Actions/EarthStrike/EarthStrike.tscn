@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ct1fpimwrmel6" path="res://Actions/EarthStrike/StoneSpike.tscn" id="2_2uo16"]
 [ext_resource type="AudioStream" uid="uid://tudbukhvt6vt" path="res://Actions/EarthStrike/EarthStrike.ogg" id="2_bn1ie"]
 [ext_resource type="PackedScene" uid="uid://bnafegcu1op0m" path="res://Effects/Particles/DustParticles.tscn" id="3_v40sh"]
-[ext_resource type="Texture2D" uid="uid://bma4l00qv3606" path="res://Actions/EarthStrike/DustParticle.png" id="4_bn1ie"]
+[ext_resource type="Texture2D" uid="uid://nve342478lbs" path="res://Effects/Particles/GrayDustParticle.png" id="4_bn1ie"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlodq"]
 render_priority = 11
@@ -25,14 +25,14 @@ interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.163636, 0.545455, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1.04006, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_pikvt"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bn1ie"]
 gradient = SubResource("Gradient_yrxxt")
 
 [sub_resource type="Curve" id="Curve_j0ejx"]
 _data = [Vector2(0, 0.747253), 0.0, 0.884616, 0, 0, Vector2(0.521739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.725275), -1.71429, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_srlmx"]
+[sub_resource type="CurveTexture" id="CurveTexture_dlodq"]
 curve = SubResource("Curve_j0ejx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v40sh"]
@@ -41,14 +41,14 @@ emission_shape_offset = Vector3(0, 0.35, 0)
 emission_shape_scale = Vector3(1, 0.65, 1)
 emission_shape = 1
 emission_sphere_radius = 1.0
-angle_min = -45.0
-angle_max = 45.0
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
 direction = Vector3(1, 0, 1)
 spread = 180.0
 initial_velocity_max = 0.5
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_srlmx")
-color_ramp = SubResource("GradientTexture1D_pikvt")
+scale_curve = SubResource("CurveTexture_dlodq")
+color_ramp = SubResource("GradientTexture1D_bn1ie")
 
 [sub_resource type="QuadMesh" id="QuadMesh_v40sh"]
 size = Vector2(3, 2)

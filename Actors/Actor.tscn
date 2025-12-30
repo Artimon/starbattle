@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cb3j6sa8w2cm3"]
+[gd_scene load_steps=61 format=3 uid="uid://cb3j6sa8w2cm3"]
 
 [ext_resource type="Script" uid="uid://3lda46ikfe8i" path="res://Scripts/Actor/Actor.cs" id="1_g2dna"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="2_eb7re"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://bm57jneo4at86" path="res://Scripts/Actor/StateCast.cs" id="15_37747"]
 [ext_resource type="Script" uid="uid://dyk1spc3vhgtx" path="res://Scripts/Actor/StateRegenerate.cs" id="16_75xxn"]
 [ext_resource type="AudioStream" uid="uid://gatjqs8i5wvs" path="res://Actors/SpellCast_Replace.ogg" id="17_kbeq4"]
+[ext_resource type="Texture2D" uid="uid://nve342478lbs" path="res://Effects/Particles/GrayDustParticle.png" id="19_smla1"]
 [ext_resource type="AudioStream" uid="uid://bhu2mbp2vt7eg" path="res://Actors/Move.ogg" id="22_ix5jp"]
 [ext_resource type="AudioStream" uid="uid://bh4534jv8fhgw" path="res://Actors/Die.ogg" id="29_c20ii"]
 
@@ -101,7 +102,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate")
+tracks/0/path = NodePath("Sprite Container/AnimatedSprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -129,7 +130,7 @@ length = 5.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate")
+tracks/0/path = NodePath("Sprite Container/AnimatedSprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -158,7 +159,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate")
+tracks/0/path = NodePath("Sprite Container/AnimatedSprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -173,7 +174,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Display Node/AnimatedSprite3D:modulate.a")
+tracks/0/path = NodePath("Sprite Container/AnimatedSprite3D:modulate.a")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -185,7 +186,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Display Node/AnimatedSprite3D:modulate")
+tracks/1/path = NodePath("Sprite Container/AnimatedSprite3D:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -357,14 +358,62 @@ animations = [{
 radius = 0.4
 height = 1.6
 
-[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "displayNode", "characterBody", "collisionShape", "_animator", "sprite", "shadow", "action", "poise", "behaviour", "experience", "perks", "_regenerate", "stateMachine")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teb35"]
+render_priority = 10
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("19_smla1")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_8xflc"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.163636, 0.545455, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1.04006, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dvlqg"]
+gradient = SubResource("Gradient_8xflc")
+
+[sub_resource type="Curve" id="Curve_j0ejx"]
+_data = [Vector2(0, 0.747253), 0.0, 0.884616, 0, 0, Vector2(0.521739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.725275), -1.71429, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_srlmx"]
+curve = SubResource("Curve_j0ejx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eoehk"]
+lifetime_randomness = 0.5
+emission_shape_offset = Vector3(0, 0.25, 0)
+emission_shape_scale = Vector3(0.25, 0.25, 0.25)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.35
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_srlmx")
+color_ramp = SubResource("GradientTexture1D_dvlqg")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kanrg"]
+size = Vector2(1.5, 1.5)
+
+[node name="Actor" type="Node3D" node_paths=PackedStringArray("synchronizer", "displayNode", "characterBody", "collisionShape", "_animator", "sprite", "spriteContainer", "shadow", "action", "poise", "behaviour", "experience", "perks", "_regenerate", "stateMachine")]
 script = ExtResource("1_g2dna")
 synchronizer = NodePath("ActorSynchronizer")
-displayNode = NodePath("Display Node")
+displayNode = NodePath("Sprite Container")
 characterBody = NodePath("CharacterBody3D")
 collisionShape = NodePath("CharacterBody3D/CollisionShape3D")
 _animator = NodePath("Systems/ActorAnimator")
-sprite = NodePath("Display Node/AnimatedSprite3D")
+sprite = NodePath("Sprite Container/AnimatedSprite3D")
+spriteContainer = NodePath("Sprite Container")
 shadow = NodePath("Shadow Sprite3D")
 _setups = ExtResource("2_eb7re")
 action = NodePath("Systems/ActorAction")
@@ -430,10 +479,10 @@ wait_time = 3.0
 script = ExtResource("7_apaue")
 _actor = NodePath("../..")
 
-[node name="Display Node" type="Node3D" parent="."]
+[node name="Sprite Container" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Display Node"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Sprite Container"]
 pixel_size = 0.02
 billboard = 1
 double_sided = false
@@ -453,6 +502,15 @@ texture = ExtResource("6_d5h64")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("CapsuleShape3D_1m2qn")
 
+[node name="Move Dust Particles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_teb35")
+emitting = false
+amount = 20
+lifetime = 1.5
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_eoehk")
+draw_pass_1 = SubResource("QuadMesh_kanrg")
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_kcnqb")
 
@@ -462,9 +520,10 @@ _actor = NodePath("../..")
 _stateMachine = NodePath("..")
 isDefault = true
 
-[node name="StateMove" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_stateMachine")]
+[node name="StateMove" type="Node" parent="StateMachine" node_paths=PackedStringArray("_actor", "_moveDustParticles", "_stateMachine")]
 script = ExtResource("7_lvwdo")
 _actor = NodePath("../..")
+_moveDustParticles = NodePath("../../Move Dust Particles")
 _moveAudio = ExtResource("22_ix5jp")
 _stateMachine = NodePath("..")
 

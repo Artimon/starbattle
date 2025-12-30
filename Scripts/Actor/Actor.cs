@@ -59,6 +59,9 @@ public partial class Actor : Node3D {
 	public AnimatedSprite3D sprite;
 
 	[Export]
+	public Node3D spriteContainer;
+
+	[Export]
 	public Sprite3D shadow;
 
 	public float Height => sprite.PixelSize * setup.pixelHeight;
@@ -348,7 +351,7 @@ public partial class Actor : Node3D {
 
 		var spriteOffset = sprite.PixelSize * setup.SpritePixels / 2f;
 
-		displayNode.Position = new Vector3(0f, spriteOffset, 0f);
+		spriteContainer.Position = new Vector3(0f, spriteOffset, 0f);
 
 		var height = Height;
 
