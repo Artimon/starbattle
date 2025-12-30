@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2x46gbbwcs86"
-path="res://.godot/imported/OldSpirit.png-24e77e084218b1ec04453ff5007210c7.ctex"
+uid="uid://lu6njwr8pdpr"
+path="res://.godot/imported/Raptor.png-44dd04886cfa79f1a568acbe858d7984.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Actors/OldSpirit.png"
-dest_files=["res://.godot/imported/OldSpirit.png-24e77e084218b1ec04453ff5007210c7.ctex"]
+source_file="res://Actors/Enemies/Raptor.png"
+dest_files=["res://.godot/imported/Raptor.png-44dd04886cfa79f1a568acbe858d7984.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3dweplfts37"
-path="res://.godot/imported/Dragon.png-7429fd1425fd41b7e0ff134f73fac748.ctex"
+uid="uid://br5ukrxtk46ya"
+path="res://.godot/imported/Allosaur.png-47ab765c4fb8ca7ebd5bd81a1a9c0f1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Actors/Dragon.png"
-dest_files=["res://.godot/imported/Dragon.png-7429fd1425fd41b7e0ff134f73fac748.ctex"]
+source_file="res://Actors/Enemies/Allosaur.png"
+dest_files=["res://.godot/imported/Allosaur.png-47ab765c4fb8ca7ebd5bd81a1a9c0f1c.ctex"]
 
 [params]
 

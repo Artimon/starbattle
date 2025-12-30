@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvp1x6jau67hd"
-path="res://.godot/imported/DecayJelly.png-8a94973830ff80eae8518dc5d9a085e8.ctex"
+uid="uid://uhi12tqka61y"
+path="res://.godot/imported/ElderGhost.png-40443b7768a889de6b5779d0ace4ceb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Actors/DecayJelly.png"
-dest_files=["res://.godot/imported/DecayJelly.png-8a94973830ff80eae8518dc5d9a085e8.ctex"]
+source_file="res://Actors/Enemies/ElderGhost.png"
+dest_files=["res://.godot/imported/ElderGhost.png-40443b7768a889de6b5779d0ace4ceb0.ctex"]
 
 [params]
 

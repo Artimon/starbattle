@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy6mq3md6impy"
-path="res://.godot/imported/Oktion.png-8cc9e54c0af9a3e0bd9e0f279d548181.ctex"
+uid="uid://b2x46gbbwcs86"
+path="res://.godot/imported/OldSpirit.png-585ccc680681c41cf7f6d7ad3bfb9b55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Actors/Oktion.png"
-dest_files=["res://.godot/imported/Oktion.png-8cc9e54c0af9a3e0bd9e0f279d548181.ctex"]
+source_file="res://Actors/Enemies/OldSpirit.png"
+dest_files=["res://.godot/imported/OldSpirit.png-585ccc680681c41cf7f6d7ad3bfb9b55.ctex"]
 
 [params]
 

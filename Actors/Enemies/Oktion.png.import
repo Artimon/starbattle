@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uhi12tqka61y"
-path="res://.godot/imported/ElderGhost.png-f4dbccba557a1de4b0c8ee26aa198996.ctex"
+uid="uid://dy6mq3md6impy"
+path="res://.godot/imported/Oktion.png-a478742beeb11f70e757cb2a71d76fd6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Actors/ElderGhost.png"
-dest_files=["res://.godot/imported/ElderGhost.png-f4dbccba557a1de4b0c8ee26aa198996.ctex"]
+source_file="res://Actors/Enemies/Oktion.png"
+dest_files=["res://.godot/imported/Oktion.png-a478742beeb11f70e757cb2a71d76fd6.ctex"]
 
 [params]
 
