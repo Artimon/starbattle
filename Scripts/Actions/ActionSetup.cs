@@ -80,4 +80,10 @@ public partial class ActionSetup : Resource {
 				return true;
 		}
 	}
+
+	public Vector3 GetPosition(Actor target, Vector3 spellPosition) {
+		return targetType == TargetTypes.Position
+			? spellPosition
+			: target.GlobalPosition;
+	}
 }

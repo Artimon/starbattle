@@ -40,7 +40,9 @@ public partial class StateCast : StateBase {
 	}
 
 	public void OnAnimationFinished() {
-		EffectContainer.instance.Instantiate<AoeNode>(_actionSetup.aoePrefab, _spellPosition).Initialize(_actionSetup, _actor);
+		var liveSpellPosition = _actionSetup.GetPosition(_target, _spellPosition);
+
+		EffectContainer.instance.Instantiate<AoeNode>(_actionSetup.aoePrefab, liveSpellPosition).Initialize(_actionSetup, _actor);
 
 		_actor.stateMachine.TryEnter("Idle");
 	}
