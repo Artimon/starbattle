@@ -275,11 +275,18 @@ public partial class ActorAction : Node {
 	}
 
 	public Vector3 GetAttackPosition(Actor actor) {
-		var playerPosition = _actor.GlobalPosition;
+		const float attackRange = 1.5f;
+
+		var actorPosition = _actor.GlobalPosition;
 		var targetPosition = actor.GlobalPosition;
 
-		var direction = (playerPosition - targetPosition).Normalized();
+		var distance = actorPosition - targetPosition;
+		if (distance.Length() <= attackRange) {
+			return actorPosition;
+		}
 
-		return targetPosition + direction * 1.5f;
+		var direction = distance.Normalized();
+
+		return targetPosition + direction * attackRange;
 	}
 }

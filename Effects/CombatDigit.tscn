@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://8e7ofkam8nmj" path="res://Scripts/Effects/CombatDigit.cs" id="1_ymeci"]
 
 [node name="CombatDigit" type="Label3D"]
+alpha_cut = 2
 render_priority = 15
 outline_render_priority = 14
 text = "1"
