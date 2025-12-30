@@ -162,6 +162,7 @@ metadata/_custom_type_script = "uid://bh1e5sbqs26p5"
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="OffsetNode"]
 pixel_size = 0.015
 billboard = 1
+alpha_cut = 2
 render_priority = 10
 sprite_frames = SubResource("SpriteFrames_io33n")
 autoplay = "default"

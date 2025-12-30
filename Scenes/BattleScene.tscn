@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=46 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" uid="uid://c64pyrw7r0vqt" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dwj7xqe76fl5i" path="res://Scripts/Actor/ActorSpawner.cs" id="1_ogvtl"]
 [ext_resource type="Script" uid="uid://dyr4ktq12fm1j" path="res://Scripts/UserInterface/Components/ExperienceBar.cs" id="2_1nfni"]
 [ext_resource type="Script" uid="uid://rqoiknjjc5w0" path="res://Scripts/Controllers/CameraController.cs" id="2_7n0hf"]
+[ext_resource type="Shader" uid="uid://cby2cndmqitxj" path="res://Shaders/Vignette.gdshader" id="2_xy0dg"]
 [ext_resource type="Script" uid="uid://c7jye6tj8r1ss" path="res://Scripts/MultiplayerContainer.cs" id="3_5vdu8"]
 [ext_resource type="Resource" uid="uid://dj3kma3ilnn7q" path="res://Actors/ActorSetups.tres" id="3_s4vdo"]
 [ext_resource type="Texture2D" uid="uid://03llkhcxxj85" path="res://UserInterface/Components/ExperienceBar/ExperienceBarUnder.png" id="4_homol"]
@@ -31,6 +32,12 @@
 [ext_resource type="Resource" uid="uid://c3t6u7qcetsch" path="res://Maps/Forest/ForestSetup.tres" id="17_f2rmj"]
 [ext_resource type="AudioStream" uid="uid://cbfq4b7o2e7yn" path="res://Audio/AgaBgm.ogg" id="30_eqbi2"]
 
+[sub_resource type="Gradient" id="Gradient_xy0dg"]
+colors = PackedColorArray(0, 0, 0, 1, 0.59, 1, 0.883833, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oskno"]
+gradient = SubResource("Gradient_xy0dg")
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jimt1"]
 panorama = ExtResource("1_et1wg")
 
@@ -40,7 +47,26 @@ sky_material = SubResource("PanoramaSkyMaterial_jimt1")
 [sub_resource type="Environment" id="Environment_blut4"]
 background_canvas_max_layer = 1
 sky = SubResource("Sky_7770p")
-glow_enabled = true
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.1
+adjustment_color_correction = SubResource("GradientTexture1D_oskno")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_xy0dg"]
+dof_blur_far_distance = 20.0
+dof_blur_far_transition = 20.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 7.0
+dof_blur_near_transition = 4.0
+dof_blur_amount = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqbi2"]
+shader = ExtResource("2_xy0dg")
+shader_parameter/inner_radius = 0.35
+shader_parameter/outer_radius = 1.25
+shader_parameter/vignette_strength = 1.0
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1dvsm"]
 font_size = 20
@@ -75,6 +101,7 @@ size = Vector3(100, 1, 100)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_blut4")
+camera_attributes = SubResource("CameraAttributesPractical_xy0dg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
@@ -82,6 +109,15 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ScreenFlash" parent="CanvasLayer" instance=ExtResource("1_oewvn")]
+
+[node name="Vignette" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_eqbi2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="ExperienceBar" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_progressBar", "_levelLabel")]
 custom_minimum_size = Vector2(0, 11)

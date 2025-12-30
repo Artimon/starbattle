@@ -264,6 +264,7 @@ offset = Vector2(0, 8)
 pixel_size = 0.025
 billboard = 2
 double_sided = false
+alpha_cut = 2
 render_priority = 10
 texture = ExtResource("2_0hads")
 
@@ -277,6 +278,7 @@ _offsetDistance = 2.0
 transform = Transform3D(6, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0)
 billboard = 1
 double_sided = false
+alpha_cut = 2
 render_priority = 10
 texture = ExtResource("5_dj35t")
 
