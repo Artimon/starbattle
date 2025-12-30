@@ -82,6 +82,9 @@ public partial class Actor : Node3D {
 	public ActorSetups Setups => _setups;
 
 	[Export]
+	public ActorShake shake;
+
+	[Export]
 	public ActorAction action;
 
 	[Export]
@@ -237,6 +240,8 @@ public partial class Actor : Node3D {
 	[Rpc(CallLocal = true)]
 	public void RpcDamage(float damage, float newHp, bool isCritical, int hitCount) {
 		hp = newHp;
+
+		shake.Play();
 
 		_animator.Hit(damage);
 		_combatNumberPrefab.Instantiate<CombatNumberBounce>(EffectContainer.instance)

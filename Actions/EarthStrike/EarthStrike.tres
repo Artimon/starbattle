@@ -7,7 +7,7 @@
 script = ExtResource("1_fn876")
 name = "Earth Strike"
 actionCost = 2
-spCost = 7.0
+spCost = 14.0
 power = 130.0
 actionType = 3
 damageType = 1

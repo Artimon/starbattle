@@ -7,7 +7,7 @@
 script = ExtResource("1_72yku")
 name = "ValkyrieFlames"
 actionCost = 2
-spCost = 15.0
+spCost = 10.0
 power = 90.0
 actionType = 3
 damageType = 1
