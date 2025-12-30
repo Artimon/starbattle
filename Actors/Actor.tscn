@@ -96,6 +96,9 @@ properties/19/replication_mode = 2
 properties/20/path = NodePath("ActorSynchronizer:magicalDefense")
 properties/20/spawn = true
 properties/20/replication_mode = 2
+properties/21/path = NodePath("ActorSynchronizer:spawnActionTime")
+properties/21/spawn = true
+properties/21/replication_mode = 2
 
 [sub_resource type="Animation" id="Animation_chqir"]
 resource_name = "FadeIn"

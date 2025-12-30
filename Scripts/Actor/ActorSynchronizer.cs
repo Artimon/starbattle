@@ -20,6 +20,9 @@ public partial class ActorSynchronizer : MultiplayerSynchronizer {
 	public Vector3 spawnPosition;
 
 	[Export]
+	public float spawnActionTime;
+
+	[Export]
 	public float might;
 
 	[Export]
@@ -133,6 +136,10 @@ public partial class ActorSynchronizer : MultiplayerSynchronizer {
 
 	public void SetBaseStats(Stats baseStats, float difficulty = 1f) {
 		var isPlayerGroup = _actor.IsPlayerGroup;
+
+		if (!isPlayerGroup) {
+			spawnActionTime = GD.Randf(); // Up to 1 of 3 bars.
+		}
 
 		might = Stats.Modify(baseStats.might, isPlayerGroup);
 		spirit = Stats.Modify(baseStats.spirit, isPlayerGroup);

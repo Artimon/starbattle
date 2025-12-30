@@ -346,6 +346,7 @@ public partial class Actor : Node3D {
 	private void OnCreated(uint actorId) {
 		isPlayer = synchronizer.playerId == Multiplayer.GetUniqueId();
 		Position = synchronizer.spawnPosition;
+		action.ActionTime = synchronizer.spawnActionTime;
 
 		behaviour.Register();
 		setup = _setups.GetSetup(actorId);

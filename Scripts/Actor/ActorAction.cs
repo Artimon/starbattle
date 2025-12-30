@@ -10,7 +10,10 @@ public partial class ActorAction : Node {
 
 	public double _actionTime;
 
-	public double ActionTime => _actionTime;
+	public double ActionTime {
+		get => _actionTime;
+		set => _actionTime = value;
+	}
 
 	public int _lastActionCharges;
 
