@@ -28,6 +28,7 @@ public partial class LocalAudio : AudioStreamPlayer3D {
 		player.VolumeDb = Mathf.LinearToDb(volume);
 
 		player.Finished += () => player.Remove();
+		player.PitchScale = (float)GD.RandRange(0.9, 1.1);
 		player.Play();
 	}
 }

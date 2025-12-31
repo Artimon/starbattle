@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dqbe2220e2hdv"]
+[gd_scene load_steps=48 format=3 uid="uid://dqbe2220e2hdv"]
 
 [ext_resource type="Script" uid="uid://c64pyrw7r0vqt" path="res://Scripts/Controllers/PlayerController.cs" id="1_d62xq"]
 [ext_resource type="Texture2D" uid="uid://cnyblrkjvbowh" path="res://Images/BackgroundForest_Replace.png" id="1_et1wg"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://biciriymvmv6j" path="res://Images/BlackFrame.png" id="9_xy0dg"]
 [ext_resource type="PackedScene" uid="uid://cqauknin6ppw1" path="res://Actors/ActorAvatar.tscn" id="9_yr3ug"]
 [ext_resource type="Shader" uid="uid://kfjlo04ac7q3" path="res://Shaders/AlphaShine.tres" id="10_2dd70"]
+[ext_resource type="Script" uid="uid://cdp38qoiv8nh3" path="res://Scripts/UserInterface/Elements/MapTimer.cs" id="12_oskno"]
 [ext_resource type="Script" uid="uid://dfilhkfl1mt1" path="res://Scripts/Controllers/WavesController.cs" id="12_pqm43"]
 [ext_resource type="Script" uid="uid://cwk2ce2aur7he" path="res://Scripts/Actor/ActorSelection.cs" id="12_t8ruj"]
 [ext_resource type="Texture2D" uid="uid://idoo2rtmn6n" path="res://Images/SelectCircle.png" id="13_dwphc"]
@@ -70,6 +71,11 @@ shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1dvsm"]
 font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nd4jk"]
+font_size = 24
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
@@ -284,6 +290,20 @@ layout_mode = 2
 
 [node name="PerkButton4" parent="CanvasLayer/PerkSelection/VBoxContainer" instance=ExtResource("9_6xyd7")]
 layout_mode = 2
+
+[node name="MapTimer" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.5
+offset_top = 10.0
+offset_right = 30.5
+offset_bottom = 44.0
+grow_horizontal = 2
+text = "30:00"
+label_settings = SubResource("LabelSettings_nd4jk")
+script = ExtResource("12_oskno")
+metadata/_custom_type_script = "uid://cdp38qoiv8nh3"
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("2_7n0hf")

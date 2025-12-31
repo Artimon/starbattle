@@ -146,11 +146,11 @@ public partial class ActorAction : Node {
 				break;
 		}
 
-		Rpc(nameof(RpcBeginAction), actionId, actorHandle, targetPosition);
+		Rpc(nameof(_RpcBeginAction), actionId, actorHandle, targetPosition);
 	}
 
 	[Rpc(CallLocal = true)]
-	public void RpcBeginAction(uint actionId, uint actorHandle, Vector3 position) {
+	public void _RpcBeginAction(uint actionId, uint actorHandle, Vector3 position) {
 		var action = _actionSetups.GetSetup(actionId);
 
 		switch (action.actionType) {

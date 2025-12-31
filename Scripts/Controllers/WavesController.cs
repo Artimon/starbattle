@@ -7,7 +7,9 @@ namespace Starbattle.Controllers;
 
 [GlobalClass]
 public partial class WavesController : Node {
-	public static int MaxMobs = 10;
+	public const int MaxMobs = 10;
+
+	public static WavesController instance;
 
 	[Export]
 	public MultiplayerContainer _multiplayerContainer;
@@ -16,6 +18,8 @@ public partial class WavesController : Node {
 	public Timer _timer;
 
 	public float _time;
+	public float Time => _time;
+
 	public int _currentWave = -1;
 
 	public int _delayedSpawnAmount;
@@ -28,11 +32,20 @@ public partial class WavesController : Node {
 	[Export]
 	public ActorSpawner _spawner;
 
+	public override void _EnterTree() {
+		instance = this;
+	}
+
 	public override void _Ready() {
 		SetProcess(false);
 
 		_multiplayerContainer.OnConnectionReady += () => {
+			SetProcess(true);
+
 			if (!Multiplayer.IsServer()) {
+				// Only clients need to request the time.
+				RpcId(1, nameof(_RpcRequestTime));
+
 				return;
 			}
 
@@ -40,18 +53,28 @@ public partial class WavesController : Node {
 
 			_TryProgressWave(0);
 			_TrySpawnMobs();
-
-			SetProcess(true);
 		};
 	}
 
 	public override void _Process(double delta) {
-		_TryProgressWave(delta);
+		_time += (float)delta;
+
+		if (Multiplayer.IsServer()) {
+			_TryProgressWave(delta);
+		}
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	public void _RpcRequestTime() {
+		RpcId(Multiplayer.GetRemoteSenderId(), nameof(_RpcTimeUpdate), _time);
+	}
+
+	[Rpc(CallLocal = true)]
+	public void _RpcTimeUpdate(float time) {
+		_time = time;
 	}
 
 	public bool _TryProgressWave(double delta) {
-		_time += (float)delta;
-
 		var wave = (int)(_time / 60.0f);
 		wave = Math.Min(wave, _mapSetup.waveSetups.Length - 1); // @TODO Check for level end here.
 
@@ -141,5 +164,9 @@ public partial class WavesController : Node {
 
 			_spawner.CreateMob(ActorSpawner.RandomSpawnPosition, _waveSetup.RandomMobSetup, difficulty);
 		}
+	}
+
+	public override void _ExitTree() {
+		instance = null;
 	}
 }

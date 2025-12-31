@@ -1,2 +1,3 @@
 ﻿- Overhead pointer to mark hovered actor.
-- Spell position on cast-finished.
+- Low health vignette and greyout
+- wave pause
