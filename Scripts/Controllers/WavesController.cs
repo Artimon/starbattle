@@ -24,6 +24,8 @@ public partial class WavesController : Node {
 
 	public int _delayedSpawnAmount;
 
+	public bool _spawnPause;
+
 	public WaveSetup _waveSetup;
 
 	[Export]
@@ -51,7 +53,7 @@ public partial class WavesController : Node {
 
 			_timer.Start();
 
-			_TryProgressWave(0);
+			_TryProgressWave();
 			_TrySpawnMobs();
 		};
 	}
@@ -60,7 +62,7 @@ public partial class WavesController : Node {
 		_time += (float)delta;
 
 		if (Multiplayer.IsServer()) {
-			_TryProgressWave(delta);
+			_TryProgressWave();
 		}
 	}
 
@@ -74,7 +76,7 @@ public partial class WavesController : Node {
 		_time = time;
 	}
 
-	public bool _TryProgressWave(double delta) {
+	public bool _TryProgressWave() {
 		var wave = (int)(_time / 60.0f);
 		wave = Math.Min(wave, _mapSetup.waveSetups.Length - 1); // @TODO Check for level end here.
 
@@ -87,6 +89,7 @@ public partial class WavesController : Node {
 
 		_currentWave = wave;
 		_waveSetup = _mapSetup.waveSetups[wave];
+		_spawnPause = true; // Skip one spawn cycle to give players time to recover.
 
 		_TrySpawnBosses(_waveSetup.bosses);
 
@@ -134,6 +137,12 @@ public partial class WavesController : Node {
 
 	public void _TrySpawnMobs() {
 		if (!Multiplayer.IsServer()) {
+			return;
+		}
+
+		if (_spawnPause) {
+			_spawnPause = false;
+
 			return;
 		}
 
