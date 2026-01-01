@@ -4,6 +4,7 @@ using System.Linq;
 using Artimus.Services;
 using Godot;
 using Starbattle.Controllers;
+using Starbattle.UserInterface.Components;
 
 namespace Starbattle;
 
@@ -16,6 +17,18 @@ public partial class Actor : Node3D {
 	public Stats stats;
 
 	public float hp;
+
+	public float Hp {
+		get => hp;
+		set {
+			hp = value;
+
+			if (isPlayer) {
+				ScreenEffects.instance.SetHealth(this);
+			}
+		}
+	}
+
 	public float MaxHp => stats.MaxHp;
 
 	public string DisplayHp => Mathf.CeilToInt(hp).ToString();
@@ -239,7 +252,7 @@ public partial class Actor : Node3D {
 
 	[Rpc(CallLocal = true)]
 	public void RpcDamage(float damage, float newHp, bool isCritical, int hitCount) {
-		hp = newHp;
+		Hp = newHp;
 
 		shake.Play();
 
@@ -273,6 +286,10 @@ public partial class Actor : Node3D {
 			return;
 		}
 
+		if (IsDead) {
+			return; // Could happen when the heal was already started.
+		}
+
 		var newHp = Mathf.Min(MaxHp, hp + heal);
 
 		Rpc(nameof(RpcHeal), heal, newHp, showNumber);
@@ -280,7 +297,7 @@ public partial class Actor : Node3D {
 
 	[Rpc(CallLocal = true)]
 	public void RpcHeal(float heal, float newHp, bool showNumber) {
-		hp = newHp;
+		Hp = newHp;
 
 		if (!showNumber) {
 			return;
