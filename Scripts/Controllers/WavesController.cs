@@ -22,8 +22,6 @@ public partial class WavesController : Node {
 
 	public int _currentWave = -1;
 
-	public int _delayedSpawnAmount;
-
 	public bool _spawnPause;
 
 	public WaveSetup _waveSetup;
@@ -146,27 +144,15 @@ public partial class WavesController : Node {
 			return;
 		}
 
-		var mobs = Actor.EnemyGroup;
-		if (mobs.Length >= MaxMobs) {
-			return;
+		var spawnAmount = _waveSetup.minAmount - Actor.EnemyGroup.Length;
+		if (spawnAmount <= 0) {
+			return; // Still has full wave size.
 		}
-
-		/*
-		 * Only spawn in bulk to prevent frequent updates to the avatar list.
-		 */
-		var spawnAmount = Mathf.Max(1, _waveSetup.minAmount - mobs.Length) + _delayedSpawnAmount;
-		spawnAmount = Mathf.Min(spawnAmount, _waveSetup.minAmount); // Prevent overshooting.
-		spawnAmount = Mathf.Min(spawnAmount, MaxMobs - mobs.Length); // Don't exceed max mobs.
-
-		if (spawnAmount < _waveSetup.minAmount) {
-			_delayedSpawnAmount = spawnAmount;
-
-			return;
-		}
-
-		_delayedSpawnAmount = 0;
 
 		var difficulty = GetDifficulty();
+
+		var maxGroupSize = Mathf.FloorToInt(_waveSetup.minAmount * 0.7f);
+		spawnAmount = Mathf.Min(spawnAmount, maxGroupSize);
 
 		while (spawnAmount > 0) {
 			spawnAmount -= 1;
