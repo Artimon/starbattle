@@ -105,6 +105,8 @@ public partial class Stats : Resource {
 	public float MaxSp => wisdom;
 
 	/**
+	 * Rises stronger at lower numbers.
+	 *
 	 * Critical chances at scale 120:
 	 * 5 -> 0,05
 	 * 10 -> 0,079
@@ -155,18 +157,32 @@ public partial class Stats : Resource {
 		return power / 100f * regenerateSp * (1f + GD.Randf() * 0.5f);
 	}
 
+	/**
+	 * Damage calculation background:
+	 * Old
+	 * 35 * (0,5 + 90 / 200) * 1,25 = 41 - 20 = 21 dmg to player
+	 * 50 * (0,5 + 65 / 200) * 1,25 = 51 - 5 = 46 dmg to mob
+	 *
+	 * New: atk * 100 / (100 + defense); with def x3 (similar to atk)
+	 * 35 * (0,5 + 90 / 200) * 1,25 = 41; 41 * 100 / (100 + 20) = 25 dmg to player
+	 * 50 * (0,5 + 65 / 200) * 1,25 = 51; 51 * 100 / (100 + 5) = 44 dmg to mob
+	 *
+	 * progress = currentMinute / 20.0
+	 * multiplier = 1.0 + 0.6 * progress * progress
+	 * 1.00x > 1.60x "level" pressure
+	 */
 	public float GetPhysicalDamage(float power, Actor target) {
-		var statsValue = (might + spirit * 0.65f) / 200f;
+		var statsValue = (might + spirit * 0.65f) / 200f; // Add luck?
 		var attack = power / 100f * physicalBaseValue * (0.5f + statsValue) * (1f + GD.Randf() * 0.5f);
-		var defense = target.stats.physicalDefense;
+		var defense = 100f / (100f + target.stats.physicalDefense * 3f);
 
 		return Mathf.Max(1f, attack - defense);
 	}
 
 	public float GetMagicalDamage(float power, Actor target) {
-		var statsValue = (spirit + might * 0.65f) / 200f;
+		var statsValue = (spirit + might * 0.65f) / 200f; // Add luck?
 		var attack = power / 100f * magicalBaseValue * (0.5f + statsValue) * (1f + GD.Randf() * 0.5f);
-		var defense = target.stats.magicalDefense;
+		var defense = 100f / (100f + target.stats.magicalDefense * 3f);
 
 		return Mathf.Max(1f, attack - defense);
 	}
